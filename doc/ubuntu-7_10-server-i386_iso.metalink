@@ -1,0 +1,642 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metalink version="3.0" xmlns="http://www.metalinker.org/"
+  origin="http://download.packages.ro/metalink"
+  type="static" pubdate="Mon Feb  4 14:43:50 2008"
+  generator="Metalink Gen - http://metalink.packages.ro" 
+  refreshdate="Mon Feb  4 14:43:50 2008">
+
+  <publisher>
+    <name>package resources</name>
+    <url>http://www.packages.ro</url>
+  </publisher>
+
+  
+
+  <description></description>
+  <tags>linux,ubuntu</tags>
+  <identity>ubuntu</identity>
+  <version>7.10</version>
+
+  <files> 
+   <file name="ubuntu-7.10-server-i386.iso">
+    
+    <os>Linux-x86</os>
+
+    <size>524060672</size>
+
+    <verification>
+     <hash type="md5">7d88cd87df509a740d9f47b9bbf1375e</hash>
+     <hash type="sha1">0d66e17364184d959dea6647ac070fe438a265d0</hash>
+     <hash type="ed2k">cffd88e4b4541619e5cbeab18cbf19ac</hash>
+
+     
+     <pieces length="2097152" type="sha1">
+      <hash piece="0">7dad51894e69749c7fed839b6348853bdc76a146</hash>
+      <hash piece="1">d50e8991aac65477cb8483517e1194394360e950</hash>
+      <hash piece="2">75e05bd343d08f5e79a46220088a876d3805c778</hash>
+      <hash piece="3">3c204056475dfd73cddd09c07592716b5d930a62</hash>
+      <hash piece="4">cfd5f060410209a06bbb4efd87c2d93d84aee2e7</hash>
+      <hash piece="5">47c6b908ead6b91de90f513ef25d56206f121d3b</hash>
+      <hash piece="6">bfe0c53e963ec45d53efd42b8284c86989fd7021</hash>
+      <hash piece="7">87337195ea0c85254492a201d06ece12d8b3fca9</hash>
+      <hash piece="8">914be421746f653fbe367390399ed7c2eb5a1462</hash>
+      <hash piece="9">25b7f5ba1b84cf27576a4f8d820e96183f8b81af</hash>
+      <hash piece="10">a272fbefb72eed5d8a4a43e81b1bd9501227c566</hash>
+      <hash piece="11">f8079d264489fc6a2442a5d2470752f7de4784e3</hash>
+      <hash piece="12">5bad95f55cea7189a6826c612c2bb4f151382bf8</hash>
+      <hash piece="13">7a284f4a27c136b38f4ce61ba6619e05b672be65</hash>
+      <hash piece="14">077f1f5acb6f76af5fdedb1d7c2d2a353dc8b698</hash>
+      <hash piece="15">8d05fa55a7d52a8fc2cd8ff4a3225a16fa1309db</hash>
+      <hash piece="16">9a72cbb691532226384dfe723af581306965cdea</hash>
+      <hash piece="17">20eb67cfaa2300eae8ba03bb3e6d6759e894568f</hash>
+      <hash piece="18">0c1073c48c9a12f090fcedbd178c44030d2bffd1</hash>
+      <hash piece="19">9064e38f0423ff5a798810ebcca4ee904e136f61</hash>
+      <hash piece="20">3a43797217f0bc2e104e47e16d83500c61781f74</hash>
+      <hash piece="21">5a19d3f4441721dbc86c4c46daac6c3b57dae280</hash>
+      <hash piece="22">02fc1ab179640db6b0dd3f96ecfc6ab51437015b</hash>
+      <hash piece="23">5d3426fd7675aec86a73cd0e3a9f5ebdeaddd72f</hash>
+      <hash piece="24">5c679d7574603f68a50e197cf31460536f71d669</hash>
+      <hash piece="25">8b0c70e30ee15240c08d11cc6d79b3bd135a5c10</hash>
+      <hash piece="26">2a75371e47b68f87b648fbb8fdb80408590bb04f</hash>
+      <hash piece="27">4be173108e4a7995da611b8ea33b8de000f91e73</hash>
+      <hash piece="28">2dfd9c856afc8c263dee528eeb80481f2d1e84fb</hash>
+      <hash piece="29">8467b46602de5bafc38473449a86f42366089e58</hash>
+      <hash piece="30">01b2fb42fcea11b725074378dec075b2f8572c2b</hash>
+      <hash piece="31">4aaf374772983cebdf8450f0fad47f78822093b6</hash>
+      <hash piece="32">4c89a9a5e9db84a2f907c5182815c0d7c715b5ec</hash>
+      <hash piece="33">1299d3685a0e544a748353a823fdb0534d81fb37</hash>
+      <hash piece="34">936f786da035bef60aa7cf45f85edea641883530</hash>
+      <hash piece="35">78e6201d61861be843d2d4a169f3de385c429976</hash>
+      <hash piece="36">d53f62b46809c2204a5759feb41c533161d7dc91</hash>
+      <hash piece="37">0bdff9c773ef24034ebbcdb3c8e9c6b601c807f3</hash>
+      <hash piece="38">83c3a623930066a11d13c09f1a8d4a5f0a879e1f</hash>
+      <hash piece="39">f414309ebae9cfe2703ba6c4ad8f8475188b75b7</hash>
+      <hash piece="40">ef05f59614a988ab7239439ca224696aab13956f</hash>
+      <hash piece="41">cab3ff1049046e18e96020c3ec25fd2fc57fb2da</hash>
+      <hash piece="42">c70df37da08f11dab6f75dcca92bde03c4b6dba9</hash>
+      <hash piece="43">d0eef9cccbb2d5f9d8cd47574fbd0e5b371f1590</hash>
+      <hash piece="44">80fa74b59e6ee8569dd366e04dd9f286207db0df</hash>
+      <hash piece="45">5fc0241b1cddeab11ed820c83966e7044cdf5b2d</hash>
+      <hash piece="46">95e84b84236456c27ed8eb3e16760542d40d8fb2</hash>
+      <hash piece="47">2dbcbfa50955afa10ad7e20de93372da932000ef</hash>
+      <hash piece="48">aa6b150aa07c6cac646ab5e21d243c7a37479ecf</hash>
+      <hash piece="49">3dcdcde4e74f62cadcca5eb798ce21a61e04924e</hash>
+      <hash piece="50">08aca445370f0a37a76bcb34315572658f12f5ad</hash>
+      <hash piece="51">a095bdf101dcf522941d0ddffc8b8a748bf908ae</hash>
+      <hash piece="52">93a91e069f755eaef62e272f81c15f57e070a5d0</hash>
+      <hash piece="53">e6a4d59a03c8e579ed45de2c3840f5094bfe642b</hash>
+      <hash piece="54">56f5fd7815c4dcea7f94f1abfc6dc909fb896bec</hash>
+      <hash piece="55">1350b149cd1634ae2546d85975f17a81daf2d47f</hash>
+      <hash piece="56">1ec7f01b9468890696f2a216b7f31c0d2fd3a77f</hash>
+      <hash piece="57">8f29f718e39c932269a8a526a5df12a003c23073</hash>
+      <hash piece="58">c6e6b554b111c1bc12b644874c5afb3b76a76f27</hash>
+      <hash piece="59">e01d774a0061efb2a8eee1cc3759bff2e2d801b6</hash>
+      <hash piece="60">24a0389743ca47fc884c87cee641ccf6c0a8fc88</hash>
+      <hash piece="61">a8dd3f91b5c572243216ffab162f2834d8259b06</hash>
+      <hash piece="62">07aca8ab0b3853d1ab73de45270008cb1bb8472b</hash>
+      <hash piece="63">c5e0d854b3b14dd82c1f8eef27262b9d78712cff</hash>
+      <hash piece="64">b73058d964f3bcd5245903b14cc00fa58d34e366</hash>
+      <hash piece="65">ab33ab7dfcf6e8a597c9451176cf8e743b573b20</hash>
+      <hash piece="66">2d581d51492729375ea21c1e7a6e15f6f17259a9</hash>
+      <hash piece="67">beef7fd26b640bcb767731fc32697c0e42e83d9e</hash>
+      <hash piece="68">090b2292840e33c6de6d3d3e787eb1737b0c2809</hash>
+      <hash piece="69">9b12f5bc5bebae5b7a80bc1c006104bc024b6108</hash>
+      <hash piece="70">d0dcf4fb14219d91ba4fa4f69342eba7cf7eb53c</hash>
+      <hash piece="71">35c182a485b20f9eb1e63473bb9ea702692cccf9</hash>
+      <hash piece="72">48a1123009b14994fb6568a817539cc5f6e1f002</hash>
+      <hash piece="73">8556204c1f2ee3cff2f51f101a3989a4a72b0418</hash>
+      <hash piece="74">48765d3fc3b8cf10ac6fed5368e1846d4131baa0</hash>
+      <hash piece="75">763e7a99deb747ad70b86a7c7b085f4d42d23fe5</hash>
+      <hash piece="76">00aba6d02080361daac9c8c3cc737c981fea37e0</hash>
+      <hash piece="77">adf08ff8115fe242a0960b3aaf63c0d2e5d6dd67</hash>
+      <hash piece="78">df0ad9080321f87008b7ce881254e488eee6fffb</hash>
+      <hash piece="79">707afbdda4561f292502719f166cd560388aeb05</hash>
+      <hash piece="80">70b5cd3bd0d43ff9be10461c86a644259009debc</hash>
+      <hash piece="81">cb6960ade32e8bb4072282f5660f216c65ef6cc2</hash>
+      <hash piece="82">814ea4a4989fe2b9ce0bda8554a23b0e829acbec</hash>
+      <hash piece="83">5eab34e5dc621a6fd2a26a7f0879c866de0687ee</hash>
+      <hash piece="84">5b7e22411490f42e8cdbc2a1f9fd2cd0dd0c116c</hash>
+      <hash piece="85">55795b28c1e405b19e5cab9c32dc3f8b5f5f3148</hash>
+      <hash piece="86">315f2c082dd0d59dde86aac760c6188f75ef1ef4</hash>
+      <hash piece="87">6c3a50c440181f3010070c677c286aa2114f7f3d</hash>
+      <hash piece="88">0a5fa693dab6d7fa673ee9f3f6d351ab98e07a03</hash>
+      <hash piece="89">1b29401813e37c7fd3432602ebb84f42bf50a7fc</hash>
+      <hash piece="90">2fce8c909e71152b25eb5272e83470deb1c57c74</hash>
+      <hash piece="91">3826be18331585e09b67f9b797497e3ee34fe341</hash>
+      <hash piece="92">3ae71684ef5ca7b426ab0860339f98572902a3fd</hash>
+      <hash piece="93">48921b437fc3fa74636ed988e764543b38d1192f</hash>
+      <hash piece="94">9a37417d334c7c91b74263fc5e283c9771e17b52</hash>
+      <hash piece="95">5f118e101c970e10658e8e18d8117d56dbca0ab0</hash>
+      <hash piece="96">2e5313e1be5703f5e25d864d59fa209bf295de39</hash>
+      <hash piece="97">57256e5a63c9787e3060c5859e17eae2ceceddf4</hash>
+      <hash piece="98">8bf7ce093edcf6db0d2060c24200dc3c462be913</hash>
+      <hash piece="99">ccd1437f1dd02ae4706cd2f30256e80f81955664</hash>
+      <hash piece="100">e5f0dbceb266e1618906282d6cfad43313cd20a0</hash>
+      <hash piece="101">edeee5812c0fba1585d02191779013f235fb76d7</hash>
+      <hash piece="102">1ac82457ce7a4a643c67e1fd9af1b79ed8d04194</hash>
+      <hash piece="103">39c8bac5bf5208b746e3235aa431ec1dd27f81e9</hash>
+      <hash piece="104">5a85b30ae1d817e4df10254fa04d8b0063d67c58</hash>
+      <hash piece="105">95dd4cb4559ecc905f84e2852da710798b60ea41</hash>
+      <hash piece="106">18bd9f7f4a063dd1c171b21e765c53cd57623970</hash>
+      <hash piece="107">d6821b34e2ddd8f9758705e7c357833870521ef0</hash>
+      <hash piece="108">f85398ab5e55fde52b06d75212ee13aaad78e5f6</hash>
+      <hash piece="109">06dc0e48be989da4d0924850b3a5368316f84cc8</hash>
+      <hash piece="110">2a8eb0d7dbbe1b216495757ae19129a8146af437</hash>
+      <hash piece="111">14885d8b609512f2b3b88e346a7538899f670aac</hash>
+      <hash piece="112">652c13b75f6d4b82b44381abcf796b585d48cb10</hash>
+      <hash piece="113">a594f97e1cb99e84f0a8be244fb16f4c6af56490</hash>
+      <hash piece="114">9f31cc8b090587a00c0976eba4274a34587adaf0</hash>
+      <hash piece="115">6603d62838065874087f00507481ca39423d061c</hash>
+      <hash piece="116">9da2f63612af517456408d031d6d0f291b622f6d</hash>
+      <hash piece="117">1dcd08da4df6d890856b616391e2c0ae49c3389d</hash>
+      <hash piece="118">a955702db89185d70c945db29d071eac610766f2</hash>
+      <hash piece="119">4840ac383627fcc6f2738d7d4120c53d16ac8c04</hash>
+      <hash piece="120">58eacdd952da95dfa67a29daf4d4225a259ade2d</hash>
+      <hash piece="121">d345ad5c1df6e8cddece558875a4f160d522d968</hash>
+      <hash piece="122">a8c8a33b38991d07938f78aa73f841b449632df6</hash>
+      <hash piece="123">b8977ae5ecb6423e9300d96232548e0949a19762</hash>
+      <hash piece="124">0ad733a90d2f1795b63886a5cddf647d67472b26</hash>
+      <hash piece="125">b80bb7d29361c202660ac86a0085331619a5cf10</hash>
+      <hash piece="126">ddebd8f7db5a5f5aae48bfc4c6f9d95c83b425fd</hash>
+      <hash piece="127">e8eeceaf5ac7154c336021d41cbf578796aaa379</hash>
+      <hash piece="128">43d034394795a7320bcbb7619348a6e6a3a5bb3a</hash>
+      <hash piece="129">66dc0c686e7cd5257c725b8702810a8698fe6069</hash>
+      <hash piece="130">e061753b47051c83e52724dfafcc5db0402e9a23</hash>
+      <hash piece="131">bec0c893e8a35d4bd6a4fd3d4d7af5dbf592e02a</hash>
+      <hash piece="132">6deef628b8c0e88b7dda7175859bb679af64e4a9</hash>
+      <hash piece="133">d915a6317355988245ce0416e38534f5c39f4af5</hash>
+      <hash piece="134">e89741358d6fa5c2a08b83fab9f975826cb0cf9e</hash>
+      <hash piece="135">218f55d389913ae636ed77bcc3f28934243624a7</hash>
+      <hash piece="136">cbab60b4cb58ab642b266741c4e203cc6b4e4fdf</hash>
+      <hash piece="137">a9c50e911a4d555663d117ecd7d5bd23b8720c2c</hash>
+      <hash piece="138">ef8e9b7ee47e5eb9ff141e7c3ecfc1a8151cdfd3</hash>
+      <hash piece="139">9d89cfe9cea1af3aaa46abf070297ce282de25ed</hash>
+      <hash piece="140">3c059ac47fdb2afa4afe0470e67f8cce57b4f7cb</hash>
+      <hash piece="141">f84c25968d31e116199683c5c62add1b50919ea9</hash>
+      <hash piece="142">81188ae27d83bfb166a8e84f5ab1efcd3ba4a620</hash>
+      <hash piece="143">082eecbce1c6c1c7594de409007c55068a6627e3</hash>
+      <hash piece="144">f9436e8de451ba4ee9257ab8153a5daf9e07840c</hash>
+      <hash piece="145">2d49e6b47d42e1e0d8f7f93014a860f3bc9f47d1</hash>
+      <hash piece="146">c2f88a66111fc7d826bc49a43012ee484c23fe0d</hash>
+      <hash piece="147">f16cbfc7bb1cd94fa51c6a6365bece41fc128fd0</hash>
+      <hash piece="148">62fad1a3935c3e1e3645b8a9326350cceca152c4</hash>
+      <hash piece="149">9ea000169f0efa90e3776d1e90ebbb7108fbf00f</hash>
+      <hash piece="150">fb02c8eceb427f02b1fe4027a9b40f9c513e0943</hash>
+      <hash piece="151">6dd6ad05f24a3dca880e42f9d0934603086cadbe</hash>
+      <hash piece="152">df974b0ecf93124a7a7d4376620a1f5ea8e31a3f</hash>
+      <hash piece="153">d183e12d297f4672e4b7e75755b7b5958409f789</hash>
+      <hash piece="154">41f60d774246c98a190623dfcdded2b1db57b47c</hash>
+      <hash piece="155">4bd153e0175e80a8f22461bb112235f7f8c0f87c</hash>
+      <hash piece="156">09069b9bae85f36071f46382039a97d3734aca76</hash>
+      <hash piece="157">47d680df92794046de866ca1d384b972b0a802c1</hash>
+      <hash piece="158">fd86c3b2d4c034c91a3d59472d8d327cb0e34e57</hash>
+      <hash piece="159">7eea947615955ecf8756bf38e5b6b83e3a396636</hash>
+      <hash piece="160">ae744bf39e9a4bc86c125fc7a38e283be043799f</hash>
+      <hash piece="161">760fbfd92b7c1be000ee6f4d693c3efec0119227</hash>
+      <hash piece="162">196b6cf42b31349a6d43a13d142ae742f2e949dc</hash>
+      <hash piece="163">d7b542f06f47c8e07ec579bd0b1a15de8ef7bde6</hash>
+      <hash piece="164">e1047e10ec8c076af7c625132f5002d8e731908b</hash>
+      <hash piece="165">7c0ab54d4cb21604544ab5f735a7fd49879d2cc6</hash>
+      <hash piece="166">68d221ecd3c997eb34cb2a385ec62a9f6c3741e3</hash>
+      <hash piece="167">29519522b32af862767048f175ee58f35eee33a0</hash>
+      <hash piece="168">d9467d6a51e3dd43e014d794d420030b16dbe08a</hash>
+      <hash piece="169">e123edbc251c8cbc7bb11f4fac8eb6e83c72f906</hash>
+      <hash piece="170">60c48b5875ea37af76508fe26b16ae8148b99e75</hash>
+      <hash piece="171">f68b4c48b1ae42a8c95a45b8c6796c51c82f0d17</hash>
+      <hash piece="172">32aafd286d8cca98c1a2cb5fc067253a6e3ca4f8</hash>
+      <hash piece="173">d1dd57718bbe87fe84b019e98aafc7d57371df22</hash>
+      <hash piece="174">8412b3e741f222829d047817528a12a721a5ef05</hash>
+      <hash piece="175">d7153893598b5fdf8d9f4615ea41baaa803ccba2</hash>
+      <hash piece="176">50ec13c717e566b365403e88f8032a8333845ffc</hash>
+      <hash piece="177">07a46a72db07b120a08420f50a15e73466262874</hash>
+      <hash piece="178">c4090b1fa889988dac6adf2e95f92043846a2e86</hash>
+      <hash piece="179">ca2d4db8475ee46bdfe6aeb421fa81d07a7087f8</hash>
+      <hash piece="180">423a5520f79fb9989409855f5ab2a7e949454975</hash>
+      <hash piece="181">606d8a42eaf9996ab1d9a76fc06b20d151036396</hash>
+      <hash piece="182">79e033acafd07d43f11fd55df810f890e87ae79d</hash>
+      <hash piece="183">577c2b3f4655a7d637d5754f02442261f98990e2</hash>
+      <hash piece="184">cb284b9626a93aaa5f7d677b40642e84353c808d</hash>
+      <hash piece="185">d3253ba5f31ab7a74453315b2bd413df0a9f123f</hash>
+      <hash piece="186">369759cdbbe7f1b42343b3af276baf32e10c63f6</hash>
+      <hash piece="187">4c8e537c74189b672553bc51af46ec8e9a31976a</hash>
+      <hash piece="188">45d4327c8b70ff5ed98904de20e05d19f237b631</hash>
+      <hash piece="189">d032bdf39d50c4cce41bbe35f788ea95dc35953b</hash>
+      <hash piece="190">0abf7cc8a5ff70f1916bfa655e663bd0721e71db</hash>
+      <hash piece="191">6c295d52a9fe5377cf600b424a3fe6a049c738cb</hash>
+      <hash piece="192">2ec6baf2e27ff5402e1afd679181b656facde858</hash>
+      <hash piece="193">57680d5c2b77bab0d74e518937bec021de9b5f3d</hash>
+      <hash piece="194">6a630a309c7d3994ebdb7b9de92a59809813c92a</hash>
+      <hash piece="195">b725008768da7120834bc97ee5cdd5b308febd68</hash>
+      <hash piece="196">d64a5e82b789cfe1f46ecd9bb056da5265f66da7</hash>
+      <hash piece="197">e7d2031795eb6f31aff6b65d22fa50cf11255764</hash>
+      <hash piece="198">f78f7a6f5082287b175de5c2fb69c53e79c29bf3</hash>
+      <hash piece="199">5bfe04116ab49f704f572aaadba69a24f8f8b7e5</hash>
+      <hash piece="200">727ab3a5be7efd5ed529a8a98b22ed0df0dc8c97</hash>
+      <hash piece="201">5e928f6b2b8fb43818ad3943e7e064561d397c7c</hash>
+      <hash piece="202">a20fecf21c0775bcb773320c022409a2b467e06a</hash>
+      <hash piece="203">7fb6b6b03c1ff4ae486a22d41a84afe8e4d1e398</hash>
+      <hash piece="204">ea8bc09d58526fa114fb4b87e0f3dc3f4b81bd84</hash>
+      <hash piece="205">18541e41a2808df1921f0ad71c86e4c1ba7e2508</hash>
+      <hash piece="206">23f1cd331be4f90eb459238bca19ede8c0bec3c3</hash>
+      <hash piece="207">c6cb10f7181a2c0d947d6614695adebae3a3802b</hash>
+      <hash piece="208">cd41fa40e50fbd72540632c64b7105058f48b636</hash>
+      <hash piece="209">a58d96c3f6852b32d4f7645152df34eefd21be9e</hash>
+      <hash piece="210">30907c3c946a21f269e10111ae9b6f8a168ee54b</hash>
+      <hash piece="211">8cd8f358ba6d749abcb503b084c92078dca07ce1</hash>
+      <hash piece="212">833d6882fa21c98c565a9904ef4756167560ea15</hash>
+      <hash piece="213">d1816b6e898353b63088c29a4653e9332d34a00c</hash>
+      <hash piece="214">376658517a3bc6ea00dd9270bfa3a99f492c6a92</hash>
+      <hash piece="215">3b1d442aee0ecf51d62b23cfefb7eb7af9861fd6</hash>
+      <hash piece="216">a0d21e8801c66f3f12a5f577a42954aad5150966</hash>
+      <hash piece="217">6a5ca953f6cfcc942da557cc23ed43b08f3bb71d</hash>
+      <hash piece="218">60b729895ea8987dc4e0215c0207c0f231ccadcd</hash>
+      <hash piece="219">5f301afb308df11ad995bbceb535a7a44020bbc8</hash>
+      <hash piece="220">f5792753fd913243631dcc34a495e849fd60a893</hash>
+      <hash piece="221">d46cd382825555f365c463cffdcd24cdfc4a0e77</hash>
+      <hash piece="222">93ce7a7a33a5896d15a96b40cfc81fa848eb01dc</hash>
+      <hash piece="223">7c224a29eb0ee3e856f69bc0edd0614ac3d6f832</hash>
+      <hash piece="224">58a545342925d3647dff35aebb0f7986c764670f</hash>
+      <hash piece="225">ff30bcfdda45881a56f40f31a6ce60de431c8a72</hash>
+      <hash piece="226">553d147182a5bfb736ab72bb2479a9ef159ee7ec</hash>
+      <hash piece="227">16b5eb55638a34c2483bbfa3ebe944377ea7b4c8</hash>
+      <hash piece="228">7d7fa6749632fef59c08ba4f475bbf04e09a2e7c</hash>
+      <hash piece="229">64c13221cc053ba43d27e982c34b2540d9923d7c</hash>
+      <hash piece="230">c1fd8d716a5d6d870818fa269cfc7a773207bda2</hash>
+      <hash piece="231">ba7856783a263aaf51d0d4db989db4f679a465ee</hash>
+      <hash piece="232">63ffa2b35d4102c787e1d91f3393ced6900f165c</hash>
+      <hash piece="233">7671d18700f8a471dded14ed3d57d58264dcf627</hash>
+      <hash piece="234">746a977f1340601c5b759f8d74d5baf57d20e78e</hash>
+      <hash piece="235">64dc872a8b6991c25fef47ba39212db0a07f082c</hash>
+      <hash piece="236">50bde662b061d2d2277ddeeef38e61adcbb6f233</hash>
+      <hash piece="237">54056252d4b9ba4b8c3a44d1a41a1e45eda3707a</hash>
+      <hash piece="238">2cff65e64d3ac211d2b14471b84cbefe94d1ff6c</hash>
+      <hash piece="239">54f93037aa70edd524984f35dcf07022ab68a6f7</hash>
+      <hash piece="240">fb90d426135a0e6050aaea4c07f11c17dea9926f</hash>
+      <hash piece="241">9efcc139c4b5aaef0658ceada373c01bb63629a3</hash>
+      <hash piece="242">6b51746fb1b43a28b6ce5caefc99116c1b0e43a4</hash>
+      <hash piece="243">f969bbf0bda918656a63c09fe5285519b6b8af2f</hash>
+      <hash piece="244">dde01862ecb7b403f086b4c9e8a7d63e2776cf7c</hash>
+      <hash piece="245">6ac9fa2460e6280b79791a05b74eb24222b7ddc8</hash>
+      <hash piece="246">09a9b511aeab994b0b2d0b5c18d04ecaf0183744</hash>
+      <hash piece="247">e46e31d7c1ab7fa223f7ce14ec6de784d1808203</hash>
+      <hash piece="248">2ad27fd4b5ab92c69846dfe2ae927d7023cc551f</hash>
+      <hash piece="249">7ba329c0d9e9433ec41b9fb06b29df6291a307a9</hash>
+     </pieces>
+     
+
+    </verification>
+
+    <resources>
+
+      
+
+     
+     <url type="http" location="ro" preference="10">http://ftp.iasi.roedu.net/mirrors/fedora.redhat.com/core/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="ro" preference="10">http://ftp.roedu.net/mirrors/fedora.redhat.com/core/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="ro" preference="10">http://ftp.iasi.roedu.net/mirrors/ubuntulinux.org/releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="tw" preference="10">http://apt.ubuntu.org.tw/releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="tw" preference="10">ftp://ftp.cse.yzu.edu.tw/Linux/Ubuntu/ubuntu-cd/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="tw" preference="10">http://ftp.cse.yzu.edu.tw/ftp/Linux/Ubuntu/ubuntu-cd/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="ch" preference="10">ftp://mirror.switch.ch/mirror/ubuntu-cdimage/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="ch" preference="10">http://mirror.switch.ch/ftp/mirror/ubuntu-cdimage/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="se" preference="10">ftp://ftp.se.linux.org/pub/Linux/distributions/ubuntu/releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="es" preference="10">ftp://ftp.ubuntu-es.org/ubuntu-cdimage/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="es" preference="10">ftp://ftp.um.es/mirror/ubuntu-cds/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="es" preference="10">http://sunsite.rediris.es/mirror/ubuntu-releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="es" preference="10">http://isolinux.xtec.net/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="za" preference="10">ftp://ftp.leg.uct.ac.za/pub/linux/ubuntu-releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="sp" preference="10">ftp://yu.releases.ubuntu.com/releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="sp" preference="10">http://yu.releases.ubuntu.com/releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="ru" preference="10">ftp://debian.nsu.ru/ubuntu-releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="ru" preference="10">http://debian.nsu.ru/ubuntu-releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="ro" preference="10">ftp://ftp.lug.ro/ubuntu-releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="ro" preference="10">ftp://ftp.iasi.roedu.net/mirrors/ubuntulinux.org/releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="ro" preference="10">http://ftp.iasi.roedu.net/mirrors/ubuntulinux.org/releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="ro" preference="10">http://ftp.lug.ro/ubuntu-releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="pt" preference="10">ftp://neacm.fe.up.pt/pub/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="pt" preference="10">ftp://ftp.rnl.ist.utl.pt/ubuntu-releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="pt" preference="10">http://neacm.fe.up.pt/pub/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="pt" preference="10">http://glua.ua.pt/mirror/dists/ubuntu/releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="pt" preference="10">http://darkstar.ist.utl.pt/ubuntu/5.04/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="pl" preference="10">ftp://ubuntu.task.gda.pl/ubuntu-releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="pl" preference="10">http://ubuntu.task.gda.pl/ubuntu-releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="pl" preference="10">http://ubuntulinux.mainseek.com/releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="no" preference="10">ftp://ftp.uninett.no/linux/ubuntu-iso/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="no" preference="10">http://mirror.trivini.no/ubuntu-iso/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="nl" preference="10">ftp://ilsb.il.fontys.nl/pub/linux/distr/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="nl" preference="10">http://sommerville.uvt.nl/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="nl" preference="10">http://nl.releases.ubuntu.com/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="lt" preference="10">ftp://ftp.litnet.lt/pub/ubuntu-cd/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="lt" preference="10">http://ftp.litnet.lt/pub/ubuntu-cd/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="jp" preference="10">ftp://ftp.yz.yamagata-u.ac.jp/pub/linux/ubuntu/releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="jp" preference="10">http://ftp.yz.yamagata-u.ac.jp/pub/linux/ubuntu/releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="jp" preference="10">http://ubuntu.mithril-linux.org/releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="it" preference="10">ftp://na.mirror.garr.it/mirrors/ubuntu-releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="it" preference="10">ftp://ftp.linux.it/ubuntu/releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="it" preference="10">http://na.mirror.garr.it/mirrors/ubuntu-releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="it" preference="10">http://ftp.linux.it/ubuntu/releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="ie" preference="10">ftp://ftp.esat.net/mirrors/releases.ubuntu.com/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="ie" preference="10">ftp://ftp.heanet.ie/pub/ubuntu-releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="ie" preference="10">http://ftp.heanet.ie/pub/ubuntu-releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="ie" preference="10">http://ftp.esat.net/mirrors/releases.ubuntu.com/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="hu" preference="10">http://ubuntu.elasztik.hu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="hu" preference="10">ftp://ftp.fsn.hu/pub/CDROM-Images/ubuntu/releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="hu" preference="10">ftp://ftp.kfki.hu/pub/linux/cdimages/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="hu" preference="10">http://ftp.kfki.hu/linux/cdimages/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="gr" preference="10">ftp://ftp.ntua.gr/pub/linux/ubuntu-releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="gr" preference="10">http://ftp.ntua.gr/pub/linux/ubuntu-releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="de" preference="10">ftp://ftp.join.uni-muenster.de/pub/mirrors/ftp.ubuntu.com/releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="de" preference="10">ftp://ftp.rz.tu-bs.de/pub/mirror/ubuntu-cd-releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="de" preference="10">ftp://ftp.bay13.net/pub/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="de" preference="10">ftp://ftp2.kgt.org/pub/ubuntu.com/releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="de" preference="10">ftp://mirror.teleport-iabg.de/mirror/releases.ubuntu.com/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="de" preference="10">ftp://source.rfc822.org/pub/mirror/releases.ubuntu.com/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="de" preference="10">ftp://ftp.fu-berlin.de/linux/ubuntu/releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="de" preference="10">ftp://debian.charite.de/releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="de" preference="10">http://ftp.join.uni-muenster.de/pub/mirrors/ftp.ubuntu.com/releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="de" preference="10">http://ftp.rz.tu-bs.de/pub/mirror/ubuntu-cd-releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="de" preference="10">http://ftp2.kgt.org/pub/ubuntu.com/releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="de" preference="10">http://source.rfc822.org/pub/mirror/releases.ubuntu.com/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="de" preference="10">http://releases.ubuntu.mirror.at.stealer.net/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="de" preference="10">http://debian.charite.de/releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="ge" preference="10">http://ubuntu.eriders.ge/releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="fr" preference="10">ftp://fr.archive.ubuntu.com/ubuntu-cd/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="fr" preference="10">ftp://ftp.univ-pau.fr/pub/linux/iso/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="fr" preference="10">ftp://mir1.ovh.net/ubuntu/releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="fr" preference="10">ftp://www.paulla.asso.fr/pub/Ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="fr" preference="10">http://fr.releases.ubuntu.com/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="fr" preference="10">http://ftp.univ-pau.fr/linux/iso/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="fr" preference="10">http://mir1.ovh.net/ubuntu/releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="fi" preference="10">ftp://ftp.funet.fi/pub/mirrors/releases.ubuntu.com/releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="fi" preference="10">http://www.nic.funet.fi/pub/mirrors/releases.ubuntu.com/releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="ee" preference="10">ftp://ftp.estpak.ee/pub/ubuntu-releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="ee" preference="10">http://ftp.estpak.ee/pub/ubuntu-releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="dk" preference="10">ftp://mirrors.dotsrc.org/ubuntu-cd/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="dk" preference="10">ftp://mirrors.dk.telia.net/pub/mirrors/releases.ubuntu.com/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="dk" preference="10">http://mirrors.dotsrc.org/ubuntu-cd/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="dk" preference="10">http://mirrors.dk.telia.net/pub/mirrors/releases.ubuntu.com/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="cz" preference="10">http://ubuntu.supp.name/releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="cz" preference="10">ftp://archive.ubuntu.cz/cdimage/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="cz" preference="10">http://releases.ubuntu.cz/warty/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="cz" preference="10">http://archive.ubuntu.cz/cdimage/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="hr" preference="10">ftp://debian.carnet.hr/ubuntu-releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="hr" preference="10">http://debian.carnet.hr/ubuntu-releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="cr" preference="10">ftp://ftp.ucr.ac.cr/pub/ubuntu-cd/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="cr" preference="10">http://ftp.ucr.ac.cr/ubuntu-cd/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="cn" preference="10">http://mirror.lupaworld.com/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="cn" preference="10">http://mirror.vmmatrix.net/ubuntu-cd/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="ca" preference="10">ftp://mirror.arcticnetwork.ca/pub/ubuntu/releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="ca" preference="10">http://mirror.arcticnetwork.ca/pub/ubuntu/releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="ca" preference="10">ftp://cs.ubishops.ca/pub/iso/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="ca" preference="10">ftp://gulus.USherbrooke.ca/ubuntu/iso/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="ca" preference="10">http://gulus.USherbrooke.ca/pub/distro/ubuntu/iso/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="bg" preference="10">http://ubuntu.ipacct.com/releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="br" preference="10">http://espelhos.edugraf.ufsc.br/ubuntu-releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="br" preference="10">http://ubuntu.c3sl.ufpr.br/releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="br" preference="10">http://ftp.interlegis.gov.br/pub/ubuntu/releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="be" preference="10">http://mirror.freax.be/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="at" preference="10">ftp://ftp.uni-klu.ac.at/linux/ubuntu-cdimage/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="at" preference="10">ftp://ubuntu.inode.at/cdimage/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="at" preference="10">ftp://gd.tuwien.ac.at/opsys/linux/ubuntu/cdimage/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="at" preference="10">http://gd.tuwien.ac.at/opsys/linux/ubuntu/cdimage/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="at" preference="10">http://ubuntu.uni-klu.ac.at/ubuntu-cdimage/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="at" preference="10">http://ubuntu.inode.at/cdimage/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="au" preference="10">ftp://mirror.pacific.net.au/linux/ubuntu-releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="au" preference="10">ftp://ftp.filearena.net/pub/ubuntu-releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="au" preference="10">ftp://ftp.planetmirror.com/pub/ubuntu/releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="au" preference="10">ftp://mirror.isp.net.au/pub/ubuntu-releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="au" preference="10">ftp://ftp.iinet.net.au/pub/ubuntu-releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="au" preference="10">http://mirror.pacific.net.au/linux/ubuntu-releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="au" preference="10">http://ubuntu-releases.optus.net/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="au" preference="10">http://www.planetmirror.com/pub/ubuntu/releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="au" preference="10">http://mirror.isp.net.au/ftp/pub/ubuntu-releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="au" preference="10">http://ftp.iinet.net.au/pub/ubuntu-releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="uz" preference="10">http://cdimage.ubuntu.com/releases/dapper/current/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="uz" preference="10">http://cdimage.ubuntu.com/daily/current/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="uz" preference="10">http://releases.ubuntu.com/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="uz" preference="10">http://ubuntu.snet.uz/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="us" preference="10">ftp://ubuntu.cs.utah.edu/pub/ubuntu/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="us" preference="10">ftp://mirrors.cat.pdx.edu/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="us" preference="10">ftp://mirror.mcs.anl.gov/pub/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="us" preference="10">ftp://ubuntu.mirrors.tds.net/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="us" preference="10">ftp://mirror.clarkson.edu/pub/distributions/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="us" preference="10">ftp://ftp.ussg.iu.edu/linux/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="us" preference="10">ftp://mirrors.xmission.com/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="us" preference="10">ftp://ftp.osuosl.org/pub/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="us" preference="10">http://mirrors.cs.wmich.edu/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="us" preference="10">http://ftp.osuosl.org/pub/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="us" preference="10">http://mirrors.xmission.com/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="us" preference="10">http://ftp.ussg.iu.edu/linux/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="us" preference="10">http://ubuntu.cs.utah.edu/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="us" preference="10">http://mirrors.cat.pdx.edu/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="us" preference="10">http://mirror.mcs.anl.gov/pub/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="us" preference="10">http://ubuntu.secs.oakland.edu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="us" preference="10">http://ftp.ale.org/pub/mirrors/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="us" preference="10">http://www.opensourcemirrors.org/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="us" preference="10">http://ubuntu.mirrors.tds.net/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="us" preference="10">http://mirror.clarkson.edu/pub/distributions/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="us" preference="10">http://lug.mtu.edu/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="us" preference="10">http://mirror.cs.umn.edu/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="gb" preference="10">ftp://ftp.blueyonder.co.uk/sites/ubuntu/archive/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="gb" preference="10">http://ubuntu.blueyonder.co.uk/archive/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="gb" preference="10">ftp://ftp.mirror.ac.uk/mirror/archive.ubuntu.com/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="gb" preference="10">http://www.mirror.ac.uk/mirror/archive.ubuntu.com/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="gb" preference="10">ftp://ftp.mirrorservice.org/sites/archive.ubuntu.com/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="gb" preference="10">http://www.mirrorservice.org/sites/archive.ubuntu.com/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="tr" preference="10">ftp://godel.cs.bilgi.edu.tr/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="tr" preference="10">http://godel.cs.bilgi.edu.tr/mirror/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="tw" preference="10">ftp://ftp.cse.yzu.edu.tw/Linux/Ubuntu/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="tw" preference="10">http://ftp.cse.yzu.edu.tw/ftp/Linux/Ubuntu/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="tw" preference="10">ftp://ftp.ee.ncku.edu.tw/pub/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="tw" preference="10">ftp://os.nchc.org.tw/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="tw" preference="10">ftp://apt.nc.hcc.edu.tw/pub/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="tw" preference="10">http://ubuntu.csie.ntu.edu.tw/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="tw" preference="10">http://apt.nc.hcc.edu.tw/pub/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="tw" preference="10">ftp://apt.ubuntu.org.tw/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="tw" preference="10">http://apt.ubuntu.org.tw/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="ch" preference="10">ftp://mirror.switch.ch/mirror/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="ch" preference="10">http://mirror.switch.ch/ftp/mirror/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="se" preference="10">ftp://ftp.se.linux.org/pub/Linux/distributions/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="se" preference="10">http://ftp.acc.umu.se/mirror/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="es" preference="10">ftp://ftp.ubuntu-es.org/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="es" preference="10">ftp://ftp.um.es/mirror/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="za" preference="10">ftp://ftp.sun.ac.za/ftp/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="za" preference="10">ftp://ftp.leg.uct.ac.za/pub/linux/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="za" preference="10">ftp://ubuntu.mirror.ac.za/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="za" preference="10">http://za.archive.ubuntu.com/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="za" preference="10">ftp://ftp.is.co.za/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="sp" preference="10">ftp://yu.archive.ubuntu.com/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="sp" preference="10">http://yu.archive.ubuntu.com/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="ru" preference="10">ftp://debian.nsu.ru/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="ru" preference="10">http://debian.nsu.ru/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="ro" preference="10">ftp://ftp.lug.ro/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="ro" preference="10">http://ftp.lug.ro/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="ro" preference="10">ftp://ftp.iasi.roedu.net/mirrors/ubuntulinux.org/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="ro" preference="10">http://ftp.iasi.roedu.net/mirrors/ubuntulinux.org/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="pt" preference="10">http://ubuntu.dcc.fc.up.pt/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="pt" preference="10">http://darkstar.ist.utl.pt/ubuntu/archive/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="pt" preference="10">ftp://ftp.rnl.ist.utl.pt/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="pl" preference="10">ftp://ubuntu.task.gda.pl/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="pl" preference="10">http://ubuntu.task.gda.pl/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="pl" preference="10">http://ubuntulinux.mainseek.com/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="no" preference="10">ftp://no.archive.ubuntu.com/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="no" preference="10">http://no.archive.ubuntu.com/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="ni" preference="10">http://www.computacion.uni.edu.ni/iso/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="nz" preference="10">ftp://ftp.citylink.co.nz/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="nl" preference="10">ftp://nl.archive.ubuntu.com/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="nl" preference="10">http://nl.archive.ubuntu.com/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="na" preference="10">ftp://ftp.polytechnic.edu.na/pub/ubuntulinux/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="lt" preference="10">ftp://ftp.litnet.lt/pub/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="lt" preference="10">http://ftp.litnet.lt/pub/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="lv" preference="10">http://ubuntu-arch.linux.edu.lv/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="jp" preference="10">http://ubuntu.mithril-linux.org/archives/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="it" preference="10">ftp://na.mirror.garr.it/mirrors/ubuntu-archive/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="it" preference="10">ftp://ftp.linux.it/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="it" preference="10">http://na.mirror.garr.it/mirrors/ubuntu-archive/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="it" preference="10">http://ftp.linux.it/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="ie" preference="10">ftp://ftp.heanet.ie/pub/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="ie" preference="10">ftp://ftp.esat.net/mirrors/archive.ubuntu.com/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="ie" preference="10">http://ftp.heanet.ie/pub/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="ie" preference="10">http://ftp.esat.net/mirrors/archive.ubuntu.com/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="is" preference="10">http://ubuntu.lhi.is/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="is" preference="10">http://ubuntu.odg.cc/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="id" preference="10">http://kambing.vlsm.org/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="id" preference="10">http://komo.vlsm.org/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="hu" preference="10">ftp://ftp.fsn.hu/pub/linux/distributions/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="hu" preference="10">ftp://ftp.kfki.hu/pub/linux/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="hu" preference="10">http://ftp.kfki.hu/linux/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="gr" preference="10">ftp://ftp.ntua.gr/pub/linux/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="gr" preference="10">http://ftp.ntua.gr/pub/linux/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="de" preference="10">ftp://ftp.uni-erlangen.de/pub/mirrors/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="de" preference="10">ftp://ftp.join.uni-muenster.de/pub/mirrors/ftp.ubuntu.com/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="de" preference="10">ftp://ftp.rz.tu-bs.de/pub/mirror/ubuntu-packages/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="de" preference="10">ftp://ftp.fu-berlin.de/linux/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="de" preference="10">ftp://debian.charite.de/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="de" preference="10">http://www.ftp.uni-erlangen.de/pub/mirrors/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="de" preference="10">http://ftp.join.uni-muenster.de/pub/mirrors/ftp.ubuntu.com/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="de" preference="10">http://ftp.rz.tu-bs.de/pub/mirror/ubuntu-packages/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="de" preference="10">http://debian.charite.de/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="ge" preference="10">http://ge.archive.ubuntu.com/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="fr" preference="10">ftp://ftp.oleane.net/pub/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="fr" preference="10">ftp://ftp.proxad.net/mirrors/ftp.ubuntu.com/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="fr" preference="10">ftp://ftp.u-picardie.fr/pub/ubuntu/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="fr" preference="10">ftp://fr.archive.ubuntu.com/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="fr" preference="10">ftp://mir1.ovh.net/ubuntu/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="fr" preference="10">http://ftp.oleane.net/pub/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="fr" preference="10">http://ftp.u-picardie.fr/pub/ubuntu/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="fr" preference="10">http://fr.archive.ubuntu.com/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="fr" preference="10">http://mir1.ovh.net/ubuntu/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="fi" preference="10">ftp://ftp.funet.fi/pub/mirrors/archive.ubuntu.com/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="fi" preference="10">http://www.nic.funet.fi/pub/mirrors/archive.ubuntu.com/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="ee" preference="10">ftp://ftp.estpak.ee/pub/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="dk" preference="10">ftp://klid.dk/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="ee" preference="10">http://ftp.estpak.ee/pub/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="dk" preference="10">ftp://mirrors.dotsrc.org/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="dk" preference="10">ftp://mirrors.dk.telia.net/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="dk" preference="10">http://klid.dk/homeftp/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="dk" preference="10">http://mirrors.dotsrc.org/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="dk" preference="10">http://mirrors.dk.telia.net/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="cz" preference="10">http://ubuntu.supp.name/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="cz" preference="10">ftp://archive.ubuntu.cz/MIRRORS/archive.ubuntu.com/mirror/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="cz" preference="10">http://archive.ubuntu.cz/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="cr" preference="10">ftp://ftp.ucr.ac.cr/pub/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="cr" preference="10">http://ftp.ucr.ac.cr/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="cn" preference="10">http://mirror.lupaworld.com/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="cn" preference="10">http://debian.cn99.com/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="cn" preference="10">http://archive.ubuntu.org.cn/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="cl" preference="10">ftp://cl.archive.ubuntu.com/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="cl" preference="10">http://cl.archive.ubuntu.com/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="ca" preference="10">ftp://gulus.USherbrooke.ca/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="ca" preference="10">http://gulus.USherbrooke.ca/pub/distro/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="ca" preference="10">ftp://mirror.arcticnetwork.ca/pub/ubuntu/packages/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="ca" preference="10">http://mirror.arcticnetwork.ca/pub/ubuntu/packages/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="ca" preference="10">ftp://mirror.cpsc.ucalgary.ca/mirror/ubuntu.com/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="ca" preference="10">http://mirror.cpsc.ucalgary.ca/mirror/ubuntu.com/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="ca" preference="10">ftp://ftp.cs.mun.ca/pub/mirror/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="bg" preference="10">http://ubuntu.ipacct.com/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="br" preference="10">http://ubuntu.c3sl.ufpr.br/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="br" preference="10">http://ubuntu.interlegis.gov.br/archive/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="br" preference="10">http://espelhos.edugraf.ufsc.br/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="be" preference="10">ftp://ubuntu.mirrors.skynet.be/pub/ubuntu.com/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="be" preference="10">ftp://ftp.belnet.be/pub/mirror/ubuntu.com/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="be" preference="10">http://ubuntu.mirrors.skynet.be/pub/ubuntu.com/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="be" preference="10">http://ftp.belnet.be/pub/mirror/ubuntu.com/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="at" preference="10">ftp://gd.tuwien.ac.at/opsys/linux/ubuntu/archive/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="at" preference="10">ftp://ftp.uni-klu.ac.at/linux/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="at" preference="10">ftp://ubuntu.inode.at/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="at" preference="10">http://gd.tuwien.ac.at/opsys/linux/ubuntu/archive/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="at" preference="10">http://ubuntu.uni-klu.ac.at/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="at" preference="10">http://ubuntu.inode.at/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="au" preference="10">ftp://mirror.pacific.net.au/linux/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="au" preference="10">ftp://ftp.iinet.net.au/pub/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="au" preference="10">ftp://ftp.filearena.net/pub/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="au" preference="10">ftp://ftp.planetmirror.com/pub/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="au" preference="10">ftp://mirror.isp.net.au/pub/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="au" preference="10">http://mirror.pacific.net.au/linux/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="au" preference="10">http://ftp.filearena.net/pub/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="au" preference="10">http://www.planetmirror.com/pub/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="au" preference="10">http://mirror.isp.net.au/ftp/pub/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="au" preference="10">http://mirror.optus.net/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="au" preference="10">http://ftp.iinet.net.au/pub/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="tw" preference="10">ftp://apt.ubuntu.org.tw/releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="tw" preference="10">http://apt.nc.hcc.edu.tw/pub/ubuntu-cd/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="tw" preference="10">ftp://apt.nc.hcc.edu.tw/pub/ubuntu-cd/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="tw" preference="10">ftp://ftp.ee.ncku.edu.tw/pub/ubuntu-cd/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="ua" preference="10">ftp://ftp.linux.kiev.ua/pub/Linux/Ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="gb" preference="10">http://www.mirrorservice.org/sites/cdimage.ubuntu.com/cdimage/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="gb" preference="10">http://ubuntu.blueyonder.co.uk/releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="gb" preference="10">ftp://ftp.mirrorservice.org/sites/cdimage.ubuntu.com/cdimage/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="gb" preference="10">ftp://ftp.blueyonder.co.uk/sites/ubuntu/releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="us" preference="10">http://ftp.osuosl.org/pub/ubuntu-releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="us" preference="10">http://ftp.ussg.iu.edu/linux/ubuntu-releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="us" preference="10">http://mirrors.unrealradio.org/Ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="us" preference="10">http://mirror.yousendit.com/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="us" preference="10">http://mirror.lunarpages.com/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="us" preference="10">http://mirror.cs.umn.edu/ubuntu-releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="us" preference="10">http://linus.smenet.org/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="us" preference="10">http://ubuntu.mirrors.tds.net/releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="us" preference="10">http://www.opensourcemirrors.org/ubuntu-cd/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="us" preference="10">http://mirrors.jtlnet.com/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="us" preference="10">http://ubuntu.mirrormax.net/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="us" preference="10">http://www.nullnet.org/mirrors/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="us" preference="10">http://mirror.mcs.anl.gov/pub/ubuntu-iso/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="us" preference="10">http://mirrors.cat.pdx.edu/ubuntu-iso/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="us" preference="10">http://ubuntu.cs.utah.edu/releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="us" preference="10">http://mirror.cc.vt.edu/pub/projects/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="us" preference="10">http://san.csc.calpoly.edu/ubuntu/releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="us" preference="10">http://ftp.wayne.edu/linux_distributions/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="us" preference="10">http://mirrors.tummy.com/pub/ftp.ubuntulinux.org/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="us" preference="10">ftp://ftp.osuosl.org/pub/ubuntu-releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="us" preference="10">ftp://ftp.ussg.iu.edu/linux/ubuntu-releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="us" preference="10">ftp://mirror.dudcore.net/pub/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="us" preference="10">ftp://ubuntu.mirrors.tds.net/releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="us" preference="10">ftp://mirrors.jtlnet.com/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="us" preference="10">ftp://mirror.mcs.anl.gov/pub/ubuntu-iso/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="us" preference="10">ftp://mirrors.cat.pdx.edu/ubuntu-iso/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="us" preference="10">ftp://ubuntu.cs.utah.edu/pub/ubuntu/releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="us" preference="10">ftp://ftp.wayne.edu/linux_distributions/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="us" preference="10">ftp://mirrors.tummy.com/pub/ftp.ubuntulinux.org/ubuntu/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="us" preference="10">http://mirror.cs.umn.edu/ubuntu-dvd/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="sp" preference="10">http://mirror.etf.bg.ac.yu/distributions/ubuntu/ubuntu-dvd/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="sp" preference="10">ftp://mirror.etf.bg.ac.yu/distributions/ubuntu/ubuntu-dvd/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="sp" preference="10">http://mirror2.etf.bg.ac.yu/distributions/ubuntu/ubuntu-dvd/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="sp" preference="10">http://mirror2.etf.bg.ac.yu/distributions/ubuntu/ubuntu-dvd/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="za" preference="10">ftp://ftp.leg.uct.ac.za/pub/linux/ubuntu-dvd/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="se" preference="10">http://ftp.acc.umu.se/mirror/cdimage.ubuntu.com/releases/breezy/release/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="tw" preference="10">http://apt.ubuntu.org.tw/releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="tw" preference="10">ftp://apt.ubuntu.org.tw/releases/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="ftp" location="pl" preference="10">ftp://ubuntu.task.gda.pl/ubuntu-dvd/releases/breezy/release/.pool/ubuntu-7.10-server-i386.iso</url>
+     <url type="http" location="pl" preference="10">http://ubuntu.task.gda.pl/ubuntu-dvd/releases/breezy/release/.pool/ubuntu-7.10-server-i386.iso</url>
+
+      
+       <url type="magnet" preference="90">
+         magnet:?xt=urn:sha1:0d66e17364184d959dea6647ac070fe438a265d0&amp;xt=urn:ed2k:cffd88e4b4541619e5cbeab18cbf19ac&amp;xl=524060672&amp;dn=ubuntu-7.10-server-i386.iso
+       </url>
+      
+
+      
+
+    </resources>
+   </file>
+  </files> 
+</metalink>

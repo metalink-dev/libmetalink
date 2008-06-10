@@ -1,0 +1,3 @@
+To build this library, libexpat or libxml2 is required at the moment.
+
+To run tests, libcunit is required.

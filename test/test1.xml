@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metalink version="3.0" xmlns="http://www.metalinker.org/">
+  <publisher>
+    <name>libmetalink</name>
+    <url>http://libmetalink/</url>
+  </publisher>
+  <description>Metalink library for C</description>
+  <files>
+    <file name="libmetalink-0.0.1.tar.bz2">
+      <!-- no size tag -->
+      <version>0.0.1</version>
+      <language>en-US</language>
+      <os>Linux-x86</os>
+      <verification>
+        <hash type="sha1">a96cf3f0266b91d87d5124cf94326422800b627d</hash>
+	<!-- no type -->
+        <hash>notype</hash>
+        <hash type="md5">fc4d834e89c18c99b2615d902750948c</hash>
+	<!-- no chunk checksum -->
+      </verification>
+      <resources maxconnections="1">
+        <url type="ftp" location="jp" preference="100" maxconnections="1">ftp://ftphost/libmetalink-0.0.1.tar.bz2</url>
+	<!-- bad maxconnections --> <!-- no location -->
+        <url type="http" preference="99" maxconnections="-1">http://httphost/libmetalink-0.0.1.tar.bz2</url>
+      </resources>
+    </file>
+    <file name="libmetalink-0.0.2a.tar.bz2">
+      <size>4294967296</size>
+      <version>0.0.2a</version>
+      <language>ja-JP</language>
+      <os>Linux-m68k</os>
+      <verification>
+	<pieces length="262144" type="sha1">
+	  <hash piece="0">179463a88d79cbf0b1923991708aead914f26142</hash>
+	  <!-- no piece -->
+	  <hash>179463a88d79cbf0b1923991708aead914f26142</hash>
+	  <hash piece="1">fecf8bc9a1647505fe16746f94e97a477597dbf3</hash>
+	</pieces>
+      </verification>
+      <!-- bad maxconnections -->
+      <resources maxconnections="-1">
+        <url type="ftp" preference="100">ftp://ftphost/libmetalink-0.0.2a.tar.bz2</url>
+	<!-- no preference -->
+        <url type="http">http://httphost/libmetalink-0.0.2a.tar.bz2</url>
+	<!-- bad preference -->
+	<url type="http" preference="-100">http://badpreference/</url>
+	<url type="http" preference="99">http://mirror1/libmetalink-0.0.2a.tar.bz2</url>
+	<!-- no type -->
+	<url>http://mirror2/libmetalink-0.0.2a.tar.bz2</url>
+	<url type="bittorrent">http://mirror2/libmetalink-0.0.2a.tar.bz2.torrent</url>
+      </resources>
+    </file>
+    <!-- no name -->
+    <file>
+      <resources>
+	<url type="http">http://noname/file</url>
+      </resources>
+    </file>
+    <file name="NoVerificationHash">
+      <!-- bad size -->
+      <size>abc</size>
+      <resources>
+	<url type="ftp" preference="100">ftp://host/file</url>
+      </resources>
+    </file>
+  </files>
+</metalink>

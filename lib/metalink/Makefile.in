@@ -50,14 +50,16 @@ am__libmetalinkcore_la_SOURCES_DIST = metalink_parser.h \
 	metalink_types.c metalink_types.h metalink_error.h \
 	metalink_pstm.c metalink_pstm.h metalink_pstate.c \
 	metalink_pstate.h metalink_pctrl.c metalink_pctrl.h \
+	metalink_parser_common.c metalink_parser_common.h \
 	session_data.c session_data.h stack.c stack.h list.c list.h \
 	string_buffer.c string_buffer.h libxml2_metalink_parser.c \
 	libexpat_metalink_parser.c
 @ENABLE_LIBXML2_TRUE@am__objects_1 = libxml2_metalink_parser.lo
 @ENABLE_LIBEXPAT_TRUE@am__objects_2 = libexpat_metalink_parser.lo
 am_libmetalinkcore_la_OBJECTS = metalink_types.lo metalink_pstm.lo \
-	metalink_pstate.lo metalink_pctrl.lo session_data.lo stack.lo \
-	list.lo string_buffer.lo $(am__objects_1) $(am__objects_2)
+	metalink_pstate.lo metalink_pctrl.lo metalink_parser_common.lo \
+	session_data.lo stack.lo list.lo string_buffer.lo \
+	$(am__objects_1) $(am__objects_2)
 libmetalinkcore_la_OBJECTS = $(am_libmetalinkcore_la_OBJECTS)
 DEFAULT_INCLUDES = -I.@am__isrc@ -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
@@ -193,9 +195,10 @@ noinst_LTLIBRARIES = libmetalinkcore.la
 libmetalinkcore_la_SOURCES = metalink_parser.h metalink_types.c \
 	metalink_types.h metalink_error.h metalink_pstm.c \
 	metalink_pstm.h metalink_pstate.c metalink_pstate.h \
-	metalink_pctrl.c metalink_pctrl.h session_data.c \
-	session_data.h stack.c stack.h list.c list.h string_buffer.c \
-	string_buffer.h $(am__append_1) $(am__append_2)
+	metalink_pctrl.c metalink_pctrl.h metalink_parser_common.c \
+	metalink_parser_common.h session_data.c session_data.h stack.c \
+	stack.h list.c list.h string_buffer.c string_buffer.h \
+	$(am__append_1) $(am__append_2)
 AM_CFLAGS = -Wall -D_ISOC99_SOURCE -I${top_srcdir}/lib
 AM_CPPFLAGS = @XML_CPPFLAGS@ @LIBEXPAT_CPPFLAGS@
 all: all-am
@@ -252,6 +255,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libexpat_metalink_parser.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libxml2_metalink_parser.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/list.Plo@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/metalink_parser_common.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/metalink_pctrl.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/metalink_pstate.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/metalink_pstm.Plo@am__quote@

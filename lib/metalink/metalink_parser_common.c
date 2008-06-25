@@ -23,43 +23,23 @@
  * THE SOFTWARE.
  */
 /* copyright --> */
-#ifndef _D_METALINK_PARSER_H_
-#define _D_METALINK_PARSER_H__
+#include "metalink_parser_common.h"
+#include "metalink_error.h"
 
-#include <metalink/metalink_types.h>
+int metalink_handle_parse_result(metalink_t** res,
+				 session_data_t* session_data,
+				 int parser_retval)
+{
+  int retval;
+  if(parser_retval== 0 && session_data->stm->ctrl->error == 0) {
+    *res = metalink_pctrl_detach_metalink(session_data->stm->ctrl);
+  }
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-/*
- * Parses metalink XML file.
- * @param filename path to Metalink XML file to be parsed.
- * @param res a dynamically allocated metalink_t structure as a result of
- * parsing.
- * @return 0 for success, non-zero for error. See metalink_error.h for
- * the meaning of error code.
- */
-int metalink_parse_file(const char* filename, metalink_t** res);
-
-/*
- * Parses metalink XML stored in buf and its length is len.
- * @param buf a pointer to the XML data.
- * @param len length of XML data in byte.
- * @param res a dynamically allocated metalink_t structure as a result of
- * parsing.
- * @return 0 for success, non-zero for error. See metalink_error.h for
- * the meaning of error code.
- */
-int metalink_parse_memory(const char* buf, size_t len, metalink_t** res);
-
-/*
- * Frees the memory allocated for res
- */
-void metalink_free(metalink_t* res);
-
-#ifdef __cplusplus
+  if(parser_retval!= 0) {
+    /* TODO more detailed error handling for parser is desired. */
+    retval = METALINK_ERR_PARSER_ERROR;
+  } else {
+    retval = metalink_pctrl_get_error(session_data->stm->ctrl);
+  }
+  return retval;
 }
-#endif
-
-#endif // _D_METALINK_PARSER_H_

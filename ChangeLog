@@ -1,5 +1,25 @@
 2008-06-25  Tatsuhiro Tsujikawa  <tatsuhiro.t at gmail dot com>
 
+	Added metalink_parse_memory function. Currently libexpat implementation
+	only. libexpat_metalink_parser.c is refactored and setup_parser function
+	added for creating parser object and setting handlers.
+	The portion of code which handeles return value and detachment of
+	metalink_t object is common for libexpat and libxml2, so it is now
+	defined in metalink_parser_common.c.
+	metalink_parser_test.c is refactord so that assertions are shared with
+	both test_metalink_parse_file and test_metalink_parse_memory functions.
+	* lib/metalink/Makefile.am
+	* lib/metalink/Makefile.in
+	* lib/metalink/libexpat_metalink_parser.c
+	* lib/metalink/metalink_parser.h
+	* lib/metalink/metalink_parser_common.c
+	* lib/metalink/metalink_parser_common.h
+	* test/main.c
+	* test/metalink_parser_test.c
+	* test/metalink_parser_test.h
+
+2008-06-25  Tatsuhiro Tsujikawa  <tatsuhiro.t at gmail dot com>
+
 	Added extern "C" construct to make it easy to include them in C++ code. 
 	* lib/metalink/metalink_types.h
 	* lib/metalink/metalink_parser.h

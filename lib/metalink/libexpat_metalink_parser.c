@@ -33,6 +33,7 @@
 #include "metalink_pstm.h"
 #include "metalink_pstate.h"
 #include "metalink_error.h"
+#include "metalink_parser_common.h"
 #include "session_data.h"
 #include "stack.h"
 #include "string_buffer.h"
@@ -73,6 +74,19 @@ static void characters_handler(void* user_data, const char* chars,
   string_buffer_append(str_buf, (const char*)chars, length);
 }
 
+static XML_Parser setup_parser(session_data_t* session_data)
+{
+  XML_Parser parser;
+  
+  parser = XML_ParserCreate(NULL);
+  
+  XML_SetUserData(parser, session_data);
+  XML_SetElementHandler(parser, &start_element_handler, &end_element_handler);
+  XML_SetCharacterDataHandler(parser, &characters_handler);
+
+  return parser;
+}
+
 int metalink_parse_file(const char* filename, metalink_t** res)
 {
   session_data_t* session_data;
@@ -89,11 +103,7 @@ int metalink_parse_file(const char* filename, metalink_t** res)
 
   session_data = new_session_data();
   
-  parser = XML_ParserCreate(NULL);
-
-  XML_SetUserData(parser, session_data);
-  XML_SetElementHandler(parser, &start_element_handler, &end_element_handler);
-  XML_SetCharacterDataHandler(parser, &characters_handler);
+  parser = setup_parser(session_data);
 
   while(1) {
     int num_read;
@@ -118,18 +128,33 @@ int metalink_parse_file(const char* filename, metalink_t** res)
   XML_ParserFree(parser);
   close(docfd);
   
-  if(r == 0 && session_data->stm->ctrl->error == 0) {
-    *res = metalink_pctrl_detach_metalink(session_data->stm->ctrl);
-  }
-
-  if(r != 0) {
-    /* TODO more detailed error handling for parser is desired. */
-    retval = METALINK_ERR_PARSER_ERROR;
-  } else {
-    retval = metalink_pctrl_get_error(session_data->stm->ctrl);
-  }
+  retval = metalink_handle_parse_result(res, session_data, r);
 
   delete_session_data(session_data);
 
   return retval;
+}
+
+int metalink_parse_memory(const char* buf, size_t len, metalink_t** res)
+{
+  session_data_t* session_data;
+  int r = 0;
+  int retval;
+  XML_Parser parser;
+  
+  session_data = new_session_data();
+
+  parser = setup_parser(session_data);
+
+  if(!XML_Parse(parser, buf, len, 1)) {
+    r = METALINK_ERR_PARSER_ERROR;
+  }
+
+  XML_ParserFree(parser);
+
+  retval = metalink_handle_parse_result(res, session_data, r);
+
+  delete_session_data(session_data);
+
+  return retval; 
 }

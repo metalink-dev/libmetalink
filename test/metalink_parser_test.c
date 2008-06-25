@@ -23,6 +23,10 @@
  * THE SOFTWARE.
  */
 /* copyright --> */
+#include <sys/mman.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <unistd.h>
 #include <CUnit/CUnit.h>
 #include "metalink_parser_test.h"
 #include "metalink/metalink_parser.h"
@@ -37,17 +41,12 @@ static size_t count_array(void** array)
   return count;
 }
 
-void test_metalink_parser_test1_xml()
+static void validate_result(metalink_t* metalink)
 {
-  int r;
-  metalink_t* metalink;
   metalink_file_t* file;
   metalink_checksum_t* checksum;
   metalink_resource_t* resource;
   metalink_piece_hash_t* piece_hash;
-
-  r = metalink_parse_file("test1.xml", &metalink);
-  CU_ASSERT_EQUAL(0, r);
 
   /* count files */
   CU_ASSERT_EQUAL_FATAL(3, count_array((void**)metalink->files));
@@ -155,4 +154,44 @@ void test_metalink_parser_test1_xml()
   CU_ASSERT_STRING_EQUAL("ftp://host/file", resource->url);
 
   delete_metalink(metalink);
+}
+
+void test_metalink_parse_file()
+{
+  int r;
+  metalink_t* metalink;
+
+  r = metalink_parse_file("test1.xml", &metalink);
+  CU_ASSERT_EQUAL(0, r);
+
+  validate_result(metalink);
+}
+
+void test_metalink_parse_memory()
+{
+  int r;
+  metalink_t* metalink;
+  int fd;
+  struct stat st;
+  char* addr;
+
+  fd = open("test1.xml", O_RDONLY);
+  if(fd == -1) {
+    CU_FAIL_FATAL("opening file failed");
+  }
+  if(fstat(fd, &st) == -1) {
+    CU_FAIL_FATAL("fstat failed");
+  }
+
+  addr = mmap(NULL, st.st_size, PROT_READ, MAP_PRIVATE, fd, 0);
+  if(addr == MAP_FAILED) {
+    CU_FAIL_FATAL("mmap failed");
+  }
+
+  r = metalink_parse_memory(addr, st.st_size, &metalink);
+  CU_ASSERT_EQUAL(0, r);
+
+  CU_ASSERT_EQUAL(0, close(fd));
+
+  validate_result(metalink);
 }

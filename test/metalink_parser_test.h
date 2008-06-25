@@ -26,6 +26,8 @@
 #ifndef _D_METALINK_PARSER_TEST_H_
 #define _D_METALINK_PARSER_TEST_H_
 
-void test_metalink_parser_test1_xml();
+void test_metalink_parse_file();
+
+void test_metalink_parse_memory();
 
 #endif // _D_METALINK_PARSER_TEST_H_

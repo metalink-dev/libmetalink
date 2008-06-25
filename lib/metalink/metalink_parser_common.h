@@ -23,43 +23,28 @@
  * THE SOFTWARE.
  */
 /* copyright --> */
-#ifndef _D_METALINK_PARSER_H_
-#define _D_METALINK_PARSER_H__
+#ifndef _D_METALINK_PARSER_COMMON_H_
+#define _D_METALINK_PARSER_COMMON_H_
 
-#include <metalink/metalink_types.h>
-
-#ifdef __cplusplus
-extern "C" {
-#endif
+#include "metalink_types.h"
+#include "session_data.h"
 
 /*
- * Parses metalink XML file.
- * @param filename path to Metalink XML file to be parsed.
- * @param res a dynamically allocated metalink_t structure as a result of
- * parsing.
- * @return 0 for success, non-zero for error. See metalink_error.h for
- * the meaning of error code.
+ * See session_data and parser_retval which is a return value of parser object
+ * and decide the actual return value of metalink_parse_* function and fills
+ * res.
+ * @param res If the function decided the parse operation is succeeded, then
+ *  res is filled with actual metalink_t pointer which is detached from
+ *  session_data.
+ * @param session_data session_data used in parser operation.
+ * @param parser_retval return value of parser object.
+ * @return error code listed in metalink_error.h if error, otherwise 0 for
+ *  success.
+ * 
  */
-int metalink_parse_file(const char* filename, metalink_t** res);
+int metalink_handle_parse_result(metalink_t** res,
+				 session_data_t* session_data,
+				 int parser_retval);
 
-/*
- * Parses metalink XML stored in buf and its length is len.
- * @param buf a pointer to the XML data.
- * @param len length of XML data in byte.
- * @param res a dynamically allocated metalink_t structure as a result of
- * parsing.
- * @return 0 for success, non-zero for error. See metalink_error.h for
- * the meaning of error code.
- */
-int metalink_parse_memory(const char* buf, size_t len, metalink_t** res);
 
-/*
- * Frees the memory allocated for res
- */
-void metalink_free(metalink_t* res);
-
-#ifdef __cplusplus
-}
-#endif
-
-#endif // _D_METALINK_PARSER_H_
+#endif // _D_METALINK_PARSER_COMMON_H_

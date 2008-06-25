@@ -50,8 +50,11 @@ int main()
       (!CU_add_test(pSuite, "test of metalink_pctrl_chunk_checksum_transaction",
 		    test_metalink_pctrl_chunk_checksum_transaction))
       ||
-      (!CU_add_test(pSuite, "test of metalink_parser_test1_xml",
-		    test_metalink_parser_test1_xml))
+      (!CU_add_test(pSuite, "test of metalink_parse_file",
+		    test_metalink_parse_file))
+      ||
+      (!CU_add_test(pSuite, "test of metalink_parse_memory",
+		    test_metalink_parse_memory))
       ) {
      CU_cleanup_registry();
      return CU_get_error();

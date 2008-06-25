@@ -1,5 +1,10 @@
 2008-06-25  Tatsuhiro Tsujikawa  <tatsuhiro.t at gmail dot com>
 
+	Implemented metalink_parse_memory with libxml2.
+	* lib/metalink/libxml2_metalink_parser.c
+
+2008-06-25  Tatsuhiro Tsujikawa  <tatsuhiro.t at gmail dot com>
+
 	Added metalink_parse_memory function. Currently libexpat implementation
 	only. libexpat_metalink_parser.c is refactored and setup_parser function
 	added for creating parser object and setting handlers.

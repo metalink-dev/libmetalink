@@ -29,6 +29,7 @@
 #include "metalink_pstm.h"
 #include "metalink_pstate.h"
 #include "metalink_error.h"
+#include "metalink_parser_common.h"
 #include "session_data.h"
 #include "stack.h"
 #include "string_buffer.h"
@@ -114,16 +115,24 @@ int metalink_parse_file(const char* filename, metalink_t** res)
   
   r = xmlSAXUserParseFile(&mySAXHandler, session_data, filename);
 
-  if(r == 0 && session_data->stm->ctrl->error == 0) {
-    *res = metalink_pctrl_detach_metalink(session_data->stm->ctrl);
-  }
+  retval = metalink_handle_parse_result(res, session_data, r);
 
-  if(r != 0) {
-    /* TODO more detailed error handling for parser is desired. */
-    retval = METALINK_ERR_PARSER_ERROR;
-  } else {
-    retval = metalink_pctrl_get_error(session_data->stm->ctrl);
-  }
+  delete_session_data(session_data);
+
+  return retval;
+}
+
+int metalink_parse_memory(const char* buf, size_t len, metalink_t** res)
+{
+  session_data_t* session_data;
+  int r;
+  int retval;
+
+  session_data = new_session_data();
+
+  r = xmlSAXUserParseMemory(&mySAXHandler, session_data, buf, len);
+
+  retval = metalink_handle_parse_result(res, session_data, r);
 
   delete_session_data(session_data);
 

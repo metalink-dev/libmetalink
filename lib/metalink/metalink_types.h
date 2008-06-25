@@ -26,6 +26,10 @@
 #ifndef _D_METALINK_TYPES_H_
 #define _D_METALINK_TYPES_H_
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef struct _metalink_resource {
   /* url, null terminated string */
   char* url;
@@ -180,5 +184,9 @@ typedef struct _metalink {
 metalink_t* new_metalink();
 
 void delete_metalink(metalink_t* metalink);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif // _D_METALINK_TYPES_H_

@@ -28,6 +28,10 @@
 
 #include <metalink/metalink_types.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /*
  * Parses metalink XML file.
  * @param filename path to Metalink XML file to be parsed.
@@ -42,5 +46,9 @@ int metalink_parse_file(const char* filename, metalink_t** res);
  * Frees the memory allocated for res
  */
 void metalink_free(metalink_t* res);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif // _D_METALINK_PARSER_H_

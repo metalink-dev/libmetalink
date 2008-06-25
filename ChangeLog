@@ -1,3 +1,9 @@
+2008-06-25  Tatsuhiro Tsujikawa  <tatsuhiro.t at gmail dot com>
+
+	Added extern "C" construct to make it easy to include them in C++ code. 
+	* lib/metalink/metalink_types.h
+	* lib/metalink/metalink_parser.h
+
 2008-06-13  Tatsuhiro Tsujikawa  <tatsuhiro.t at gmail dot com>
 
 	Release 0.0.2

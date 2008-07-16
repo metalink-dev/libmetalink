@@ -52,6 +52,9 @@ void delete_session_data(session_data_t* sd)
     return;
   }
   delete_metalink_pstm(sd->stm);
+  while(!is_stack_empty(sd->characters_stack)) {
+    delete_string_buffer(stack_pop(sd->characters_stack));
+  }
   release_stack(sd->characters_stack);
   free(sd);
 }

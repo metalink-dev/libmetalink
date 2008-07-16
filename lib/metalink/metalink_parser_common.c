@@ -31,11 +31,11 @@ int metalink_handle_parse_result(metalink_t** res,
 				 int parser_retval)
 {
   int retval;
-  if(parser_retval== 0 && session_data->stm->ctrl->error == 0) {
+  if(parser_retval == 0 && session_data->stm->ctrl->error == 0) {
     *res = metalink_pctrl_detach_metalink(session_data->stm->ctrl);
   }
 
-  if(parser_retval!= 0) {
+  if(parser_retval != 0) {
     /* TODO more detailed error handling for parser is desired. */
     retval = METALINK_ERR_PARSER_ERROR;
   } else {

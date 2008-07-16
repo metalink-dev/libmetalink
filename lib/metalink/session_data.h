@@ -29,7 +29,7 @@
 #include <metalink_pstm.h>
 #include <stack.h>
 
-typedef struct session_data_t
+typedef struct _session_data
 {
   metalink_pstm_t* stm;
 

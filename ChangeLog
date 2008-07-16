@@ -1,3 +1,8 @@
+2008-07-16  Tatsuhiro Tsujikawa  <tatsuhiro.t at gmail dot com>
+
+	Renamed struct session_data_t as struct _session_data.
+	* lib/metalink/session_data.h
+
 2008-06-25  Tatsuhiro Tsujikawa  <tatsuhiro.t at gmail dot com>
 
 	Implemented metalink_parse_memory with libxml2.

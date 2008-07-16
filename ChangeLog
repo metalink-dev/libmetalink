@@ -1,5 +1,15 @@
 2008-07-16  Tatsuhiro Tsujikawa  <tatsuhiro.t at gmail dot com>
 
+	Added metalink_parse_update, metalink_parse_final interface.
+	* lib/metalink/metalink_parser.h
+	* lib/metalink/libexpat_metalink_parser.c
+	* lib/metalink/libxml2_metalink_parser.c
+	* test/main.c
+	* test/metalink_parser_test.h
+	* test/metalink_parser_test.c
+	
+2008-07-16  Tatsuhiro Tsujikawa  <tatsuhiro.t at gmail dot com>
+
 	Renamed struct session_data_t as struct _session_data.
 	* lib/metalink/session_data.h
 

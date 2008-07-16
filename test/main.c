@@ -55,6 +55,12 @@ int main()
       ||
       (!CU_add_test(pSuite, "test of metalink_parse_memory",
 		    test_metalink_parse_memory))
+      ||
+      (!CU_add_test(pSuite, "test of metalink_parse_update",
+		    test_metalink_parse_update))
+      ||
+      (!CU_add_test(pSuite, "test of metalink_parser_update_fail",
+		    test_metalink_parse_update_fail))
       ) {
      CU_cleanup_registry();
      return CU_get_error();

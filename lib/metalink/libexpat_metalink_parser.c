@@ -158,3 +158,75 @@ int metalink_parse_memory(const char* buf, size_t len, metalink_t** res)
 
   return retval; 
 }
+
+struct _metalink_parser_context
+{
+  session_data_t* session_data;
+  XML_Parser parser;
+  metalink_t* res;
+};
+
+metalink_parser_context_t* new_metalink_parser_context()
+{
+  metalink_parser_context_t* ctx;
+  ctx = malloc(sizeof(metalink_parser_context_t));
+  if(ctx == NULL) {
+    return NULL;
+  }
+  memset(ctx, 0, sizeof(metalink_parser_context_t));
+
+  ctx->session_data = new_session_data();
+  if(ctx->session_data == NULL) {
+    delete_metalink_parser_context(ctx);
+    return NULL;
+  }
+
+  ctx->parser = setup_parser(ctx->session_data);
+  if(ctx->parser == NULL) {
+    delete_metalink_parser_context(ctx);
+    return NULL;
+  }
+  return ctx;
+}
+
+void delete_metalink_parser_context(metalink_parser_context_t* ctx)
+{
+  if(ctx == NULL) {
+    return;
+  }
+  delete_session_data(ctx->session_data);
+  XML_ParserFree(ctx->parser);
+  free(ctx);
+}
+
+int metalink_parse_update(metalink_parser_context_t* ctx,
+			  const char* buf, size_t len)
+{
+  int r = 0;
+
+  if(!XML_Parse(ctx->parser, buf, len, 0)) {
+    r = METALINK_ERR_PARSER_ERROR;
+  }
+
+  if(r == 0) {
+    r = metalink_pctrl_get_error(ctx->session_data->stm->ctrl);
+  }
+  return r;
+}
+
+int metalink_parse_final(metalink_parser_context_t* ctx,
+			 const char* buf, size_t len, metalink_t** res)
+{
+  int r = 0;
+  int retval;
+
+  if(!XML_Parse(ctx->parser, buf, len, 1)) {
+    r = METALINK_ERR_PARSER_ERROR;
+  }
+
+  retval = metalink_handle_parse_result(res, ctx->session_data, r);
+
+  delete_metalink_parser_context(ctx);
+
+  return retval; 
+}

@@ -138,3 +138,86 @@ int metalink_parse_memory(const char* buf, size_t len, metalink_t** res)
 
   return retval;
 }
+
+struct _metalink_parser_context
+{
+  session_data_t* session_data;
+  xmlParserCtxtPtr parser;
+  metalink_t* res;
+};
+
+metalink_parser_context_t* new_metalink_parser_context()
+{
+  metalink_parser_context_t* ctx;
+  ctx = malloc(sizeof(metalink_parser_context_t));
+  if(ctx == NULL) {
+    return NULL;
+  }
+  memset(ctx, 0, sizeof(metalink_parser_context_t));
+
+  ctx->session_data = new_session_data();
+  if(ctx->session_data == NULL) {
+    delete_metalink_parser_context(ctx);
+    return NULL;
+  }
+  return ctx;
+}
+
+void delete_metalink_parser_context(metalink_parser_context_t* ctx)
+{
+  if(ctx == NULL) {
+    return;
+  }
+  delete_session_data(ctx->session_data);
+  xmlFreeParserCtxt(ctx->parser);
+  free(ctx);
+}
+
+int metalink_parse_update_internal(metalink_parser_context_t* ctx,
+				   const char* buf, size_t len, int terminate)
+{
+  int r;
+
+  if(ctx->parser == NULL) {
+    int inilen = 4 < len ? 4 : len;
+    ctx->parser = xmlCreatePushParserCtxt(&mySAXHandler, ctx->session_data,
+					  buf, inilen, NULL);
+    if(ctx->parser == NULL) {
+      r = METALINK_ERR_PARSER_ERROR;
+    } else {
+      r = xmlParseChunk(ctx->parser, buf+inilen, len-inilen, terminate);
+    }
+  } else {
+    r = xmlParseChunk(ctx->parser, buf, len, terminate);
+  }
+  return r;
+}
+
+int metalink_parse_update(metalink_parser_context_t* ctx,
+			  const char* buf, size_t len)
+{
+  int r;
+  r = metalink_parse_update_internal(ctx, buf, len, 0);
+  if(r == 0) {
+    r = metalink_pctrl_get_error(ctx->session_data->stm->ctrl);
+  }
+  return r;
+}
+
+int metalink_parse_final(metalink_parser_context_t* ctx,
+			 const char* buf, size_t len, metalink_t** res)
+{
+  int r;
+  int retval;
+
+  r = metalink_parse_update_internal(ctx, buf, len, 1);
+  if(r == 0) {
+    r = metalink_pctrl_get_error(ctx->session_data->stm->ctrl);
+  }
+
+  retval = metalink_handle_parse_result(res, ctx->session_data, r);
+
+  delete_metalink_parser_context(ctx);
+
+  return retval; 
+}

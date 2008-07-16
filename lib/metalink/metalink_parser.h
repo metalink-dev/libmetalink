@@ -53,6 +53,51 @@ int metalink_parse_file(const char* filename, metalink_t** res);
  */
 int metalink_parse_memory(const char* buf, size_t len, metalink_t** res);
 
+/**
+ * a parser context to keep current progress of XML parser.
+ */
+typedef struct _metalink_parser_context metalink_parser_context_t;
+
+/*
+ * Allocates, initializes and returns a parser context.
+ * @return a parser context on success, otherwise NULL.
+ */
+metalink_parser_context_t* new_metalink_parser_context();
+
+/**
+ * Deallocates a parser context ctx.
+ * @param ctx a parser context to deallocate. If ctx is NULL, this function does
+ * nothing.
+ */
+void delete_metalink_parser_context(metalink_parser_context_t* ctx);
+
+/**
+ * Processes len bytes of data at buf. This function can be called several times
+ * to parse entire XML data.
+ * @param ctx a parser context.
+ * @param buf a pointer to the XML data.
+ * @param len length of XML data in bytes.
+ * @return 0 on success, non-zero for error. See metalink_error.h for the
+ * meaning of error code.
+ */
+int metalink_parse_update(metalink_parser_context_t* ctx,
+			  const char* buf, size_t len);
+
+/**
+ * Processes len bytes of data at buf and places metalink_t to res.
+ * Inside this function, ctx is cleaned up, so you don't need to call
+ * delete_metalink_parser_context. len can be 0.
+ * @param ctx a parser context.
+ * @param buf a pointer to the XML data.
+ * @param len length of XML data in bytes.
+ * @param res a dynamically allocated metalink_t structure as a result of
+ * parsing.
+ * @return 0 on success, non-zero for error. See metalink_error_h for
+ * the meaning of error code.
+ */
+int metalink_parse_final(metalink_parser_context_t* ctx,
+			 const char* buf, size_t len, metalink_t** res);
+
 /*
  * Frees the memory allocated for res
  */

@@ -1,5 +1,11 @@
 2008-07-16  Tatsuhiro Tsujikawa  <tatsuhiro.t at gmail dot com>
 
+	Put -D_ISOC99_SOURCE to DEFS variable.
+	* lib/metalink/Makefile.am
+	* test/Makefile.am
+
+2008-07-16  Tatsuhiro Tsujikawa  <tatsuhiro.t at gmail dot com>
+
 	Code leanup.
 	* lib/metalink/metalink_parser_common.c
 

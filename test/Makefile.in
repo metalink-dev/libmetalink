@@ -81,7 +81,7 @@ CXXCPP = @CXXCPP@
 CXXDEPMODE = @CXXDEPMODE@
 CXXFLAGS = @CXXFLAGS@
 CYGPATH_W = @CYGPATH_W@
-DEFS = @DEFS@
+DEFS = -D_ISOC99_SOURCE
 DEPDIR = @DEPDIR@
 DSYMUTIL = @DSYMUTIL@
 ECHO = @ECHO@
@@ -184,7 +184,7 @@ main_SOURCES = \
 	metalink_parser_test.c metalink_parser_test.h
 
 main_LDADD = ${top_builddir}/lib/libmetalink.la -lcunit
-AM_CFLAGS = -Wall -D_ISOC99_SOURCE -I${top_srcdir}/lib
+AM_CFLAGS = -Wall -I${top_srcdir}/lib
 EXTRA_DIST = test1.xml
 all: all-am
 

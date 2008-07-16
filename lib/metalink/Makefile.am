@@ -20,5 +20,6 @@ if ENABLE_LIBEXPAT
 libmetalinkcore_la_SOURCES += libexpat_metalink_parser.c
 endif
 
-AM_CFLAGS = -Wall -D_ISOC99_SOURCE -I${top_srcdir}/lib
+AM_CFLAGS = -Wall -I${top_srcdir}/lib
 AM_CPPFLAGS = @XML_CPPFLAGS@ @LIBEXPAT_CPPFLAGS@
+DEFS = -D_ISOC99_SOURCE

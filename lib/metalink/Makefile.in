@@ -95,7 +95,7 @@ CXXCPP = @CXXCPP@
 CXXDEPMODE = @CXXDEPMODE@
 CXXFLAGS = @CXXFLAGS@
 CYGPATH_W = @CYGPATH_W@
-DEFS = @DEFS@
+DEFS = -D_ISOC99_SOURCE
 DEPDIR = @DEPDIR@
 DSYMUTIL = @DSYMUTIL@
 ECHO = @ECHO@
@@ -199,7 +199,7 @@ libmetalinkcore_la_SOURCES = metalink_parser.h metalink_types.c \
 	metalink_parser_common.h session_data.c session_data.h stack.c \
 	stack.h list.c list.h string_buffer.c string_buffer.h \
 	$(am__append_1) $(am__append_2)
-AM_CFLAGS = -Wall -D_ISOC99_SOURCE -I${top_srcdir}/lib
+AM_CFLAGS = -Wall -I${top_srcdir}/lib
 AM_CPPFLAGS = @XML_CPPFLAGS@ @LIBEXPAT_CPPFLAGS@
 all: all-am
 

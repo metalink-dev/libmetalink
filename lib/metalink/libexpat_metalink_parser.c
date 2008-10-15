@@ -111,12 +111,12 @@ metalink_error_t metalink_parse_fp(FILE *docfp, metalink_t** res)
 
   while(!feof(docfp)) {
     size_t num_read;
-    void* buff = XML_GetBuffer(parser, BUFF_SIZE);
+    void* buff = XML_GetBuffer(parser, BUFSIZ);
     if(buff == NULL) {
       r = METALINK_ERR_PARSER_ERROR;
       break;
     }
-    num_read = fread(buff, 1, BUFF_SIZE, docfp);
+    num_read = fread(buff, 1, BUFSIZ, docfp);
     if(num_read < 0) {
       r = METALINK_ERR_PARSER_ERROR;
       break;

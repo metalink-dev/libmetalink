@@ -29,7 +29,6 @@
 #include <limits.h>
 #include "metalink_pstate.h"
 #include "metalink_pstm.h"
-#include "metalink_error.h"
 
 metalink_pstate_t* new_metalink_pstate()
 {
@@ -74,7 +73,7 @@ const char* get_attribute_value(const char** attrs, const char* name)
  * set error code to metalink_pctrl and transit to null state, where no further
  * state transition takes place.
  */
-void error_handler(metalink_pstm_t* stm, int error)
+void error_handler(metalink_pstm_t* stm, metalink_error_t error)
 {
   metalink_pctrl_set_error(stm->ctrl, error);
   metalink_pstm_enter_null_state(stm);
@@ -125,7 +124,7 @@ void metalink_state_end_fun(metalink_pstm_t* stm,
 void files_state_start_fun(metalink_pstm_t* stm,
 			   const char* name, const char** attrs)
 {
-  int r;
+  metalink_error_t r;
   if(strcmp("file", name) == 0) {
     const char* fname;
     metalink_file_t* file;
@@ -156,7 +155,7 @@ void files_state_start_fun(metalink_pstm_t* stm,
 void files_state_end_fun(metalink_pstm_t* stm,
 			 const char* name, const char* characters)
 {
-  int r;
+  metalink_error_t r;
   r = metalink_pctrl_metalink_accumulate_files(stm->ctrl);
   if(r == 0) {
     metalink_pstm_enter_metalink_state(stm);
@@ -202,7 +201,7 @@ void file_state_start_fun(metalink_pstm_t* stm,
 void file_state_end_fun(metalink_pstm_t* stm,
 			const char* name, const char* characters)
 {
-  int r;
+  metalink_error_t r;
   r = metalink_pctrl_commit_file_transaction(stm->ctrl);
   if(r != 0) {
     error_handler(stm, r);
@@ -245,7 +244,7 @@ void version_state_start_fun(metalink_pstm_t* stm,
 void version_state_end_fun(metalink_pstm_t* stm,
 			   const char* name, const char* characters)
 {
-  int r;
+  metalink_error_t r;
   r = metalink_pctrl_file_set_version(stm->ctrl, characters);
   if(r == 0) {
     metalink_pstm_enter_file_state(stm);
@@ -264,7 +263,7 @@ void language_state_start_fun(metalink_pstm_t* stm,
 void language_state_end_fun(metalink_pstm_t* stm,
 			    const char* name, const char* characters)
 {
-  int r;
+  metalink_error_t r;
   r = metalink_pctrl_file_set_language(stm->ctrl, characters);
   if(r == 0) {
     metalink_pstm_enter_file_state(stm);
@@ -283,7 +282,7 @@ void os_state_start_fun(metalink_pstm_t* stm,
 void os_state_end_fun(metalink_pstm_t* stm,
 		      const char* name, const char* characters)
 {
-  int r;
+  metalink_error_t r;
   r = metalink_pctrl_file_set_os(stm->ctrl, characters);
   if(r == 0) {
     metalink_pstm_enter_file_state(stm);
@@ -296,7 +295,7 @@ void os_state_end_fun(metalink_pstm_t* stm,
 void resources_state_start_fun(metalink_pstm_t* stm,
 			       const char* name, const char** attrs)
 {
-  int r;
+  metalink_error_t r;
   if(strcmp("url", name) == 0) {
     const char* type;
     const char* location;
@@ -375,7 +374,7 @@ void url_state_start_fun(metalink_pstm_t* stm,
 void url_state_end_fun(metalink_pstm_t* stm,
 		       const char* name, const char* characters)
 {
-  int r;
+  metalink_error_t r;
   r = metalink_pctrl_resource_set_url(stm->ctrl, characters);
   if(r != 0) {
     /* TODO clear intermidiate resource transaction. */
@@ -394,7 +393,7 @@ void url_state_end_fun(metalink_pstm_t* stm,
 void verification_state_start_fun(metalink_pstm_t* stm,
 				  const char* name, const char** attrs)
 {
-  int r;
+  metalink_error_t r;
   if(strcmp("hash", name) == 0) {
     const char* type;
     metalink_checksum_t* checksum;
@@ -478,7 +477,7 @@ void hash_state_start_fun(metalink_pstm_t* stm,
 void hash_state_end_fun(metalink_pstm_t* stm,
 			const char* name, const char* characters)
 {
-  int r;
+  metalink_error_t r;
   r = metalink_pctrl_checksum_set_hash(stm->ctrl, characters);
   if(r != 0) {
     error_handler(stm, r);
@@ -533,7 +532,7 @@ void pieces_state_start_fun(metalink_pstm_t* stm,
 void pieces_state_end_fun(metalink_pstm_t* stm,
 			  const char* name, const char* characters)
 {
-  int r;
+  metalink_error_t r;
   r = metalink_pctrl_commit_chunk_checksum_transaction(stm->ctrl);
   if(r != 0) {
     error_handler(stm, r);
@@ -552,7 +551,7 @@ void piece_hash_state_start_fun(metalink_pstm_t* stm,
 void piece_hash_state_end_fun(metalink_pstm_t* stm,
 			      const char* name, const char* characters)
 {
-  int r;
+  metalink_error_t r;
   metalink_pctrl_piece_hash_set_hash(stm->ctrl, characters);
   r = metalink_pctrl_commit_piece_hash_transaction(stm->ctrl);
   if(r != 0) {

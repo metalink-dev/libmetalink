@@ -87,11 +87,11 @@ static XML_Parser setup_parser(session_data_t* session_data)
   return parser;
 }
 
-int metalink_parse_file(const char* filename, metalink_t** res)
+metalink_error_t metalink_parse_file(const char* filename, metalink_t** res)
 {
   session_data_t* session_data;
-  int r = 0;
-  int retval;
+  metalink_error_t r = 0,
+		   retval;
   XML_Parser parser;
   int docfd;
   const size_t BUFF_SIZE = 4096;
@@ -106,7 +106,7 @@ int metalink_parse_file(const char* filename, metalink_t** res)
   parser = setup_parser(session_data);
 
   while(1) {
-    int num_read;
+    metalink_error_t num_read;
     void* buff = XML_GetBuffer(parser, BUFF_SIZE);
     if(buff == NULL) {
       r = METALINK_ERR_PARSER_ERROR;
@@ -135,11 +135,11 @@ int metalink_parse_file(const char* filename, metalink_t** res)
   return retval;
 }
 
-int metalink_parse_memory(const char* buf, size_t len, metalink_t** res)
+metalink_error_t metalink_parse_memory(const char* buf, size_t len, metalink_t** res)
 {
   session_data_t* session_data;
-  int r = 0;
-  int retval;
+  metalink_error_t r = 0,
+		   retval;
   XML_Parser parser;
   
   session_data = new_session_data();
@@ -199,10 +199,10 @@ void delete_metalink_parser_context(metalink_parser_context_t* ctx)
   free(ctx);
 }
 
-int metalink_parse_update(metalink_parser_context_t* ctx,
+metalink_error_t metalink_parse_update(metalink_parser_context_t* ctx,
 			  const char* buf, size_t len)
 {
-  int r = 0;
+  metalink_error_t r = 0;
 
   if(!XML_Parse(ctx->parser, buf, len, 0)) {
     r = METALINK_ERR_PARSER_ERROR;
@@ -214,11 +214,11 @@ int metalink_parse_update(metalink_parser_context_t* ctx,
   return r;
 }
 
-int metalink_parse_final(metalink_parser_context_t* ctx,
+metalink_error_t metalink_parse_final(metalink_parser_context_t* ctx,
 			 const char* buf, size_t len, metalink_t** res)
 {
-  int r = 0;
-  int retval;
+  metalink_error_t r = 0,
+		   retval;
 
   if(!XML_Parse(ctx->parser, buf, len, 1)) {
     r = METALINK_ERR_PARSER_ERROR;

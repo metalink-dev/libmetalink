@@ -10,7 +10,7 @@
 
 int main(int argc, char** argv)
 {
-  int r;
+  metalink_error_t r;
   metalink_t* metalink;
   metalink_file_t* file;
   metalink_checksum_t** checksums;

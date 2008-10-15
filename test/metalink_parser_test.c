@@ -186,7 +186,7 @@ static void* mapfile(int fd, off_t size)
 
 void test_metalink_parse_file()
 {
-  int r;
+  metalink_error_t r;
   metalink_t* metalink;
 
   r = metalink_parse_file("test1.xml", &metalink);
@@ -197,7 +197,7 @@ void test_metalink_parse_file()
 
 void test_metalink_parse_memory()
 {
-  int r;
+  metalink_error_t r;
   metalink_t* metalink;
   int fd;
   struct stat st;
@@ -218,7 +218,7 @@ void test_metalink_parse_memory()
 
 void test_metalink_parse_update()
 {
-  int r;
+  metalink_error_t r;
   metalink_t* metalink;
   int fd;
   struct stat st;
@@ -252,7 +252,7 @@ void test_metalink_parse_update()
 
 void test_metalink_parse_update_fail()
 {
-  int r;
+  metalink_error_t r;
   metalink_t* metalink;
   int fd;
   struct stat st;

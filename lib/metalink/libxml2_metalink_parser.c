@@ -105,11 +105,11 @@ static xmlSAXHandler mySAXHandler = {
   0, /*   xmlStructuredErrorFunc */
 };
 
-int metalink_parse_file(const char* filename, metalink_t** res)
+metalink_error_t metalink_parse_file(const char* filename, metalink_t** res)
 {
   session_data_t* session_data;
-  int r;
-  int retval;
+  metalink_error_t r,
+  		   retval;
 
   session_data = new_session_data();
   
@@ -122,11 +122,11 @@ int metalink_parse_file(const char* filename, metalink_t** res)
   return retval;
 }
 
-int metalink_parse_memory(const char* buf, size_t len, metalink_t** res)
+metalink_error_t metalink_parse_memory(const char* buf, size_t len, metalink_t** res)
 {
   session_data_t* session_data;
-  int r;
-  int retval;
+  metalink_error_t r,
+		   retval;
 
   session_data = new_session_data();
 
@@ -173,10 +173,10 @@ void delete_metalink_parser_context(metalink_parser_context_t* ctx)
   free(ctx);
 }
 
-int metalink_parse_update_internal(metalink_parser_context_t* ctx,
+metalink_error_t metalink_parse_update_internal(metalink_parser_context_t* ctx,
 				   const char* buf, size_t len, int terminate)
 {
-  int r;
+  metalink_error_t r;
 
   if(ctx->parser == NULL) {
     int inilen = 4 < len ? 4 : len;
@@ -193,10 +193,10 @@ int metalink_parse_update_internal(metalink_parser_context_t* ctx,
   return r;
 }
 
-int metalink_parse_update(metalink_parser_context_t* ctx,
+metalink_error_t metalink_parse_update(metalink_parser_context_t* ctx,
 			  const char* buf, size_t len)
 {
-  int r;
+  metalink_error_t r;
   r = metalink_parse_update_internal(ctx, buf, len, 0);
   if(r == 0) {
     r = metalink_pctrl_get_error(ctx->session_data->stm->ctrl);
@@ -204,11 +204,11 @@ int metalink_parse_update(metalink_parser_context_t* ctx,
   return r;
 }
 
-int metalink_parse_final(metalink_parser_context_t* ctx,
+metalink_erro_t metalink_parse_final(metalink_parser_context_t* ctx,
 			 const char* buf, size_t len, metalink_t** res)
 {
-  int r;
-  int retval;
+  metalink_error_t r,
+		   retval;
 
   r = metalink_parse_update_internal(ctx, buf, len, 1);
   if(r == 0) {

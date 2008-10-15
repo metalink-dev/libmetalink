@@ -30,7 +30,7 @@
 #include "list.h"
 
 typedef struct metalink_pctrl_t {
-  int error;
+  metalink_error_t error;
 
   metalink_t* metalink;
 
@@ -65,51 +65,51 @@ void delete_metalink_pctrl(metalink_pctrl_t* ctrl);
 metalink_t* metalink_pctrl_detach_metalink(metalink_pctrl_t* ctrl);
 
 /* Set error code */
-void metalink_pctrl_set_error(metalink_pctrl_t* ctrl, int error);
+void metalink_pctrl_set_error(metalink_pctrl_t* ctrl, metalink_error_t error);
 
-int metalink_pctrl_get_error(metalink_pctrl_t* ctrl);
+metalink_error_t metalink_pctrl_get_error(metalink_pctrl_t* ctrl);
 
 /* metalink manipulation functions */
-int metalink_pctrl_metalink_accumulate_files(metalink_pctrl_t* ctrl);
+metalink_error_t metalink_pctrl_metalink_accumulate_files(metalink_pctrl_t* ctrl);
 
 /* transaction functions */
 metalink_file_t* metalink_pctrl_new_file_transaction(metalink_pctrl_t* ctrl);
 
-int metalink_pctrl_commit_file_transaction(metalink_pctrl_t* ctrl);
+metalink_error_t metalink_pctrl_commit_file_transaction(metalink_pctrl_t* ctrl);
 
 metalink_resource_t* metalink_pctrl_new_resource_transaction(metalink_pctrl_t* ctrl);
 
-int metalink_pctrl_commit_resource_transaction(metalink_pctrl_t* ctrl);
+metalink_error_t metalink_pctrl_commit_resource_transaction(metalink_pctrl_t* ctrl);
 
 metalink_checksum_t* metalink_pctrl_new_checksum_transaction(metalink_pctrl_t* ctrl);
 
-int metalink_pctrl_commit_checksum_transaction(metalink_pctrl_t* ctrl);
+metalink_error_t metalink_pctrl_commit_checksum_transaction(metalink_pctrl_t* ctrl);
 
 metalink_chunk_checksum_t* metalink_pctrl_new_chunk_checksum_transaction(metalink_pctrl_t* ctrl);
 
-int metalink_pctrl_commit_chunk_checksum_transaction(metalink_pctrl_t* ctrl);
+metalink_error_t metalink_pctrl_commit_chunk_checksum_transaction(metalink_pctrl_t* ctrl);
 
 metalink_piece_hash_t* metalink_pctrl_new_piece_hash_transaction(metalink_pctrl_t* ctrl);
 
-int metalink_pctrl_commit_piece_hash_transaction(metalink_pctrl_t* ctrl);
+metalink_error_t metalink_pctrl_commit_piece_hash_transaction(metalink_pctrl_t* ctrl);
 
 /* file manipulation functions*/
-int metalink_pctrl_file_set_name(metalink_pctrl_t* ctrl, const char* name);
+metalink_error_t metalink_pctrl_file_set_name(metalink_pctrl_t* ctrl, const char* name);
 
 void metalink_pctrl_file_set_size(metalink_pctrl_t* ctrl, long long int size);
 
-int metalink_pctrl_file_set_version(metalink_pctrl_t* ctrl, const char* version);
+metalink_error_t metalink_pctrl_file_set_version(metalink_pctrl_t* ctrl, const char* version);
 
-int metalink_pctrl_file_set_language(metalink_pctrl_t* ctrl, const char* language);
+metalink_error_t metalink_pctrl_file_set_language(metalink_pctrl_t* ctrl, const char* language);
 
-int metalink_pctrl_file_set_os(metalink_pctrl_t* ctrl, const char* os);
+metalink_error_t metalink_pctrl_file_set_os(metalink_pctrl_t* ctrl, const char* os);
 
 void metalink_pctrl_file_set_maxconnections(metalink_pctrl_t* ctrl, int maxconnections);
 
 /* resource manipulation functions */
-int metalink_pctrl_resource_set_type(metalink_pctrl_t* ctrl, const char* type);
+metalink_error_t metalink_pctrl_resource_set_type(metalink_pctrl_t* ctrl, const char* type);
 
-int metalink_pctrl_resource_set_location(metalink_pctrl_t* ctrl,
+metalink_error_t metalink_pctrl_resource_set_location(metalink_pctrl_t* ctrl,
 					 const char* location);
 
 void metalink_pctrl_resource_set_preference(metalink_pctrl_t* ctrl,
@@ -118,20 +118,20 @@ void metalink_pctrl_resource_set_preference(metalink_pctrl_t* ctrl,
 void metalink_pctrl_resource_set_maxconnections(metalink_pctrl_t* ctrl,
 						int maxconnections);
 
-int metalink_pctrl_resource_set_url(metalink_pctrl_t* ctrl, const char* url);
+metalink_error_t metalink_pctrl_resource_set_url(metalink_pctrl_t* ctrl, const char* url);
 
 /* checksum manipulation functions */
-int metalink_pctrl_checksum_set_type(metalink_pctrl_t* ctrl, const char* type);
+metalink_error_t metalink_pctrl_checksum_set_type(metalink_pctrl_t* ctrl, const char* type);
 
-int metalink_pctrl_checksum_set_hash(metalink_pctrl_t* ctrl, const char* hash);
+metalink_error_t metalink_pctrl_checksum_set_hash(metalink_pctrl_t* ctrl, const char* hash);
 
 /* piece hash manipulation functions */
 void metalink_pctrl_piece_hash_set_piece(metalink_pctrl_t* ctrl, int piece);
 
-int metalink_pctrl_piece_hash_set_hash(metalink_pctrl_t* ctrl, const char* hash);
+metalink_error_t metalink_pctrl_piece_hash_set_hash(metalink_pctrl_t* ctrl, const char* hash);
 
 /* chunk checksum manipulation functions */
-int metalink_pctrl_chunk_checksum_set_type(metalink_pctrl_t* ctrl, const char* type);
+metalink_error_t metalink_pctrl_chunk_checksum_set_type(metalink_pctrl_t* ctrl, const char* type);
 
 void metalink_pctrl_chunk_checksum_set_length(metalink_pctrl_t* ctrl, int length);
 

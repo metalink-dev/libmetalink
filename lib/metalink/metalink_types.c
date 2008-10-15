@@ -31,7 +31,7 @@
 
 #include <stdio.h>
 
-int allocate_copy_string(char** dest, const char* src)
+metalink_error_t allocate_copy_string(char** dest, const char* src)
 {
   free(*dest);
   if(src) {
@@ -93,7 +93,7 @@ void delete_metalink_file(metalink_file_t* file)
   }
 }
 
-int metalink_file_set_name(metalink_file_t* file, const char* name)
+metalink_error_t metalink_file_set_name(metalink_file_t* file, const char* name)
 {
   return allocate_copy_string(&file->name, name);
 }
@@ -103,17 +103,17 @@ void metalink_file_set_size(metalink_file_t* file, long long int size)
   file->size = size;
 }
 
-int metalink_file_set_version(metalink_file_t* file, const char* version)
+metalink_error_t metalink_file_set_version(metalink_file_t* file, const char* version)
 {
   return allocate_copy_string(&file->version, version);
 }
 
-int metalink_file_set_language(metalink_file_t* file, const char* language)
+metalink_error_t metalink_file_set_language(metalink_file_t* file, const char* language)
 {
   return allocate_copy_string(&file->language, language);
 }
 
-int metalink_file_set_os(metalink_file_t* file, const char* os)
+metalink_error_t metalink_file_set_os(metalink_file_t* file, const char* os)
 {
   return allocate_copy_string(&file->os, os);
 }
@@ -145,12 +145,12 @@ void delete_metalink_resource(metalink_resource_t* resource)
   }
 }
 
-int metalink_resource_set_type(metalink_resource_t* resource, const char* type)
+metalink_error_t metalink_resource_set_type(metalink_resource_t* resource, const char* type)
 {
   return allocate_copy_string(&resource->type, type);
 }
 
-int metalink_resource_set_location(metalink_resource_t* resource,
+metalink_error_t metalink_resource_set_location(metalink_resource_t* resource,
 				   const char* location)
 {
   return allocate_copy_string(&resource->location, location);
@@ -168,7 +168,7 @@ void metalink_resource_set_maxconnections(metalink_resource_t* resource,
   resource->maxconnections = maxconnections;
 }
 
-int metalink_resource_set_url(metalink_resource_t* resource, const char* url)
+metalink_error_t metalink_resource_set_url(metalink_resource_t* resource, const char* url)
 {
   return allocate_copy_string(&resource->url, url);
 }
@@ -193,12 +193,12 @@ void delete_metalink_checksum(metalink_checksum_t* checksum)
   }
 }
 
-int metalink_checksum_set_type(metalink_checksum_t* checksum, const char* type)
+metalink_error_t metalink_checksum_set_type(metalink_checksum_t* checksum, const char* type)
 {
   return allocate_copy_string(&checksum->type, type);
 }
 
-int metalink_checksum_set_hash(metalink_checksum_t* checksum, const char* hash)
+metalink_error_t metalink_checksum_set_hash(metalink_checksum_t* checksum, const char* hash)
 {
   return allocate_copy_string(&checksum->hash, hash);
 }
@@ -228,7 +228,7 @@ void metalink_piece_hash_set_piece(metalink_piece_hash_t* piece_hash, int piece)
   piece_hash->piece = piece;
 }
 
-int metalink_piece_hash_set_hash(metalink_piece_hash_t* piece_hash, const char* hash)
+metalink_error_t metalink_piece_hash_set_hash(metalink_piece_hash_t* piece_hash, const char* hash)
 {
   return allocate_copy_string(&piece_hash->hash, hash);
 }
@@ -262,7 +262,7 @@ void delete_metalink_chunk_checksum(metalink_chunk_checksum_t* chunk_checksum)
   free(chunk_checksum);
 }
 
-int metalink_chunk_checksum_set_type(metalink_chunk_checksum_t* chunk_checksum,
+metalink_error_t metalink_chunk_checksum_set_type(metalink_chunk_checksum_t* chunk_checksum,
 				     const char* type)
 {
   return allocate_copy_string(&chunk_checksum->type, type);

@@ -40,7 +40,7 @@ extern "C" {
  * @return 0 for success, non-zero for error. See metalink_error.h for
  * the meaning of error code.
  */
-int metalink_parse_file(const char* filename, metalink_t** res);
+metalink_error_t metalink_parse_file(const char* filename, metalink_t** res);
 
 /*
  * Parses metalink XML stored in buf and its length is len.
@@ -51,7 +51,7 @@ int metalink_parse_file(const char* filename, metalink_t** res);
  * @return 0 for success, non-zero for error. See metalink_error.h for
  * the meaning of error code.
  */
-int metalink_parse_memory(const char* buf, size_t len, metalink_t** res);
+metalink_error_t metalink_parse_memory(const char* buf, size_t len, metalink_t** res);
 
 /**
  * a parser context to keep current progress of XML parser.
@@ -80,7 +80,7 @@ void delete_metalink_parser_context(metalink_parser_context_t* ctx);
  * @return 0 on success, non-zero for error. See metalink_error.h for the
  * meaning of error code.
  */
-int metalink_parse_update(metalink_parser_context_t* ctx,
+metalink_error_t metalink_parse_update(metalink_parser_context_t* ctx,
 			  const char* buf, size_t len);
 
 /**
@@ -95,7 +95,7 @@ int metalink_parse_update(metalink_parser_context_t* ctx,
  * @return 0 on success, non-zero for error. See metalink_error_h for
  * the meaning of error code.
  */
-int metalink_parse_final(metalink_parser_context_t* ctx,
+metalink_error_t metalink_parse_final(metalink_parser_context_t* ctx,
 			 const char* buf, size_t len, metalink_t** res);
 
 /*

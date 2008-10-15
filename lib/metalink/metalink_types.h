@@ -30,6 +30,8 @@
 extern "C" {
 #endif
 
+#include "metalink_error.h"
+
 typedef struct _metalink_resource {
   /* url, null terminated string */
   char* url;
@@ -50,9 +52,9 @@ metalink_resource_t* new_metalink_resource();
 void delete_metalink_resource(metalink_resource_t* resource);
 
 /* mutators */
-int metalink_resource_set_type(metalink_resource_t* resource, const char* type);
+metalink_error_t metalink_resource_set_type(metalink_resource_t* resource, const char* type);
 
-int metalink_resource_set_location(metalink_resource_t* resource,
+metalink_error_t metalink_resource_set_location(metalink_resource_t* resource,
 				   const char* location);
 
 void metalink_resource_set_preference(metalink_resource_t* resource,
@@ -61,7 +63,7 @@ void metalink_resource_set_preference(metalink_resource_t* resource,
 void metalink_resource_set_maxconnections(metalink_resource_t* resource,
 					  int maxconnections);
 
-int metalink_resource_set_url(metalink_resource_t* resource, const char* url);
+metalink_error_t metalink_resource_set_url(metalink_resource_t* resource, const char* url);
 
 typedef struct _metalink_checksum {
   /* message digest algorithm, for example, sha1, null terminated string */
@@ -75,9 +77,9 @@ metalink_checksum_t* new_metalink_checksum();
 void delete_metalink_checksum(metalink_checksum_t* checksum);
 
 /* mutators */
-int metalink_checksum_set_type(metalink_checksum_t* checksum, const char* type);
+metalink_error_t metalink_checksum_set_type(metalink_checksum_t* checksum, const char* type);
 
-int metalink_checksum_set_hash(metalink_checksum_t* checksum, const char* hash);
+metalink_error_t metalink_checksum_set_hash(metalink_checksum_t* checksum, const char* hash);
 
 /**
  * hash value of each piece.
@@ -97,7 +99,7 @@ void delete_metalink_piece_hash(metalink_piece_hash_t* piece_hash);
 /* mutators */
 void metalink_piece_hash_set_piece(metalink_piece_hash_t* piece_hash, int piece);
 
-int metalink_piece_hash_set_hash(metalink_piece_hash_t* piece_hash, const char* hash);
+metalink_error_t metalink_piece_hash_set_hash(metalink_piece_hash_t* piece_hash, const char* hash);
 
 /**
  * Piece hash; containing type(hash algorithm) and piece size and
@@ -119,7 +121,7 @@ metalink_chunk_checksum_t* new_metalink_chunk_checksum();
 void delete_metalink_chunk_checksum(metalink_chunk_checksum_t* chunk_checksum);
 
 /* mutators */
-int metalink_chunk_checksum_set_type(metalink_chunk_checksum_t* chunk_checksum,
+metalink_error_t metalink_chunk_checksum_set_type(metalink_chunk_checksum_t* chunk_checksum,
 				     const char* type);
 
 void metalink_chunk_checksum_set_length(metalink_chunk_checksum_t* chunk_checksum,
@@ -159,17 +161,17 @@ metalink_file_t* new_metalink_file();
 void delete_metalink_file(metalink_file_t* file);
 
 /* mutators */
-int metalink_file_set_name(metalink_file_t* file, const char* name);
+metalink_error_t metalink_file_set_name(metalink_file_t* file, const char* name);
 
 void metalink_file_set_size(metalink_file_t* file, long long int size);
 
-int metalink_file_set_version(metalink_file_t* file, const char* version);
+metalink_error_t metalink_file_set_version(metalink_file_t* file, const char* version);
 
-int metalink_file_set_language(metalink_file_t* file, const char* language);
+metalink_error_t metalink_file_set_language(metalink_file_t* file, const char* language);
 
-int metalink_file_set_os(metalink_file_t* file, const char* os);
+metalink_error_t metalink_file_set_os(metalink_file_t* file, const char* os);
 
-int metalink_file_set_resources(metalink_file_t* file, metalink_resource_t** resources);
+metalink_error_t metalink_file_set_resources(metalink_file_t* file, metalink_resource_t** resources);
 
 void metalink_file_set_maxconnections(metalink_file_t* file, int maxconnections);
 

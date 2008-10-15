@@ -98,7 +98,7 @@ metalink_error_t metalink_parse_file(const char* filename, metalink_t** res)
   return r;
 }
 
-metalink_error_t metalink_parse_fp(FILE *docfp, metalink_t** res)
+metalink_error_t metalink_parse_fp(FILE* docfp, metalink_t** res)
 {
   session_data_t* session_data;
   metalink_error_t r = 0,

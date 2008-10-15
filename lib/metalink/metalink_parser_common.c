@@ -26,11 +26,11 @@
 #include "metalink_parser_common.h"
 #include "metalink_error.h"
 
-int metalink_handle_parse_result(metalink_t** res,
+metalink_error_t metalink_handle_parse_result(metalink_t** res,
 				 session_data_t* session_data,
-				 int parser_retval)
+				 metalink_error_t parser_retval)
 {
-  int retval;
+  metalink_error_t retval;
   if(parser_retval == 0 && session_data->stm->ctrl->error == 0) {
     *res = metalink_pctrl_detach_metalink(session_data->stm->ctrl);
   }

@@ -134,7 +134,7 @@ metalink_error_t metalink_parse_fp(FILE* docfp, metalink_t** res)
 
   session_data = new_session_data();
   
-  num_read = fread(buff, 1, 4, docfp);
+  num_read = fread(buff, 1, BUFSIZ, docfp);
   ctxt = xmlCreatePushParserCtxt(&mySAXHandler, session_data, buff, num_read, NULL);
 
 

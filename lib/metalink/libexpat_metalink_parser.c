@@ -89,17 +89,20 @@ static XML_Parser setup_parser(session_data_t* session_data)
 
 metalink_error_t metalink_parse_file(const char* filename, metalink_t** res)
 {
+  FILE *docfp = fopen(filename, O_RDONLY);
+  if(docfp == NULL)
+    return METALINK_ERR_CANNOT_OPEN_FILE;
+  return metalink_parse_fp(docfp, res);
+}
+
+metalink_error_t metalink_parse_fp(FILE *docfp, metalink_t** res)
+{
   session_data_t* session_data;
   metalink_error_t r = 0,
 		   retval;
   XML_Parser parser;
-  int docfd;
   const size_t BUFF_SIZE = 4096;
 
-  docfd = open(filename, O_RDONLY);
-  if(docfd == -1) {
-    return METALINK_ERR_CANNOT_OPEN_FILE;
-  }
 
   session_data = new_session_data();
   
@@ -112,7 +115,7 @@ metalink_error_t metalink_parse_file(const char* filename, metalink_t** res)
       r = METALINK_ERR_PARSER_ERROR;
       break;
     }
-    num_read = read(docfd, buff, BUFF_SIZE);
+    num_read = fread(buff, 1, BUFF_SIZE, docfp);
     if(num_read < 0) {
       r = METALINK_ERR_PARSER_ERROR;
       break;
@@ -126,7 +129,7 @@ metalink_error_t metalink_parse_file(const char* filename, metalink_t** res)
     }
   }
   XML_ParserFree(parser);
-  close(docfd);
+  fclose(docfp);
   
   retval = metalink_handle_parse_result(res, session_data, r);
 

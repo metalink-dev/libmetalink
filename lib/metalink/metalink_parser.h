@@ -27,6 +27,7 @@
 #define _D_METALINK_PARSER_H__
 
 #include <metalink/metalink_types.h>
+#include <stdio.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -41,6 +42,16 @@ extern "C" {
  * the meaning of error code.
  */
 metalink_error_t metalink_parse_file(const char* filename, metalink_t** res);
+
+/*
+ * Parses metalink XML file.
+ * @param docfd file descriptor for Metalink XML file to be parsed.
+ * @param res a dynamically allocated metalink_t structure as a result of
+ * parsing.
+ * @return 0 for success, non-zero for error. See metalink_error.h for
+ * the meaning of error code.
+ */
+metalink_error_t metalink_parse_fp(FILE *docfp, metalink_t** res);
 
 /*
  * Parses metalink XML stored in buf and its length is len.

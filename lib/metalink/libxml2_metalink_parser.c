@@ -204,7 +204,7 @@ metalink_error_t metalink_parse_update(metalink_parser_context_t* ctx,
   return r;
 }
 
-metalink_erro_t metalink_parse_final(metalink_parser_context_t* ctx,
+metalink_error_t metalink_parse_final(metalink_parser_context_t* ctx,
 			 const char* buf, size_t len, metalink_t** res)
 {
   metalink_error_t r,

@@ -122,6 +122,44 @@ metalink_error_t metalink_parse_file(const char* filename, metalink_t** res)
   return retval;
 }
 
+metalink_error_t metalink_parse_fp(FILE* docfp, metalink_t** res)
+{
+  session_data_t* session_data;
+  metalink_error_t r = 0,
+  		   retval;
+  size_t num_read;
+  char buff[BUFSIZ];
+
+  xmlParserCtxtPtr ctxt;
+
+  session_data = new_session_data();
+  
+  num_read = fread(buff, 1, 4, docfp);
+  ctxt = xmlCreatePushParserCtxt(&mySAXHandler, session_data, buff, num_read, NULL);
+
+
+  while(!feof(docfp)) {
+    num_read = fread(buff, 1, BUFSIZ, docfp);
+    if(num_read < 0) {
+      r = METALINK_ERR_PARSER_ERROR;
+      break;
+    }
+    if(xmlParseChunk(ctxt, buff, num_read, 0))
+    {
+      r = METALINK_ERR_PARSER_ERROR;
+      break;
+    }
+  }
+  xmlParseChunk(ctxt, buff, 0, 1);
+  xmlFreeParserCtxt(ctxt);
+
+  retval = metalink_handle_parse_result(res, session_data, r);
+
+  delete_session_data(session_data);
+
+  return retval;
+}
+
 metalink_error_t metalink_parse_memory(const char* buf, size_t len, metalink_t** res)
 {
   session_data_t* session_data;

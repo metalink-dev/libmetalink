@@ -42,9 +42,9 @@
  *  success.
  * 
  */
-int metalink_handle_parse_result(metalink_t** res,
+metalink_error_t metalink_handle_parse_result(metalink_t** res,
 				 session_data_t* session_data,
-				 int parser_retval);
+				 metalink_error_t parser_retval);
 
 
 #endif // _D_METALINK_PARSER_COMMON_H_

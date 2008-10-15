@@ -89,10 +89,13 @@ static XML_Parser setup_parser(session_data_t* session_data)
 
 metalink_error_t metalink_parse_file(const char* filename, metalink_t** res)
 {
-  FILE *docfp = fopen(filename, O_RDONLY);
+  metalink_error_t r;
+  FILE *docfp = fopen(filename, "rb");
   if(docfp == NULL)
     return METALINK_ERR_CANNOT_OPEN_FILE;
-  return metalink_parse_fp(docfp, res);
+  r = metalink_parse_fp(docfp, res);
+  fclose(docfp);   
+  return r;
 }
 
 metalink_error_t metalink_parse_fp(FILE *docfp, metalink_t** res)
@@ -101,15 +104,13 @@ metalink_error_t metalink_parse_fp(FILE *docfp, metalink_t** res)
   metalink_error_t r = 0,
 		   retval;
   XML_Parser parser;
-  const size_t BUFF_SIZE = 4096;
-
 
   session_data = new_session_data();
   
   parser = setup_parser(session_data);
 
-  while(1) {
-    metalink_error_t num_read;
+  while(!feof(docfp)) {
+    size_t num_read;
     void* buff = XML_GetBuffer(parser, BUFF_SIZE);
     if(buff == NULL) {
       r = METALINK_ERR_PARSER_ERROR;
@@ -120,16 +121,12 @@ metalink_error_t metalink_parse_fp(FILE *docfp, metalink_t** res)
       r = METALINK_ERR_PARSER_ERROR;
       break;
     }
-    if(!XML_ParseBuffer(parser, num_read, num_read == 0)) {
+    if(!XML_ParseBuffer(parser, num_read, 0)) {
       r = METALINK_ERR_PARSER_ERROR;
-      break;
-    }
-    if(num_read == 0) {
       break;
     }
   }
   XML_ParserFree(parser);
-  fclose(docfp);
   
   retval = metalink_handle_parse_result(res, session_data, r);
 

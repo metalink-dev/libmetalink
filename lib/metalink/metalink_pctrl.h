@@ -93,7 +93,10 @@ metalink_piece_hash_t* metalink_pctrl_new_piece_hash_transaction(metalink_pctrl_
 
 metalink_error_t metalink_pctrl_commit_piece_hash_transaction(metalink_pctrl_t* ctrl);
 
-/* file manipulation functions*/
+/* metalink manipulation functions */
+metalink_error_t metalink_pctrl_set_identity(metalink_pctrl_t* ctrl, const char* identity);
+
+/* file manipulation functions */
 metalink_error_t metalink_pctrl_file_set_name(metalink_pctrl_t* ctrl, const char* name);
 
 void metalink_pctrl_file_set_size(metalink_pctrl_t* ctrl, long long int size);

@@ -82,6 +82,13 @@ void metalink_state_start_fun(metalink_pstm_t* stm,
 void metalink_state_end_fun(metalink_pstm_t* stm,
 			    const char* name, const char* characters);
 
+/* identity state <identity> */
+void identity_state_start_fun(metalink_pstm_t* stm,
+			const char* name, const char** attrs);
+
+void identity_state_end_fun(metalink_pstm_t* stm,
+		      const char* name, const char* characters);
+
 /* files state <files> */
 void files_state_start_fun(metalink_pstm_t* stm,
 			   const char* name, const char** attrs);

@@ -145,6 +145,11 @@ void delete_metalink_resource(metalink_resource_t* resource)
   }
 }
 
+metalink_error_t metalink_set_identity(metalink_t* metalink, const char* identity)
+{
+  return allocate_copy_string(&metalink->identity, identity);
+}
+
 metalink_error_t metalink_resource_set_type(metalink_resource_t* resource, const char* type)
 {
   return allocate_copy_string(&resource->type, type);

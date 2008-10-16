@@ -285,6 +285,12 @@ metalink_error_t metalink_pctrl_commit_piece_hash_transaction(metalink_pctrl_t* 
   return 0;
 }
 
+/* metalink manipulation functions */
+metalink_error_t metalink_pctrl_set_identity(metalink_pctrl_t* ctrl, const char* identity)
+{
+  return metalink_set_identity(ctrl->metalink, identity);
+}
+
 /* file manipulation functions*/
 metalink_error_t metalink_pctrl_file_set_name(metalink_pctrl_t* ctrl, const char* name)
 {
@@ -315,6 +321,7 @@ void metalink_pctrl_file_set_maxconnections(metalink_pctrl_t* ctrl, int maxconne
 {
   metalink_file_set_maxconnections(ctrl->temp_file, maxconnections);
 }
+
 
 /* resource manipulation functions */
 metalink_error_t metalink_pctrl_resource_set_type(metalink_pctrl_t* ctrl, const char* type)

@@ -109,11 +109,6 @@ metalink_error_t metalink_parse_update(metalink_parser_context_t* ctx,
 metalink_error_t metalink_parse_final(metalink_parser_context_t* ctx,
 			 const char* buf, size_t len, metalink_t** res);
 
-/*
- * Frees the memory allocated for res
- */
-void metalink_free(metalink_t* res);
-
 #ifdef __cplusplus
 }
 #endif

@@ -319,5 +319,8 @@ void delete_metalink(metalink_t* metalink)
     }
     free(metalink->files);
   }
+  if(metalink->identity){
+    free(metalink->identity);
+  }
   free(metalink);
 }

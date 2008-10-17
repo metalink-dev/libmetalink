@@ -95,6 +95,7 @@ metalink_error_t metalink_pctrl_commit_piece_hash_transaction(metalink_pctrl_t* 
 
 /* metalink manipulation functions */
 metalink_error_t metalink_pctrl_set_identity(metalink_pctrl_t* ctrl, const char* identity);
+metalink_error_t metalink_pctrl_set_tags(metalink_pctrl_t* ctrl, const char* tas);
 
 /* file manipulation functions */
 metalink_error_t metalink_pctrl_file_set_name(metalink_pctrl_t* ctrl, const char* name);

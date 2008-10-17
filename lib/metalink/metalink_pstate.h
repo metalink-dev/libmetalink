@@ -89,6 +89,13 @@ void identity_state_start_fun(metalink_pstm_t* stm,
 void identity_state_end_fun(metalink_pstm_t* stm,
 		      const char* name, const char* characters);
 
+/* identity state <tags> */
+void tags_state_start_fun(metalink_pstm_t* stm,
+			const char* name, const char** attrs);
+
+void tags_state_end_fun(metalink_pstm_t* stm,
+		      const char* name, const char* characters);
+
 /* files state <files> */
 void files_state_start_fun(metalink_pstm_t* stm,
 			   const char* name, const char** attrs);

@@ -107,7 +107,9 @@ void initial_state_end_fun(metalink_pstm_t* stm,
 void metalink_state_start_fun(metalink_pstm_t* stm,
 			      const char* name, const char** attrs)
 {
-  if(strcmp("identity", name) == 0) {
+  if(strcmp("tags", name) == 0) {
+    metalink_pstm_enter_tags_state(stm);
+  }else if(strcmp("identity", name) == 0) {
     metalink_pstm_enter_identity_state(stm);
   }else if(strcmp("files", name) == 0) {
     metalink_pstm_enter_files_state(stm);
@@ -142,6 +144,33 @@ void identity_state_end_fun(metalink_pstm_t* stm,
 {
   metalink_error_t r;
   r = metalink_pctrl_set_identity(stm->ctrl, characters);
+  if(r == 0) {
+    metalink_pstm_enter_metalink_state(stm);
+  } else {
+    error_handler(stm, r);
+  }
+}
+
+/* identity state <tags> */
+void tags_state_start_fun(metalink_pstm_t* stm,
+			const char* name, const char** attrs)
+{
+  metalink_error_t r;
+  const char* fname;
+  fname = get_attribute_value(attrs, "tags");
+  r = metalink_pctrl_set_tags(stm->ctrl, fname);
+  if(r != 0) {
+    error_handler(stm, r);
+    return;
+  }
+  metalink_pstm_enter_skip_state(stm);
+}
+
+void tags_state_end_fun(metalink_pstm_t* stm,
+		      const char* name, const char* characters)
+{
+  metalink_error_t r;
+  r = metalink_pctrl_set_tags(stm->ctrl, characters);
   if(r == 0) {
     metalink_pstm_enter_metalink_state(stm);
   } else {

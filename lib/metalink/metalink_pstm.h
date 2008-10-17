@@ -71,6 +71,8 @@ void metalink_pstm_enter_metalink_state(metalink_pstm_t* stm);
 
 void metalink_pstm_enter_identity_state(metalink_pstm_t* stm);
 
+void metalink_pstm_enter_tags_state(metalink_pstm_t* stm);
+
 void metalink_pstm_enter_files_state(metalink_pstm_t* stm);
 
 void metalink_pstm_enter_file_state(metalink_pstm_t* stm);

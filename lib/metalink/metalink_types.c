@@ -150,6 +150,11 @@ metalink_error_t metalink_set_identity(metalink_t* metalink, const char* identit
   return allocate_copy_string(&metalink->identity, identity);
 }
 
+metalink_error_t metalink_set_tags(metalink_t* metalink, const char* tags)
+{
+  return allocate_copy_string(&metalink->tags, tags);
+}
+
 metalink_error_t metalink_resource_set_type(metalink_resource_t* resource, const char* type)
 {
   return allocate_copy_string(&resource->type, type);
@@ -321,6 +326,9 @@ void delete_metalink(metalink_t* metalink)
   }
   if(metalink->identity){
     free(metalink->identity);
+  }
+  if(metalink->identity){
+    free(metalink->tags);
   }
   free(metalink);
 }

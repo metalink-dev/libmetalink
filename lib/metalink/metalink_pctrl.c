@@ -291,6 +291,11 @@ metalink_error_t metalink_pctrl_set_identity(metalink_pctrl_t* ctrl, const char*
   return metalink_set_identity(ctrl->metalink, identity);
 }
 
+metalink_error_t metalink_pctrl_set_tags(metalink_pctrl_t* ctrl, const char* tags)
+{
+  return metalink_set_tags(ctrl->metalink, tags);
+}
+
 /* file manipulation functions*/
 metalink_error_t metalink_pctrl_file_set_name(metalink_pctrl_t* ctrl, const char* name)
 {

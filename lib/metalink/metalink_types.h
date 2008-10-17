@@ -182,9 +182,12 @@ typedef struct _metalink {
   /* list of metalink_file_t */
   metalink_file_t** files;
   char* identity;
+  char* tags;
 } metalink_t;
 
 metalink_error_t metalink_set_identity(metalink_t* metalink, const char* identity);
+metalink_error_t metalink_set_tags(metalink_t* metalink, const char* tags);
+
 
 metalink_t* new_metalink();
 

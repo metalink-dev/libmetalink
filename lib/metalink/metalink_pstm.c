@@ -103,6 +103,12 @@ void metalink_pstm_enter_identity_state(metalink_pstm_t* stm)
   metalink_pstm_disable_character_buffering(stm);
 }
 
+void metalink_pstm_enter_tags_state(metalink_pstm_t* stm)
+{
+  metalink_pstm_set_fun(stm, &tags_state_start_fun, &tags_state_end_fun);
+  metalink_pstm_disable_character_buffering(stm);
+}
+
 void metalink_pstm_enter_files_state(metalink_pstm_t* stm)
 {
   metalink_pstm_set_fun(stm, &files_state_start_fun, &files_state_end_fun);

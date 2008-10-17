@@ -54,6 +54,16 @@ metalink_error_t metalink_parse_file(const char* filename, metalink_t** res);
 metalink_error_t metalink_parse_fp(FILE *docfp, metalink_t** res);
 
 /*
+ * Parses metalink XML from a file descriptor.
+ * @param docfd file descriptor of Metalink XML file to be parsed.
+ * @param res a dynamically allocated metalink_t structure as a result of
+ * parsing.
+ * @return 0 for success, non-zero for error. See metalink_error.h for
+ * the meaning of error code.
+ */
+metalink_error_t metalink_parse_fd(int docfd, metalink_t** res);
+
+/*
  * Parses metalink XML stored in buf and its length is len.
  * @param buf a pointer to the XML data.
  * @param len length of XML data in byte.

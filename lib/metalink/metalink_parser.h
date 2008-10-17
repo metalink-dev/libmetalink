@@ -24,7 +24,7 @@
  */
 /* copyright --> */
 #ifndef _D_METALINK_PARSER_H_
-#define _D_METALINK_PARSER_H__
+#define _D_METALINK_PARSER_H_
 
 #include <metalink/metalink_types.h>
 #include <stdio.h>

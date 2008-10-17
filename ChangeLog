@@ -1,3 +1,8 @@
+2008-10-16  Tatsuhiro Tsujikawa  <tatsuhiro.t at gmail dot com>
+
+	Fixed #define guard
+	* lib/metalink/metalink_parser.h
+
 2008-07-16  Tatsuhiro Tsujikawa  <tatsuhiro.t at gmail dot com>
 
 	Put -D_ISOC99_SOURCE to DEFS variable.

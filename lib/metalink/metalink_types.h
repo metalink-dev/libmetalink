@@ -30,7 +30,7 @@
 extern "C" {
 #endif
 
-#include "metalink_error.h"
+#include <metalink/metalink_error.h>
 
 typedef struct _metalink_resource {
   /* url, null terminated string */

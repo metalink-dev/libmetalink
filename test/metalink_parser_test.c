@@ -153,7 +153,7 @@ static void validate_result(metalink_t* metalink)
   resource = file->resources[0];
   CU_ASSERT_STRING_EQUAL("ftp://host/file", resource->url);
 
-  delete_metalink(metalink);
+  metalink_delete(metalink);
 }
 
 static int openfile(const char* filepath, int flags)
@@ -248,7 +248,7 @@ void test_metalink_parse_update()
   getfstat(&st, fd);
   addr = mapfile(fd, st.st_size);
 
-  ctx = new_metalink_parser_context();
+  ctx = metalink_parser_context_new();
   CU_ASSERT_FATAL(NULL != ctx);
 
   last = addr+st.st_size;
@@ -279,17 +279,17 @@ void test_metalink_parse_update_fail()
   metalink_parser_context_t* ctx;
 
   // Initialize ctx
-  ctx = new_metalink_parser_context();
+  ctx = metalink_parser_context_new();
   CU_ASSERT_FATAL(NULL != ctx);
 
   // feed bad formed data
   r = metalink_parse_update(ctx, "<a><b></a>", 10);
   CU_ASSERT(0 != r);
 
-  delete_metalink_parser_context(ctx);
+  metalink_parser_context_delete(ctx);
 
   // Initialize ctx
-  ctx = new_metalink_parser_context();
+  ctx = metalink_parser_context_new();
   CU_ASSERT_FATAL(NULL != ctx);
 
   fd = openfile("test1.xml", O_RDONLY);

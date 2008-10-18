@@ -177,7 +177,7 @@ struct _metalink_parser_context
 
 metalink_parser_context_t
 METALINK_PUBLIC
-* new_metalink_parser_context()
+* metalink_parser_context_new()
 {
   metalink_parser_context_t* ctx;
   ctx = malloc(sizeof(metalink_parser_context_t));
@@ -188,13 +188,13 @@ METALINK_PUBLIC
 
   ctx->session_data = new_session_data();
   if(ctx->session_data == NULL) {
-    delete_metalink_parser_context(ctx);
+    metalink_parser_context_delete(ctx);
     return NULL;
   }
 
   ctx->parser = setup_parser(ctx->session_data);
   if(ctx->parser == NULL) {
-    delete_metalink_parser_context(ctx);
+    metalink_parser_context_delete(ctx);
     return NULL;
   }
   return ctx;
@@ -202,7 +202,7 @@ METALINK_PUBLIC
 
 void
 METALINK_PUBLIC
-delete_metalink_parser_context(metalink_parser_context_t* ctx)
+metalink_parser_context_delete(metalink_parser_context_t* ctx)
 {
   if(ctx == NULL) {
     return;
@@ -243,7 +243,7 @@ metalink_parse_final(metalink_parser_context_t* ctx,
 
   retval = metalink_handle_parse_result(res, ctx->session_data, r);
 
-  delete_metalink_parser_context(ctx);
+  metalink_parser_context_delete(ctx);
 
   return retval; 
 }

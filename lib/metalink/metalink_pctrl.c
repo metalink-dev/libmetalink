@@ -35,7 +35,7 @@ metalink_pctrl_t* new_metalink_pctrl()
     return NULL;
   }
   memset(ctrl, 0, sizeof(metalink_pctrl_t));
-  ctrl->metalink = new_metalink();
+  ctrl->metalink = metalink_new();
   if(!ctrl->metalink) {
     goto NEW_METALINK_PCTRL_ERROR;
   }
@@ -66,25 +66,26 @@ void delete_metalink_pctrl(metalink_pctrl_t* ctrl)
   if(!ctrl) {
     return;
   }
-  delete_metalink(ctrl->metalink);
+  metalink_delete(ctrl->metalink);
   
-  list_for_each(ctrl->files, (void (*)(void*))&delete_metalink_file);
+  list_for_each(ctrl->files, (void (*)(void*))&metalink_file_delete);
   delete_list(ctrl->files);
-  delete_metalink_file(ctrl->temp_file);
+  metalink_file_delete(ctrl->temp_file);
   
-  list_for_each(ctrl->resources, (void (*)(void*))&delete_metalink_resource);
+  list_for_each(ctrl->resources, (void (*)(void*))&metalink_resource_delete);
   delete_list(ctrl->resources);
-  delete_metalink_resource(ctrl->temp_resource);
+  metalink_resource_delete(ctrl->temp_resource);
 
-  list_for_each(ctrl->checksums, (void (*)(void*))&delete_metalink_checksum);
+  list_for_each(ctrl->checksums, (void (*)(void*))&metalink_checksum_delete);
   delete_list(ctrl->checksums);
-  delete_metalink_checksum(ctrl->temp_checksum);
+  metalink_checksum_delete(ctrl->temp_checksum);
 
-  delete_metalink_chunk_checksum(ctrl->temp_chunk_checksum);
+  metalink_chunk_checksum_delete(ctrl->temp_chunk_checksum);
 
-  list_for_each(ctrl->piece_hashes, (void (*)(void*))&delete_metalink_piece_hash);
+  list_for_each(ctrl->piece_hashes,
+		(void (*)(void*))&metalink_piece_hash_delete);
   delete_list(ctrl->piece_hashes);
-  delete_metalink_piece_hash(ctrl->temp_piece_hash);
+  metalink_piece_hash_delete(ctrl->temp_piece_hash);
 
   free(ctrl);
 }
@@ -144,14 +145,14 @@ static metalink_error_t commit_list_to_array(void*** array_ptr, list_t* src, siz
 metalink_file_t* metalink_pctrl_new_file_transaction(metalink_pctrl_t* ctrl)
 {
   if(ctrl->temp_file) {
-    delete_metalink_file(ctrl->temp_file);
+    metalink_file_delete(ctrl->temp_file);
   }
-  ctrl->temp_file = new_metalink_file();
+  ctrl->temp_file = metalink_file_new();
 
-  list_for_each(ctrl->resources, (void (*)(void*))&delete_metalink_resource);
+  list_for_each(ctrl->resources, (void (*)(void*))&metalink_resource_delete);
   list_clear(ctrl->resources);
 
-  list_for_each(ctrl->checksums, (void (*)(void*))&delete_metalink_checksum);
+  list_for_each(ctrl->checksums, (void (*)(void*))&metalink_checksum_delete);
   list_clear(ctrl->checksums);
 
   return ctrl->temp_file;
@@ -188,9 +189,9 @@ metalink_error_t metalink_pctrl_commit_file_transaction(metalink_pctrl_t* ctrl)
 metalink_resource_t* metalink_pctrl_new_resource_transaction(metalink_pctrl_t* ctrl)
 {
   if(ctrl->temp_resource) {
-    delete_metalink_resource(ctrl->temp_resource);
+    metalink_resource_delete(ctrl->temp_resource);
   }
-  ctrl->temp_resource = new_metalink_resource();
+  ctrl->temp_resource = metalink_resource_new();
   return ctrl->temp_resource;
 }
 
@@ -211,9 +212,9 @@ metalink_error_t metalink_pctrl_commit_resource_transaction(metalink_pctrl_t* ct
 metalink_checksum_t* metalink_pctrl_new_checksum_transaction(metalink_pctrl_t* ctrl)
 {
   if(ctrl->temp_checksum) {
-    delete_metalink_checksum(ctrl->temp_checksum);
+    metalink_checksum_delete(ctrl->temp_checksum);
   }
-  ctrl->temp_checksum = new_metalink_checksum();
+  ctrl->temp_checksum = metalink_checksum_new();
   return ctrl->temp_checksum;
 }
 
@@ -234,11 +235,12 @@ metalink_chunk_checksum_t*
 metalink_pctrl_new_chunk_checksum_transaction(metalink_pctrl_t* ctrl)
 {
   if(ctrl->temp_chunk_checksum) {
-    delete_metalink_chunk_checksum(ctrl->temp_chunk_checksum);
+    metalink_chunk_checksum_delete(ctrl->temp_chunk_checksum);
   }
 
-  ctrl->temp_chunk_checksum = new_metalink_chunk_checksum();
-  list_for_each(ctrl->piece_hashes, (void (*)(void*))&delete_metalink_piece_hash);
+  ctrl->temp_chunk_checksum = metalink_chunk_checksum_new();
+  list_for_each(ctrl->piece_hashes,
+		(void (*)(void*))&metalink_piece_hash_delete);
   list_clear(ctrl->piece_hashes);
   
   return ctrl->temp_chunk_checksum;
@@ -267,9 +269,9 @@ metalink_error_t metalink_pctrl_commit_chunk_checksum_transaction(metalink_pctrl
 metalink_piece_hash_t* metalink_pctrl_new_piece_hash_transaction(metalink_pctrl_t* ctrl)
 {
   if(ctrl->temp_piece_hash) {
-    delete_metalink_piece_hash(ctrl->temp_piece_hash);
+    metalink_piece_hash_delete(ctrl->temp_piece_hash);
   }
-  ctrl->temp_piece_hash = new_metalink_piece_hash();
+  ctrl->temp_piece_hash = metalink_piece_hash_new();
   return ctrl->temp_piece_hash;
 }
 

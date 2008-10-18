@@ -51,7 +51,7 @@ static metalink_error_t allocate_copy_string(char** dest, const char* src)
 
 metalink_file_t
 METALINK_PUBLIC
-* new_metalink_file()
+* metalink_file_new()
 {
   metalink_file_t* file;
   file = malloc(sizeof(metalink_file_t));
@@ -63,7 +63,7 @@ METALINK_PUBLIC
 
 void
 METALINK_PUBLIC
-delete_metalink_file(metalink_file_t* file)
+metalink_file_delete(metalink_file_t* file)
 {
   metalink_resource_t** res;
   metalink_checksum_t** checksums;
@@ -76,7 +76,7 @@ delete_metalink_file(metalink_file_t* file)
     if(file->resources) {
       res = file->resources;
       while(*res) {
-	delete_metalink_resource(*res);
+	metalink_resource_delete(*res);
 	++res;
       }
       free(file->resources);
@@ -85,13 +85,13 @@ delete_metalink_file(metalink_file_t* file)
     if(file->checksums) {
       checksums = file->checksums;
       while(*checksums) {
-	delete_metalink_checksum(*checksums);
+	metalink_checksum_delete(*checksums);
 	++checksums;
       }
       free(file->checksums);
     }
 
-    delete_metalink_chunk_checksum(file->chunk_checksum);
+    metalink_chunk_checksum_delete(file->chunk_checksum);
 
     free(file);
   }
@@ -143,7 +143,7 @@ metalink_file_set_maxconnections(metalink_file_t* file, int maxconnections)
 
 metalink_resource_t
 METALINK_PUBLIC
-* new_metalink_resource()
+* metalink_resource_new()
 {
   metalink_resource_t* resource;
   resource = malloc(sizeof(metalink_resource_t));
@@ -155,7 +155,7 @@ METALINK_PUBLIC
 
 void
 METALINK_PUBLIC
-delete_metalink_resource(metalink_resource_t* resource)
+metalink_resource_delete(metalink_resource_t* resource)
 {
   if(resource) {
     free(resource->url);
@@ -220,7 +220,7 @@ metalink_resource_set_url(metalink_resource_t* resource, const char* url)
 /* for metalink_checksum_t */
 metalink_checksum_t
 METALINK_PUBLIC
-* new_metalink_checksum()
+* metalink_checksum_new()
 {
   metalink_checksum_t* checksum;
   checksum = malloc(sizeof(metalink_checksum_t));
@@ -232,7 +232,7 @@ METALINK_PUBLIC
 
 void
 METALINK_PUBLIC
-delete_metalink_checksum(metalink_checksum_t* checksum)
+metalink_checksum_delete(metalink_checksum_t* checksum)
 {
   if(checksum) {
     free(checksum->type);
@@ -258,7 +258,7 @@ metalink_checksum_set_hash(metalink_checksum_t* checksum, const char* hash)
 /* for metalink_piece_hash_t */
 metalink_piece_hash_t
 METALINK_PUBLIC
-* new_metalink_piece_hash()
+* metalink_piece_hash_new()
 {
   metalink_piece_hash_t* piece_hash;
   piece_hash = malloc(sizeof(metalink_piece_hash_t));
@@ -270,7 +270,7 @@ METALINK_PUBLIC
 
 void
 METALINK_PUBLIC
-delete_metalink_piece_hash(metalink_piece_hash_t* piece_hash)
+metalink_piece_hash_delete(metalink_piece_hash_t* piece_hash)
 {
   if(!piece_hash) {
     return;
@@ -296,7 +296,7 @@ metalink_piece_hash_set_hash(metalink_piece_hash_t* piece_hash, const char* hash
 /* for metalink_chunk_checksum_t */
 metalink_chunk_checksum_t
 METALINK_PUBLIC
-* new_metalink_chunk_checksum()
+* metalink_chunk_checksum_new()
 {
   metalink_chunk_checksum_t* chunk_checksum;
   chunk_checksum = malloc(sizeof(metalink_chunk_checksum_t));
@@ -308,7 +308,7 @@ METALINK_PUBLIC
 
 void
 METALINK_PUBLIC
-delete_metalink_chunk_checksum(metalink_chunk_checksum_t* chunk_checksum)
+metalink_chunk_checksum_delete(metalink_chunk_checksum_t* chunk_checksum)
 {
   metalink_piece_hash_t** p;
   if(!chunk_checksum) {
@@ -318,7 +318,7 @@ delete_metalink_chunk_checksum(metalink_chunk_checksum_t* chunk_checksum)
   if(chunk_checksum->piece_hashes) {
     p = chunk_checksum->piece_hashes;
     while(*p) {
-      delete_metalink_piece_hash(*p);
+      metalink_piece_hash_delete(*p);
       ++p;
     }
     free(chunk_checksum->piece_hashes);
@@ -352,7 +352,7 @@ metalink_chunk_checksum_set_piece_hashes
     metalink_piece_hash_t** p;
     p = chunk_checksum->piece_hashes;
     while(*p) {
-      delete_metalink_piece_hash(*p);
+      metalink_piece_hash_delete(*p);
       ++p;
     }
   }
@@ -362,7 +362,7 @@ metalink_chunk_checksum_set_piece_hashes
 /* for metalink_t */
 metalink_t
 METALINK_PUBLIC
-* new_metalink()
+* metalink_new()
 {
   metalink_t* metalink;
   metalink = malloc(sizeof(metalink_t));
@@ -374,7 +374,7 @@ METALINK_PUBLIC
 
 void
 METALINK_PUBLIC
-delete_metalink(metalink_t* metalink)
+metalink_delete(metalink_t* metalink)
 {
   metalink_file_t** filepp;
   if(!metalink) {
@@ -383,7 +383,7 @@ delete_metalink(metalink_t* metalink)
   if(metalink->files) {
     filepp = metalink->files;
     while(*filepp) {
-      delete_metalink_file(*filepp);
+      metalink_file_delete(*filepp);
       ++filepp;
     }
     free(metalink->files);

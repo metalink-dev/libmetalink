@@ -85,14 +85,14 @@ typedef struct _metalink_parser_context metalink_parser_context_t;
  * Allocates, initializes and returns a parser context.
  * @return a parser context on success, otherwise NULL.
  */
-metalink_parser_context_t* new_metalink_parser_context();
+metalink_parser_context_t* metalink_parser_context_new();
 
 /**
  * Deallocates a parser context ctx.
  * @param ctx a parser context to deallocate. If ctx is NULL, this function does
  * nothing.
  */
-void delete_metalink_parser_context(metalink_parser_context_t* ctx);
+void metalink_parser_context_delete(metalink_parser_context_t* ctx);
 
 /**
  * Processes len bytes of data at buf. This function can be called several times

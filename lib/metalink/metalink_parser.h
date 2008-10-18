@@ -26,8 +26,10 @@
 #ifndef _D_METALINK_PARSER_H_
 #define _D_METALINK_PARSER_H_
 
-#include <metalink/metalink_types.h>
 #include <stdio.h>
+
+#include <metalink/metalink_types.h>
+#include <metalink/metalink_error.h>
 
 #ifdef __cplusplus
 extern "C" {

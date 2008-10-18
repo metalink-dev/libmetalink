@@ -1,5 +1,6 @@
 noinst_LTLIBRARIES = libmetalinkcore.la
 libmetalinkcore_la_SOURCES =\
+	metalink_config.h\
 	metalink_parser.h\
 	metalink_types.c metalink_types.h\
 	metalink_error.h\

@@ -30,6 +30,8 @@ void test_metalink_parse_file();
 
 void test_metalink_parse_fp();
 
+void test_metalink_parse_fd();
+
 void test_metalink_parse_memory();
 
 void test_metalink_parse_update();

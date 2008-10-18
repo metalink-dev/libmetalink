@@ -211,6 +211,19 @@ void test_metalink_parse_fp()
   validate_result(metalink);
 }
 
+void test_metalink_parse_fd()
+{
+  metalink_error_t r;
+  metalink_t* metalink;
+  int fd;
+
+  fd = openfile("test1.xml", O_RDONLY);
+  r = metalink_parse_fd(fd, &metalink);  
+  CU_ASSERT_EQUAL(0, r);
+  CU_ASSERT_EQUAL(0, close(fd));
+  validate_result(metalink);
+}
+
 void test_metalink_parse_memory()
 {
   metalink_error_t r;

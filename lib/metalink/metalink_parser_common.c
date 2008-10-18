@@ -44,14 +44,3 @@ metalink_error_t metalink_handle_parse_result(metalink_t** res,
   }
   return retval;
 }
-
-metalink_error_t metalink_parse_fd(int docfd, metalink_t** res)
-{
-  metalink_error_t r;
-  FILE *docfp = fdopen(docfd, "rb");
-  if(docfp == NULL)
-    return METALINK_ERR_CANNOT_OPEN_FILE;
-  r = metalink_parse_fp(docfp, res);
-  fclose(docfp); 
-  return r;
-}

@@ -31,6 +31,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include <errno.h>
 
 #include <expat.h>
 
@@ -135,6 +136,47 @@ metalink_parse_fp(FILE* docfp, metalink_t** res)
   }
   XML_ParserFree(parser);
   
+  retval = metalink_handle_parse_result(res, session_data, r);
+
+  delete_session_data(session_data);
+
+  return retval;
+}
+
+metalink_error_t
+METALINK_PUBLIC
+metalink_parse_fd(int fd, metalink_t** res)
+{
+  session_data_t* session_data;
+  metalink_error_t r = 0;
+  metalink_error_t retval;
+  XML_Parser parser;
+
+  session_data = new_session_data();
+
+  parser = setup_parser(session_data);
+
+  while(1) {
+    size_t num_read;
+    void* buff = XML_GetBuffer(parser, BUFSIZ);
+    if(buff == NULL) {
+      r = METALINK_ERR_PARSER_ERROR;
+      break;
+    }
+    num_read = TEMP_FAILURE_RETRY(read(fd, buff, BUFSIZ));
+    if(num_read < 0) {
+      r = METALINK_ERR_PARSER_ERROR;
+      break;
+    } else if(num_read == 0) {
+      break;
+    }
+    if(!XML_ParseBuffer(parser, num_read, 0)) {
+      r = METALINK_ERR_PARSER_ERROR;
+      break;
+    }
+  }
+  XML_ParserFree(parser);
+
   retval = metalink_handle_parse_result(res, session_data, r);
 
   delete_session_data(session_data);

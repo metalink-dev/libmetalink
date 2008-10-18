@@ -183,7 +183,6 @@ static void* mapfile(int fd, off_t size)
   return addr;
 }
 
-
 void test_metalink_parse_file()
 {
   metalink_error_t r;
@@ -191,6 +190,23 @@ void test_metalink_parse_file()
 
   r = metalink_parse_file("test1.xml", &metalink);
   CU_ASSERT_EQUAL(0, r);
+
+  validate_result(metalink);
+}
+
+void test_metalink_parse_fp()
+{
+  metalink_error_t r;
+  metalink_t* metalink;
+  FILE* fp;
+
+  fp = fopen("test1.xml", "rb");
+  if(fp == NULL) {
+    CU_FAIL_FATAL("cannot open test1.xml");
+  }
+  r = metalink_parse_fp(fp, &metalink);
+  CU_ASSERT_EQUAL(0, r);
+  fclose(fp);
 
   validate_result(metalink);
 }

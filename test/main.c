@@ -53,6 +53,9 @@ int main()
       (!CU_add_test(pSuite, "test of metalink_parse_file",
 		    test_metalink_parse_file))
       ||
+      (!CU_add_test(pSuite, "test of metalink_parse_fp",
+		    test_metalink_parse_fp))
+      ||
       (!CU_add_test(pSuite, "test of metalink_parse_memory",
 		    test_metalink_parse_memory))
       ||

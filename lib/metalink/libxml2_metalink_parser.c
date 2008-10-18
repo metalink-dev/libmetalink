@@ -134,10 +134,9 @@ metalink_error_t metalink_parse_fp(FILE* docfp, metalink_t** res)
 
   session_data = new_session_data();
   
-  num_read = fread(buff, 1, BUFSIZ, docfp);
+  num_read = fread(buff, 1, 4, docfp);
   ctxt = xmlCreatePushParserCtxt(&mySAXHandler, session_data, buff, num_read, NULL);
-  //FIXME: This test works, but is probably not the correct way..
-  if(strlen((char*)ctxt) > 0)
+  if(ctxt == NULL)
 	  r = METALINK_ERR_PARSER_ERROR;
 
   while(!feof(docfp) && !r) {

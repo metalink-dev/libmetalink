@@ -23,9 +23,13 @@
  * THE SOFTWARE.
  */
 /* copyright --> */
-#include <string.h>
-#include <libxml/parser.h>
 #include "metalink_parser.h"
+#include "metalink_config.h"
+
+#include <string.h>
+
+#include <libxml/parser.h>
+
 #include "metalink_pstm.h"
 #include "metalink_pstate.h"
 #include "metalink_error.h"
@@ -105,7 +109,9 @@ static xmlSAXHandler mySAXHandler = {
   0, /*   xmlStructuredErrorFunc */
 };
 
-metalink_error_t metalink_parse_file(const char* filename, metalink_t** res)
+metalink_error_t
+METALINK_PUBLIC
+metalink_parse_file(const char* filename, metalink_t** res)
 {
   session_data_t* session_data;
   metalink_error_t r,
@@ -122,7 +128,9 @@ metalink_error_t metalink_parse_file(const char* filename, metalink_t** res)
   return retval;
 }
 
-metalink_error_t metalink_parse_fp(FILE* docfp, metalink_t** res)
+metalink_error_t
+METALINK_PUBLIC
+metalink_parse_fp(FILE* docfp, metalink_t** res)
 {
   session_data_t* session_data;
   metalink_error_t r = 0,
@@ -154,7 +162,9 @@ metalink_error_t metalink_parse_fp(FILE* docfp, metalink_t** res)
   return retval;
 }
 
-metalink_error_t metalink_parse_memory(const char* buf, size_t len, metalink_t** res)
+metalink_error_t
+METALINK_PUBLIC
+metalink_parse_memory(const char* buf, size_t len, metalink_t** res)
 {
   session_data_t* session_data;
   metalink_error_t r,
@@ -178,7 +188,9 @@ struct _metalink_parser_context
   metalink_t* res;
 };
 
-metalink_parser_context_t* new_metalink_parser_context()
+metalink_parser_context_t
+METALINK_PUBLIC
+* new_metalink_parser_context()
 {
   metalink_parser_context_t* ctx;
   ctx = malloc(sizeof(metalink_parser_context_t));
@@ -195,7 +207,9 @@ metalink_parser_context_t* new_metalink_parser_context()
   return ctx;
 }
 
-void delete_metalink_parser_context(metalink_parser_context_t* ctx)
+void
+METALINK_PUBLIC
+delete_metalink_parser_context(metalink_parser_context_t* ctx)
 {
   if(ctx == NULL) {
     return;
@@ -205,8 +219,10 @@ void delete_metalink_parser_context(metalink_parser_context_t* ctx)
   free(ctx);
 }
 
-metalink_error_t metalink_parse_update_internal(metalink_parser_context_t* ctx,
-				   const char* buf, size_t len, int terminate)
+metalink_error_t
+METALINK_PUBLIC
+metalink_parse_update_internal(metalink_parser_context_t* ctx,
+			       const char* buf, size_t len, int terminate)
 {
   metalink_error_t r;
 
@@ -225,8 +241,10 @@ metalink_error_t metalink_parse_update_internal(metalink_parser_context_t* ctx,
   return r;
 }
 
-metalink_error_t metalink_parse_update(metalink_parser_context_t* ctx,
-			  const char* buf, size_t len)
+metalink_error_t
+METALINK_PUBLIC
+metalink_parse_update(metalink_parser_context_t* ctx,
+		      const char* buf, size_t len)
 {
   metalink_error_t r;
   r = metalink_parse_update_internal(ctx, buf, len, 0);
@@ -236,8 +254,10 @@ metalink_error_t metalink_parse_update(metalink_parser_context_t* ctx,
   return r;
 }
 
-metalink_error_t metalink_parse_final(metalink_parser_context_t* ctx,
-			 const char* buf, size_t len, metalink_t** res)
+metalink_error_t
+METALINK_PUBLIC
+metalink_parse_final(metalink_parser_context_t* ctx,
+		     const char* buf, size_t len, metalink_t** res)
 {
   metalink_error_t r,
 		   retval;

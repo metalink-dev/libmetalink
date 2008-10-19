@@ -27,28 +27,28 @@
 #define _D_METALINK_PCTRL_H_
 
 #include "metalink_types.h"
-#include "list.h"
+#include "metalink_list.h"
 
 typedef struct metalink_pctrl_t {
   metalink_error_t error;
 
   metalink_t* metalink;
 
-  list_t/* <metalink_file_t*> */ * files;
+  metalink_list_t/* <metalink_file_t*> */ * files;
 
   metalink_file_t* temp_file;
 
-  list_t/* <metalink_resource_t*> */ * resources;
+  metalink_list_t/* <metalink_resource_t*> */ * resources;
 
   metalink_resource_t* temp_resource;
 
-  list_t/* <metalink_checksum_t*> */ * checksums;
+  metalink_list_t/* <metalink_checksum_t*> */ * checksums;
 
   metalink_checksum_t* temp_checksum;
 
   metalink_chunk_checksum_t* temp_chunk_checksum;
 
-  list_t/* <metalink_piece_hash_t*> */ * piece_hashes;
+  metalink_list_t/* <metalink_piece_hash_t*> */ * piece_hashes;
 
   metalink_piece_hash_t* temp_piece_hash;
 

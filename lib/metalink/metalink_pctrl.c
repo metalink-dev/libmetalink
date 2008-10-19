@@ -40,19 +40,19 @@ metalink_pctrl_t* new_metalink_pctrl()
   if(!ctrl->metalink) {
     goto NEW_METALINK_PCTRL_ERROR;
   }
-  ctrl->files = new_list();
+  ctrl->files = metalink_list_new();
   if(!ctrl->files) {
     goto NEW_METALINK_PCTRL_ERROR;
   }
-  ctrl->resources = new_list();
+  ctrl->resources = metalink_list_new();
   if(!ctrl->resources) {
     goto NEW_METALINK_PCTRL_ERROR;
   }
-  ctrl->checksums = new_list();
+  ctrl->checksums = metalink_list_new();
   if(!ctrl->checksums) {
     goto NEW_METALINK_PCTRL_ERROR;
   }
-  ctrl->piece_hashes = new_list();
+  ctrl->piece_hashes = metalink_list_new();
   if(!ctrl->piece_hashes) {
     goto NEW_METALINK_PCTRL_ERROR;
   }
@@ -69,23 +69,25 @@ void delete_metalink_pctrl(metalink_pctrl_t* ctrl)
   }
   metalink_delete(ctrl->metalink);
   
-  list_for_each(ctrl->files, (void (*)(void*))&metalink_file_delete);
-  delete_list(ctrl->files);
+  metalink_list_for_each(ctrl->files, (void (*)(void*))&metalink_file_delete);
+  metalink_list_delete(ctrl->files);
   metalink_file_delete(ctrl->temp_file);
   
-  list_for_each(ctrl->resources, (void (*)(void*))&metalink_resource_delete);
-  delete_list(ctrl->resources);
+  metalink_list_for_each(ctrl->resources,
+			 (void (*)(void*))&metalink_resource_delete);
+  metalink_list_delete(ctrl->resources);
   metalink_resource_delete(ctrl->temp_resource);
 
-  list_for_each(ctrl->checksums, (void (*)(void*))&metalink_checksum_delete);
-  delete_list(ctrl->checksums);
+  metalink_list_for_each(ctrl->checksums,
+			 (void (*)(void*))&metalink_checksum_delete);
+  metalink_list_delete(ctrl->checksums);
   metalink_checksum_delete(ctrl->temp_checksum);
 
   metalink_chunk_checksum_delete(ctrl->temp_chunk_checksum);
 
-  list_for_each(ctrl->piece_hashes,
-		(void (*)(void*))&metalink_piece_hash_delete);
-  delete_list(ctrl->piece_hashes);
+  metalink_list_for_each(ctrl->piece_hashes,
+			 (void (*)(void*))&metalink_piece_hash_delete);
+  metalink_list_delete(ctrl->piece_hashes);
   metalink_piece_hash_delete(ctrl->temp_piece_hash);
 
   free(ctrl);
@@ -112,32 +114,32 @@ metalink_error_t metalink_pctrl_get_error(metalink_pctrl_t* ctrl)
 metalink_error_t metalink_pctrl_metalink_accumulate_files(metalink_pctrl_t* ctrl)
 {
   size_t files_length;
-  files_length = list_length(ctrl->files);
+  files_length = metalink_list_length(ctrl->files);
   if(files_length) {
     ctrl->metalink->files = calloc(files_length+1, sizeof(metalink_file_t*));
     if(!ctrl->metalink->files) {
       return METALINK_ERR_BAD_ALLOC;
     }
-    list_to_array(ctrl->files, (void**)ctrl->metalink->files);
+    metalink_list_to_array(ctrl->files, (void**)ctrl->metalink->files);
     ctrl->metalink->files[files_length] = NULL;
 
-    list_clear(ctrl->files);
+    metalink_list_clear(ctrl->files);
   }
   return 0;
 }
 
-static metalink_error_t commit_list_to_array(void*** array_ptr, list_t* src, size_t ele_size)
+static metalink_error_t commit_list_to_array(void*** array_ptr, metalink_list_t* src, size_t ele_size)
 {
   size_t size;
-  size = list_length(src);
+  size = metalink_list_length(src);
   if(size) {
     *array_ptr = calloc(size+1, ele_size);
     if(!*array_ptr) {
       return METALINK_ERR_BAD_ALLOC;
     }
-    list_to_array(src, *array_ptr);
+    metalink_list_to_array(src, *array_ptr);
     (*array_ptr)[size] = NULL;
-    list_clear(src);
+    metalink_list_clear(src);
   }
   return 0;
 }
@@ -150,11 +152,13 @@ metalink_file_t* metalink_pctrl_new_file_transaction(metalink_pctrl_t* ctrl)
   }
   ctrl->temp_file = metalink_file_new();
 
-  list_for_each(ctrl->resources, (void (*)(void*))&metalink_resource_delete);
-  list_clear(ctrl->resources);
+  metalink_list_for_each(ctrl->resources,
+			 (void (*)(void*))&metalink_resource_delete);
+  metalink_list_clear(ctrl->resources);
 
-  list_for_each(ctrl->checksums, (void (*)(void*))&metalink_checksum_delete);
-  list_clear(ctrl->checksums);
+  metalink_list_for_each(ctrl->checksums,
+			 (void (*)(void*))&metalink_checksum_delete);
+  metalink_list_clear(ctrl->checksums);
 
   return ctrl->temp_file;
 }
@@ -179,7 +183,7 @@ metalink_error_t metalink_pctrl_commit_file_transaction(metalink_pctrl_t* ctrl)
     return r;
   }
 
-  if(list_append(ctrl->files, ctrl->temp_file) != 0) {
+  if(metalink_list_append(ctrl->files, ctrl->temp_file) != 0) {
     return METALINK_ERR_BAD_ALLOC;
   }
 
@@ -202,7 +206,7 @@ metalink_error_t metalink_pctrl_commit_resource_transaction(metalink_pctrl_t* ct
     return METALINK_ERR_NO_RESOURCE_TRANSACTION;
   }
 
-  if(list_append(ctrl->resources, ctrl->temp_resource) != 0) {
+  if(metalink_list_append(ctrl->resources, ctrl->temp_resource) != 0) {
     return METALINK_ERR_BAD_ALLOC;
   }
 
@@ -225,7 +229,7 @@ metalink_error_t metalink_pctrl_commit_checksum_transaction(metalink_pctrl_t* ct
     return METALINK_ERR_NO_CHECKSUM_TRANSACTION;
   }
 
-  if(list_append(ctrl->checksums, ctrl->temp_checksum) != 0) {
+  if(metalink_list_append(ctrl->checksums, ctrl->temp_checksum) != 0) {
     return METALINK_ERR_BAD_ALLOC;
   }
   ctrl->temp_checksum = NULL;
@@ -240,9 +244,9 @@ metalink_pctrl_new_chunk_checksum_transaction(metalink_pctrl_t* ctrl)
   }
 
   ctrl->temp_chunk_checksum = metalink_chunk_checksum_new();
-  list_for_each(ctrl->piece_hashes,
-		(void (*)(void*))&metalink_piece_hash_delete);
-  list_clear(ctrl->piece_hashes);
+  metalink_list_for_each(ctrl->piece_hashes,
+			 (void (*)(void*))&metalink_piece_hash_delete);
+  metalink_list_clear(ctrl->piece_hashes);
   
   return ctrl->temp_chunk_checksum;
 }
@@ -261,7 +265,7 @@ metalink_error_t metalink_pctrl_commit_chunk_checksum_transaction(metalink_pctrl
   if(r != 0) {
     return r;
   }
-  list_clear(ctrl->piece_hashes);
+  metalink_list_clear(ctrl->piece_hashes);
   ctrl->temp_file->chunk_checksum = ctrl->temp_chunk_checksum;
   ctrl->temp_chunk_checksum = NULL;
   return 0;
@@ -281,7 +285,8 @@ metalink_error_t metalink_pctrl_commit_piece_hash_transaction(metalink_pctrl_t* 
   if(!ctrl->temp_piece_hash) {
     return METALINK_ERR_NO_PIECE_HASH_TRANSACTION;
   }
-  if(list_append(ctrl->piece_hashes, (void*)ctrl->temp_piece_hash) != 0) {
+  if(metalink_list_append(ctrl->piece_hashes,
+			  (void*)ctrl->temp_piece_hash) != 0) {
     return METALINK_ERR_BAD_ALLOC;
   }
   ctrl->temp_piece_hash = NULL;

@@ -53,9 +53,9 @@ void test_metalink_pctrl_file_transaction()
   file = NULL;
 
   CU_ASSERT_PTR_NULL(ctrl->temp_file);
-  CU_ASSERT_EQUAL(1, list_length(ctrl->files));
+  CU_ASSERT_EQUAL(1, metalink_list_length(ctrl->files));
 
-  file = list_get_data(ctrl->files, 0);
+  file = metalink_list_get_data(ctrl->files, 0);
   CU_ASSERT_STRING_EQUAL("libmetalink.tar.bz2", file->name);
   CU_ASSERT_EQUAL(4294967296LL, file->size);
   CU_ASSERT_STRING_EQUAL("1.0.0", file->version);
@@ -94,9 +94,9 @@ void test_metalink_pctrl_resource_transaction()
   resource = NULL;
 
   CU_ASSERT_PTR_NULL(ctrl->temp_resource);
-  CU_ASSERT_EQUAL(1, list_length(ctrl->resources));
+  CU_ASSERT_EQUAL(1, metalink_list_length(ctrl->resources));
 
-  resource = list_get_data(ctrl->resources, 0);
+  resource = metalink_list_get_data(ctrl->resources, 0);
   CU_ASSERT_STRING_EQUAL("http", resource->type);
   CU_ASSERT_STRING_EQUAL("FI", resource->location);
   CU_ASSERT_EQUAL(100, resource->preference);
@@ -132,9 +132,9 @@ void test_metalink_pctrl_checksum_transaction()
   checksum = NULL;
 
   CU_ASSERT_PTR_NULL(ctrl->temp_checksum);
-  CU_ASSERT_EQUAL(1, list_length(ctrl->checksums));
+  CU_ASSERT_EQUAL(1, metalink_list_length(ctrl->checksums));
 
-  checksum = list_get_data(ctrl->checksums, 0);
+  checksum = metalink_list_get_data(ctrl->checksums, 0);
   CU_ASSERT_STRING_EQUAL("sha1", checksum->type);
   CU_ASSERT_STRING_EQUAL("234f3611ad77aaf1241a0dc8ac708007935844d5",
 			 checksum->hash);
@@ -207,9 +207,9 @@ void test_metalink_pctrl_piece_hash_transaction()
   piece_hash = NULL;
 
   CU_ASSERT_PTR_NULL(ctrl->temp_piece_hash);
-  CU_ASSERT_EQUAL(1, list_length(ctrl->piece_hashes));
+  CU_ASSERT_EQUAL(1, metalink_list_length(ctrl->piece_hashes));
 
-  piece_hash = list_get_data(ctrl->piece_hashes, 0);
+  piece_hash = metalink_list_get_data(ctrl->piece_hashes, 0);
   CU_ASSERT_EQUAL(100, piece_hash->piece);
   CU_ASSERT_STRING_EQUAL("234f3611ad77aaf1241a0dc8ac708007935844d5",
 			 piece_hash->hash);

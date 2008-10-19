@@ -23,41 +23,43 @@
  * THE SOFTWARE.
  */
 /* copyright --> */
-#ifndef _D_LIST_H_
-#define _D_LIST_H_
+#include "metalink_list_test.h"
 
-#include <stdlib.h>
+#include <CUnit/CUnit.h>
 
-typedef struct _list_entry {
-  void* data;
-  struct _list_entry* next;
-} list_entry_t;
+#include "metalink/metalink_list.h"
 
-typedef struct _list {
-  list_entry_t* head;
-  list_entry_t* tail;
-} list_t;
+void test_metalink_list()
+{
+  metalink_list_t* l;
+  int a, b, c;
+  int* int_ptr_array[3];
 
-list_t* new_list();
+  l = metalink_list_new();
+  CU_ASSERT_PTR_NOT_NULL(l);
 
-void delete_list(list_t* list);
+  // Add 3 ints.
+  a = 1;
+  b = 2;
+  c = 4;
+  metalink_list_append(l, &a);
+  metalink_list_append(l, &b);
+  metalink_list_append(l, &c);
+  CU_ASSERT_EQUAL(3, metalink_list_length(l));
 
-void* list_get_data(list_t* list, size_t index);
+  // get 2nd(index = 1) element = (2)
+  CU_ASSERT_EQUAL(2, *(int*)metalink_list_get_data(l, 1));
+ 
+  // dump the contents of list to array
+  metalink_list_to_array(l, (void**)int_ptr_array);
+  CU_ASSERT_EQUAL(1, *int_ptr_array[0]);
+  CU_ASSERT_EQUAL(2, *int_ptr_array[1]);
+  CU_ASSERT_EQUAL(4, *int_ptr_array[2]);
 
-size_t list_length(list_t* list);
+  // clear all data
+  metalink_list_clear(l);
+  CU_ASSERT_EQUAL(0, metalink_list_length(l));
 
-void list_clear(list_t* list);
-
-void list_clear_data(list_t* list);
-
-void list_to_array(list_t* list, void** array);
-
-int list_append(list_t* list, void* data);
-
-void list_insert(list_t* list, size_t index);
-
-void list_remove(list_t* list, size_t index);
-
-void list_for_each(list_t* list, void (*fun)(void* data));
-
-#endif // _D_LIST_H_
+  // delete list
+  metalink_list_delete(l);
+}

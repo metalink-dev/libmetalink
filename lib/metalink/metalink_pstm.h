@@ -29,7 +29,6 @@
 #include "metalink_types.h"
 #include "metalink_pstate.h"
 #include "metalink_pctrl.h"
-#include "list.h"
 
 /* parser state machine */
 struct _metalink_pstm {

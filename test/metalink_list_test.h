@@ -23,9 +23,9 @@
  * THE SOFTWARE.
  */
 /* copyright --> */
-#ifndef _D_TEST_LIST_H_
-#define _D_TEST_LIST_H_
+#ifndef _D_METALINK_LIST_TEST_H_
+#define _D_METALINK_LIST_TEST_H_
 
-void test_list();
+void test_metalink_list();
 
-#endif // _D_TEST_LIST_H_
+#endif // _D_METALINK_LIST_TEST_H_

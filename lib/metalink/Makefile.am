@@ -10,7 +10,7 @@ libmetalinkcore_la_SOURCES =\
 	metalink_parser_common.c metalink_parser_common.h\
 	session_data.c session_data.h\
 	stack.c stack.h\
-	list.c list.h\
+	metalink_list.c metalink_list.h\
 	string_buffer.c string_buffer.h
 
 if ENABLE_LIBXML2

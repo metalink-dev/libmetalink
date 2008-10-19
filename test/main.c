@@ -2,7 +2,7 @@
 #include <string.h>
 #include <CUnit/Basic.h>
 /* include test cases' include files here */
-#include "list_test.h"
+#include "metalink_list_test.h"
 #include "metalink_pctrl_test.h"
 #include "metalink_parser_test.h"
 
@@ -33,7 +33,7 @@ int main()
    }
 
    /* add the tests to the suite */
-   if((!CU_add_test(pSuite, "test of list", test_list))
+   if((!CU_add_test(pSuite, "test of metalink_list", test_metalink_list))
       ||
       (!CU_add_test(pSuite, "test of metalink_pctrl_file_transaction",
 		    test_metalink_pctrl_file_transaction))

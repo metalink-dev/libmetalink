@@ -25,7 +25,7 @@
 /* copyright --> */
 #include "metalink_session_data.h"
 #include "metalink_config.h"
-#include "string_buffer.h"
+#include "metalink_string_buffer.h"
 
 metalink_session_data_t* metalink_session_data_new()
 {
@@ -55,7 +55,7 @@ void metalink_session_data_delete(metalink_session_data_t* sd)
   }
   delete_metalink_pstm(sd->stm);
   while(!metalink_stack_empty(sd->characters_stack)) {
-    delete_string_buffer(metalink_stack_pop(sd->characters_stack));
+    metalink_string_buffer_delete(metalink_stack_pop(sd->characters_stack));
   }
   metalink_stack_delete(sd->characters_stack);
   free(sd);

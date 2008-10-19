@@ -23,27 +23,28 @@
  * THE SOFTWARE.
  */
 /* copyright --> */
-#ifndef _D_STRING_BUFFER_H_
-#define _D_STRING_BUFFER_H_
+#ifndef _D_METALINK_STRING_BUFFER_H_
+#define _D_METALINK_STRING_BUFFER_H_
 
 #include <stdlib.h>
 
-typedef struct string_buffer_t {
+typedef struct metalink_string_buffer_t {
   char* buffer;
   size_t length;
   size_t capacity;
-} string_buffer_t;
+} metalink_string_buffer_t;
 
-string_buffer_t* new_string_buffer(size_t initial_capacity);
+metalink_string_buffer_t* metalink_string_buffer_new(size_t initial_capacity);
 
-void delete_string_buffer(string_buffer_t* str_buf);
+void metalink_string_buffer_delete(metalink_string_buffer_t* str_buf);
 
-void string_buffer_append(string_buffer_t* str_buf, const char* str, size_t length);
+void metalink_string_buffer_append(metalink_string_buffer_t* str_buf,
+				   const char* str, size_t length);
 
-const char* string_buffer_str(const string_buffer_t* str_buf);
+const char* metalink_string_buffer_str(const metalink_string_buffer_t* str_buf);
 
-size_t string_buffer_capacity(const string_buffer_t* str_buf);
+size_t metalink_string_buffer_capacity(const metalink_string_buffer_t* str_buf);
 
-size_t string_buffer_strlen(const string_buffer_t* str_buf);
+size_t metalink_string_buffer_strlen(const metalink_string_buffer_t* str_buf);
 
-#endif // _D_STRING_BUFFER_H_
+#endif // _D_METALINK_STRING_BUFFER_H_

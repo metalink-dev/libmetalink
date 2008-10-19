@@ -37,14 +37,14 @@
 #include "metalink_parser_common.h"
 #include "metalink_session_data.h"
 #include "metalink_stack.h"
-#include "string_buffer.h"
+#include "metalink_string_buffer.h"
 
 static void start_element_handler(void* user_data,
 				  const xmlChar* name,
 				  const xmlChar** attrs)
 {
   metalink_session_data_t* session_data = (metalink_session_data_t*)user_data;
-  string_buffer_t* str_buf = new_string_buffer(128);
+  metalink_string_buffer_t* str_buf = metalink_string_buffer_new(128);
 
   /* TODO evaluate return value of stack_push; non-zero value is error. */
   metalink_stack_push(session_data->characters_stack, str_buf);
@@ -57,22 +57,23 @@ static void start_element_handler(void* user_data,
 static void end_element_handler(void* user_data, const xmlChar* name)
 {
   metalink_session_data_t* session_data = (metalink_session_data_t*)user_data;
-  string_buffer_t* str_buf = metalink_stack_pop(session_data->characters_stack);
+  metalink_string_buffer_t* str_buf = metalink_stack_pop(session_data->characters_stack);
   
   session_data->stm->state->end_fun(session_data->stm,
 				    (const char*)name,
-				    string_buffer_str(str_buf));
+				    metalink_string_buffer_str(str_buf));
 
-  delete_string_buffer(str_buf);	     
+  metalink_string_buffer_delete(str_buf);	     
 }
 
 static void characters_handler(void* user_data, const xmlChar* chars,
 			       int length)
 {
   metalink_session_data_t* session_data = (metalink_session_data_t*)user_data;
-  string_buffer_t* str_buf = metalink_stack_top(session_data->characters_stack);
+  metalink_string_buffer_t* str_buf =
+    metalink_stack_top(session_data->characters_stack);
 
-  string_buffer_append(str_buf, (const char*)chars, length);
+  metalink_string_buffer_append(str_buf, (const char*)chars, length);
 }
 
 static xmlSAXHandler mySAXHandler = {

@@ -23,9 +23,9 @@
  * THE SOFTWARE.
  */
 /* copyright --> */
-#include "metalink_parser.h"
 #include "metalink_parser_common.h"
-#include "metalink_error.h"
+#include "metalink_config.h"
+#include "metalink_pctrl.h"
 
 metalink_error_t metalink_handle_parse_result(metalink_t** res,
 				 session_data_t* session_data,

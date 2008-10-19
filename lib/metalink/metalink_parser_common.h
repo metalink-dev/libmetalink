@@ -28,6 +28,7 @@
 
 #include "metalink_types.h"
 #include "session_data.h"
+#include "metalink_error.h"
 
 /*
  * See session_data and parser_retval which is a return value of parser object

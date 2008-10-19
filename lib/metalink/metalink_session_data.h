@@ -27,13 +27,13 @@
 #define _D_METALINK_SESSION_DATA_H_
 
 #include "metalink_pstm.h"
-#include "stack.h"
+#include "metalink_stack.h"
 
 typedef struct _metalink_session_data
 {
   metalink_pstm_t* stm;
 
-  stack_t* characters_stack;
+  metalink_stack_t* characters_stack;
 } metalink_session_data_t;
 
 /* constructor */

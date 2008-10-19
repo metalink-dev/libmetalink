@@ -36,7 +36,7 @@
 #include "metalink_pstate.h"
 #include "metalink_parser_common.h"
 #include "metalink_session_data.h"
-#include "stack.h"
+#include "metalink_stack.h"
 #include "string_buffer.h"
 
 static void start_element_handler(void* user_data,
@@ -47,7 +47,7 @@ static void start_element_handler(void* user_data,
   string_buffer_t* str_buf = new_string_buffer(128);
 
   /* TODO evaluate return value of stack_push; non-zero value is error. */
-  stack_push(session_data->characters_stack, str_buf);
+  metalink_stack_push(session_data->characters_stack, str_buf);
 
   session_data->stm->state->start_fun(session_data->stm,
 				      (const char*)name,
@@ -57,7 +57,7 @@ static void start_element_handler(void* user_data,
 static void end_element_handler(void* user_data, const char* name)
 {
   metalink_session_data_t* session_data = (metalink_session_data_t*)user_data;
-  string_buffer_t* str_buf = stack_pop(session_data->characters_stack);
+  string_buffer_t* str_buf = metalink_stack_pop(session_data->characters_stack);
   
   session_data->stm->state->end_fun(session_data->stm,
 				    (const char*)name,
@@ -70,7 +70,7 @@ static void characters_handler(void* user_data, const char* chars,
 			       int length)
 {
   metalink_session_data_t* session_data = (metalink_session_data_t*)user_data;
-  string_buffer_t* str_buf = stack_top(session_data->characters_stack);
+  string_buffer_t* str_buf = metalink_stack_top(session_data->characters_stack);
 
   string_buffer_append(str_buf, (const char*)chars, length);
 }

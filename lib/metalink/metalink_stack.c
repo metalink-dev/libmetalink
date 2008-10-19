@@ -23,29 +23,29 @@
  * THE SOFTWARE.
  */
 /* copyright --> */
-#include "stack.h"
+#include "metalink_stack.h"
 #include "metalink_config.h"
 
 #include <stdlib.h>
 
-void init_stack(stack_t* s)
+static void init_stack(metalink_stack_t* s)
 {
   s->entry = NULL;
 }
 
-stack_t* new_stack()
+metalink_stack_t* metalink_stack_new()
 {
-  stack_t* s = malloc(sizeof(stack_t));
+  metalink_stack_t* s = malloc(sizeof(metalink_stack_t));
   if(s) {
     init_stack(s);
   }
   return s;
 }
 
-void release_stack(stack_t* stack)
+void metalink_stack_delete(metalink_stack_t* stack)
 {
-  stack_entry_t* e;
-  stack_entry_t* next;
+  metalink_stack_entry_t* e;
+  metalink_stack_entry_t* next;
 
   e = stack->entry;
   while(e) {
@@ -57,16 +57,16 @@ void release_stack(stack_t* stack)
 }
 
 
-int is_stack_empty(const stack_t* stack)
+int metalink_stack_empty(const metalink_stack_t* stack)
 {
   return stack->entry == NULL;
 }
 
-int stack_push(stack_t* stack, void* data)
+int metalink_stack_push(metalink_stack_t* stack, void* data)
 {
-  stack_entry_t* new_entry;
+  metalink_stack_entry_t* new_entry;
 
-  new_entry = malloc(sizeof(stack_entry_t));
+  new_entry = malloc(sizeof(metalink_stack_entry_t));
   if(!new_entry) {
     return 1;
   }
@@ -76,9 +76,9 @@ int stack_push(stack_t* stack, void* data)
   return 0;
 }
 
-void* stack_pop(stack_t* stack)
+void* metalink_stack_pop(metalink_stack_t* stack)
 {
-  stack_entry_t* pop_entry;
+  metalink_stack_entry_t* pop_entry;
   void* data;
 
   pop_entry = stack->entry;
@@ -88,9 +88,9 @@ void* stack_pop(stack_t* stack)
   return data;
 }
 
-void* stack_top(stack_t* stack)
+void* metalink_stack_top(metalink_stack_t* stack)
 {
-  if(is_stack_empty(stack)) {
+  if(metalink_stack_empty(stack)) {
     return NULL;
   } else {
     return stack->entry->data;

@@ -38,7 +38,7 @@ metalink_session_data_t* metalink_session_data_new()
   if(!sd->stm) {
     goto NEW_SESSION_DATA_ERROR;
   }
-  sd->characters_stack = new_stack();
+  sd->characters_stack = metalink_stack_new();
   if(!sd->characters_stack) {
     goto NEW_SESSION_DATA_ERROR;
   }
@@ -54,9 +54,9 @@ void metalink_session_data_delete(metalink_session_data_t* sd)
     return;
   }
   delete_metalink_pstm(sd->stm);
-  while(!is_stack_empty(sd->characters_stack)) {
-    delete_string_buffer(stack_pop(sd->characters_stack));
+  while(!metalink_stack_empty(sd->characters_stack)) {
+    delete_string_buffer(metalink_stack_pop(sd->characters_stack));
   }
-  release_stack(sd->characters_stack);
+  metalink_stack_delete(sd->characters_stack);
   free(sd);
 }

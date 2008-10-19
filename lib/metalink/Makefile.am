@@ -9,7 +9,7 @@ libmetalinkcore_la_SOURCES =\
 	metalink_pctrl.c metalink_pctrl.h\
 	metalink_parser_common.c metalink_parser_common.h\
 	metalink_session_data.c metalink_session_data.h\
-	stack.c stack.h\
+	metalink_stack.c metalink_stack.h\
 	metalink_list.c metalink_list.h\
 	string_buffer.c string_buffer.h
 

@@ -23,29 +23,29 @@
  * THE SOFTWARE.
  */
 /* copyright --> */
-#ifndef _D_STACK_H_
-#define _D_STACK_H_
+#ifndef _D_METALINK_STACK_H_
+#define _D_METALINK_STACK_H_
 
-typedef struct _stack_entry {
+typedef struct _metalink_stack_entry {
   void* data;
-  struct _stack_entry* next;
-} stack_entry_t;
+  struct _metalink_stack_entry* next;
+} metalink_stack_entry_t;
 
-typedef struct _stack {
-  stack_entry_t* entry;
-} stack_t;
+typedef struct _metalink_stack {
+  metalink_stack_entry_t* entry;
+} metalink_stack_t;
 
-stack_t* new_stack();
+metalink_stack_t* metalink_stack_new();
 
-void release_stack(stack_t* stack);
+void metalink_stack_delete(metalink_stack_t* stack);
 
-int is_stack_empty(const stack_t* stack);
+int metalink_stack_empty(const metalink_stack_t* stack);
 
-void* stack_top(stack_t* stack);
+void* metalink_stack_top(metalink_stack_t* stack);
 
 /* returns data */
-void* stack_pop(stack_t* stack);
+void* metalink_stack_pop(metalink_stack_t* stack);
 
-int stack_push(stack_t* stack, void* data);
+int metalink_stack_push(metalink_stack_t* stack, void* data);
 
-#endif // _D_STACK_H_
+#endif // _D_METALINK_STACK_H_

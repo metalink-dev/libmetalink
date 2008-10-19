@@ -23,8 +23,10 @@
  * THE SOFTWARE.
  */
 /* copyright --> */
-#include <string.h>
 #include "metalink_pstm.h"
+#include "metalink_config.h"
+
+#include <string.h>
 
 metalink_pstm_t* new_metalink_pstm()
 {

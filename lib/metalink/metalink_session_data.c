@@ -23,14 +23,14 @@
  * THE SOFTWARE.
  */
 /* copyright --> */
-#include "session_data.h"
+#include "metalink_session_data.h"
 #include "metalink_config.h"
 #include "string_buffer.h"
 
-session_data_t* new_session_data()
+metalink_session_data_t* metalink_session_data_new()
 {
-  session_data_t* sd;
-  sd = malloc(sizeof(session_data_t));
+  metalink_session_data_t* sd;
+  sd = malloc(sizeof(metalink_session_data_t));
   if(!sd) {
     return NULL;
   }
@@ -44,11 +44,11 @@ session_data_t* new_session_data()
   }
   return sd;
  NEW_SESSION_DATA_ERROR:
-  delete_session_data(sd);
+  metalink_session_data_delete(sd);
   return NULL;
 }
 
-void delete_session_data(session_data_t* sd)
+void metalink_session_data_delete(metalink_session_data_t* sd)
 {
   if(!sd) {
     return;

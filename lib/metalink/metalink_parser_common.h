@@ -27,7 +27,7 @@
 #define _D_METALINK_PARSER_COMMON_H_
 
 #include "metalink_types.h"
-#include "session_data.h"
+#include "metalink_session_data.h"
 #include "metalink_error.h"
 
 /*
@@ -44,7 +44,7 @@
  * 
  */
 metalink_error_t metalink_handle_parse_result(metalink_t** res,
-				 session_data_t* session_data,
+				 metalink_session_data_t* session_data,
 				 metalink_error_t parser_retval);
 
 

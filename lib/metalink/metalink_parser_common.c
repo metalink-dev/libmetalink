@@ -28,7 +28,7 @@
 #include "metalink_pctrl.h"
 
 metalink_error_t metalink_handle_parse_result(metalink_t** res,
-				 session_data_t* session_data,
+				 metalink_session_data_t* session_data,
 				 metalink_error_t parser_retval)
 {
   metalink_error_t retval;

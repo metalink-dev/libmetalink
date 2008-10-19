@@ -23,23 +23,23 @@
  * THE SOFTWARE.
  */
 /* copyright --> */
-#ifndef _D_SESSION_DATA_H_
-#define _D_SESSION_DATA_H_
+#ifndef _D_METALINK_SESSION_DATA_H_
+#define _D_METALINK_SESSION_DATA_H_
 
 #include "metalink_pstm.h"
 #include "stack.h"
 
-typedef struct _session_data
+typedef struct _metalink_session_data
 {
   metalink_pstm_t* stm;
 
   stack_t* characters_stack;
-} session_data_t;
+} metalink_session_data_t;
 
 /* constructor */
-session_data_t* new_session_data();
+metalink_session_data_t* metalink_session_data_new();
 
 /* destructor */
-void delete_session_data(session_data_t* sd);
+void metalink_session_data_delete(metalink_session_data_t* sd);
 
-#endif // _D_SESSION_DATA_H_
+#endif // _D_METALINK_SESSION_DATA_H_

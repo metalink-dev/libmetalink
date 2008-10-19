@@ -35,7 +35,7 @@
 #include "metalink_pstm.h"
 #include "metalink_pstate.h"
 #include "metalink_parser_common.h"
-#include "session_data.h"
+#include "metalink_session_data.h"
 #include "stack.h"
 #include "string_buffer.h"
 
@@ -43,7 +43,7 @@ static void start_element_handler(void* user_data,
 				  const char* name,
 				  const char** attrs)
 {
-  session_data_t* session_data = (session_data_t*)user_data;
+  metalink_session_data_t* session_data = (metalink_session_data_t*)user_data;
   string_buffer_t* str_buf = new_string_buffer(128);
 
   /* TODO evaluate return value of stack_push; non-zero value is error. */
@@ -56,7 +56,7 @@ static void start_element_handler(void* user_data,
 
 static void end_element_handler(void* user_data, const char* name)
 {
-  session_data_t* session_data = (session_data_t*)user_data;
+  metalink_session_data_t* session_data = (metalink_session_data_t*)user_data;
   string_buffer_t* str_buf = stack_pop(session_data->characters_stack);
   
   session_data->stm->state->end_fun(session_data->stm,
@@ -69,13 +69,13 @@ static void end_element_handler(void* user_data, const char* name)
 static void characters_handler(void* user_data, const char* chars,
 			       int length)
 {
-  session_data_t* session_data = (session_data_t*)user_data;
+  metalink_session_data_t* session_data = (metalink_session_data_t*)user_data;
   string_buffer_t* str_buf = stack_top(session_data->characters_stack);
 
   string_buffer_append(str_buf, (const char*)chars, length);
 }
 
-static XML_Parser setup_parser(session_data_t* session_data)
+static XML_Parser setup_parser(metalink_session_data_t* session_data)
 {
   XML_Parser parser;
   
@@ -105,12 +105,12 @@ metalink_error_t
 METALINK_PUBLIC
 metalink_parse_fp(FILE* docfp, metalink_t** res)
 {
-  session_data_t* session_data;
+  metalink_session_data_t* session_data;
   metalink_error_t r = 0,
 		   retval;
   XML_Parser parser;
 
-  session_data = new_session_data();
+  session_data = metalink_session_data_new();
   
   parser = setup_parser(session_data);
 
@@ -135,7 +135,7 @@ metalink_parse_fp(FILE* docfp, metalink_t** res)
   
   retval = metalink_handle_parse_result(res, session_data, r);
 
-  delete_session_data(session_data);
+  metalink_session_data_delete(session_data);
 
   return retval;
 }
@@ -144,12 +144,12 @@ metalink_error_t
 METALINK_PUBLIC
 metalink_parse_fd(int fd, metalink_t** res)
 {
-  session_data_t* session_data;
+  metalink_session_data_t* session_data;
   metalink_error_t r = 0;
   metalink_error_t retval;
   XML_Parser parser;
 
-  session_data = new_session_data();
+  session_data = metalink_session_data_new();
 
   parser = setup_parser(session_data);
 
@@ -176,7 +176,7 @@ metalink_parse_fd(int fd, metalink_t** res)
 
   retval = metalink_handle_parse_result(res, session_data, r);
 
-  delete_session_data(session_data);
+  metalink_session_data_delete(session_data);
 
   return retval;
 }
@@ -185,12 +185,12 @@ metalink_error_t
 METALINK_PUBLIC
 metalink_parse_memory(const char* buf, size_t len, metalink_t** res)
 {
-  session_data_t* session_data;
+  metalink_session_data_t* session_data;
   metalink_error_t r = 0,
 		   retval;
   XML_Parser parser;
   
-  session_data = new_session_data();
+  session_data = metalink_session_data_new();
 
   parser = setup_parser(session_data);
 
@@ -202,14 +202,14 @@ metalink_parse_memory(const char* buf, size_t len, metalink_t** res)
 
   retval = metalink_handle_parse_result(res, session_data, r);
 
-  delete_session_data(session_data);
+  metalink_session_data_delete(session_data);
 
   return retval; 
 }
 
 struct _metalink_parser_context
 {
-  session_data_t* session_data;
+  metalink_session_data_t* session_data;
   XML_Parser parser;
   metalink_t* res;
 };
@@ -225,7 +225,7 @@ METALINK_PUBLIC
   }
   memset(ctx, 0, sizeof(metalink_parser_context_t));
 
-  ctx->session_data = new_session_data();
+  ctx->session_data = metalink_session_data_new();
   if(ctx->session_data == NULL) {
     metalink_parser_context_delete(ctx);
     return NULL;
@@ -246,7 +246,7 @@ metalink_parser_context_delete(metalink_parser_context_t* ctx)
   if(ctx == NULL) {
     return;
   }
-  delete_session_data(ctx->session_data);
+  metalink_session_data_delete(ctx->session_data);
   XML_ParserFree(ctx->parser);
   free(ctx);
 }

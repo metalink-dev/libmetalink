@@ -23,9 +23,10 @@
  * THE SOFTWARE.
  */
 /* copyright --> */
+#include "metalink_pctrl.h"
+#include "metalink_config.h"
+
 #include <string.h>
-#include <metalink_pctrl.h>
-#include <metalink_types.h>
 
 metalink_pctrl_t* new_metalink_pctrl()
 {

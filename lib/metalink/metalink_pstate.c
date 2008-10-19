@@ -23,11 +23,14 @@
  * THE SOFTWARE.
  */
 /* copyright --> */
+#include "metalink_pstate.h"
+#include "metalink_config.h"
+
 #include <string.h>
 #include <stdlib.h>
 #include <errno.h>
 #include <limits.h>
-#include "metalink_pstate.h"
+
 #include "metalink_pstm.h"
 
 metalink_pstate_t* new_metalink_pstate()
@@ -45,7 +48,7 @@ void delete_metalink_pstate(metalink_pstate_t* state)
   free(state);
 }
 
-const char* get_attribute_value(const char** attrs, const char* name)
+static const char* get_attribute_value(const char** attrs, const char* name)
 {
   const char** p;
   const char* cname;
@@ -73,7 +76,7 @@ const char* get_attribute_value(const char** attrs, const char* name)
  * set error code to metalink_pctrl and transit to null state, where no further
  * state transition takes place.
  */
-void error_handler(metalink_pstm_t* stm, metalink_error_t error)
+static void error_handler(metalink_pstm_t* stm, metalink_error_t error)
 {
   metalink_pctrl_set_error(stm->ctrl, error);
   metalink_pstm_enter_null_state(stm);

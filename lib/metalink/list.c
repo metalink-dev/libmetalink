@@ -24,6 +24,7 @@
  */
 /* copyright --> */
 #include "list.h"
+#include "metalink_config.h"
 
 list_t* new_list()
 {

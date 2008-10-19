@@ -23,8 +23,10 @@
  * THE SOFTWARE.
  */
 /* copyright --> */
+#include "string_buffer.h"
+#include "metalink_config.h"
+
 #include <string.h>
-#include <string_buffer.h>
 #include <stdio.h>
 
 string_buffer_t* new_string_buffer(size_t initial_capacity)

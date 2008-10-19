@@ -23,8 +23,10 @@
  * THE SOFTWARE.
  */
 /* copyright --> */
-#include <stdlib.h>
 #include "stack.h"
+#include "metalink_config.h"
+
+#include <stdlib.h>
 
 void init_stack(stack_t* s)
 {

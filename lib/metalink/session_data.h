@@ -26,8 +26,8 @@
 #ifndef _D_SESSION_DATA_H_
 #define _D_SESSION_DATA_H_
 
-#include <metalink_pstm.h>
-#include <stack.h>
+#include "metalink_pstm.h"
+#include "stack.h"
 
 typedef struct _session_data
 {

@@ -23,8 +23,9 @@
  * THE SOFTWARE.
  */
 /* copyright --> */
-#include <session_data.h>
-#include <string_buffer.h>
+#include "session_data.h"
+#include "metalink_config.h"
+#include "string_buffer.h"
 
 session_data_t* new_session_data()
 {

@@ -1,5 +1,5 @@
 AC_PREREQ(2.61)
-AC_INIT([libmetalink], [0.0.2], [t-tujikawa@users.sourceforge.net])
+AC_INIT([libmetalink], [0.0.3], [t-tujikawa@users.sourceforge.net])
 AM_INIT_AUTOMAKE()
 
 # Checks for arguments.

@@ -1,0 +1,14 @@
+.TH "METALINK_PARSE_FILE" "3" "10/21/2008" "libmetalink 0.0.0" "libmetalink Manual"
+.SH "NAME"
+metalink_parse_file, metalink_parse_fp, metalink_parse_fd, metalink_parse_memory \- Parse Metalink file and create metalink_t object.
+.SH "SYNOPSIS"
+.B #include <metalink/metalink_parser.h>
+.sp
+.B metalink_error_t metalink_parse_file(const char *filename, metalink_t **res);
+.br
+.B metalink_error_t metalink_parse_fp(FILE *docfp, metalink_t **res);
+.br
+.B metalink_error_t metalink_parse_fd(int docfd, metalink_t **res);
+.br
+.B metalink_error_t metalink_parse_memory(const char *buf, size_t len, metalink_t **res);
+

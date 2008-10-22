@@ -17,14 +17,21 @@ These functions parse Metalink file data and constructs metalink_t structure.
 You don't have to allocate memory for metalink_t structure.
 They take the pointer of metalink_t pointer and allocate memory for that pointer.
 
-metalink_parse_file parses Metalink file denoted by filename and constructs
+\fBmetalink_parse_file\fP() parses Metalink file denoted by \fIfilename\fP and constructs
 metalink_t structure.
 
-metalink_parse_fp reads data from file stream docfp and construtcts metalink_t structure.
+\fBmetalink_parse_fp\fP() reads data from file stream \fIdocfp\fP and construtcts metalink_t structure.
 
-metalink_parse_fd reads data from file descriptor docfd and constructs metalink_t structure.
+\fBmetalink_parse_fd\fP() reads data from file descriptor \fIdocfd\fP and constructs metalink_t structure.
 
-metalink_parse_memory parses len bytes of buf and constructs metalink_t structure.
+\fBmetalink_parse_memory\fP() parses \fIlen\fP bytes of \fIbuf\fP and constructs metalink_t structure.
+
+The caller must free the memory allocated for metalink_t structure using \fBmetalink_delete\fP(3) if it is no longer used.
 
 .SH "RETURN VALUE"
-All functions return 0 for success. When error occurred, non-zero value error code is returned. The error codes are described in metalink_error.h.
+All functions return 0 for success. When error occurred, non-zero value error code is returned and metalink_t structure is not allocated. The error codes are described in metalink_error.h.
+
+.SH "SEE ALSO"
+.BR metalink_free "(3), "
+.BR metalink_parse_update "(3)"
+

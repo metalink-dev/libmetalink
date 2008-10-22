@@ -12,3 +12,19 @@ metalink_parse_file, metalink_parse_fp, metalink_parse_fd, metalink_parse_memory
 .br
 .B metalink_error_t metalink_parse_memory(const char *buf, size_t len, metalink_t **res);
 
+.SH "DESCRIPTION"
+These functions parse Metalink file data and constructs metalink_t structure.
+You don't have to allocate memory for metalink_t structure.
+They take the pointer of metalink_t pointer and allocate memory for that pointer.
+
+metalink_parse_file parses Metalink file denoted by filename and constructs
+metalink_t structure.
+
+metalink_parse_fp reads data from file stream docfp and construtcts metalink_t structure.
+
+metalink_parse_fd reads data from file descriptor docfd and constructs metalink_t structure.
+
+metalink_parse_memory parses len bytes of buf and constructs metalink_t structure.
+
+.SH "RETURN VALUE"
+All functions return 0 for success. When error occurred, non-zero value error code is returned. The error codes are described in metalink_error.h.

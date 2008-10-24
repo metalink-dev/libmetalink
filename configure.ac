@@ -45,6 +45,7 @@ AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_FILES([
 	Makefile
 	lib/Makefile
+	lib/libmetalink.pc
 	lib/metalink/Makefile
 	test/Makefile
 	doc/Makefile

@@ -1,0 +1,36 @@
+.TH "METALINK_T" "3" "10/25/2008" "libmetalink 0.0.0" "libmetalink Manual"
+.SH "NAME"
+metalink_t \- Metalink top level structure.
+.SH "SYNOPSIS"
+.B #include <metalink/metalink_types.h>
+
+.SH "DESCRIPTION"
+\fBmetalink_t\fP is a top level structure that corresponds to metalink root element in Metalink XML file and contains data under the element.
+It conatins metadata for Metalink file and list of
+ \fBmetalink_file_t\fP(3) structure.
+Typically \fBmetalink_t\fP is created by parser function such as
+\fBmetalink_parse_file\fP(3).
+
+.SH "STRUCTURE MEMBERS"
+metalink_file_t **files;
+.br
+char *identity;
+.br
+char *tags;
+
+.SS files
+Null terminated array of pointer of \fBmetalink_file_t\fP(3) structure.
+This corresponds to files tag in Metalink XML file.
+Each \fBmetalink_file_t\fP(3) structure corresponds to file element in
+Metalink XML file.
+
+.SS identity
+Null terminated string which corresponds to identity element in Metalink XML file.
+
+.SS tags
+Null terminated string which corresponds to tags element in Metalink XML file.
+
+.SH "SEE ALSO"
+.BR metalink_delete_t (3),
+.BR metalink_file_t (3),
+.BR metalink_parse_file (3)

@@ -1,0 +1,14 @@
+.TH "METALINK_DELETE" "3" "10/25/2008" "libmetalink 0.0.0" "libmetalink Manual"
+.SH "NAME"
+metalink_delete \- Free the allocated resources for metalink_t structure.
+.SH "SYNOPSIS"
+.B #include <metalink/metalink_types.h>
+.sp
+.B void metalink_delete(metalink_t *metalink);
+
+.SH "DESCRIPTION"
+\fBmetalink_delete\fP frees the allocated resources for \fImetalink\fP.
+Passing NULL is legal: \fBmetalink_delete\fP does nothing in this case.
+
+.SH "RETURN VALUE"
+\fBmetalink_delete\fP returns no value.

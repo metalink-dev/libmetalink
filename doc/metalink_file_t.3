@@ -1,0 +1,71 @@
+.TH "METALINK_FILE_T" "3" "10/25/2008" "libmetalink 0.0.0" "libmetalink Manual"
+.SH "NAME"
+metalink_file_t \- The structure that corresonds to file element in Metalink XML file.
+.SH "SYNOPSIS"
+.B #include <metalink/metalink_types.h>
+
+.SH "DESCRIPTION"
+\fBmetalink_file_t\fP is a structure that corresponds to file element in Metalink XML file.
+It contains array of URLs(\fBmetalink_resource_t\fP(3)), checksums and metadata for a file.
+
+.SH "STRUCTURE MEMBERS"
+char *name;
+.br
+long long int size;
+.br
+char *version;
+.br
+char *language;
+.br
+char *os;
+.br
+metalink_resource_t **resources;
+.br
+int maxconnections;
+.br
+metalink_checksum_t **checksums;
+.br
+metalink_chunk_checksum_t *chunk_checksum;
+
+.SS name
+Null terminated file name of the resource which corresponds to name element in Metalink XML file.
+
+.SS size
+Length of the resource in bytes.
+
+.SS version
+Null terminated version string which corresponds to version element in Metalink XML file.
+
+.SS language
+Null terminated language string which corresponds to language element in Metalink XML file.
+
+.SS os
+Null terminated os string which corresponds to os element in Metalink XML file.
+
+.SS resources
+Null terminated array of pointer of \fBmetalink_resource_t\fP(3) structure.
+This corresponds to resources element in Metalink XML file.
+Each \fBmetalink_resource_t\fP(3) structure corresponds to url element in
+Metalink XML file.
+
+.SS maxconnections
+This is a value of maxconnections attribute of file element.
+This value is usually used for upper limit of concurrent connections for the
+resource.
+
+.SS checksums
+Null terminated array of pointer of \fBmetalink_checksum_t\fP(3) structure.
+This field is an array because in Metalink specification,
+verification element can contain multiple hash elements.
+Each \fBmetalink_checksum_t\fP(3) structure corresponds to hash element in
+Metalink XML file.
+
+.SS chunk_checksum
+The chunk checksum(aka piece hash) for the resource. This corresponds to
+pieces element under verification element in Metalink XML file.
+
+.SH "SEE ALSO"
+.BR metalink_checksum_t (3),
+.BR metalink_chunk_checksum_t (3),
+.BR metalink_resource_t (3),
+.BR metalink_parse_file (3)

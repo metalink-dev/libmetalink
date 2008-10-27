@@ -391,7 +391,7 @@ metalink_delete(metalink_t* metalink)
   if(metalink->identity){
     free(metalink->identity);
   }
-  if(metalink->identity){
+  if(metalink->tags){
     free(metalink->tags);
   }
   free(metalink);

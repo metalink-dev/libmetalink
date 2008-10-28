@@ -48,6 +48,7 @@ AC_CONFIG_FILES([
 	lib/metalink/Makefile
 	test/Makefile
 	doc/Makefile
+	doc/man3/Makefile
 	m4/Makefile
 ])
 AC_OUTPUT

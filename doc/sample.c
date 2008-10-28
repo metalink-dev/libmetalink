@@ -64,7 +64,7 @@ int main(int argc, char** argv)
   }
 
   /* delete metalink_t */
-  delete_metalink(metalink);
+  metalink_delete(metalink);
 
   return EXIT_SUCCESS;
 }

@@ -1,0 +1,35 @@
+.TH "METALINK_CHUNK_CHECKSUM_T" "3" "10/28/2008" "libmetalink 0.0.0" "libmetalink Manual"
+.SH "NAME"
+metalink_chunk_checksum_t \- The structure that holds piece hashes for a
+resource.
+
+.SH "SYNOPSIS"
+.B #include <metalink/metalink_types.h>
+
+.SH "DESCRIPTION"
+\fBmetalink_chunk_checksum_t\fP is a structure that holds piece hashes for a
+resource.
+It contains length of piece and a message digest algorithm name and each hash value which is stored in \fBmetalink_piece_hash_t\fP(3).
+
+.SH "STRUCTURE MEMBERS"
+char *type;
+.br
+int length;
+.br
+metalink_piece_hash_t **piece_hashes;
+
+.SS type
+Null terminated string of a message digest algorithm name used to calculate
+hash value for a resource.
+
+.SS length
+Length of a piece in bytes.
+
+.SS piece_hashes
+Null terminated array of pointer of \fBmetalink_piece_hash_t\fP(3) structure.
+They are ordered so that a pointer to \fBmetalink_piece_hash_t\fP(3) of
+\fIi\fPth piece can be accessed by piece_hashes[\fIi\fP].
+
+.SH "SEE ALSO"
+.BR metalink_parse_file (3),
+.BR metalink_piece_hash_t (3)

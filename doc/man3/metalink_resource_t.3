@@ -1,0 +1,41 @@
+.TH "METALINK_RESOURCE_T" "3" "10/28/2008" "libmetalink 0.0.0" "libmetalink Manual"
+.SH "NAME"
+metalink_resource_t \- The structure that holds an URL of a resource and its
+metadata.
+
+.SH "SYNOPSIS"
+.B #include <metalink/metalink_types.h>
+
+.SH "DESCRIPTION"
+\fBmetalink_resource_t\fP is a structure that holds an URL of a resource and its
+metadata.
+
+.SH "STRUCTURE MEMBERS"
+char *url;
+.br
+char *type;
+.br
+char *location;
+.br
+int preference;
+.br
+int maxconnections;
+
+.SS url
+Null terminated string of URL.
+
+.SS type
+Null terminated string of protocol of URL, like "http", "ftp".
+
+.SS location
+Null terminated string of country code, like "JP", where the server in URL
+resides.
+
+.SS preference
+Preference of this resource. The higher value has bigger preference.
+
+.SS maxconnections
+Max connections that a client can establish to this resource simultaneously.
+
+.SH "SEE ALSO"
+.BR metalink_parse_file (3)

@@ -1,0 +1,27 @@
+.TH "METALINK_CHECKSUM_T" "3" "10/28/2008" "libmetalink 0.0.0" "libmetalink Manual"
+.SH "NAME"
+metalink_checksum_t \- The structure that holds a hash value of an entire
+resource.
+
+.SH "SYNOPSIS"
+.B #include <metalink/metalink_types.h>
+
+.SH "DESCRIPTION"
+\fBmetalink_checksum_t\fP is a structure that holds a hash value of an entire
+resource.
+It contains a hash value of a resource and its message digest algorithm name.
+
+.SH "STRUCTURE MEMBERS"
+char *type;
+.br
+char *hash;
+
+.SS type
+Null terminated string of a message digest algorithm name used to calculate
+hash value for a resource.
+
+.SS hash
+Null terminated string of a hash value in ASCII hexadecimal notation.
+
+.SH "SEE ALSO"
+.BR metalink_parse_file (3)

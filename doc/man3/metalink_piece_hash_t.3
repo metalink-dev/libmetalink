@@ -1,0 +1,23 @@
+.TH "METALINK_PIECE_HASH_T" "3" "10/28/2008" "libmetalink 0.0.0" "libmetalink Manual"
+.SH "NAME"
+metalink_piece_hash_t \- The structure that holds hash value of a piece.
+
+.SH "SYNOPSIS"
+.B #include <metalink/metalink_types.h>
+
+.SH "DESCRIPTION"
+\fBmetalink_piece_hash_t\fP is a structure that holds a hash value of a piece.
+
+.SH "STRUCTURE MEMBERS"
+int piece;
+.br
+char *hash;
+
+.SS type
+Index of a piece starting 0.
+
+.SS hash
+Null terminated string of a hash value in ASCII hexadecimal notation.
+
+.SH "SEE ALSO"
+.BR metalink_parse_file (3),

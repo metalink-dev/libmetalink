@@ -1,0 +1,171 @@
+.TH "METALINK_PARSE_UPDATE" "3" "10/25/2008" "libmetalink 0.0.0" "libmetalink Manual"
+.SH "NAME"
+metalink_parse_update, metalink_parse_final, metalink_parser_context_new, metalink_parse_context_delete \- Parse Metalink file and create metalink_t object.
+
+.SH "SYNOPSIS"
+.B #include <metalink/metalink_parser.h>
+.sp
+.BI "metalink_error_t metalink_parse_update(metalink_parser_context_t *" ctx ,
+.BI "								const char *" buf ", size_t " len );
+.br
+.BI "metalink_error_t metalink_parse_final(metalink_parser_context_t *" ctx ,
+.BI "								const char *" buf ", size_t " len ,
+.BI "								metalink_t **" res );
+.sp
+.BI "metalink_parser_context_t* metalink_parser_context_new();"
+.br
+.BI "void metalink_parser_context_delete(metalink_parser_context_t *" ctx );
+
+.SH "DESCRIPTION"
+These functions privide a push interface for parsing Metalink XML files.
+
+Before calling \fBmetalink_parse_update\fP() and \fBmetalink_parse_final\fP(),
+\fBmetalink_parse_context_t\fP has to be created by
+\fBmetalink_parser_context_new\fP().
+
+In each call of \fBmetalink_parse_update\fP(), \fIlen\fP bytes of \fIbuf\fP are
+processed.
+At the last piece of data, call \fBmetalink_parse_final\fP() to get
+\fBmetalink_t\fP(3) structure as a result.
+Giving 0 as \fIlen\fP is permitted.
+
+\fBmetalink_parse_final\fP() calls \fBmetalink_parser_context_delete\fP()
+internally to deallocate the memory for passed
+\fBmetalink_parser_context_t\fP.
+Therefore you don't have to call \fPmetlaink_parser_context_delete\fP() if you
+call \fBmetalink_parse_final\fP().
+Otherwise call \fPmetalink_parser_context_delete\fP() to free the allocated
+resource.
+
+You don't have to allocate memory for \fBmetalink_t\fP(3) structure.
+\fBmetalink_parse_final\fP() take the pointer of \fBmetalink_t\fP(3) pointer
+and allocate memory for that pointer.
+
+The caller must free the memory allocated for \fBmetalink_t\fP(3) structure
+using \fBmetalink_delete\fP(3) if it is no longer used.
+
+.SH "RETURN VALUE"
+\fBmetalink_parse_update\fP(), \fBmetalink_parse_final\fP() return 0 for
+success. When error occurred, non-zero value error code is returned.
+If error occurred, \fBmetalink_parse_final\fP() does not allocate memory for
+\fBmetalink_t\fP. The error codes are described in metalink_error.h.
+
+In case of success, \fBmetalink_parser_context_new\fP() allocates memory for
+\fBmetalink_parser_context_t\fP() and returns the pointer to it.
+In case of failure, \fBmetalink_parser_context_new\fP() returns NULL.
+
+\fBmetalink_parser_context_delete\fP() returns no value.
+
+.SH "EXAMPLE"
+.nf
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <errno.h>
+#include <string.h>
+#include <unistd.h>
+#include <metalink/metalink_parser.h>
+
+int main(int argc, char** argv)
+{
+  metalink_error_t r;
+  metalink_t* metalink;
+  metalink_file_t* file;
+  metalink_checksum_t** checksums;
+  metalink_parser_context_t* context;
+  int fd;
+  char buf[BUFSIZ];
+  ssize_t length;
+
+  context = metalink_parser_context_new();
+
+  if(context == NULL) {
+    fprintf(stderr,
+            "ERROR: failed to create metalink_parser_context_t\en");
+    exit(EXIT_FAILURE);
+  }
+
+  fd = open("sample.metalink", O_RDONLY);
+  if(fd == \-1) {
+    fprintf(stderr, "ERROR: open():%s\en", strerror(errno));
+    exit(EXIT_FAILURE);
+  }
+  while((length = TEMP_FAILURE_RETRY(read(fd, buf, sizeof(buf)))) != 0){
+    r = metalink_parse_update(context, buf, length);
+    if(r != 0) {
+      fprintf(stderr, "ERROR: code=%d\en", r);
+      metalink_parser_context_delete(context);
+      exit(EXIT_FAILURE);
+    }
+  }
+  if(length == \-1) {
+    fprintf(stderr, "ERROR: read():%s\en", strerror(errno));
+    metalink_parser_context_delete(context);
+    exit(EXIT_FAILURE);    
+  }
+  
+  r = metalink_parse_final(context, NULL, 0, &metalink);
+
+  if(r != 0) {
+    fprintf(stderr, "ERROR: code=%d\en", r);
+    exit(EXIT_FAILURE);
+  }
+
+  TEMP_FAILURE_RETRY(close(fd));
+ 
+  file = metalink\->files[0];
+  printf("name: %s\en", file\->name);
+  printf("size: %lld\en", file\->size);
+  printf("os  : %s\en", file\->os);
+
+  if(file\->checksums) {
+    checksums = file\->checksums;
+    while(*checksums) {
+      printf("hash: %s %s\en", (*checksums)\->type, (*checksums)\->hash);
+      ++checksums;
+    }
+  }
+  if(file\->chunk_checksum) {
+    size_t count = 0;
+    metalink_piece_hash_t** piece_hashes;
+    printf("chunk checksum: size=%d, type=%s\en",
+           file\->chunk_checksum\->length,
+           file\->chunk_checksum\->type);
+    printf("first 5 piece hashes...\en");
+    piece_hashes = file\->chunk_checksum\->piece_hashes;
+    while(*piece_hashes && count < 5) {
+      printf("piece=%d, hash=%s\en", (*piece_hashes)\->piece,
+                                     (*piece_hashes)\->hash);
+      ++piece_hashes;
+      ++count;
+    }
+    printf("...\en");
+  }
+  if(file\->resources) {
+    size_t count = 0;
+    metalink_resource_t** resources;
+    printf("first 5 resources...\en");
+    resources = file\->resources;
+    while(*resources && count < 5) {
+      printf("type=%s, location=%s, preference=%d, url=%s\en",
+             (*resources)\->type, (*resources)\->location,
+             (*resources)\->preference, (*resources)\->url);
+      ++resources;
+      ++count;
+    }
+    printf("...\en");
+  }
+
+  /* delete metalink_t */
+  metalink_delete(metalink);
+
+  return EXIT_SUCCESS;
+}
+.fi
+
+.SH "SEE ALSO"
+.BR metalink_delete (3),
+.BR metalink_parse_file (3),
+.BR metalink_t (3)

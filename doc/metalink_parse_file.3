@@ -4,13 +4,13 @@ metalink_parse_file, metalink_parse_fp, metalink_parse_fd, metalink_parse_memory
 .SH "SYNOPSIS"
 .B #include <metalink/metalink_parser.h>
 .sp
-.B metalink_error_t metalink_parse_file(const char *filename, metalink_t **res);
+.BI "metalink_error_t metalink_parse_file(const char *" filename ", metalink_t **" res );
 .br
-.B metalink_error_t metalink_parse_fp(FILE *docfp, metalink_t **res);
+.BI "metalink_error_t metalink_parse_fp(FILE *" docfp ", metalink_t **" res );
 .br
-.B metalink_error_t metalink_parse_fd(int docfd, metalink_t **res);
+.BI "metalink_error_t metalink_parse_fd(int " docfd ", metalink_t **" res );
 .br
-.B metalink_error_t metalink_parse_memory(const char *buf, size_t len, metalink_t **res);
+.BI "metalink_error_t metalink_parse_memory(const char *" buf ", size_t " len ", metalink_t **" res );
 
 .SH "DESCRIPTION"
 These functions parse Metalink file data and constructs metalink_t structure.
@@ -31,6 +31,77 @@ The caller must free the memory allocated for metalink_t structure using \fBmeta
 .SH "RETURN VALUE"
 All functions return 0 for success. When error occurred, non-zero value error code is returned and metalink_t structure is not allocated. The error codes are described in metalink_error.h.
 
+.SH "EXAMPLE"
+.nf
+#include <stdio.h>
+#include <stdlib.h>
+#include <metalink/metalink_parser.h>
+
+int main(int argc, char** argv)
+{
+  metalink_error_t r;
+  metalink_t* metalink;
+  metalink_file_t* file;
+  metalink_checksum_t** checksums;
+  
+  r = metalink_parse_file("sample.metalink", &metalink);
+
+  if(r != 0) {
+    fprintf(stderr, "ERROR: code=%d\en", r);
+    exit(EXIT_FAILURE);
+  }
+ 
+  file = metalink\->files[0];
+  printf("name: %s\en", file\->name);
+  printf("size: %lld\en", file\->size);
+  printf("os  : %s\en", file\->os);
+
+  if(file\->checksums) {
+    checksums = file\->checksums;
+    while(*checksums) {
+      printf("hash: %s %s\en", (*checksums)\->type, (*checksums)\->hash);
+      ++checksums;
+    }
+  }
+  if(file\->chunk_checksum) {
+    size_t count = 0;
+    metalink_piece_hash_t** piece_hashes;
+    printf("chunk checksum: size=%d, type=%s\en",
+           file\->chunk_checksum\->length,
+           file\->chunk_checksum\->type);
+    printf("first 5 piece hashes...\en");
+    piece_hashes = file\->chunk_checksum\->piece_hashes;
+    while(*piece_hashes && count < 5) {
+      printf("piece=%d, hash=%s\en", (*piece_hashes)\->piece,
+                                     (*piece_hashes)\->hash);
+      ++piece_hashes;
+      ++count;
+    }
+    printf("...\en");
+  }
+  if(file\->resources) {
+    size_t count = 0;
+    metalink_resource_t** resources;
+    printf("first 5 resources...\en");
+    resources = file\->resources;
+    while(*resources && count < 5) {
+      printf("type=%s, location=%s, preference=%d, url=%s\en",
+             (*resources)\->type, (*resources)\->location,
+             (*resources)\->preference, (*resources)\->url);
+      ++resources;
+      ++count;
+    }
+    printf("...\en");
+  }
+
+  /* delete metalink_t */
+  metalink_delete(metalink);
+
+  return EXIT_SUCCESS;
+}
+.fi
+
 .SH "SEE ALSO"
 .BR metalink_delete (3),
-.BR metalink_parse_update (3)
+.BR metalink_parse_update (3),
+.BR metalink_t (3)

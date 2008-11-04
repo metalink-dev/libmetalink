@@ -48,6 +48,9 @@ static void validate_result(metalink_t* metalink)
   metalink_resource_t* resource;
   metalink_piece_hash_t* piece_hash;
 
+  CU_ASSERT_STRING_EQUAL("libmetalink-0.0.1", metalink->identity);
+  CU_ASSERT_STRING_EQUAL("metalink,xml", metalink->tags);
+
   /* count files */
   CU_ASSERT_EQUAL_FATAL(3, count_array((void**)metalink->files));
 

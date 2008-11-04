@@ -5,6 +5,8 @@
     <url>http://libmetalink/</url>
   </publisher>
   <description>Metalink library for C</description>
+  <identity>libmetalink-0.0.1</identity>
+  <tags>metalink,xml</tags>
   <files>
     <file name="libmetalink-0.0.1.tar.bz2">
       <!-- no size tag -->

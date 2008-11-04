@@ -131,14 +131,6 @@ void metalink_state_end_fun(metalink_pstm_t* stm,
 void identity_state_start_fun(metalink_pstm_t* stm,
 			const char* name, const char** attrs)
 {
-  metalink_error_t r;
-  const char* fname;
-  fname = get_attribute_value(attrs, "identity");
-  r = metalink_pctrl_set_identity(stm->ctrl, fname);
-  if(r != 0) {
-    error_handler(stm, r);
-    return;
-  }
   metalink_pstm_enter_skip_state(stm);
 }
 
@@ -154,18 +146,10 @@ void identity_state_end_fun(metalink_pstm_t* stm,
   }
 }
 
-/* identity state <tags> */
+/* tags state <tags> */
 void tags_state_start_fun(metalink_pstm_t* stm,
 			const char* name, const char** attrs)
 {
-  metalink_error_t r;
-  const char* fname;
-  fname = get_attribute_value(attrs, "tags");
-  r = metalink_pctrl_set_tags(stm->ctrl, fname);
-  if(r != 0) {
-    error_handler(stm, r);
-    return;
-  }
   metalink_pstm_enter_skip_state(stm);
 }
 

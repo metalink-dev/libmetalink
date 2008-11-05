@@ -1,3 +1,20 @@
-To build this library, libexpat or libxml2 is required at the moment.
+libmetalink
+===========
 
-To run tests, libcunit is required.
+Prerequisites
+-------------
+libmetalink depends on libexpat or libxml2. libexpat has precedence over
+libxml2. Install development package of the selected XML library.
+For unit tests, libcunit is required, so install its development package.
+You need autoconf, automake and libtool for generating Makefiles.
+
+Build
+-----
+First, run "autoreconf -i" to generate configure scripts and other files needed
+in building library.
+
+Then run "./configure". Run "./configure --help" for configuration options.
+
+Then run "make" to build metalink.
+
+To build and run unit tests, run "make check".

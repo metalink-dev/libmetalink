@@ -1,6 +1,8 @@
 .TH "METALINK_PARSE_UPDATE" "3" "10/25/2008" "libmetalink 0.0.3" "libmetalink Manual"
 .SH "NAME"
-metalink_parse_update, metalink_parse_final, metalink_parser_context_new, metalink_parse_context_delete \- Parse Metalink file and create metalink_t object.
+metalink_parse_update, metalink_parse_final,
+metalink_parser_context_new, metalink_parser_context_delete \- Parse
+Metalink file and create metalink_t object.
 
 .SH "SYNOPSIS"
 .B #include <metalink/metalink_parser.h>
@@ -38,8 +40,8 @@ Otherwise call \fPmetalink_parser_context_delete\fP() to free the allocated
 resource.
 
 You don't have to allocate memory for \fBmetalink_t\fP(3) structure.
-\fBmetalink_parse_final\fP() take the pointer of \fBmetalink_t\fP(3) pointer
-and allocate memory for that pointer.
+\fBmetalink_parse_final\fP() takes the pointer of \fBmetalink_t\fP(3)
+pointer and allocates memory for that pointer.
 
 The caller must free the memory allocated for \fBmetalink_t\fP(3) structure
 using \fBmetalink_delete\fP(3) if it is no longer used.

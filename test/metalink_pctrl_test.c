@@ -28,7 +28,7 @@
 #include "metalink/metalink_pctrl.h"
 #include "metalink/metalink_error.h"
 
-void test_metalink_pctrl_file_transaction()
+void test_metalink_pctrl_file_transaction(void)
 {
   metalink_pctrl_t* ctrl;
   metalink_file_t* file;
@@ -66,7 +66,7 @@ void test_metalink_pctrl_file_transaction()
   delete_metalink_pctrl(ctrl);
 }
 
-void test_metalink_pctrl_resource_transaction()
+void test_metalink_pctrl_resource_transaction(void)
 {
   metalink_pctrl_t* ctrl;
   metalink_resource_t* resource;
@@ -106,7 +106,7 @@ void test_metalink_pctrl_resource_transaction()
   delete_metalink_pctrl(ctrl);
 }
 
-void test_metalink_pctrl_checksum_transaction()
+void test_metalink_pctrl_checksum_transaction(void)
 {
   metalink_pctrl_t* ctrl;
   metalink_checksum_t* checksum;
@@ -146,7 +146,7 @@ void test_metalink_pctrl_checksum_transaction()
   delete_metalink_pctrl(ctrl);
 }
 
-void test_metalink_pctrl_chunk_checksum_transaction()
+void test_metalink_pctrl_chunk_checksum_transaction(void)
 {
   metalink_pctrl_t* ctrl;
   metalink_chunk_checksum_t* chunk_checksum;
@@ -185,7 +185,7 @@ void test_metalink_pctrl_chunk_checksum_transaction()
   delete_metalink_pctrl(ctrl);
 }
 
-void test_metalink_pctrl_piece_hash_transaction()
+void test_metalink_pctrl_piece_hash_transaction(void)
 {
   metalink_pctrl_t* ctrl;
   metalink_piece_hash_t* piece_hash;

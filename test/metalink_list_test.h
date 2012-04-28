@@ -26,6 +26,6 @@
 #ifndef _D_METALINK_LIST_TEST_H_
 #define _D_METALINK_LIST_TEST_H_
 
-void test_metalink_list();
+void test_metalink_list(void);
 
-#endif // _D_METALINK_LIST_TEST_H_
+#endif /* _D_METALINK_LIST_TEST_H_ */

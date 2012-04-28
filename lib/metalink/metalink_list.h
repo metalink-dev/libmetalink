@@ -38,7 +38,7 @@ typedef struct _metalink_list {
   metalink_list_entry_t* tail;
 } metalink_list_t;
 
-metalink_list_t* metalink_list_new();
+metalink_list_t* metalink_list_new(void);
 
 void metalink_list_delete(metalink_list_t* list);
 
@@ -60,4 +60,4 @@ void metalink_list_remove(metalink_list_t* list, size_t index);
 
 void metalink_list_for_each(metalink_list_t* list, void (*fun)(void* data));
 
-#endif // _D_METALINK_LIST_H_
+#endif /* _D_METALINK_LIST_H_ */

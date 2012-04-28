@@ -29,6 +29,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <errno.h>
+#include <assert.h>
 
 #include <expat.h>
 
@@ -122,9 +123,15 @@ metalink_parse_fp(FILE* docfp, metalink_t** res)
       break;
     }
     num_read = fread(buff, 1, BUFSIZ, docfp);
-    if(num_read < 0) {
-      r = METALINK_ERR_PARSER_ERROR;
-      break;
+    if(num_read == 0) {
+      if(feof(docfp)) {
+        break;
+      } else if(ferror(docfp)) {
+        r = METALINK_ERR_PARSER_ERROR;
+        break;
+      } else {
+        assert(0);
+      }
     }
     if(!XML_ParseBuffer(parser, num_read, 0)) {
       r = METALINK_ERR_PARSER_ERROR;
@@ -154,14 +161,14 @@ metalink_parse_fd(int fd, metalink_t** res)
   parser = setup_parser(session_data);
 
   while(1) {
-    size_t num_read;
+    ssize_t num_read;
     void* buff = XML_GetBuffer(parser, BUFSIZ);
     if(buff == NULL) {
       r = METALINK_ERR_PARSER_ERROR;
       break;
     }
     num_read = TEMP_FAILURE_RETRY(read(fd, buff, BUFSIZ));
-    if(num_read < 0) {
+    if(num_read == -1) {
       r = METALINK_ERR_PARSER_ERROR;
       break;
     } else if(num_read == 0) {
@@ -216,7 +223,7 @@ struct _metalink_parser_context
 
 metalink_parser_context_t
 METALINK_PUBLIC
-* metalink_parser_context_new()
+* metalink_parser_context_new(void)
 {
   metalink_parser_context_t* ctx;
   ctx = malloc(sizeof(metalink_parser_context_t));

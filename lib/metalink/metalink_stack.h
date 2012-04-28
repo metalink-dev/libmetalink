@@ -35,7 +35,7 @@ typedef struct _metalink_stack {
   metalink_stack_entry_t* entry;
 } metalink_stack_t;
 
-metalink_stack_t* metalink_stack_new();
+metalink_stack_t* metalink_stack_new(void);
 
 void metalink_stack_delete(metalink_stack_t* stack);
 
@@ -48,4 +48,4 @@ void* metalink_stack_pop(metalink_stack_t* stack);
 
 int metalink_stack_push(metalink_stack_t* stack, void* data);
 
-#endif // _D_METALINK_STACK_H_
+#endif /* _D_METALINK_STACK_H_ */

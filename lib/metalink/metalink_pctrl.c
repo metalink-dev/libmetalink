@@ -28,7 +28,7 @@
 
 #include <string.h>
 
-metalink_pctrl_t* new_metalink_pctrl()
+metalink_pctrl_t* new_metalink_pctrl(void)
 {
   metalink_pctrl_t* ctrl;
   ctrl = malloc(sizeof(metalink_pctrl_t));

@@ -47,7 +47,7 @@ typedef struct _metalink_resource {
   int maxconnections;
 } metalink_resource_t;
 
-metalink_resource_t* metalink_resource_new();
+metalink_resource_t* metalink_resource_new(void);
 
 void metalink_resource_delete(metalink_resource_t* resource);
 
@@ -72,7 +72,7 @@ typedef struct _metalink_checksum {
   char* hash;
 } metalink_checksum_t;
 
-metalink_checksum_t* metalink_checksum_new();
+metalink_checksum_t* metalink_checksum_new(void);
 
 void metalink_checksum_delete(metalink_checksum_t* checksum);
 
@@ -91,7 +91,7 @@ typedef struct _metalink_piece_hash {
 } metalink_piece_hash_t;
 
 /* constructor */
-metalink_piece_hash_t* metalink_piece_hash_new();
+metalink_piece_hash_t* metalink_piece_hash_new(void);
 
 /* destructor */
 void metalink_piece_hash_delete(metalink_piece_hash_t* piece_hash);
@@ -115,7 +115,7 @@ typedef struct _metalink_chunk_checksum {
 } metalink_chunk_checksum_t;
 
 /* constructor */
-metalink_chunk_checksum_t* metalink_chunk_checksum_new();
+metalink_chunk_checksum_t* metalink_chunk_checksum_new(void);
 
 /* destructor */
 void metalink_chunk_checksum_delete(metalink_chunk_checksum_t* chunk_checksum);
@@ -155,7 +155,7 @@ typedef struct _metalink_file {
 } metalink_file_t;
 
 /* constructor */
-metalink_file_t* metalink_file_new();
+metalink_file_t* metalink_file_new(void);
 
 /* destructor */
 void metalink_file_delete(metalink_file_t* file);
@@ -189,7 +189,7 @@ metalink_error_t metalink_set_identity(metalink_t* metalink, const char* identit
 metalink_error_t metalink_set_tags(metalink_t* metalink, const char* tags);
 
 
-metalink_t* metalink_new();
+metalink_t* metalink_new(void);
 
 void metalink_delete(metalink_t* metalink);
 
@@ -197,4 +197,4 @@ void metalink_delete(metalink_t* metalink);
 }
 #endif
 
-#endif // _D_METALINK_TYPES_H_
+#endif /* _D_METALINK_TYPES_H_ */

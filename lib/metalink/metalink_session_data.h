@@ -37,9 +37,9 @@ typedef struct _metalink_session_data
 } metalink_session_data_t;
 
 /* constructor */
-metalink_session_data_t* metalink_session_data_new();
+metalink_session_data_t* metalink_session_data_new(void);
 
 /* destructor */
 void metalink_session_data_delete(metalink_session_data_t* sd);
 
-#endif // _D_METALINK_SESSION_DATA_H_
+#endif /* _D_METALINK_SESSION_DATA_H_ */

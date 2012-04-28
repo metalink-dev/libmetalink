@@ -186,7 +186,7 @@ static void* mapfile(int fd, off_t size)
   return addr;
 }
 
-void test_metalink_parse_file()
+void test_metalink_parse_file(void)
 {
   metalink_error_t r;
   metalink_t* metalink;
@@ -197,7 +197,7 @@ void test_metalink_parse_file()
   validate_result(metalink);
 }
 
-void test_metalink_parse_fp()
+void test_metalink_parse_fp(void)
 {
   metalink_error_t r;
   metalink_t* metalink;
@@ -214,7 +214,7 @@ void test_metalink_parse_fp()
   validate_result(metalink);
 }
 
-void test_metalink_parse_fd()
+void test_metalink_parse_fd(void)
 {
   metalink_error_t r;
   metalink_t* metalink;
@@ -227,7 +227,7 @@ void test_metalink_parse_fd()
   validate_result(metalink);
 }
 
-void test_metalink_parse_memory()
+void test_metalink_parse_memory(void)
 {
   metalink_error_t r;
   metalink_t* metalink;
@@ -248,7 +248,7 @@ void test_metalink_parse_memory()
   validate_result(metalink);
 }
 
-void test_metalink_parse_update()
+void test_metalink_parse_update(void)
 {
   metalink_error_t r;
   metalink_t* metalink;
@@ -282,7 +282,7 @@ void test_metalink_parse_update()
 }
 
 
-void test_metalink_parse_update_fail()
+void test_metalink_parse_update_fail(void)
 {
   metalink_error_t r;
   metalink_t* metalink;
@@ -294,17 +294,17 @@ void test_metalink_parse_update_fail()
   const int advance = 256;
   metalink_parser_context_t* ctx;
 
-  // Initialize ctx
+  /* Initialize ctx */
   ctx = metalink_parser_context_new();
   CU_ASSERT_FATAL(NULL != ctx);
 
-  // feed bad formed data
+  /* feed bad formed data */
   r = metalink_parse_update(ctx, "<a><b></a>", 10);
   CU_ASSERT(0 != r);
 
   metalink_parser_context_delete(ctx);
 
-  // Initialize ctx
+  /* Initialize ctx */
   ctx = metalink_parser_context_new();
   CU_ASSERT_FATAL(NULL != ctx);
 
@@ -317,7 +317,7 @@ void test_metalink_parse_update_fail()
     r = metalink_parse_update(ctx, ptr, advance);
     CU_ASSERT_EQUAL_FATAL(r, 0);
   }
-  // See when prematured XML data is supplied
+  /* See when prematured XML data is supplied */
   r = metalink_parse_final(ctx, 0, 0, &metalink);
 
   CU_ASSERT(0 != r);

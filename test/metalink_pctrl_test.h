@@ -26,18 +26,18 @@
 #ifndef _D_METALINK_PCTRL_TEST_H_
 #define _D_METALINK_PCTRL_TEST_H_
 
-void test_metalink_pctrl_file_transaction();
+void test_metalink_pctrl_file_transaction(void);
 
-void test_metalink_pctrl_resource_transaction();
+void test_metalink_pctrl_resource_transaction(void);
 
-void test_metalink_pctrl_checksum_transaction();
+void test_metalink_pctrl_checksum_transaction(void);
 
-void test_metalink_pctrl_chunk_checksum_transaction();
+void test_metalink_pctrl_chunk_checksum_transaction(void);
 
-void test_metalink_pctrl_piece_hash_transaction();
+void test_metalink_pctrl_piece_hash_transaction(void);
 
-void test_metalink_pctrl_metalink_accumulate_files();
+void test_metalink_pctrl_metalink_accumulate_files(void);
 
-void test_metalink_pctrl_detach_metalink();
+void test_metalink_pctrl_detach_metalink(void);
 
-#endif // _D_METALINK_PCTRL_TEST_H_
+#endif /* _D_METALINK_PCTRL_TEST_H_ */

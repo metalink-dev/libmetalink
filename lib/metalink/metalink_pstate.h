@@ -56,7 +56,7 @@ typedef struct _metalink_pstate
 } metalink_pstate_t;
 
 /* constructor */
-metalink_pstate_t* new_metalink_pstate();
+metalink_pstate_t* new_metalink_pstate(void);
 
 /* destructor */
 void delete_metalink_pstate(metalink_pstate_t* state);
@@ -194,4 +194,4 @@ void skip_state_start_fun(metalink_pstm_t* stm,
 void skip_state_end_fun(metalink_pstm_t* stm,
 			const char* name, const char* characters);
 
-#endif // _D_METALINK_PARSER_STATE_H_
+#endif /* _D_METALINK_PARSER_STATE_H_ */

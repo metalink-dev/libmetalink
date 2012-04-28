@@ -50,4 +50,4 @@ typedef enum metalink_error_e {
 	METALINK_ERR_NO_PIECE_HASH_TRANSACTION = 305
 } metalink_error_t;
 
-#endif // _D_METALINK_ERROR_H_
+#endif /* _D_METALINK_ERROR_H_ */

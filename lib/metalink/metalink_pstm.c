@@ -28,7 +28,7 @@
 
 #include <string.h>
 
-metalink_pstm_t* new_metalink_pstm()
+metalink_pstm_t* new_metalink_pstm(void)
 {
   metalink_pstm_t* stm;
 

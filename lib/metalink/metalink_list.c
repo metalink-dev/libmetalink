@@ -26,7 +26,7 @@
 #include "metalink_list.h"
 #include "metalink_config.h"
 
-metalink_list_t* metalink_list_new()
+metalink_list_t* metalink_list_new(void)
 {
   metalink_list_t* l = malloc(sizeof(metalink_list_t));
   if(l) {

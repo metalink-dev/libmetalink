@@ -37,7 +37,7 @@ struct _metalink_pstm {
 } /* metalink_pstm_t */;
 
 /* constructor */
-metalink_pstm_t* new_metalink_pstm();
+metalink_pstm_t* new_metalink_pstm(void);
 
 /* destructor */
 void delete_metalink_pstm(metalink_pstm_t* stm);
@@ -102,4 +102,4 @@ void metalink_pstm_enter_skip_state(metalink_pstm_t* stm);
 
 void metalink_pstm_exit_skip_state(metalink_pstm_t* stm);
 
-#endif // _D_METALINK_PSTM_H_
+#endif /* _D_METALINK_PSTM_H_ */

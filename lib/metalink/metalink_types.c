@@ -51,7 +51,7 @@ static metalink_error_t allocate_copy_string(char** dest, const char* src)
 
 metalink_file_t
 METALINK_PUBLIC
-* metalink_file_new()
+* metalink_file_new(void)
 {
   metalink_file_t* file;
   file = malloc(sizeof(metalink_file_t));
@@ -143,7 +143,7 @@ metalink_file_set_maxconnections(metalink_file_t* file, int maxconnections)
 
 metalink_resource_t
 METALINK_PUBLIC
-* metalink_resource_new()
+* metalink_resource_new(void)
 {
   metalink_resource_t* resource;
   resource = malloc(sizeof(metalink_resource_t));
@@ -220,7 +220,7 @@ metalink_resource_set_url(metalink_resource_t* resource, const char* url)
 /* for metalink_checksum_t */
 metalink_checksum_t
 METALINK_PUBLIC
-* metalink_checksum_new()
+* metalink_checksum_new(void)
 {
   metalink_checksum_t* checksum;
   checksum = malloc(sizeof(metalink_checksum_t));
@@ -258,7 +258,7 @@ metalink_checksum_set_hash(metalink_checksum_t* checksum, const char* hash)
 /* for metalink_piece_hash_t */
 metalink_piece_hash_t
 METALINK_PUBLIC
-* metalink_piece_hash_new()
+* metalink_piece_hash_new(void)
 {
   metalink_piece_hash_t* piece_hash;
   piece_hash = malloc(sizeof(metalink_piece_hash_t));
@@ -296,7 +296,7 @@ metalink_piece_hash_set_hash(metalink_piece_hash_t* piece_hash, const char* hash
 /* for metalink_chunk_checksum_t */
 metalink_chunk_checksum_t
 METALINK_PUBLIC
-* metalink_chunk_checksum_new()
+* metalink_chunk_checksum_new(void)
 {
   metalink_chunk_checksum_t* chunk_checksum;
   chunk_checksum = malloc(sizeof(metalink_chunk_checksum_t));
@@ -362,7 +362,7 @@ metalink_chunk_checksum_set_piece_hashes
 /* for metalink_t */
 metalink_t
 METALINK_PUBLIC
-* metalink_new()
+* metalink_new(void)
 {
   metalink_t* metalink;
   metalink = malloc(sizeof(metalink_t));

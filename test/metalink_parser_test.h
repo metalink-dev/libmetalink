@@ -26,16 +26,16 @@
 #ifndef _D_METALINK_PARSER_TEST_H_
 #define _D_METALINK_PARSER_TEST_H_
 
-void test_metalink_parse_file();
+void test_metalink_parse_file(void);
 
-void test_metalink_parse_fp();
+void test_metalink_parse_fp(void);
 
-void test_metalink_parse_fd();
+void test_metalink_parse_fd(void);
 
-void test_metalink_parse_memory();
+void test_metalink_parse_memory(void);
 
-void test_metalink_parse_update();
+void test_metalink_parse_update(void);
 
-void test_metalink_parse_update_fail();
+void test_metalink_parse_update_fail(void);
 
-#endif // _D_METALINK_PARSER_TEST_H_
+#endif /* _D_METALINK_PARSER_TEST_H_ */

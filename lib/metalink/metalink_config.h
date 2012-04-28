@@ -28,8 +28,8 @@
 
 #ifdef HAVE_CONFIG_H
 # include "config.h"
-#endif // HAVE_CONFIG_H
+#endif /* HAVE_CONFIG_H */
 
 #define METALINK_PUBLIC __attribute__ ((visibility ("default")))
 
-#endif // _D_METALINK_CONFIG_H_
+#endif /* _D_METALINK_CONFIG_H_ */

@@ -29,7 +29,7 @@
 
 #include "metalink/metalink_list.h"
 
-void test_metalink_list()
+void test_metalink_list(void)
 {
   metalink_list_t* l;
   int a, b, c;
@@ -38,7 +38,7 @@ void test_metalink_list()
   l = metalink_list_new();
   CU_ASSERT_PTR_NOT_NULL(l);
 
-  // Add 3 ints.
+  /* Add 3 ints. */
   a = 1;
   b = 2;
   c = 4;
@@ -47,19 +47,19 @@ void test_metalink_list()
   metalink_list_append(l, &c);
   CU_ASSERT_EQUAL(3, metalink_list_length(l));
 
-  // get 2nd(index = 1) element = (2)
+  /* get 2nd(index = 1) element = (2) */
   CU_ASSERT_EQUAL(2, *(int*)metalink_list_get_data(l, 1));
  
-  // dump the contents of list to array
+  /* dump the contents of list to array */
   metalink_list_to_array(l, (void**)int_ptr_array);
   CU_ASSERT_EQUAL(1, *int_ptr_array[0]);
   CU_ASSERT_EQUAL(2, *int_ptr_array[1]);
   CU_ASSERT_EQUAL(4, *int_ptr_array[2]);
 
-  // clear all data
+  /* clear all data */
   metalink_list_clear(l);
   CU_ASSERT_EQUAL(0, metalink_list_length(l));
 
-  // delete list
+  /* delete list */
   metalink_list_delete(l);
 }

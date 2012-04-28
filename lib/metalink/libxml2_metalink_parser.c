@@ -120,7 +120,7 @@ struct _metalink_parser_context
 
 metalink_parser_context_t
 METALINK_PUBLIC
-* metalink_parser_context_new()
+* metalink_parser_context_new(void)
 {
   metalink_parser_context_t* ctx;
   ctx = malloc(sizeof(metalink_parser_context_t));
@@ -239,11 +239,15 @@ metalink_parse_fp(FILE* docfp, metalink_t** res)
   num_read = fread(buff, 1, 4, docfp);
   ctxt = xmlCreatePushParserCtxt(&mySAXHandler, session_data, buff, num_read, NULL);
   if(ctxt == NULL)
-	  r = METALINK_ERR_PARSER_ERROR;
+    r = METALINK_ERR_PARSER_ERROR;
 
   while(!feof(docfp) && !r) {
     num_read = fread(buff, 1, BUFSIZ, docfp);
-    if(num_read < 0 || xmlParseChunk(ctxt, buff, num_read, 0))
+    if(num_read == 0) {
+      if(ferror(docfp)) {
+        r = METALINK_ERR_PARSER_ERROR;
+      }
+    } else if(xmlParseChunk(ctxt, buff, num_read, 0))
       r = METALINK_ERR_PARSER_ERROR;
   }
   xmlParseChunk(ctxt, buff, 0, 1);

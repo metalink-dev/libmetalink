@@ -85,7 +85,7 @@ typedef struct _metalink_parser_context metalink_parser_context_t;
  * Allocates, initializes and returns a parser context.
  * @return a parser context on success, otherwise NULL.
  */
-metalink_parser_context_t* metalink_parser_context_new();
+metalink_parser_context_t* metalink_parser_context_new(void);
 
 /**
  * Deallocates a parser context ctx.
@@ -125,4 +125,4 @@ metalink_error_t metalink_parse_final(metalink_parser_context_t* ctx,
 }
 #endif
 
-#endif // _D_METALINK_PARSER_H_
+#endif /* _D_METALINK_PARSER_H_ */

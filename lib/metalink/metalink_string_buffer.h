@@ -47,4 +47,4 @@ size_t metalink_string_buffer_capacity(const metalink_string_buffer_t* str_buf);
 
 size_t metalink_string_buffer_strlen(const metalink_string_buffer_t* str_buf);
 
-#endif // _D_METALINK_STRING_BUFFER_H_
+#endif /* _D_METALINK_STRING_BUFFER_H_ */

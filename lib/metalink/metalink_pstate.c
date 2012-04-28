@@ -33,7 +33,7 @@
 
 #include "metalink_pstm.h"
 
-metalink_pstate_t* new_metalink_pstate()
+metalink_pstate_t* new_metalink_pstate(void)
 {
   metalink_pstate_t* state;
   state = malloc(sizeof(metalink_pstate_t));
@@ -225,12 +225,13 @@ void file_state_start_fun(metalink_pstm_t* stm,
     metalink_pstm_enter_verification_state(stm);
   } else if(strcmp("resources", name) == 0) {
     const char* value;
-    int maxconnections = 0;
+    long int maxconnections = 0;
 
     value = get_attribute_value(attrs, "maxconnections");
     if(value) {
+      errno = 0;
       maxconnections = strtol(value, 0, 10);
-      if((errno == ERANGE && maxconnections == LONG_MAX) || maxconnections < 0) {
+      if(errno == ERANGE  || maxconnections < 0 || maxconnections > INT_MAX) {
 	/* error, maxconnection is not positive integer. */
 	maxconnections = 0;
       }
@@ -268,8 +269,9 @@ void size_state_end_fun(metalink_pstm_t* stm,
   long long int size = 0;
 
   /* TODO evaluate endptr(2nd argument) */
+  errno = 0;
   size = strtoll(characters, 0, 10);
-  if((errno == ERANGE && size == LLONG_MAX) || size < 0) {
+  if(errno == ERANGE || size < 0) {
     /* overflow or parse error or negative integer detected. */
     /* current Metalink specification does not require size. */
     size = 0;
@@ -345,8 +347,8 @@ void resources_state_start_fun(metalink_pstm_t* stm,
     const char* type;
     const char* location;
     const char* value;
-    int preference = 0;
-    int maxconnections = 0;
+    long int preference = 0;
+    long int maxconnections = 0;
     metalink_resource_t* resource;
 
     resource = metalink_pctrl_new_resource_transaction(stm->ctrl);
@@ -378,8 +380,9 @@ void resources_state_start_fun(metalink_pstm_t* stm,
 
     value = get_attribute_value(attrs, "preference");
     if(value) {
+      errno = 0;
       preference = strtol(value, 0, 10);
-      if((errno == ERANGE && preference == LONG_MAX) || preference < 0) {
+      if(errno == ERANGE || preference < 0 || preference > INT_MAX) {
 	/* error, preference is not positive integer. */
 	preference = 0;
       }
@@ -388,8 +391,9 @@ void resources_state_start_fun(metalink_pstm_t* stm,
 
     value = get_attribute_value(attrs, "maxconnections");
     if(value) {
+      errno = 0;
       maxconnections = strtol(value, 0, 10);
-      if((errno == ERANGE && maxconnections == LONG_MAX) || maxconnections < 0) {
+      if(errno == ERANGE || maxconnections < 0 || maxconnections > INT_MAX) {
 	/* error, maxconnections is not positive integer. */
 	maxconnections = 0;
       }
@@ -463,7 +467,7 @@ void verification_state_start_fun(metalink_pstm_t* stm,
   } else if(strcmp("pieces", name) == 0) {
     const char* type;
     const char* value;
-    int length;
+    long int length;
     metalink_chunk_checksum_t* chunk_checksum;
 
     type = get_attribute_value(attrs, "type");
@@ -475,8 +479,9 @@ void verification_state_start_fun(metalink_pstm_t* stm,
     
     value = get_attribute_value(attrs, "length");
     if(value) {
+      errno = 0;
       length = strtol(value, 0, 10);
-      if((errno == ERANGE && length == LONG_MAX) || length < 0) {
+      if(errno == ERANGE || length < 0 || length > INT_MAX) {
 	/* error, length is not positive integer. */
 	/* length is required attribute, so if not specified, then skip this tag*/
 	metalink_pstm_enter_skip_state(stm);
@@ -542,13 +547,14 @@ void pieces_state_start_fun(metalink_pstm_t* stm,
 {
   if(strcmp("hash", name) == 0) {
     const char* value;
-    int piece;
+    long int piece;
     metalink_piece_hash_t* piece_hash;
 
     value = get_attribute_value(attrs, "piece");
     if(value) {
+      errno = 0;
       piece = strtol(value, 0, 10);
-      if((errno == ERANGE && piece == LONG_MAX) || piece < 0) {
+      if(errno == ERANGE || piece < 0 || piece > INT_MAX) {
 	/* error, piece is not positive integer. */
 	/* piece is required attribute, but it is missing. Skip this tag. */
 	metalink_pstm_enter_skip_state(stm);

@@ -33,7 +33,7 @@ static void init_stack(metalink_stack_t* s)
   s->entry = NULL;
 }
 
-metalink_stack_t* metalink_stack_new()
+metalink_stack_t* metalink_stack_new(void)
 {
   metalink_stack_t* s = malloc(sizeof(metalink_stack_t));
   if(s) {

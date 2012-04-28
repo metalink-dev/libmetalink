@@ -54,7 +54,7 @@ typedef struct metalink_pctrl_t {
 
 } metalink_pctrl_t;
 
-metalink_pctrl_t* new_metalink_pctrl();
+metalink_pctrl_t* new_metalink_pctrl(void);
 
 void delete_metalink_pctrl(metalink_pctrl_t* ctrl);
 
@@ -144,4 +144,4 @@ void metalink_pctrl_chunk_checksum_set_length(metalink_pctrl_t* ctrl, int length
 void metalink_pctrl_chunk_checksum_set_piece_hashes(metalink_pctrl_t* ctrl,
 						    metalink_piece_hash_t** piece_hashes);
 
-#endif // _D_METALINK_PCTRL_H_
+#endif /* _D_METALINK_PCTRL_H_ */

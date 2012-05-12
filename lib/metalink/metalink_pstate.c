@@ -86,15 +86,18 @@ static void error_handler(metalink_pstm_t* stm, metalink_error_t error)
 /* null handler doing nothing */
 void null_state_start_fun(metalink_pstm_t* stm,
 			  const char* name,
+			  const char* ns_uri,
 			  const char** attrs) {}
 
 void null_state_end_fun(metalink_pstm_t* stm,
 			const char* name,
+			const char* ns_uri,
 			const char* characters) {}
 
 /* initial state */
 void initial_state_start_fun(metalink_pstm_t* stm,
-			     const char* name, const char** attrs)
+			     const char* name, const char* ns_uri,
+			     const char** attrs)
 {
   if(strcmp("metalink", name) == 0) {
     metalink_pstm_enter_metalink_state(stm);
@@ -104,11 +107,13 @@ void initial_state_start_fun(metalink_pstm_t* stm,
 }
 
 void initial_state_end_fun(metalink_pstm_t* stm,
-			   const char* name, const char* characters) {}
+			   const char* name, const char* ns_uri,
+			   const char* characters) {}
 
 /* metalink state <metalink> */
 void metalink_state_start_fun(metalink_pstm_t* stm,
-			      const char* name, const char** attrs)
+			      const char* name, const char* ns_uri,
+			      const char** attrs)
 {
   if(strcmp("tags", name) == 0) {
     metalink_pstm_enter_tags_state(stm);
@@ -122,20 +127,23 @@ void metalink_state_start_fun(metalink_pstm_t* stm,
 }
 
 void metalink_state_end_fun(metalink_pstm_t* stm,
-			    const char* name, const char* characters)
+			    const char* name, const char* ns_uri,
+			    const char* characters)
 {
   metalink_pstm_enter_fin_state(stm);
 }
 
 /* identity state <identity> */
 void identity_state_start_fun(metalink_pstm_t* stm,
-			const char* name, const char** attrs)
+			const char* name, const char* ns_uri,
+			const char** attrs)
 {
   metalink_pstm_enter_skip_state(stm);
 }
 
 void identity_state_end_fun(metalink_pstm_t* stm,
-		      const char* name, const char* characters)
+		      const char* name, const char* ns_uri,
+		      const char* characters)
 {
   metalink_error_t r;
   r = metalink_pctrl_set_identity(stm->ctrl, characters);
@@ -148,13 +156,15 @@ void identity_state_end_fun(metalink_pstm_t* stm,
 
 /* tags state <tags> */
 void tags_state_start_fun(metalink_pstm_t* stm,
-			const char* name, const char** attrs)
+			const char* name, const char* ns_uri,
+			const char** attrs)
 {
   metalink_pstm_enter_skip_state(stm);
 }
 
 void tags_state_end_fun(metalink_pstm_t* stm,
-		      const char* name, const char* characters)
+		      const char* name, const char* ns_uri,
+		      const char* characters)
 {
   metalink_error_t r;
   r = metalink_pctrl_set_tags(stm->ctrl, characters);
@@ -167,7 +177,8 @@ void tags_state_end_fun(metalink_pstm_t* stm,
 
 /* files state <files> */
 void files_state_start_fun(metalink_pstm_t* stm,
-			   const char* name, const char** attrs)
+			   const char* name, const char* ns_uri,
+			   const char** attrs)
 {
   metalink_error_t r;
   if(strcmp("file", name) == 0) {
@@ -198,7 +209,8 @@ void files_state_start_fun(metalink_pstm_t* stm,
 }
 
 void files_state_end_fun(metalink_pstm_t* stm,
-			 const char* name, const char* characters)
+			 const char* name, const char* ns_uri,
+			 const char*characters)
 {
   metalink_error_t r;
   r = metalink_pctrl_metalink_accumulate_files(stm->ctrl);
@@ -211,7 +223,8 @@ void files_state_end_fun(metalink_pstm_t* stm,
 
 /* file state <file> */
 void file_state_start_fun(metalink_pstm_t* stm,
-			  const char* name, const char** attrs)
+			  const char* name, const char* ns_uri,
+			  const char** attrs)
 {
   if(strcmp("size", name) == 0) {
     metalink_pstm_enter_size_state(stm);
@@ -245,7 +258,8 @@ void file_state_start_fun(metalink_pstm_t* stm,
 }
 
 void file_state_end_fun(metalink_pstm_t* stm,
-			const char* name, const char* characters)
+			const char* name, const char* ns_uri,
+			const char* characters)
 {
   metalink_error_t r;
   r = metalink_pctrl_commit_file_transaction(stm->ctrl);
@@ -258,13 +272,15 @@ void file_state_end_fun(metalink_pstm_t* stm,
 
 /* size state <size> */
 void size_state_start_fun(metalink_pstm_t* stm,
-			  const char* name, const char** attrs)
+			  const char* name, const char* ns_uri,
+			  const char** attrs)
 {
   metalink_pstm_enter_skip_state(stm);
 }
 
 void size_state_end_fun(metalink_pstm_t* stm,
-			const char* name, const char* characters)
+			const char* name, const char* ns_uri,
+			const char* characters)
 {
   long long int size = 0;
 
@@ -283,13 +299,15 @@ void size_state_end_fun(metalink_pstm_t* stm,
 
 /* version state <version> */
 void version_state_start_fun(metalink_pstm_t* stm,
-			     const char* name, const char** attrs)
+			     const char* name, const char* ns_uri,
+			     const char** attrs)
 {
   metalink_pstm_enter_skip_state(stm);
 }
 
 void version_state_end_fun(metalink_pstm_t* stm,
-			   const char* name, const char* characters)
+			   const char* name, const char* ns_uri,
+			   const char* characters)
 {
   metalink_error_t r;
   r = metalink_pctrl_file_set_version(stm->ctrl, characters);
@@ -302,13 +320,15 @@ void version_state_end_fun(metalink_pstm_t* stm,
 
 /* language state <language> */
 void language_state_start_fun(metalink_pstm_t* stm,
-			      const char* name, const char** attrs)
+			      const char* name, const char* ns_uri,
+			      const char** attrs)
 {
   metalink_pstm_enter_skip_state(stm);
 }
 
 void language_state_end_fun(metalink_pstm_t* stm,
-			    const char* name, const char* characters)
+			    const char* name, const char* ns_uri,
+			    const char* characters)
 {
   metalink_error_t r;
   r = metalink_pctrl_file_set_language(stm->ctrl, characters);
@@ -321,13 +341,15 @@ void language_state_end_fun(metalink_pstm_t* stm,
 
 /* os state <os> */
 void os_state_start_fun(metalink_pstm_t* stm,
-			const char* name, const char** attrs)
+			const char* name, const char* ns_uri,
+			const char** attrs)
 {
   metalink_pstm_enter_skip_state(stm);
 }
 
 void os_state_end_fun(metalink_pstm_t* stm,
-		      const char* name, const char* characters)
+		      const char* name, const char* ns_uri,
+		      const char* characters)
 {
   metalink_error_t r;
   r = metalink_pctrl_file_set_os(stm->ctrl, characters);
@@ -340,7 +362,8 @@ void os_state_end_fun(metalink_pstm_t* stm,
 
 /* resources state <resources> */
 void resources_state_start_fun(metalink_pstm_t* stm,
-			       const char* name, const char** attrs)
+			       const char* name, const char* ns_uri,
+			       const char** attrs)
 {
   metalink_error_t r;
   if(strcmp("url", name) == 0) {
@@ -408,20 +431,23 @@ void resources_state_start_fun(metalink_pstm_t* stm,
 }
 
 void resources_state_end_fun(metalink_pstm_t* stm,
-			     const char* name, const char* characters)
+			     const char* name, const char* ns_uri,
+			     const char* characters)
 {
   metalink_pstm_enter_file_state(stm);
 }
 
 /* url state <url> */
 void url_state_start_fun(metalink_pstm_t* stm,
-			 const char* name, const char** attrs)
+			 const char* name, const char* ns_uri,
+			 const char** attrs)
 {
   metalink_pstm_enter_skip_state(stm);
 }
 
 void url_state_end_fun(metalink_pstm_t* stm,
-		       const char* name, const char* characters)
+		       const char* name, const char* ns_uri,
+		       const char* characters)
 {
   metalink_error_t r;
   r = metalink_pctrl_resource_set_url(stm->ctrl, characters);
@@ -440,7 +466,8 @@ void url_state_end_fun(metalink_pstm_t* stm,
 
 /* verification state <verification> */
 void verification_state_start_fun(metalink_pstm_t* stm,
-				  const char* name, const char** attrs)
+				  const char* name, const char* ns_uri,
+				  const char** attrs)
 {
   metalink_error_t r;
   if(strcmp("hash", name) == 0) {
@@ -512,20 +539,23 @@ void verification_state_start_fun(metalink_pstm_t* stm,
 }
 
 void verification_state_end_fun(metalink_pstm_t* stm,
-				const char* name, const char* characters)
+				const char* name, const char* ns_uri,
+				const char* characters)
 {
   metalink_pstm_enter_file_state(stm);
 }
 
 /* hash state <hash> */
 void hash_state_start_fun(metalink_pstm_t* stm,
-			 const char* name, const char** attrs)
+			 const char* name, const char* ns_uri, 
+			 const char** attrs)
 {
   metalink_pstm_enter_skip_state(stm);
 }
 
 void hash_state_end_fun(metalink_pstm_t* stm,
-			const char* name, const char* characters)
+			const char* name, const char* ns_uri,
+			const char* characters)
 {
   metalink_error_t r;
   r = metalink_pctrl_checksum_set_hash(stm->ctrl, characters);
@@ -543,7 +573,8 @@ void hash_state_end_fun(metalink_pstm_t* stm,
 
 /* pieces state <pieces> */
 void pieces_state_start_fun(metalink_pstm_t* stm,
-			    const char* name, const char** attrs)
+			    const char* name, const char* ns_uri,
+			    const char** attrs)
 {
   if(strcmp("hash", name) == 0) {
     const char* value;
@@ -581,7 +612,8 @@ void pieces_state_start_fun(metalink_pstm_t* stm,
 }
 
 void pieces_state_end_fun(metalink_pstm_t* stm,
-			  const char* name, const char* characters)
+			  const char* name, const char* ns_uri,
+			  const char* characters)
 {
   metalink_error_t r;
   r = metalink_pctrl_commit_chunk_checksum_transaction(stm->ctrl);
@@ -594,13 +626,15 @@ void pieces_state_end_fun(metalink_pstm_t* stm,
 
 /* piece hash state <hash> inside of <pieces> */
 void piece_hash_state_start_fun(metalink_pstm_t* stm,
-				const char* name, const char** attrs)
+				const char* name, const char* ns_uri,
+				const char** attrs)
 {
   metalink_pstm_enter_skip_state(stm);
 }
 
 void piece_hash_state_end_fun(metalink_pstm_t* stm,
-			      const char* name, const char* characters)
+			      const char* name, const char* ns_uri,
+			      const char* characters)
 {
   metalink_error_t r;
   metalink_pctrl_piece_hash_set_hash(stm->ctrl, characters);
@@ -614,20 +648,24 @@ void piece_hash_state_end_fun(metalink_pstm_t* stm,
 
 /* fin state */
 void fin_state_start_fun(metalink_pstm_t* stm,
-			 const char* name, const char** attrs) {}
+			 const char* name, const char* ns_uri,
+			 const char** attrs) {}
 
 void fin_state_end_fun(metalink_pstm_t* stm,
-		       const char* name, const char* characters) {}
+		       const char* name, const char* ns_uri,
+		       const char* characters) {}
 
 /* skip state */
 void skip_state_start_fun(metalink_pstm_t* stm,
-			  const char* name, const char** attrs)
+			  const char* name, const char* ns_uri,
+			  const char** attrs)
 {
   ++stm->state->skip_depth;
 }
 
 void skip_state_end_fun(metalink_pstm_t* stm,
-			const char* name, const char* characters)
+			const char* name, const char* ns_uri,
+			const char* characters)
 {
   if(--stm->state->skip_depth == 0) {
     metalink_pstm_exit_skip_state(stm);

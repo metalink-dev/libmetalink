@@ -30,10 +30,12 @@ typedef struct _metalink_pstm metalink_pstm_t;
 
 typedef void (*metalink_start_fun) (metalink_pstm_t* stm,
 				    const char* name,
+				    const char* ns_uri,
 				    const char** attr);
 
 typedef void (*metalink_end_fun) (metalink_pstm_t* stm,
 				  const char* name,
+				  const char* ns_uri,
 				  const char* characters);
 
 typedef struct _metalink_pstate
@@ -63,135 +65,173 @@ void delete_metalink_pstate(metalink_pstate_t* state);
 
 /* null handler doing nothing */
 void null_state_start_fun(metalink_pstm_t* stm,
-			  const char* name, const char** attrs);
+			  const char* name, const char* ns_uri,
+			  const char** attrs);
 
 void null_state_end_fun(metalink_pstm_t* stm,
-			const char* name, const char* characters);
+			const char* name, const char* ns_uri,
+			const char* characters);
 
 /* initial state */
 void initial_state_start_fun(metalink_pstm_t* stm,
-			     const char* name, const char** attrs);
+			     const char* name, const char* ns_uri,
+			     const char** attrs);
 
 void initial_state_end_fun(metalink_pstm_t* stm,
-			   const char* name, const char* characters);
+			   const char* name, const char* ns_uri,
+			   const char* characters);
 
 /* metalink state <metalink> */
 void metalink_state_start_fun(metalink_pstm_t* stm,
-			      const char* name, const char** attrs);
+			      const char* name, const char* ns_uri,
+			      const char** attrs);
 
 void metalink_state_end_fun(metalink_pstm_t* stm,
-			    const char* name, const char* characters);
+			    const char* name, const char* ns_uri,
+			    const char* characters);
 
 /* identity state <identity> */
 void identity_state_start_fun(metalink_pstm_t* stm,
-			const char* name, const char** attrs);
+			const char* name, const char* ns_uri,
+			const char** attrs);
 
 void identity_state_end_fun(metalink_pstm_t* stm,
-		      const char* name, const char* characters);
+		      const char* name, const char* ns_uri,
+		      const char* characters);
 
 /* tags state <tags> */
 void tags_state_start_fun(metalink_pstm_t* stm,
-			const char* name, const char** attrs);
+			const char* name, const char* ns_uri,
+			const char** attrs);
 
 void tags_state_end_fun(metalink_pstm_t* stm,
-		      const char* name, const char* characters);
+		      const char* name, const char* ns_uri,
+		      const char* characters);
 
 /* files state <files> */
 void files_state_start_fun(metalink_pstm_t* stm,
-			   const char* name, const char** attrs);
+			   const char* name, const char* ns_uri,
+			   const char** attrs);
 
 void files_state_end_fun(metalink_pstm_t* stm,
-			 const char* name, const char* characters);
+			 const char* name, const char* ns_uri,
+			 const char* characters);
 
 /* file state <file> */
 void file_state_start_fun(metalink_pstm_t* stm,
-			  const char* name, const char** attrs);
+			  const char* name, const char* ns_uri,
+			  const char** attrs);
 
 void file_state_end_fun(metalink_pstm_t* stm,
-			const char* name, const char* characters);
+			const char* name, const char* ns_uri,
+			const char* characters);
 
 /* size state <size> */
 void size_state_start_fun(metalink_pstm_t* stm,
-			  const char* name, const char** attrs);
+			  const char* name, const char* ns_uri,
+			  const char** attrs);
 
 void size_state_end_fun(metalink_pstm_t* stm,
-			const char* name, const char* characters);
+			const char* name, const char* ns_uri,
+			const char* characters);
 
 /* version state <version> */
 void version_state_start_fun(metalink_pstm_t* stm,
-			     const char* name, const char** attrs);
+			     const char* name, const char* ns_uri,
+			     const char** attrs);
 
 void version_state_end_fun(metalink_pstm_t* stm,
-			   const char* name, const char* characters);
+			   const char* name, const char* ns_uri,
+			   const char* characters);
 
 /* language state <language> */
 void language_state_start_fun(metalink_pstm_t* stm,
-			      const char* name, const char** attrs);
+			      const char* name, const char* ns_uri,
+			      const char** attrs);
 
 void language_state_end_fun(metalink_pstm_t* stm,
-			    const char* name, const char* characters);
+			    const char* name, const char* ns_uri,
+			    const char* characters);
 
 /* os state <os> */
 void os_state_start_fun(metalink_pstm_t* stm,
-			const char* name, const char** attrs);
+			const char* name, const char* ns_uri,
+			const char** attrs);
 
 void os_state_end_fun(metalink_pstm_t* stm,
-		      const char* name, const char* characters);
+		      const char* name, const char* ns_uri,
+		      const char* characters);
 
 /* resources state <resources> */
 void resources_state_start_fun(metalink_pstm_t* stm,
-			       const char* name, const char** attrs);
+			       const char* name, const char* ns_uri,
+			       const char** attrs);
 
 void resources_state_end_fun(metalink_pstm_t* stm,
-			     const char* name, const char* characters);
+			     const char* name, const char* ns_uri,
+			     const char* characters);
 
 /* url state <url> */
 void url_state_start_fun(metalink_pstm_t* stm,
-			 const char* name, const char** attrs);
+			 const char* name, const char* ns_uri,
+			 const char** attrs);
 
 void url_state_end_fun(metalink_pstm_t* stm,
-		       const char* name, const char* characters);
+		       const char* name, const char* ns_uri,
+		       const char* characters);
 
 /* verification state <verification> */
 void verification_state_start_fun(metalink_pstm_t* stm,
-				  const char* name, const char** attrs);
+				  const char* name, const char* ns_uri,
+				  const char** attrs);
 
 void verification_state_end_fun(metalink_pstm_t* stm,
-				const char* name, const char* characters);
+				const char* name, const char* ns_uri,
+				const char* characters);
 
 /* hash state <hash> */
 void hash_state_start_fun(metalink_pstm_t* stm,
-			  const char* name, const char** attrs);
+			  const char* name, const char* ns_uri,
+			  const char** attrs);
 
 void hash_state_end_fun(metalink_pstm_t* stm,
-			const char* name, const char* characters);
+			const char* name, const char* ns_uri,
+			const char* characters);
 
 /* pieces state <pieces> */
 void pieces_state_start_fun(metalink_pstm_t* stm,
-			    const char* name, const char** attrs);
+			    const char* name, const char* ns_uri,
+			    const char** attrs);
 
 void pieces_state_end_fun(metalink_pstm_t* stm,
-			  const char* name, const char* characters);
+			  const char* name, const char* ns_uri,
+			  const char* characters);
 
 /* piece hash state <hash> inside of <pieces> */
 void piece_hash_state_start_fun(metalink_pstm_t* stm,
-				const char* name, const char** attrs);
+				const char* name, const char* ns_uri,
+				const char** attrs);
 
 void piece_hash_state_end_fun(metalink_pstm_t* stm,
-			      const char* name, const char* characters);
+			      const char* name, const char* ns_uri,
+			      const char* characters);
 
 /* fin state */
 void fin_state_start_fun(metalink_pstm_t* stm,
-			 const char* name, const char** attrs);
+			 const char* name, const char* ns_uri,
+			 const char** attrs);
 
 void fin_state_end_fun(metalink_pstm_t* stm,
-		       const char* name, const char* characters);
+		       const char* name, const char* ns_uri,
+		       const char* characters);
 
 /* skip state */
 void skip_state_start_fun(metalink_pstm_t* stm,
-			  const char* name, const char** attrs);
+			  const char* name, const char* ns_uri,
+			  const char** attrs);
 
 void skip_state_end_fun(metalink_pstm_t* stm,
-			const char* name, const char* characters);
+			const char* name, const char* ns_uri,
+			const char* characters);
 
 #endif /* _D_METALINK_PARSER_STATE_H_ */

@@ -11,7 +11,8 @@ libmetalinkcore_la_SOURCES =\
 	metalink_session_data.c metalink_session_data.h\
 	metalink_stack.c metalink_stack.h\
 	metalink_list.c metalink_list.h\
-	metalink_string_buffer.c metalink_string_buffer.h
+	metalink_string_buffer.c metalink_string_buffer.h\
+	metalink_helper.c metalink_helper.h
 
 if ENABLE_LIBXML2
 libmetalinkcore_la_SOURCES += libxml2_metalink_parser.c

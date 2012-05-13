@@ -5,6 +5,7 @@
 #include "metalink_list_test.h"
 #include "metalink_pctrl_test.h"
 #include "metalink_parser_test.h"
+#include "metalink_helper_test.h"
 
 static int init_suite1(void)
 {
@@ -67,6 +68,9 @@ int main(void)
       ||
       (!CU_add_test(pSuite, "test of metalink_parser_update_fail",
 		    test_metalink_parse_update_fail))
+      ||
+      (!CU_add_test(pSuite, "test of metalink_check_safe_path",
+                    test_metalink_check_safe_path))
       ) {
      CU_cleanup_registry();
      return CU_get_error();

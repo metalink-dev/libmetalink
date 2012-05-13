@@ -65,5 +65,11 @@
 	<url type="ftp" preference="100">ftp://host/file</url>
       </resources>
     </file>
+    <!-- unsafe path -->
+    <file name="../unsafe">
+      <resources>
+	<url type="ftp" preference="100">ftp://host/file</url>
+      </resources>
+    </file>
   </files>
 </metalink>

@@ -32,6 +32,7 @@
 #include <limits.h>
 
 #include "metalink_pstm.h"
+#include "metalink_helper.h"
 
 metalink_pstate_t* new_metalink_pstate(void)
 {
@@ -186,8 +187,9 @@ void files_state_start_fun(metalink_pstm_t* stm,
     metalink_file_t* file;
 
     fname = get_attribute_value(attrs, "name");
-    if(!fname) {
-      /* name is required attribute. Skip this entry. */
+    if(!metalink_check_safe_path(fname)) {
+      /* name is required attribute. If name is NULL or it is not
+         safe, skip this entry. */
       metalink_pstm_enter_skip_state(stm);
       return;
     }

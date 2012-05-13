@@ -54,7 +54,7 @@ static void split_ns_name(const char** localname,
   if (sep) {
     *localname = sep+1;
     len = sep-src;
-    temp = malloc(len * sizeof **ns_uri);
+    temp = malloc((len+1) * sizeof **ns_uri);
     memcpy(temp, src, len);
     temp[len] = '\0';
     *ns_uri = temp;

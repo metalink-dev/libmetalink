@@ -40,29 +40,64 @@
 #include "metalink_stack.h"
 #include "metalink_string_buffer.h"
 
+#define NAMESPACE_SEPARATOR '\t'
+
+static void split_ns_name(const char** localname,
+			  const char** ns_uri,
+			  const char* src)
+{
+  const char* sep;
+  char* temp;
+  size_t len;
+
+  sep = strchr(src, NAMESPACE_SEPARATOR);
+  if (sep) {
+    *localname = sep+1;
+    len = sep-src;
+    temp = malloc((len+1) * sizeof **ns_uri);
+    memcpy(temp, src, len);
+    temp[len] = '\0';
+    *ns_uri = temp;
+  } else {
+    *localname = src;
+  }
+}
+
 static void start_element_handler(void* user_data,
 				  const char* name,
 				  const char** attrs)
 {
+  const char* localname = NULL;
+  const char* ns_uri = NULL;
+
   metalink_session_data_t* session_data = (metalink_session_data_t*)user_data;
   metalink_string_buffer_t* str_buf = metalink_string_buffer_new(128);
 
   /* TODO evaluate return value of stack_push; non-zero value is error. */
   metalink_stack_push(session_data->characters_stack, str_buf);
 
+  split_ns_name(&localname, &ns_uri, name);
   session_data->stm->state->start_fun(session_data->stm,
-				      (const char*)name,
+				      localname,
+				      ns_uri,
 				      (const char**)attrs);
+  free((void *)ns_uri);
 }
 
 static void end_element_handler(void* user_data, const char* name)
 {
+  const char* localname = NULL;
+  const char* ns_uri = NULL;
+
   metalink_session_data_t* session_data = (metalink_session_data_t*)user_data;
   metalink_string_buffer_t* str_buf = metalink_stack_pop(session_data->characters_stack);
   
+  split_ns_name(&localname, &ns_uri, name);
   session_data->stm->state->end_fun(session_data->stm,
-				    (const char*)name,
+				    localname,
+				    ns_uri,
 				    metalink_string_buffer_str(str_buf));
+  free((void *)ns_uri);
 
   metalink_string_buffer_delete(str_buf);	     
 }
@@ -80,7 +115,7 @@ static XML_Parser setup_parser(metalink_session_data_t* session_data)
 {
   XML_Parser parser;
   
-  parser = XML_ParserCreate(NULL);
+  parser = XML_ParserCreateNS(NULL, NAMESPACE_SEPARATOR);
   
   XML_SetUserData(parser, session_data);
   XML_SetElementHandler(parser, &start_element_handler, &end_element_handler);

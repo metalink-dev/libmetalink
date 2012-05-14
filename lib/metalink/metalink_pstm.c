@@ -95,99 +95,99 @@ void metalink_pstm_enter_null_state(metalink_pstm_t* stm)
 
 void metalink_pstm_enter_metalink_state(metalink_pstm_t* stm)
 {
-  metalink_pstm_set_fun(stm, &metalink_state_start_fun, &metalink_state_end_fun);
+  metalink_pstm_set_fun(stm, &metalink_state_start_fun_v3, &metalink_state_end_fun_v3);
   metalink_pstm_disable_character_buffering(stm);
 }
 
 void metalink_pstm_enter_identity_state(metalink_pstm_t* stm)
 {
-  metalink_pstm_set_fun(stm, &identity_state_start_fun, &identity_state_end_fun);
+  metalink_pstm_set_fun(stm, &identity_state_start_fun_v3, &identity_state_end_fun_v3);
   metalink_pstm_disable_character_buffering(stm);
 }
 
 void metalink_pstm_enter_tags_state(metalink_pstm_t* stm)
 {
-  metalink_pstm_set_fun(stm, &tags_state_start_fun, &tags_state_end_fun);
+  metalink_pstm_set_fun(stm, &tags_state_start_fun_v3, &tags_state_end_fun_v3);
   metalink_pstm_disable_character_buffering(stm);
 }
 
 void metalink_pstm_enter_files_state(metalink_pstm_t* stm)
 {
-  metalink_pstm_set_fun(stm, &files_state_start_fun, &files_state_end_fun);
+  metalink_pstm_set_fun(stm, &files_state_start_fun_v3, &files_state_end_fun_v3);
   metalink_pstm_enable_character_buffering(stm);
 }
 
 void metalink_pstm_enter_file_state(metalink_pstm_t* stm)
 {
-  metalink_pstm_set_fun(stm, &file_state_start_fun, &file_state_end_fun);
+  metalink_pstm_set_fun(stm, &file_state_start_fun_v3, &file_state_end_fun_v3);
   metalink_pstm_enable_character_buffering(stm);
 }
 
 void metalink_pstm_enter_size_state(metalink_pstm_t* stm)
 {
-  metalink_pstm_set_fun(stm, &size_state_start_fun, &size_state_end_fun);
+  metalink_pstm_set_fun(stm, &size_state_start_fun_v3, &size_state_end_fun_v3);
   metalink_pstm_enable_character_buffering(stm);
 }
 
 void metalink_pstm_enter_version_state(metalink_pstm_t* stm)
 {
-  metalink_pstm_set_fun(stm, &version_state_start_fun, &version_state_end_fun);
+  metalink_pstm_set_fun(stm, &version_state_start_fun_v3, &version_state_end_fun_v3);
   metalink_pstm_enable_character_buffering(stm);
 }
 
 void metalink_pstm_enter_language_state(metalink_pstm_t* stm)
 {
-  metalink_pstm_set_fun(stm, &language_state_start_fun, &language_state_end_fun);
+  metalink_pstm_set_fun(stm, &language_state_start_fun_v3, &language_state_end_fun_v3);
   metalink_pstm_enable_character_buffering(stm);
 }
 
 void metalink_pstm_enter_os_state(metalink_pstm_t* stm)
 {
-  metalink_pstm_set_fun(stm, &os_state_start_fun, &os_state_end_fun);
+  metalink_pstm_set_fun(stm, &os_state_start_fun_v3, &os_state_end_fun_v3);
   metalink_pstm_enable_character_buffering(stm);
 }
 
 void metalink_pstm_enter_resources_state(metalink_pstm_t* stm)
 {
-  metalink_pstm_set_fun(stm, &resources_state_start_fun, &resources_state_end_fun);
+  metalink_pstm_set_fun(stm, &resources_state_start_fun_v3, &resources_state_end_fun_v3);
   metalink_pstm_enable_character_buffering(stm);
 }
 
 void metalink_pstm_enter_url_state(metalink_pstm_t* stm)
 {
-  metalink_pstm_set_fun(stm, &url_state_start_fun, &url_state_end_fun);
+  metalink_pstm_set_fun(stm, &url_state_start_fun_v3, &url_state_end_fun_v3);
   metalink_pstm_enable_character_buffering(stm);
 }
 
 void metalink_pstm_enter_verification_state(metalink_pstm_t* stm)
 {
-  metalink_pstm_set_fun(stm, &verification_state_start_fun,
-			&verification_state_end_fun);
+  metalink_pstm_set_fun(stm, &verification_state_start_fun_v3,
+			&verification_state_end_fun_v3);
   metalink_pstm_enable_character_buffering(stm);
 }
 
 void metalink_pstm_enter_hash_state(metalink_pstm_t* stm)
 {
-  metalink_pstm_set_fun(stm, &hash_state_start_fun, &hash_state_end_fun);
+  metalink_pstm_set_fun(stm, &hash_state_start_fun_v3, &hash_state_end_fun_v3);
   metalink_pstm_enable_character_buffering(stm);
 }
 
 void metalink_pstm_enter_pieces_state(metalink_pstm_t* stm)
 {
-  metalink_pstm_set_fun(stm, &pieces_state_start_fun, &pieces_state_end_fun);
+  metalink_pstm_set_fun(stm, &pieces_state_start_fun_v3, &pieces_state_end_fun_v3);
   metalink_pstm_enable_character_buffering(stm);
 }
 
 void metalink_pstm_enter_piece_hash_state(metalink_pstm_t* stm)
 {
-  metalink_pstm_set_fun(stm, &piece_hash_state_start_fun,
-			&piece_hash_state_end_fun);
+  metalink_pstm_set_fun(stm, &piece_hash_state_start_fun_v3,
+			&piece_hash_state_end_fun_v3);
   metalink_pstm_enable_character_buffering(stm);
 }
 
 void metalink_pstm_enter_fin_state(metalink_pstm_t* stm)
 {
-  metalink_pstm_set_fun(stm, &fin_state_start_fun, &fin_state_end_fun);
+  metalink_pstm_set_fun(stm, &fin_state_start_fun_v3, &fin_state_end_fun_v3);
   metalink_pstm_disable_character_buffering(stm);
 }
 

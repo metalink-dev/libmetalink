@@ -40,27 +40,61 @@
 #include "metalink_string_buffer.h"
 
 static void start_element_handler(void* user_data,
-				  const xmlChar* name,
-				  const xmlChar** attrs)
+                                  const xmlChar* localname,
+                                  const xmlChar* prefix,
+                                  const xmlChar* ns_uri,
+                                  int numNamespaces,
+                                  const xmlChar** namespaces,
+                                  int numAttrs,
+                                  int numDefaulted,
+                                  const xmlChar** attrs)
 {
   metalink_session_data_t* session_data = (metalink_session_data_t*)user_data;
   metalink_string_buffer_t* str_buf = metalink_string_buffer_new(128);
+  char* attrblock;
+  const char** attr_index;
+  char* value_dst_ptr;
+  size_t value_alloc_space = 0;
+  int i, j;
+  
+  for(i = 0; i < numAttrs*5; i += 5) {
+    value_alloc_space += attrs[i+4] - attrs[i+3]+1;
+  }
 
+  attrblock = malloc((numAttrs*2+1)*sizeof(char*)+value_alloc_space);
+  attr_index = (const char**)attrblock;
+  value_dst_ptr = attrblock+(numAttrs*2+1)*sizeof(char*);
+
+  for(i = 0, j = 0; i < numAttrs*5; i += 5, j += 2) {
+    size_t value_len = attrs[i+4] - attrs[i+3];
+    memcpy(value_dst_ptr, attrs[i+3], value_len);
+    value_dst_ptr[value_len] = '\0';
+    attr_index[j] = (const char*)attrs[i];
+    attr_index[j+1] = value_dst_ptr;
+    value_dst_ptr += value_len+1;
+  }
+  attr_index[j] = NULL;
   /* TODO evaluate return value of stack_push; non-zero value is error. */
   metalink_stack_push(session_data->characters_stack, str_buf);
 
   session_data->stm->state->start_fun(session_data->stm,
-				      (const char*)name,
-				      (const char**)attrs);
+				      (const char*)localname,
+                                      (const char*)ns_uri,
+				      attr_index);
+  free(attrblock);
 }
 
-static void end_element_handler(void* user_data, const xmlChar* name)
+static void end_element_handler(void* user_data,
+                                const xmlChar* localname,
+                                const xmlChar* prefix,
+                                const xmlChar* ns_uri)
 {
   metalink_session_data_t* session_data = (metalink_session_data_t*)user_data;
   metalink_string_buffer_t* str_buf = metalink_stack_pop(session_data->characters_stack);
   
   session_data->stm->state->end_fun(session_data->stm,
-				    (const char*)name,
+				    (const char*)localname,
+                                    (const char*)ns_uri,
 				    metalink_string_buffer_str(str_buf));
 
   metalink_string_buffer_delete(str_buf);	     
@@ -91,8 +125,8 @@ static xmlSAXHandler mySAXHandler = {
   0, /*   setDocumentLocatorSAXFunc */
   0, /*   startDocumentSAXFunc */
   0, /*   endDocumentSAXFunc */
-  &start_element_handler, /*   startElementSAXFunc */
-  &end_element_handler, /*   endElementSAXFunc */
+  0, /*   startElementSAXFunc */
+  0, /*   endElementSAXFunc */
   0, /*   referenceSAXFunc */
   &characters_handler, /*   charactersSAXFunc */
   0, /*   ignorableWhitespaceSAXFunc */
@@ -104,10 +138,10 @@ static xmlSAXHandler mySAXHandler = {
   0, /*   getParameterEntitySAXFunc */
   0, /*   cdataBlockSAXFunc */
   0, /*   externalSubsetSAXFunc */
-  0, /*   unsigned int  initialized */
+  XML_SAX2_MAGIC, /*   unsigned int  initialized */
   0, /*   void *        _private */
-  0, /*   startElementNsSAX2Func */
-  0, /*   endElementNsSAX2Func */
+  &start_element_handler, /*   startElementNsSAX2Func */
+  &end_element_handler, /*   endElementNsSAX2Func */
   0, /*   xmlStructuredErrorFunc */
 };
 

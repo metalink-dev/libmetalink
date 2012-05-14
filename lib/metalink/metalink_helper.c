@@ -58,9 +58,15 @@ int metalink_check_safe_path(const char* path)
      path[0] == '/' || path[len-1] == '/') {
     return 0;
   }
+  /* Don't allow DOS drive letter (e.g., C:) */
+  if(len >= 2 &&
+     (('A' <= path[0] && path[0] <= 'Z') ||
+      ('a' <= path[0] && path[0] <= 'z')) && path[1] == ':') {
+    return 0;
+  }
   for(i = 0; i < len; ++i) {
     unsigned char c = path[i];
-    if((0x00 <= c && c <= 0x1f) || c == 0x7f) {
+    if((0x00 <= c && c <= 0x1f) || c == 0x7f || c == '\\') {
       return 0;
     }
   }

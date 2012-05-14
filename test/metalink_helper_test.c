@@ -47,6 +47,14 @@ void test_metalink_check_safe_path(void)
   CU_ASSERT(!metalink_check_safe_path("foo/./bar"));
   CU_ASSERT(!metalink_check_safe_path("foo/."));
   CU_ASSERT(!metalink_check_safe_path("foo/.."));
+  CU_ASSERT(!metalink_check_safe_path("A:"));
+  CU_ASSERT(!metalink_check_safe_path("C:/foo"));
+  CU_ASSERT(!metalink_check_safe_path("Z:/foo"));
+  CU_ASSERT(!metalink_check_safe_path("a:/foo"));
+  CU_ASSERT(!metalink_check_safe_path("c:/foo"));
+  CU_ASSERT(!metalink_check_safe_path("z:/foo"));
+  CU_ASSERT(!metalink_check_safe_path("C:\\foo"));
+  CU_ASSERT(!metalink_check_safe_path("foo\\bar"));
 
   CU_ASSERT(metalink_check_safe_path(safechars));
   CU_ASSERT(metalink_check_safe_path("foo"));

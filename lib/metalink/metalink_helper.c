@@ -66,7 +66,7 @@ int metalink_check_safe_path(const char* path)
   }
   for(i = 0; i < len; ++i) {
     unsigned char c = path[i];
-    if((0x00 <= c && c <= 0x1f) || c == 0x7f || c == '\\') {
+    if(c <= 0x1f || c == 0x7f || c == '\\') {
       return 0;
     }
   }

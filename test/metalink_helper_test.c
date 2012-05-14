@@ -32,7 +32,6 @@
 void test_metalink_check_safe_path(void)
 {
   char ctrlchars[] = { 0x1f, 0x7f, 0x00 };
-  char safechars[] = { 0xff, 0xff, 0x00 };
   CU_ASSERT(!metalink_check_safe_path(NULL));
   CU_ASSERT(!metalink_check_safe_path(""));
   CU_ASSERT(!metalink_check_safe_path("."));
@@ -56,7 +55,6 @@ void test_metalink_check_safe_path(void)
   CU_ASSERT(!metalink_check_safe_path("C:\\foo"));
   CU_ASSERT(!metalink_check_safe_path("foo\\bar"));
 
-  CU_ASSERT(metalink_check_safe_path(safechars));
   CU_ASSERT(metalink_check_safe_path("foo"));
   CU_ASSERT(metalink_check_safe_path("foo/bar"));
   CU_ASSERT(metalink_check_safe_path("foo/bar.baz"));

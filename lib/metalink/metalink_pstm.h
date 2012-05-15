@@ -28,6 +28,7 @@
 
 #include "metalink_types.h"
 #include "metalink_pstate.h"
+#include "metalink_pstate_v3.h"
 #include "metalink_pctrl.h"
 
 /* parser state machine */

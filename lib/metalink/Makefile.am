@@ -6,6 +6,7 @@ libmetalinkcore_la_SOURCES =\
 	metalink_error.h\
 	metalink_pstm.c metalink_pstm.h\
 	metalink_pstate.c metalink_pstate.h\
+	metalink_pstate_v3.c metalink_pstate_v3.h\
 	metalink_pctrl.c metalink_pctrl.h\
 	metalink_parser_common.c metalink_parser_common.h\
 	metalink_session_data.c metalink_session_data.h\

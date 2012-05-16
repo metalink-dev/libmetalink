@@ -31,7 +31,7 @@
 #include "metalink_parser_test.h"
 #include "metalink/metalink_parser.h"
 
-static size_t count_array(void** array)
+size_t count_array(void** array)
 {
   size_t count = 0;
   while(*array) {

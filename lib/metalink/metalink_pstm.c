@@ -235,3 +235,10 @@ void metalink_pstm_enter_origin_state(metalink_pstm_t* stm)
 			&origin_state_end_fun_v4);
   metalink_pstm_enable_character_buffering(stm);
 }
+
+void metalink_pstm_enter_file_state_v4(metalink_pstm_t* stm)
+{
+  metalink_pstm_set_fun(stm, &file_state_start_fun_v4,
+			&file_state_end_fun_v4);
+  metalink_pstm_disable_character_buffering(stm);
+}

@@ -133,6 +133,8 @@ void metalink_chunk_checksum_set_piece_hashes(metalink_chunk_checksum_t* chunk_c
 typedef struct _metalink_file {
   /* filename, null terminated string */
   char* name;
+  /* file description */
+  char* description;
   /* file size */
   long long int size;
   /* version, null terminated string */

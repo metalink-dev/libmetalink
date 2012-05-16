@@ -35,6 +35,7 @@ void metalink_state_end_fun_v4(metalink_pstm_t* stm,
 			       const char* name, const char* ns_uri,
 			       const char* characters);
 
+/* generator state <generator> */
 void generator_state_start_fun_v4(metalink_pstm_t* stm,
 				  const char* name, const char* ns_uri,
 				  const char** attrs);
@@ -43,6 +44,7 @@ void generator_state_end_fun_v4(metalink_pstm_t* stm,
 			       const char* name, const char* ns_uri,
 			       const char* characters);
 
+/* origin state <origin> */
 void origin_state_start_fun_v4(metalink_pstm_t* stm,
 			       const char* name, const char* ns_uri,
 			       const char** attrs);
@@ -50,5 +52,14 @@ void origin_state_start_fun_v4(metalink_pstm_t* stm,
 void origin_state_end_fun_v4(metalink_pstm_t* stm,
 			     const char* name, const char* ns_uri,
 			     const char* characters);
+
+/* file state <file> */
+void file_state_start_fun_v4(metalink_pstm_t* stm,
+			     const char* name, const char* ns_uri,
+			     const char** attrs);
+
+void file_state_end_fun_v4(metalink_pstm_t* stm,
+			   const char* name, const char* ns_uri,
+			   const char* characters);
 
 #endif /* _D_METALINK_PARSER_STATE_V4_H_ */

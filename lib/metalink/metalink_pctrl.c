@@ -115,6 +115,7 @@ metalink_error_t metalink_pctrl_metalink_accumulate_files(metalink_pctrl_t* ctrl
 {
   size_t files_length;
   files_length = metalink_list_length(ctrl->files);
+  printf("\nfile_length: %d\n", files_length);
   if(files_length) {
     ctrl->metalink->files = calloc(files_length+1, sizeof(metalink_file_t*));
     if(!ctrl->metalink->files) {

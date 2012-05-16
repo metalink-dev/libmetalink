@@ -29,11 +29,20 @@
 #include <unistd.h>
 #include <CUnit/CUnit.h>
 #include "metalink_parser_test.h"
+#include "metalink_parser_test_v4.h"
 #include "metalink/metalink_parser.h"
 
 static void validate_result(volatile metalink_t* metalink)
 {
+  metalink_file_t* file;
+
   CU_ASSERT_STRING_EQUAL("MetalinkEditor/2.0dev", metalink->generator);
+
+  CU_ASSERT_EQUAL_FATAL(3, count_array((void**)metalink->files));
+
+  /* check 1fst file */
+  file = metalink->files[0];
+  CU_ASSERT_STRING_EQUAL("libmetalink-0.0.1.tar.bz2", file->name);
 }
 
 void test_metalink_parse_file_v4(void)
@@ -42,7 +51,7 @@ void test_metalink_parse_file_v4(void)
   metalink_t* metalink;
 
   r = metalink_parse_file("test2.xml", &metalink);
-  CU_ASSERT_EQUAL(0, r);
+  CU_ASSERT_EQUAL_FATAL(0, r);
 
   validate_result(metalink);
 }

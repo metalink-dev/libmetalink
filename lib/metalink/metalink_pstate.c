@@ -101,7 +101,14 @@ void initial_state_start_fun(metalink_pstm_t* stm,
 			     const char** attrs)
 {
   if(strcmp("metalink", name) == 0) {
-    metalink_pstm_enter_metalink_state(stm);
+    if (strcmp("http://www.metalinker.org/", ns_uri) == 0) {
+      metalink_pstm_enter_metalink_state(stm);
+    }
+    else if (strcmp("urn:ietf:params:xml:ns:metalink", ns_uri) == 0) {
+      metalink_pstm_enter_metalink_state_v4(stm);
+    } else {
+      metalink_pstm_enter_skip_state(stm);
+    }
   } else {
     metalink_pstm_enter_skip_state(stm);
   }
@@ -127,3 +134,13 @@ void skip_state_end_fun(metalink_pstm_t* stm,
     metalink_pstm_exit_skip_state(stm);
   }
 }
+
+/* fin state */
+void fin_state_start_fun_v3(metalink_pstm_t* stm,
+			    const char* name, const char* ns_uri,
+			    const char** attrs) {}
+
+void fin_state_end_fun_v3(metalink_pstm_t* stm,
+			  const char* name, const char* ns_uri,
+			  const char* characters) {}
+

@@ -175,8 +175,7 @@ metalink_error_t metalink_pctrl_commit_file_transaction(metalink_pctrl_t* ctrl)
 			   ctrl->resources, sizeof(metalink_resource_t*));
   if(r != 0) {
     return r;
-  }
-  /* copy ctrl->checksums to ctrl->temp_file->checksums */
+  } /* copy ctrl->checksums to ctrl->temp_file->checksums */
   r = commit_list_to_array((void***)&ctrl->temp_file->checksums,
 			   ctrl->checksums, sizeof(metalink_checksum_t*));
   if(r != 0) {
@@ -403,4 +402,25 @@ void metalink_pctrl_chunk_checksum_set_piece_hashes
 {
   metalink_chunk_checksum_set_piece_hashes(ctrl->temp_chunk_checksum,
 					   piece_hashes);
+}
+
+/* information functions */
+metalink_error_t metalink_pctrl_set_generator(metalink_pctrl_t* ctrl, const char* generator)
+{
+  return metalink_set_generator(ctrl->metalink, generator);
+}
+
+metalink_error_t metalink_pctrl_set_origin(metalink_pctrl_t* ctrl, const char* origin)
+{
+  return metalink_set_origin(ctrl->metalink, origin);
+}
+
+void metalink_pctrl_set_published(metalink_pctrl_t* ctrl, int published)
+{
+  metalink_set_published(ctrl->metalink, published);
+}
+
+void metalink_pctrl_set_updated(metalink_pctrl_t* ctrl, int updated)
+{
+  return metalink_set_updated(ctrl->metalink, updated);
 }

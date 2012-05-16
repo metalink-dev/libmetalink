@@ -161,13 +161,4 @@ void piece_hash_state_end_fun_v3(metalink_pstm_t* stm,
 				 const char* name, const char* ns_uri,
 				 const char* characters);
 
-/* fin state */
-void fin_state_start_fun_v3(metalink_pstm_t* stm,
-			    const char* name, const char* ns_uri,
-			    const char** attrs);
-
-void fin_state_end_fun_v3(metalink_pstm_t* stm,
-			  const char* name, const char* ns_uri,
-			  const char* characters);
-
 #endif /* _D_METALINK_PARSER_STATE_V3_H_ */

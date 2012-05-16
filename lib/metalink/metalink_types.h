@@ -178,6 +178,10 @@ void metalink_file_set_maxconnections(metalink_file_t* file, int maxconnections)
 typedef struct _metalink {
   /* put more descriptable information here... */
   /* date, publisher or something useful */
+  char* generator;
+  char* origin;
+  int published;
+  int updated;
 
   /* list of metalink_file_t */
   metalink_file_t** files;
@@ -187,7 +191,10 @@ typedef struct _metalink {
 
 metalink_error_t metalink_set_identity(metalink_t* metalink, const char* identity);
 metalink_error_t metalink_set_tags(metalink_t* metalink, const char* tags);
-
+metalink_error_t metalink_set_generator(metalink_t* metalink, const char* generator);
+metalink_error_t metalink_set_origin(metalink_t* metalink, const char* origin);
+void metalink_set_published(metalink_t* metalink, int published);
+void metalink_set_updated(metalink_t* metalink, int updated);
 
 metalink_t* metalink_new(void);
 

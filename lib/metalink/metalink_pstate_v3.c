@@ -571,12 +571,3 @@ void piece_hash_state_end_fun_v3(metalink_pstm_t* stm,
   metalink_pstm_enter_pieces_state(stm);
 }
 
-/* fin state */
-void fin_state_start_fun_v3(metalink_pstm_t* stm,
-			    const char* name, const char* ns_uri,
-			    const char** attrs) {}
-
-void fin_state_end_fun_v3(metalink_pstm_t* stm,
-			  const char* name, const char* ns_uri,
-			  const char* characters) {}
-

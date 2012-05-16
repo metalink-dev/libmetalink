@@ -181,6 +181,34 @@ metalink_set_tags(metalink_t* metalink, const char* tags)
 
 metalink_error_t
 METALINK_PUBLIC
+metalink_set_generator(metalink_t* metalink, const char* generator)
+{
+  return allocate_copy_string(&metalink->generator, generator);
+}
+
+metalink_error_t
+METALINK_PUBLIC
+metalink_set_origin(metalink_t* metalink, const char* origin)
+{
+  return allocate_copy_string(&metalink->origin, origin);
+}
+
+void
+METALINK_PUBLIC
+metalink_set_published(metalink_t* metalink, int published)
+{
+  metalink->published = published;
+}
+
+void
+METALINK_PUBLIC
+metalink_set_updated(metalink_t* metalink, int updated)
+{
+
+}
+
+metalink_error_t
+METALINK_PUBLIC
 metalink_resource_set_type(metalink_resource_t* resource, const char* type)
 {
   return allocate_copy_string(&resource->type, type);

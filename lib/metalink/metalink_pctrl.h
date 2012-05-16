@@ -144,4 +144,13 @@ void metalink_pctrl_chunk_checksum_set_length(metalink_pctrl_t* ctrl, int length
 void metalink_pctrl_chunk_checksum_set_piece_hashes(metalink_pctrl_t* ctrl,
 						    metalink_piece_hash_t** piece_hashes);
 
+/* information functions */
+metalink_error_t metalink_pctrl_set_generator(metalink_pctrl_t* ctrl, const char* generator);
+
+metalink_error_t metalink_pctrl_set_origin(metalink_pctrl_t* ctrl, const char* origin);
+
+void metalink_pctrl_set_published(metalink_pctrl_t* ctrl, int published);
+
+void metalink_pctrl_set_updated(metalink_pctrl_t* ctrl, int updated);
+
 #endif /* _D_METALINK_PCTRL_H_ */

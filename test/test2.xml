@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metalink xmlns="urn:ietf:params:xml:ns:metalink">
+    <generator>MetalinkEditor/2.0dev</generator>
+    <file name="libmetalink-0.0.1.tar.bz2">
+        <version>0.0.1</version>
+        <hash type="sha1">a96cf3f0266b91d87d5124cf94326422800b627d</hash>
+	<!-- no type -->
+        <hash>notype</hash>
+        <hash type="md5">fc4d834e89c18c99b2615d902750948c</hash>
+        <url priority="100" location="jp">ftp://ftphost/libmetalink-0.0.1.tar.bz2</url>
+	<!-- no location -->
+        <url priority="99">http://httphost/libmetalink-0.0.1.tar.bz2</url>
+    </file>
+    <file name="libmetalink-0.0.2a.tar.bz2">
+        <version>0.0.2a</version>
+        <size>4294967296</size>
+        <pieces length="262144" type="sha1">
+            <hash>179463a88d79cbf0b1923991708aead914f26142</hash>
+            <hash>fecf8bc9a1647505fe16746f94e97a477597dbf3</hash>
+        </pieces>
+        <url priority="100">ftp://ftphost/libmetalink-0.0.2a.tar.bz2</url>
+	<!-- no priority -->
+        <url>http://httphost/libmetalink-0.0.2a.tar.bz2</url>
+	<!-- bad priority -->
+        <url priority="-100">http://badpriority/</url>
+        <url priority="99">http://mirror1/libmetalink-0.0.2a.tar.bz2</url>
+        <url>http://mirror2/libmetalink-0.0.2a.tar.bz2</url>
+        <metaurl mediatype="torrent">http://mirror2/libmetalink-0.0.2a.tar.bz2.torrent</metaurl>
+    </file>
+    <!-- no name -->
+    <file>
+        <url>http://noname/file</url>
+    </file>
+    <file name="NoVerificationHash">
+	<!-- bad size -->
+        <size>abc</size>
+        <url priority="100">ftp://host/file</url>
+    </file>
+    <!-- unsafe path -->
+    <file name="../unsafe">
+        <url priority="100">ftp://host/file</url>
+    </file>
+</metalink>

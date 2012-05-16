@@ -99,6 +99,12 @@ void metalink_pstm_enter_metalink_state(metalink_pstm_t* stm)
   metalink_pstm_disable_character_buffering(stm);
 }
 
+void metalink_pstm_enter_metalink_state_v4(metalink_pstm_t* stm)
+{
+  metalink_pstm_set_fun(stm, &metalink_state_start_fun_v4, &metalink_state_end_fun_v4);
+  metalink_pstm_disable_character_buffering(stm);
+}
+
 void metalink_pstm_enter_identity_state(metalink_pstm_t* stm)
 {
   metalink_pstm_set_fun(stm, &identity_state_start_fun_v3, &identity_state_end_fun_v3);
@@ -213,4 +219,19 @@ void metalink_pstm_exit_skip_state(metalink_pstm_t* stm)
   } else {
     metalink_pstm_disable_character_buffering(stm);
   }
+}
+
+/* Metalink 4 states */
+void metalink_pstm_enter_generator_state(metalink_pstm_t* stm)
+{
+  metalink_pstm_set_fun(stm, &generator_state_start_fun_v4,
+			&generator_state_end_fun_v4);
+  metalink_pstm_enable_character_buffering(stm);
+}
+
+void metalink_pstm_enter_origin_state(metalink_pstm_t* stm)
+{
+  metalink_pstm_set_fun(stm, &origin_state_start_fun_v4,
+			&origin_state_end_fun_v4);
+  metalink_pstm_enable_character_buffering(stm);
 }

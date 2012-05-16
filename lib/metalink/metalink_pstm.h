@@ -29,6 +29,7 @@
 #include "metalink_types.h"
 #include "metalink_pstate.h"
 #include "metalink_pstate_v3.h"
+#include "metalink_pstate_v4.h"
 #include "metalink_pctrl.h"
 
 /* parser state machine */
@@ -69,6 +70,8 @@ void metalink_pstm_enter_null_state(metalink_pstm_t* stm);
 
 void metalink_pstm_enter_metalink_state(metalink_pstm_t* stm);
 
+void metalink_pstm_enter_metalink_state_v4(metalink_pstm_t* stm);
+
 void metalink_pstm_enter_identity_state(metalink_pstm_t* stm);
 
 void metalink_pstm_enter_tags_state(metalink_pstm_t* stm);
@@ -102,5 +105,9 @@ void metalink_pstm_enter_fin_state(metalink_pstm_t* stm);
 void metalink_pstm_enter_skip_state(metalink_pstm_t* stm);
 
 void metalink_pstm_exit_skip_state(metalink_pstm_t* stm);
+
+void metalink_pstm_enter_generator_state(metalink_pstm_t* stm);
+
+void metalink_pstm_enter_origin_state(metalink_pstm_t* stm);
 
 #endif /* _D_METALINK_PSTM_H_ */

@@ -35,14 +35,22 @@
 static void validate_result(volatile metalink_t* metalink)
 {
   metalink_file_t* file;
+  metalink_resource_t* resource;
 
   CU_ASSERT_STRING_EQUAL("MetalinkEditor/2.0dev", metalink->generator);
 
+  /* count files */
   CU_ASSERT_EQUAL_FATAL(3, count_array((void**)metalink->files));
 
   /* check 1fst file */
   file = metalink->files[0];
   CU_ASSERT_STRING_EQUAL("libmetalink-0.0.1.tar.bz2", file->name);
+
+  resource = file->resources[0];
+  CU_ASSERT_EQUAL(100, resource->priority);
+
+  resource = file->resources[1];
+  CU_ASSERT_EQUAL(99, resource->priority);
 }
 
 void test_metalink_parse_file_v4(void)

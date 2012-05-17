@@ -41,8 +41,8 @@ typedef struct _metalink_resource {
    * null terminated string
    */
   char* location;
-  /* preference of this resource, higher value has bigger preference. */
-  int preference;
+  /* priority of this resource, higher value has bigger priority. */
+  int priority;
   /* max connections that a client can establish to this resource */
   int maxconnections;
 } metalink_resource_t;
@@ -57,8 +57,8 @@ metalink_error_t metalink_resource_set_type(metalink_resource_t* resource, const
 metalink_error_t metalink_resource_set_location(metalink_resource_t* resource,
 				   const char* location);
 
-void metalink_resource_set_preference(metalink_resource_t* resource,
-				      int preference);
+void metalink_resource_set_priority(metalink_resource_t* resource,
+				      int priority);
 
 void metalink_resource_set_maxconnections(metalink_resource_t* resource,
 					  int maxconnections);

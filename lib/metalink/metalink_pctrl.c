@@ -115,7 +115,6 @@ metalink_error_t metalink_pctrl_metalink_accumulate_files(metalink_pctrl_t* ctrl
 {
   size_t files_length;
   files_length = metalink_list_length(ctrl->files);
-  printf("\nfile_length: %d\n", files_length);
   if(files_length) {
     ctrl->metalink->files = calloc(files_length+1, sizeof(metalink_file_t*));
     if(!ctrl->metalink->files) {
@@ -348,10 +347,10 @@ metalink_error_t metalink_pctrl_resource_set_location(metalink_pctrl_t* ctrl,
   return metalink_resource_set_location(ctrl->temp_resource, location);
 }
 
-void metalink_pctrl_resource_set_preference(metalink_pctrl_t* ctrl,
-					    int preference)
+void metalink_pctrl_resource_set_priority(metalink_pctrl_t* ctrl,
+					    int priority)
 {
-  metalink_resource_set_preference(ctrl->temp_resource, preference);
+  metalink_resource_set_priority(ctrl->temp_resource, priority);
 }
 
 void metalink_pctrl_resource_set_maxconnections(metalink_pctrl_t* ctrl,

@@ -295,7 +295,7 @@ void resources_state_start_fun_v3(metalink_pstm_t* stm,
     const char* type;
     const char* location;
     const char* value;
-    long int preference = 0;
+    long int priority = 0;
     long int maxconnections = 0;
     metalink_resource_t* resource;
 
@@ -329,13 +329,13 @@ void resources_state_start_fun_v3(metalink_pstm_t* stm,
     value = get_attribute_value(attrs, "preference");
     if(value) {
       errno = 0;
-      preference = strtol(value, 0, 10);
-      if(errno == ERANGE || preference < 0 || preference > INT_MAX) {
-	/* error, preference is not positive integer. */
-	preference = 0;
+      priority = strtol(value, 0, 10);
+      if(errno == ERANGE || priority < 0 || priority > INT_MAX) {
+	/* error, priority is not positive integer. */
+	priority = 0;
       }
     }
-    metalink_pctrl_resource_set_preference(stm->ctrl, preference);
+    metalink_pctrl_resource_set_priority(stm->ctrl, priority);
 
     value = get_attribute_value(attrs, "maxconnections");
     if(value) {

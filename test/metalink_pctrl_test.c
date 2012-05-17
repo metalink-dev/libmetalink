@@ -84,7 +84,7 @@ void test_metalink_pctrl_resource_transaction(void)
    */
   metalink_pctrl_resource_set_type(ctrl, "http");
   metalink_pctrl_resource_set_location(ctrl, "FI");
-  metalink_pctrl_resource_set_preference(ctrl, 100);
+  metalink_pctrl_resource_set_priority(ctrl, 100);
   metalink_pctrl_resource_set_maxconnections(ctrl, 4);
   metalink_pctrl_resource_set_url(ctrl, "http://host/dir/file");
 
@@ -99,7 +99,7 @@ void test_metalink_pctrl_resource_transaction(void)
   resource = metalink_list_get_data(ctrl->resources, 0);
   CU_ASSERT_STRING_EQUAL("http", resource->type);
   CU_ASSERT_STRING_EQUAL("FI", resource->location);
-  CU_ASSERT_EQUAL(100, resource->preference);
+  CU_ASSERT_EQUAL(100, resource->priority);
   CU_ASSERT_EQUAL(4, resource->maxconnections);
   CU_ASSERT_STRING_EQUAL("http://host/dir/file", resource->url);
 

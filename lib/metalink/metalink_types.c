@@ -224,10 +224,10 @@ metalink_resource_set_location(metalink_resource_t* resource,
 
 void
 METALINK_PUBLIC
-metalink_resource_set_preference(metalink_resource_t* resource,
-				      int preference)
+metalink_resource_set_priority(metalink_resource_t* resource,
+				      int priority)
 {
-  resource->preference = preference;
+  resource->priority = priority;
 }
 
 void

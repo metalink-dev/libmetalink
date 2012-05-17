@@ -115,10 +115,11 @@ void file_state_start_fun_v4(metalink_pstm_t* stm,
 			     const char** attrs)
 {
   metalink_error_t r;
-  const char* fname;
-  metalink_file_t* file;
 
   if(strcmp("file", name) == 0) {
+    const char* fname;
+    metalink_file_t* file;
+
     fname = get_attribute_value(attrs, "name");
     if(!metalink_check_safe_path(fname)) {
       metalink_pstm_enter_skip_state(stm);
@@ -135,6 +136,38 @@ void file_state_start_fun_v4(metalink_pstm_t* stm,
       error_handler(stm, r);
       return;
     }
+  } else if(strcmp("url", name) == 0) {
+    const char* location;
+    const char* value;
+    long int priority = 0;
+    metalink_resource_t* resource;
+
+    resource = metalink_pctrl_new_resource_transaction(stm->ctrl);
+    if(!resource) {
+      error_handler(stm, METALINK_ERR_BAD_ALLOC);
+      return;
+    }
+
+    location = get_attribute_value(attrs, "location");
+    if(location) {
+      r = metalink_pctrl_resource_set_location(stm->ctrl, location);
+      if(r != 0) {
+        error_handler(stm, r);
+        return;
+      }
+    }
+
+    value = get_attribute_value(attrs, "priority");
+    if(value) {
+      errno = 0;
+      priority = strtol(value, 0, 10);
+      if(errno == ERANGE || priority < 0 || priority > INT_MAX) {
+        priority = 0;
+      }
+    }
+    metalink_pctrl_resource_set_priority(stm->ctrl, priority);
+
+    metalink_pstm_enter_url_state_v4(stm);
   } else {
     metalink_pstm_enter_skip_state(stm);
   }
@@ -151,4 +184,30 @@ void file_state_end_fun_v4(metalink_pstm_t* stm,
     return;
   }
   metalink_pstm_enter_metalink_state_v4(stm);
+}
+
+/* url state <url> */
+void url_state_start_fun_v4(metalink_pstm_t* stm,
+			    const char* name, const char* ns_uri,
+			    const char** attrs)
+{
+  metalink_pstm_enter_skip_state(stm);
+}
+
+void url_state_end_fun_v4(metalink_pstm_t* stm,
+			  const char* name, const char* ns_uri,
+			  const char* characters)
+{
+  metalink_error_t r;
+  r = metalink_pctrl_resource_set_url(stm->ctrl, characters);
+  if(r != 0) {
+    error_handler(stm, r);
+    return;
+  }
+  r = metalink_pctrl_commit_resource_transaction(stm->ctrl);
+  if(r != 0) {
+    error_handler(stm, r);
+    return;
+  }
+  metalink_pstm_enter_file_state_v4(stm);
 }

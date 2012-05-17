@@ -39,7 +39,29 @@ void metalink_state_start_fun_v4(metalink_pstm_t* stm,
 				 const char* name, const char* ns_uri,
 				 const char** attrs)
 {
+  metalink_error_t r;
+
   if(strcmp("file", name) == 0) {
+    const char* fname;
+    metalink_file_t* file;
+
+    fname = get_attribute_value(attrs, "name");
+    if(!metalink_check_safe_path(fname)) {
+      metalink_pstm_enter_skip_state(stm);
+      return;
+    }
+
+    file = metalink_pctrl_new_file_transaction(stm->ctrl);
+    if(!file) {
+      error_handler(stm, METALINK_ERR_BAD_ALLOC);
+      return;
+    }
+    r = metalink_pctrl_file_set_name(stm->ctrl, fname);
+    if(r !=  0) {
+      error_handler(stm, r);
+      return;
+    }
+
     metalink_pstm_enter_file_state_v4(stm);
   } else if(strcmp("generator", name) == 0) {
     metalink_pstm_enter_generator_state(stm);
@@ -116,27 +138,7 @@ void file_state_start_fun_v4(metalink_pstm_t* stm,
 {
   metalink_error_t r;
 
-  if(strcmp("file", name) == 0) {
-    const char* fname;
-    metalink_file_t* file;
-
-    fname = get_attribute_value(attrs, "name");
-    if(!metalink_check_safe_path(fname)) {
-      metalink_pstm_enter_skip_state(stm);
-      return;
-    }
-
-    file = metalink_pctrl_new_file_transaction(stm->ctrl);
-    if(!file) {
-      error_handler(stm, METALINK_ERR_BAD_ALLOC);
-      return;
-    }
-    r = metalink_pctrl_file_set_name(stm->ctrl, fname);
-    if(r !=  0) {
-      error_handler(stm, r);
-      return;
-    }
-  } else if(strcmp("url", name) == 0) {
+  if(strcmp("url", name) == 0) {
     const char* location;
     const char* value;
     long int priority = 0;

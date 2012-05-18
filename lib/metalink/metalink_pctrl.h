@@ -100,6 +100,8 @@ metalink_error_t metalink_pctrl_set_tags(metalink_pctrl_t* ctrl, const char* tas
 /* file manipulation functions */
 metalink_error_t metalink_pctrl_file_set_name(metalink_pctrl_t* ctrl, const char* name);
 
+metalink_error_t metalink_pctrl_file_set_description(metalink_pctrl_t* ctrl, const char* description);
+
 void metalink_pctrl_file_set_size(metalink_pctrl_t* ctrl, long long int size);
 
 metalink_error_t metalink_pctrl_file_set_version(metalink_pctrl_t* ctrl, const char* version);

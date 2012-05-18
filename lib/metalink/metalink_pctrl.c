@@ -309,6 +309,11 @@ metalink_error_t metalink_pctrl_file_set_name(metalink_pctrl_t* ctrl, const char
   return metalink_file_set_name(ctrl->temp_file, name);
 }
 
+metalink_error_t metalink_pctrl_file_set_description(metalink_pctrl_t* ctrl, const char* description)
+{
+  return metalink_file_set_description(ctrl->temp_file, description);
+}
+
 void metalink_pctrl_file_set_size(metalink_pctrl_t* ctrl, long long int size)
 {
   metalink_file_set_size(ctrl->temp_file, size);

@@ -165,6 +165,8 @@ void metalink_file_delete(metalink_file_t* file);
 /* mutators */
 metalink_error_t metalink_file_set_name(metalink_file_t* file, const char* name);
 
+metalink_error_t metalink_file_set_description(metalink_file_t* file, const char* description);
+
 void metalink_file_set_size(metalink_file_t* file, long long int size);
 
 metalink_error_t metalink_file_set_version(metalink_file_t* file, const char* version);

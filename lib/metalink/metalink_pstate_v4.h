@@ -71,6 +71,16 @@ void url_state_end_fun_v4(metalink_pstm_t* stm,
 			  const char* name, const char* ns_uri,
 			  const char* characters);
 
+/* description state <description> */
+void description_state_start_fun_v4(metalink_pstm_t* stm,
+				    const char* name, const char* ns_uri,
+				    const char** attrs);
+
+void description_state_end_fun_v4(metalink_pstm_t* stm,
+				  const char* name, const char* ns_uri,
+				  const char* characters);
+
+/* version state <version> */
 void version_state_start_fun_v4(metalink_pstm_t* stm,
 				const char* name, const char* ns_uri,
 				const char** attrs);

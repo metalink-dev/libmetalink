@@ -104,6 +104,13 @@ metalink_file_set_name(metalink_file_t* file, const char* name)
   return allocate_copy_string(&file->name, name);
 }
 
+metalink_error_t
+METALINK_PUBLIC
+metalink_file_set_description(metalink_file_t* file, const char* description)
+{
+  return allocate_copy_string(&file->description, description);
+}
+
 void
 METALINK_PUBLIC
 metalink_file_set_size(metalink_file_t* file, long long int size)

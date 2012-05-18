@@ -170,6 +170,8 @@ void file_state_start_fun_v4(metalink_pstm_t* stm,
     metalink_pctrl_resource_set_priority(stm->ctrl, priority);
 
     metalink_pstm_enter_url_state_v4(stm);
+  } else if(strcmp("description", name) == 0) {
+    metalink_pstm_enter_description_state_v4(stm);
   } else if(strcmp("version", name) == 0) {
     metalink_pstm_enter_version_state_v4(stm);
   } else {
@@ -209,6 +211,27 @@ void url_state_end_fun_v4(metalink_pstm_t* stm,
     return;
   }
   r = metalink_pctrl_commit_resource_transaction(stm->ctrl);
+  if(r != 0) {
+    error_handler(stm, r);
+    return;
+  }
+  metalink_pstm_enter_file_state_v4(stm);
+}
+
+/* description state <description> */
+void description_state_start_fun_v4(metalink_pstm_t* stm,
+				const char* name, const char* ns_uri,
+				const char** attrs)
+{
+  metalink_pstm_enter_skip_state(stm);
+}
+
+void description_state_end_fun_v4(metalink_pstm_t* stm,
+			      const char* name, const char* ns_uri,
+			      const char* characters)
+{
+  metalink_error_t r;
+  r = metalink_pctrl_file_set_description(stm->ctrl, characters);
   if(r != 0) {
     error_handler(stm, r);
     return;

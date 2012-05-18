@@ -256,7 +256,7 @@ void language_state_end_fun_v3(metalink_pstm_t* stm,
 			       const char* characters)
 {
   metalink_error_t r;
-  r = metalink_pctrl_file_set_language(stm->ctrl, characters);
+  r = metalink_pctrl_file_add_language(stm->ctrl, characters);
   if(r == 0) {
     metalink_pstm_enter_file_state(stm);
   } else {

@@ -106,7 +106,7 @@ void metalink_pctrl_file_set_size(metalink_pctrl_t* ctrl, long long int size);
 
 metalink_error_t metalink_pctrl_file_set_version(metalink_pctrl_t* ctrl, const char* version);
 
-metalink_error_t metalink_pctrl_file_set_language(metalink_pctrl_t* ctrl, const char* language);
+metalink_error_t metalink_pctrl_file_add_language(metalink_pctrl_t* ctrl, const char* language);
 
 metalink_error_t metalink_pctrl_file_set_os(metalink_pctrl_t* ctrl, const char* os);
 

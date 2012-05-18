@@ -324,9 +324,9 @@ metalink_error_t metalink_pctrl_file_set_version(metalink_pctrl_t* ctrl, const c
   return metalink_file_set_version(ctrl->temp_file, version);
 }
 
-metalink_error_t metalink_pctrl_file_set_language(metalink_pctrl_t* ctrl, const char* language)
+metalink_error_t metalink_pctrl_file_add_language(metalink_pctrl_t* ctrl, const char* language)
 {
-  return metalink_file_set_language(ctrl->temp_file, language);
+  return metalink_file_add_language(ctrl->temp_file, language);
 }
 
 metalink_error_t metalink_pctrl_file_set_os(metalink_pctrl_t* ctrl, const char* os)

@@ -31,6 +31,16 @@
 #include <assert.h>
 #include <stdio.h>
 
+static size_t count_array(void** array)
+{
+  size_t count = 0;
+  while(*array) {
+    ++count;
+    ++array;
+  }
+  return count;
+}
+
 static metalink_error_t allocate_copy_string(char** dest, const char* src)
 {
   free(*dest);
@@ -67,10 +77,19 @@ metalink_file_delete(metalink_file_t* file)
 {
   metalink_resource_t** res;
   metalink_checksum_t** checksums;
+  char** language;
+
   if(file) {
     free(file->name);
     free(file->version);
-    free(file->language);
+    if(file->languages) {
+      language = file->languages;
+      while(*language) {
+	free(*language);
+	++language;
+      }
+      free(file->languages);
+    }
     free(file->os);
 
     if(file->resources) {
@@ -127,9 +146,36 @@ metalink_file_set_version(metalink_file_t* file, const char* version)
 
 metalink_error_t
 METALINK_PUBLIC
-metalink_file_set_language(metalink_file_t* file, const char* language)
+metalink_file_add_language(metalink_file_t* file, const char* language)
 {
-  return allocate_copy_string(&file->language, language);
+  size_t size;
+  int i;
+  char** cpy;
+
+  if(!file->languages) {
+    file->languages = calloc(2, sizeof(char*));
+    if(!file->languages) {
+      return METALINK_ERR_BAD_ALLOC;
+    }
+    i = 0;
+  } else {
+    size = count_array((void**)file->languages);
+    cpy = calloc(size+2, sizeof(char*));
+    if(!cpy) {
+      return METALINK_ERR_BAD_ALLOC;
+    }
+    memcpy(cpy, file->languages, (size+1) * sizeof(char*));
+    cpy[size+1] = NULL;
+    free(file->languages);
+    file->languages = calloc(size+2, sizeof(char*));
+    if(!file->languages) {
+      return METALINK_ERR_BAD_ALLOC;
+    }
+    memcpy(file->languages, cpy, (size+1) * sizeof(char*));
+    i = size;
+  }
+
+  return allocate_copy_string(&file->languages[i], language);
 }
 
 metalink_error_t

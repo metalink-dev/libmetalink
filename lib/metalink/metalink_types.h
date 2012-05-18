@@ -139,9 +139,9 @@ typedef struct _metalink_file {
   long long int size;
   /* version, null terminated string */
   char* version;
-  /* language, null terminated string */
-  char* language;
-  /* os, null terminated string */
+  /* list of language, null terminated list of null terminated string */
+  char** languages;
+  /* list of os, null terminated list of null terminated string */
   char* os;
   /* list of metalink_resource_t */
   metalink_resource_t** resources;
@@ -171,7 +171,7 @@ void metalink_file_set_size(metalink_file_t* file, long long int size);
 
 metalink_error_t metalink_file_set_version(metalink_file_t* file, const char* version);
 
-metalink_error_t metalink_file_set_language(metalink_file_t* file, const char* language);
+metalink_error_t metalink_file_add_language(metalink_file_t* file, const char* language);
 
 metalink_error_t metalink_file_set_os(metalink_file_t* file, const char* os);
 

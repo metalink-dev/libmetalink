@@ -192,6 +192,8 @@ void file_state_start_fun_v4(metalink_pstm_t* stm,
       return;
     }
     metalink_pstm_enter_hash_state_v4(stm);
+  } else if(strcmp("size", name) == 0) {
+    metalink_pstm_enter_size_state_v4(stm);
   } else if(strcmp("version", name) == 0) {
     metalink_pstm_enter_version_state_v4(stm);
   } else {
@@ -282,6 +284,30 @@ void hash_state_end_fun_v4(metalink_pstm_t* stm,
     error_handler(stm, r);
     return;
   }
+  metalink_pstm_enter_file_state_v4(stm);
+}
+
+/* size state <size> */
+void size_state_start_fun_v4(metalink_pstm_t* stm,
+			     const char* name, const char* ns_uri,
+			     const char** attrs)
+{
+  metalink_pstm_enter_skip_state(stm);
+}
+
+void size_state_end_fun_v4(metalink_pstm_t* stm,
+			   const char* name, const char* ns_uri,
+			   const char* characters)
+{
+  long long int size = 0;
+
+  errno = 0;
+  size = strtoll(characters, 0, 10);
+  if(errno == ERANGE || size < 0) {
+    size = 0;
+  }
+  metalink_pctrl_file_set_size(stm->ctrl, size);
+
   metalink_pstm_enter_file_state_v4(stm);
 }
 

@@ -46,6 +46,7 @@ static void validate_result(volatile metalink_t* metalink)
   /* check 1st file */
   file = metalink->files[0];
   CU_ASSERT_STRING_EQUAL("libmetalink-0.0.1.tar.bz2", file->name);
+  CU_ASSERT_EQUAL(0, file->size); /* no size specified */
   CU_ASSERT_STRING_EQUAL("0.0.1", file->version);
 
   CU_ASSERT_EQUAL_FATAL(2, count_array((void**)file->checksums));
@@ -57,6 +58,8 @@ static void validate_result(volatile metalink_t* metalink)
   checksum = file->checksums[1];
   CU_ASSERT_STRING_EQUAL("md5", checksum->type);
   CU_ASSERT_STRING_EQUAL("fc4d834e89c18c99b2615d902750948c", checksum->hash);
+
+  CU_ASSERT_PTR_NULL(file->chunk_checksum); /* no chunk checksum */
 
   resource = file->resources[0];
   CU_ASSERT_EQUAL(100, resource->priority);

@@ -89,6 +89,15 @@ void hash_state_end_fun_v4(metalink_pstm_t* stm,
 			   const char* name, const char* ns_uri,
 			   const char* characters);
 
+/* size state <size> */
+void size_state_start_fun_v4(metalink_pstm_t* stm,
+			     const char* name, const char* ns_uri,
+			     const char** attrs);
+
+void size_state_end_fun_v4(metalink_pstm_t* stm,
+			   const char* name, const char* ns_uri,
+			   const char* characters);
+
 /* version state <version> */
 void version_state_start_fun_v4(metalink_pstm_t* stm,
 				const char* name, const char* ns_uri,

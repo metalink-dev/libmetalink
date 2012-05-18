@@ -257,6 +257,13 @@ void metalink_pstm_enter_description_state_v4(metalink_pstm_t* stm)
   metalink_pstm_enable_character_buffering(stm);
 }
 
+void metalink_pstm_enter_hash_state_v4(metalink_pstm_t* stm)
+{
+  metalink_pstm_set_fun(stm, &hash_state_start_fun_v4,
+			&hash_state_end_fun_v4);
+  metalink_pstm_enable_character_buffering(stm);
+}
+
 void metalink_pstm_enter_version_state_v4(metalink_pstm_t* stm)
 {
   metalink_pstm_set_fun(stm, &version_state_start_fun_v4,

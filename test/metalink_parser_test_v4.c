@@ -35,6 +35,7 @@
 static void validate_result(volatile metalink_t* metalink)
 {
   metalink_file_t* file;
+  metalink_checksum_t* checksum;
   metalink_resource_t* resource;
 
   CU_ASSERT_STRING_EQUAL("MetalinkEditor/2.0dev", metalink->generator);
@@ -46,6 +47,16 @@ static void validate_result(volatile metalink_t* metalink)
   file = metalink->files[0];
   CU_ASSERT_STRING_EQUAL("libmetalink-0.0.1.tar.bz2", file->name);
   CU_ASSERT_STRING_EQUAL("0.0.1", file->version);
+
+  CU_ASSERT_EQUAL_FATAL(2, count_array((void**)file->checksums));
+
+  checksum = file->checksums[0];
+  CU_ASSERT_STRING_EQUAL("sha1", checksum->type);
+  CU_ASSERT_STRING_EQUAL("a96cf3f0266b91d87d5124cf94326422800b627d",
+			 checksum->hash);
+  checksum = file->checksums[1];
+  CU_ASSERT_STRING_EQUAL("md5", checksum->type);
+  CU_ASSERT_STRING_EQUAL("fc4d834e89c18c99b2615d902750948c", checksum->hash);
 
   resource = file->resources[0];
   CU_ASSERT_EQUAL(100, resource->priority);

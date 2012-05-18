@@ -172,6 +172,26 @@ void file_state_start_fun_v4(metalink_pstm_t* stm,
     metalink_pstm_enter_url_state_v4(stm);
   } else if(strcmp("description", name) == 0) {
     metalink_pstm_enter_description_state_v4(stm);
+  } else if(strcmp("hash", name) == 0) {
+    const char* type;
+    metalink_checksum_t* checksum;
+
+    type = get_attribute_value(attrs, "type");
+    if(!type) {
+      metalink_pstm_enter_skip_state(stm);
+      return;
+    }
+    checksum = metalink_pctrl_new_checksum_transaction(stm->ctrl);
+    if(!checksum) {
+      error_handler(stm, METALINK_ERR_BAD_ALLOC);
+      return;
+    }
+    r = metalink_checksum_set_type(checksum, type);
+    if(r != 0) {
+      error_handler(stm, METALINK_ERR_BAD_ALLOC);
+      return;
+    }
+    metalink_pstm_enter_hash_state_v4(stm);
   } else if(strcmp("version", name) == 0) {
     metalink_pstm_enter_version_state_v4(stm);
   } else {
@@ -220,18 +240,44 @@ void url_state_end_fun_v4(metalink_pstm_t* stm,
 
 /* description state <description> */
 void description_state_start_fun_v4(metalink_pstm_t* stm,
-				const char* name, const char* ns_uri,
-				const char** attrs)
+				    const char* name, const char* ns_uri,
+				    const char** attrs)
 {
   metalink_pstm_enter_skip_state(stm);
 }
 
 void description_state_end_fun_v4(metalink_pstm_t* stm,
-			      const char* name, const char* ns_uri,
-			      const char* characters)
+				  const char* name, const char* ns_uri,
+				  const char* characters)
 {
   metalink_error_t r;
   r = metalink_pctrl_file_set_description(stm->ctrl, characters);
+  if(r != 0) {
+    error_handler(stm, r);
+    return;
+  }
+  metalink_pstm_enter_file_state_v4(stm);
+}
+
+/* hash state <hash> */
+void hash_state_start_fun_v4(metalink_pstm_t* stm,
+			     const char* name, const char* ns_uri,
+			     const char** attrs)
+{
+  metalink_pstm_enter_skip_state(stm);
+}
+
+void hash_state_end_fun_v4(metalink_pstm_t* stm,
+			   const char* name, const char* ns_uri,
+			   const char* characters)
+{
+  metalink_error_t r;
+  r = metalink_pctrl_checksum_set_hash(stm->ctrl, characters);
+  if(r != 0) {
+    error_handler(stm, r);
+    return;
+  }
+  r = metalink_pctrl_commit_checksum_transaction(stm->ctrl);
   if(r != 0) {
     error_handler(stm, r);
     return;

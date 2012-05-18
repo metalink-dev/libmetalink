@@ -80,6 +80,15 @@ void description_state_end_fun_v4(metalink_pstm_t* stm,
 				  const char* name, const char* ns_uri,
 				  const char* characters);
 
+/* hash state <hash> */
+void hash_state_start_fun_v4(metalink_pstm_t* stm,
+			     const char* name, const char* ns_uri,
+			     const char** attrs);
+
+void hash_state_end_fun_v4(metalink_pstm_t* stm,
+			   const char* name, const char* ns_uri,
+			   const char* characters);
+
 /* version state <version> */
 void version_state_start_fun_v4(metalink_pstm_t* stm,
 				const char* name, const char* ns_uri,

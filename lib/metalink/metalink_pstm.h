@@ -107,16 +107,12 @@ void metalink_pstm_enter_skip_state(metalink_pstm_t* stm);
 void metalink_pstm_exit_skip_state(metalink_pstm_t* stm);
 
 /* Metalink 4 states */
+void metalink_pstm_enter_file_state_v4(metalink_pstm_t* stm);
+
 void metalink_pstm_enter_generator_state(metalink_pstm_t* stm);
 
 void metalink_pstm_enter_origin_state(metalink_pstm_t* stm);
 
-void metalink_pstm_enter_url_state_v4(metalink_pstm_t* stm);
-
 void metalink_pstm_enter_description_state_v4(metalink_pstm_t* stm);
-
-void metalink_pstm_enter_hash_state_v4(metalink_pstm_t* stm);
-
-void metalink_pstm_enter_version_state_v4(metalink_pstm_t* stm);
 
 #endif /* _D_METALINK_PSTM_H_ */

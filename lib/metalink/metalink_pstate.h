@@ -28,6 +28,9 @@
 
 #include "metalink_error.h"
 
+#define METALINK_V3_NS_URI "http://www.metalinker.org/"
+#define METALINK_V4_NS_URI "urn:ietf:params:xml:ns:metalink"
+
 typedef struct _metalink_pstm metalink_pstm_t;
 
 typedef void (*metalink_start_fun) (metalink_pstm_t* stm,
@@ -96,13 +99,67 @@ void skip_state_end_fun(metalink_pstm_t* stm,
 			const char* name, const char* ns_uri,
 			const char* characters);
 
-/* fin state */
-void fin_state_start_fun_v3(metalink_pstm_t* stm,
-			    const char* name, const char* ns_uri,
-			    const char** attrs);
-
-void fin_state_end_fun_v3(metalink_pstm_t* stm,
+/* size state <size> */
+void size_state_start_fun(metalink_pstm_t* stm,
 			  const char* name, const char* ns_uri,
-			  const char* characters);
+			  const char** attrs);
+
+void size_state_end_fun(metalink_pstm_t* stm,
+			const char* name, const char* ns_uri,
+			const char* characters);
+
+/* version state <version> */
+void version_state_start_fun(metalink_pstm_t* stm,
+			     const char* name, const char* ns_uri,
+			     const char** attrs);
+
+void version_state_end_fun(metalink_pstm_t* stm,
+			   const char* name, const char* ns_uri,
+			   const char* characters);
+
+/* language state <language> */
+void language_state_start_fun(metalink_pstm_t* stm,
+			      const char* name, const char* ns_uri,
+			      const char** attrs);
+
+void language_state_end_fun(metalink_pstm_t* stm,
+			    const char* name, const char* ns_uri,
+			    const char* characters);
+
+/* os state <os> */
+void os_state_start_fun(metalink_pstm_t* stm,
+			const char* name, const char* ns_uri,
+			const char** attrs);
+
+void os_state_end_fun(metalink_pstm_t* stm,
+		      const char* name, const char* ns_uri,
+		      const char* characters);
+
+/* url state <url> */
+void url_state_start_fun(metalink_pstm_t* stm,
+			 const char* name, const char* ns_uri,
+			 const char** attrs);
+
+void url_state_end_fun(metalink_pstm_t* stm,
+		       const char* name, const char* ns_uri,
+		       const char* characters);
+
+/* hash state <hash> */
+void hash_state_start_fun(metalink_pstm_t* stm,
+			  const char* name, const char* ns_uri,
+			  const char** attrs);
+
+void hash_state_end_fun(metalink_pstm_t* stm,
+		        const char* name, const char* ns_uri,
+		        const char* characters);
+
+/* fin state */
+void fin_state_start_fun(metalink_pstm_t* stm,
+			 const char* name, const char* ns_uri,
+			 const char** attrs);
+
+void fin_state_end_fun(metalink_pstm_t* stm,
+		       const char* name, const char* ns_uri,
+		       const char* characters);
 
 #endif /* _D_METALINK_PARSER_STATE_H_ */

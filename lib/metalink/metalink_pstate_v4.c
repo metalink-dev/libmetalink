@@ -169,7 +169,7 @@ void file_state_start_fun_v4(metalink_pstm_t* stm,
     }
     metalink_pctrl_resource_set_priority(stm->ctrl, priority);
 
-    metalink_pstm_enter_url_state_v4(stm);
+    metalink_pstm_enter_url_state(stm);
   } else if(strcmp("description", name) == 0) {
     metalink_pstm_enter_description_state_v4(stm);
   } else if(strcmp("hash", name) == 0) {
@@ -191,11 +191,11 @@ void file_state_start_fun_v4(metalink_pstm_t* stm,
       error_handler(stm, METALINK_ERR_BAD_ALLOC);
       return;
     }
-    metalink_pstm_enter_hash_state_v4(stm);
+    metalink_pstm_enter_hash_state(stm);
   } else if(strcmp("size", name) == 0) {
-    metalink_pstm_enter_size_state_v4(stm);
+    metalink_pstm_enter_size_state(stm);
   } else if(strcmp("version", name) == 0) {
-    metalink_pstm_enter_version_state_v4(stm);
+    metalink_pstm_enter_version_state(stm);
   } else {
     metalink_pstm_enter_skip_state(stm);
   }

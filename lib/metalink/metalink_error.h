@@ -35,6 +35,8 @@ typedef enum metalink_error_e {
 	/* 1xx: XML semantic error */
 	METALINK_ERR_MISSING_REQUIRED_ATTR = 101,
 
+	METALINK_ERR_NAMESPACE_ERROR = 102,
+
 	/* 2xx: parser error */
 	METALINK_ERR_PARSER_ERROR = 201,
 

@@ -131,25 +131,25 @@ void metalink_pstm_enter_file_state(metalink_pstm_t* stm)
 
 void metalink_pstm_enter_size_state(metalink_pstm_t* stm)
 {
-  metalink_pstm_set_fun(stm, &size_state_start_fun_v3, &size_state_end_fun_v3);
+  metalink_pstm_set_fun(stm, &size_state_start_fun, &size_state_end_fun);
   metalink_pstm_enable_character_buffering(stm);
 }
 
 void metalink_pstm_enter_version_state(metalink_pstm_t* stm)
 {
-  metalink_pstm_set_fun(stm, &version_state_start_fun_v3, &version_state_end_fun_v3);
+  metalink_pstm_set_fun(stm, &version_state_start_fun, &version_state_end_fun);
   metalink_pstm_enable_character_buffering(stm);
 }
 
 void metalink_pstm_enter_language_state(metalink_pstm_t* stm)
 {
-  metalink_pstm_set_fun(stm, &language_state_start_fun_v3, &language_state_end_fun_v3);
+  metalink_pstm_set_fun(stm, &language_state_start_fun, &language_state_end_fun);
   metalink_pstm_enable_character_buffering(stm);
 }
 
 void metalink_pstm_enter_os_state(metalink_pstm_t* stm)
 {
-  metalink_pstm_set_fun(stm, &os_state_start_fun_v3, &os_state_end_fun_v3);
+  metalink_pstm_set_fun(stm, &os_state_start_fun, &os_state_end_fun);
   metalink_pstm_enable_character_buffering(stm);
 }
 
@@ -161,7 +161,7 @@ void metalink_pstm_enter_resources_state(metalink_pstm_t* stm)
 
 void metalink_pstm_enter_url_state(metalink_pstm_t* stm)
 {
-  metalink_pstm_set_fun(stm, &url_state_start_fun_v3, &url_state_end_fun_v3);
+  metalink_pstm_set_fun(stm, &url_state_start_fun, &url_state_end_fun);
   metalink_pstm_enable_character_buffering(stm);
 }
 
@@ -174,7 +174,7 @@ void metalink_pstm_enter_verification_state(metalink_pstm_t* stm)
 
 void metalink_pstm_enter_hash_state(metalink_pstm_t* stm)
 {
-  metalink_pstm_set_fun(stm, &hash_state_start_fun_v3, &hash_state_end_fun_v3);
+  metalink_pstm_set_fun(stm, &hash_state_start_fun, &hash_state_end_fun);
   metalink_pstm_enable_character_buffering(stm);
 }
 
@@ -193,7 +193,7 @@ void metalink_pstm_enter_piece_hash_state(metalink_pstm_t* stm)
 
 void metalink_pstm_enter_fin_state(metalink_pstm_t* stm)
 {
-  metalink_pstm_set_fun(stm, &fin_state_start_fun_v3, &fin_state_end_fun_v3);
+  metalink_pstm_set_fun(stm, &fin_state_start_fun, &fin_state_end_fun);
   metalink_pstm_disable_character_buffering(stm);
 }
 
@@ -222,6 +222,13 @@ void metalink_pstm_exit_skip_state(metalink_pstm_t* stm)
 }
 
 /* Metalink 4 states */
+void metalink_pstm_enter_file_state_v4(metalink_pstm_t* stm)
+{
+  metalink_pstm_set_fun(stm, &file_state_start_fun_v4,
+			&file_state_end_fun_v4);
+  metalink_pstm_disable_character_buffering(stm);
+}
+
 void metalink_pstm_enter_generator_state(metalink_pstm_t* stm)
 {
   metalink_pstm_set_fun(stm, &generator_state_start_fun_v4,
@@ -236,45 +243,9 @@ void metalink_pstm_enter_origin_state(metalink_pstm_t* stm)
   metalink_pstm_enable_character_buffering(stm);
 }
 
-void metalink_pstm_enter_file_state_v4(metalink_pstm_t* stm)
-{
-  metalink_pstm_set_fun(stm, &file_state_start_fun_v4,
-			&file_state_end_fun_v4);
-  metalink_pstm_disable_character_buffering(stm);
-}
-
-void metalink_pstm_enter_url_state_v4(metalink_pstm_t* stm)
-{
-  metalink_pstm_set_fun(stm, &url_state_start_fun_v4,
-			&url_state_end_fun_v4);
-  metalink_pstm_enable_character_buffering(stm);
-}
-
 void metalink_pstm_enter_description_state_v4(metalink_pstm_t* stm)
 {
   metalink_pstm_set_fun(stm, &description_state_start_fun_v4,
 			&description_state_end_fun_v4);
   metalink_pstm_enable_character_buffering(stm);
 }
-
-void metalink_pstm_enter_hash_state_v4(metalink_pstm_t* stm)
-{
-  metalink_pstm_set_fun(stm, &hash_state_start_fun_v4,
-			&hash_state_end_fun_v4);
-  metalink_pstm_enable_character_buffering(stm);
-}
-
-void metalink_pstm_enter_size_state_v4(metalink_pstm_t* stm)
-{
-  metalink_pstm_set_fun(stm, &size_state_start_fun_v4,
-			&size_state_end_fun_v4);
-  metalink_pstm_enable_character_buffering(stm);
-}
-
-void metalink_pstm_enter_version_state_v4(metalink_pstm_t* stm)
-{
-  metalink_pstm_set_fun(stm, &version_state_start_fun_v4,
-			&version_state_end_fun_v4);
-  metalink_pstm_enable_character_buffering(stm);
-}
-

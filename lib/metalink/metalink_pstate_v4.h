@@ -71,4 +71,12 @@ void url_state_end_fun_v4(metalink_pstm_t* stm,
 			  const char* name, const char* ns_uri,
 			  const char* characters);
 
+void version_state_start_fun_v4(metalink_pstm_t* stm,
+				const char* name, const char* ns_uri,
+				const char** attrs);
+
+void version_state_end_fun_v4(metalink_pstm_t* stm,
+			      const char* name, const char* ns_uri,
+			      const char* characters);
+
 #endif /* _D_METALINK_PARSER_STATE_V4_H_ */

@@ -245,6 +245,15 @@ void metalink_pstm_enter_file_state_v4(metalink_pstm_t* stm)
 
 void metalink_pstm_enter_url_state_v4(metalink_pstm_t* stm)
 {
-  metalink_pstm_set_fun(stm, &url_state_start_fun_v4, &url_state_end_fun_v4);
+  metalink_pstm_set_fun(stm, &url_state_start_fun_v4,
+			&url_state_end_fun_v4);
   metalink_pstm_enable_character_buffering(stm);
 }
+
+void metalink_pstm_enter_version_state_v4(metalink_pstm_t* stm)
+{
+  metalink_pstm_set_fun(stm, &version_state_start_fun_v4,
+			&version_state_end_fun_v4);
+  metalink_pstm_enable_character_buffering(stm);
+}
+

@@ -42,9 +42,10 @@ static void validate_result(volatile metalink_t* metalink)
   /* count files */
   CU_ASSERT_EQUAL_FATAL(3, count_array((void**)metalink->files));
 
-  /* check 1fst file */
+  /* check 1st file */
   file = metalink->files[0];
   CU_ASSERT_STRING_EQUAL("libmetalink-0.0.1.tar.bz2", file->name);
+  CU_ASSERT_STRING_EQUAL("0.0.1", file->version);
 
   resource = file->resources[0];
   CU_ASSERT_EQUAL(100, resource->priority);

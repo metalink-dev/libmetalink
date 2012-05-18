@@ -113,4 +113,6 @@ void metalink_pstm_enter_origin_state(metalink_pstm_t* stm);
 
 void metalink_pstm_enter_url_state_v4(metalink_pstm_t* stm);
 
+void metalink_pstm_enter_version_state_v4(metalink_pstm_t* stm);
+
 #endif /* _D_METALINK_PSTM_H_ */

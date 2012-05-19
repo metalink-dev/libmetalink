@@ -192,6 +192,10 @@ void file_state_start_fun_v4(metalink_pstm_t* stm,
       return;
     }
     metalink_pstm_enter_hash_state(stm);
+  } else if(strcmp("language", name) == 0) {
+    metalink_pstm_enter_language_state(stm);
+  } else if(strcmp("os", name) == 0) {
+    metalink_pstm_enter_os_state(stm);
   } else if(strcmp("size", name) == 0) {
     metalink_pstm_enter_size_state(stm);
   } else if(strcmp("version", name) == 0) {

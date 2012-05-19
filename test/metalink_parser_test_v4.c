@@ -32,7 +32,7 @@
 #include "metalink_parser_test_v4.h"
 #include "metalink/metalink_parser.h"
 
-static void validate_result(volatile metalink_t* metalink)
+static void validate_result(metalink_t* metalink)
 {
   metalink_file_t* file;
   metalink_checksum_t* checksum;
@@ -49,13 +49,11 @@ static void validate_result(volatile metalink_t* metalink)
   CU_ASSERT_EQUAL(0, file->size); /* no size specified */
   CU_ASSERT_STRING_EQUAL("0.0.1", file->version);
 
-#if 0
   CU_ASSERT_EQUAL(1, count_array((void**)file->languages));
   CU_ASSERT_STRING_EQUAL("en-US", file->languages[0]);
 
   CU_ASSERT_EQUAL(1, count_array((void**)file->oses));
   CU_ASSERT_STRING_EQUAL("Linux-x86", file->oses[0]);
-#endif
 
   CU_ASSERT_EQUAL_FATAL(2, count_array((void**)file->checksums));
 

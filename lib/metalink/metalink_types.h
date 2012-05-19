@@ -143,11 +143,17 @@ typedef struct _metalink_file {
   char** languages;
   /* list of os, null terminated list of null terminated string */
   char** oses;
+  /* file signature */
+  /**
+   * TODO: define a metalink_signature_t type? The metalink_checksum_t
+   * structure is used because it has the right behavior, but it isn't the best
+   * choice sementically.
+   */
+  metalink_checksum_t* signature;
   /* list of metalink_resource_t */
-  metalink_resource_t** resources;
-  int maxconnections;
+  metalink_resource_t** resources; int maxconnections;
   /* list of metalink_checksum_t. It is possible to include multiple message
-   * digest algorithms
+ * digest algorithms
    */
   metalink_checksum_t** checksums;
 

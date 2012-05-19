@@ -63,7 +63,8 @@ static void validate_result(metalink_t* metalink)
   CU_ASSERT_EQUAL(1, count_array((void**)file->languages));
   CU_ASSERT_STRING_EQUAL("en-US", file->languages[0]);
 
-  CU_ASSERT_STRING_EQUAL("Linux-x86", file->os);
+  CU_ASSERT_EQUAL(1, count_array((void**)file->oses));
+  CU_ASSERT_STRING_EQUAL("Linux-x86", file->oses[0]);
   CU_ASSERT_EQUAL(1, file->maxconnections);
 
   /* There is one checksum which has no type specified. Let's see it is

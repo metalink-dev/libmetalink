@@ -142,7 +142,7 @@ typedef struct _metalink_file {
   /* list of language, null terminated list of null terminated string */
   char** languages;
   /* list of os, null terminated list of null terminated string */
-  char* os;
+  char** oses;
   /* list of metalink_resource_t */
   metalink_resource_t** resources;
   int maxconnections;
@@ -173,7 +173,7 @@ metalink_error_t metalink_file_set_version(metalink_file_t* file, const char* ve
 
 metalink_error_t metalink_file_add_language(metalink_file_t* file, const char* language);
 
-metalink_error_t metalink_file_set_os(metalink_file_t* file, const char* os);
+metalink_error_t metalink_file_add_os(metalink_file_t* file, const char* os);
 
 metalink_error_t metalink_file_set_resources(metalink_file_t* file, metalink_resource_t** resources);
 

@@ -329,9 +329,9 @@ metalink_error_t metalink_pctrl_file_add_language(metalink_pctrl_t* ctrl, const 
   return metalink_file_add_language(ctrl->temp_file, language);
 }
 
-metalink_error_t metalink_pctrl_file_set_os(metalink_pctrl_t* ctrl, const char* os)
+metalink_error_t metalink_pctrl_file_add_os(metalink_pctrl_t* ctrl, const char* os)
 {
-  return metalink_file_set_os(ctrl->temp_file, os);
+  return metalink_file_add_os(ctrl->temp_file, os);
 }
 
 void metalink_pctrl_file_set_maxconnections(metalink_pctrl_t* ctrl, int maxconnections)

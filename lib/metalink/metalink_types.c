@@ -109,6 +109,7 @@ metalink_file_delete(metalink_file_t* file)
   metalink_resource_t** res;
   metalink_checksum_t** checksums;
   char** language;
+  char** os;
 
   if(file) {
     free(file->name);
@@ -121,7 +122,14 @@ metalink_file_delete(metalink_file_t* file)
       }
       free(file->languages);
     }
-    free(file->os);
+    if(file->oses) {
+      os = file->oses;
+      while(*os) {
+	free(*os);
+	++os;
+      }
+      free(file->oses);
+    }
 
     if(file->resources) {
       res = file->resources;
@@ -187,15 +195,24 @@ metalink_file_add_language(metalink_file_t* file, const char* language)
     return r;
   }
 
-  i = count_array(file->languages);
+  i = count_array((void**)file->languages);
   return allocate_copy_string(&file->languages[i], language);
 }
 
 metalink_error_t
 METALINK_PUBLIC
-metalink_file_set_os(metalink_file_t* file, const char* os)
+metalink_file_add_os(metalink_file_t* file, const char* os)
 {
-  return allocate_copy_string(&file->os, os);
+  int i;
+  metalink_error_t r;
+
+  r = extends_array((void***)&file->oses, sizeof(char*));
+  if(r != 0) {
+    return r;
+  }
+
+  i = count_array((void**)file->oses);
+  return allocate_copy_string(&file->oses[i], os);
 }
 
 void

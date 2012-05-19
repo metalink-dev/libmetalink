@@ -46,7 +46,7 @@ void test_metalink_pctrl_file_transaction(void)
   CU_ASSERT_EQUAL(0, metalink_pctrl_file_set_version(ctrl, "1.0.0"));
   CU_ASSERT_EQUAL(0, metalink_pctrl_file_add_language(ctrl, "en_US"));
   CU_ASSERT_EQUAL(0, metalink_pctrl_file_add_language(ctrl, "en_GB"));
-  CU_ASSERT_EQUAL(0, metalink_pctrl_file_set_os(ctrl, "linux"));
+  CU_ASSERT_EQUAL(0, metalink_pctrl_file_add_os(ctrl, "linux"));
   metalink_pctrl_file_set_maxconnections(ctrl, 5);
 
   /* Commit */
@@ -62,7 +62,7 @@ void test_metalink_pctrl_file_transaction(void)
   CU_ASSERT_STRING_EQUAL("1.0.0", file->version);
   CU_ASSERT_STRING_EQUAL("en_US", file->languages[0]);
   CU_ASSERT_STRING_EQUAL("en_GB", file->languages[1]);
-  CU_ASSERT_STRING_EQUAL("linux", file->os);
+  CU_ASSERT_STRING_EQUAL("linux", file->oses[0]);
   CU_ASSERT_EQUAL(5, file->maxconnections);
 
   delete_metalink_pctrl(ctrl);

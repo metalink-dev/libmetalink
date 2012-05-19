@@ -108,7 +108,7 @@ metalink_error_t metalink_pctrl_file_set_version(metalink_pctrl_t* ctrl, const c
 
 metalink_error_t metalink_pctrl_file_add_language(metalink_pctrl_t* ctrl, const char* language);
 
-metalink_error_t metalink_pctrl_file_set_os(metalink_pctrl_t* ctrl, const char* os);
+metalink_error_t metalink_pctrl_file_add_os(metalink_pctrl_t* ctrl, const char* os);
 
 void metalink_pctrl_file_set_maxconnections(metalink_pctrl_t* ctrl, int maxconnections);
 

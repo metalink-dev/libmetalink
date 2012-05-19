@@ -66,6 +66,8 @@ static void validate_result(volatile metalink_t* metalink)
 
   resource = file->resources[1];
   CU_ASSERT_EQUAL(99, resource->priority);
+
+  metalink_delete(metalink);
 }
 
 void test_metalink_parse_file_v4(void)

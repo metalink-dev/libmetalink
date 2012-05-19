@@ -151,6 +151,7 @@ metalink_file_add_language(metalink_file_t* file, const char* language)
   size_t size;
   int i;
   char** cpy;
+  char** p;
 
   if(!file->languages) {
     file->languages = calloc(2, sizeof(char*));
@@ -166,12 +167,14 @@ metalink_file_add_language(metalink_file_t* file, const char* language)
     }
     memcpy(cpy, file->languages, (size+1) * sizeof(char*));
     cpy[size+1] = NULL;
+
     free(file->languages);
     file->languages = calloc(size+2, sizeof(char*));
     if(!file->languages) {
       return METALINK_ERR_BAD_ALLOC;
     }
     memcpy(file->languages, cpy, (size+1) * sizeof(char*));
+    free(cpy);
     i = size;
   }
 
@@ -461,6 +464,14 @@ metalink_delete(metalink_t* metalink)
   if(!metalink) {
     return;
   }
+
+  if(metalink->generator) {
+    free(metalink->generator);
+  }
+  if(metalink->origin) {
+    free(metalink->origin);
+  }
+    
   if(metalink->files) {
     filepp = metalink->files;
     while(*filepp) {

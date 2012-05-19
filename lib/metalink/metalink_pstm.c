@@ -180,14 +180,14 @@ void metalink_pstm_enter_hash_state(metalink_pstm_t* stm)
 
 void metalink_pstm_enter_pieces_state(metalink_pstm_t* stm)
 {
-  metalink_pstm_set_fun(stm, &pieces_state_start_fun_v3, &pieces_state_end_fun_v3);
+  metalink_pstm_set_fun(stm, &pieces_state_start_fun, &pieces_state_end_fun);
   metalink_pstm_enable_character_buffering(stm);
 }
 
 void metalink_pstm_enter_piece_hash_state(metalink_pstm_t* stm)
 {
-  metalink_pstm_set_fun(stm, &piece_hash_state_start_fun_v3,
-			&piece_hash_state_end_fun_v3);
+  metalink_pstm_set_fun(stm, &piece_hash_state_start_fun,
+			&piece_hash_state_end_fun);
   metalink_pstm_enable_character_buffering(stm);
 }
 

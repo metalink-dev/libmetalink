@@ -153,6 +153,25 @@ void hash_state_end_fun(metalink_pstm_t* stm,
 		        const char* name, const char* ns_uri,
 		        const char* characters);
 
+/* pieces state <pieces> */
+void pieces_state_start_fun(metalink_pstm_t* stm,
+			    const char* name, const char* ns_uri,
+			    const char** attrs);
+
+void pieces_state_end_fun(metalink_pstm_t* stm,
+			  const char* name, const char* ns_uri,
+			  const char* characters);
+
+/* piece hash state <hash> inside of <pieces> */
+void piece_hash_state_start_fun(metalink_pstm_t* stm,
+			        const char* name, const char* ns_uri,
+			        const char** attrs);
+
+void piece_hash_state_end_fun(metalink_pstm_t* stm,
+			      const char* name, const char* ns_uri,
+			      const char* characters);
+
+
 /* fin state */
 void fin_state_start_fun(metalink_pstm_t* stm,
 			 const char* name, const char* ns_uri,

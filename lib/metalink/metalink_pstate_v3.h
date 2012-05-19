@@ -89,22 +89,4 @@ void verification_state_end_fun_v3(metalink_pstm_t* stm,
 				   const char* name, const char* ns_uri,
 				   const char* characters);
 
-/* pieces state <pieces> */
-void pieces_state_start_fun_v3(metalink_pstm_t* stm,
-			       const char* name, const char* ns_uri,
-			       const char** attrs);
-
-void pieces_state_end_fun_v3(metalink_pstm_t* stm,
-			     const char* name, const char* ns_uri,
-			     const char* characters);
-
-/* piece hash state <hash> inside of <pieces> */
-void piece_hash_state_start_fun_v3(metalink_pstm_t* stm,
-				   const char* name, const char* ns_uri,
-				   const char** attrs);
-
-void piece_hash_state_end_fun_v3(metalink_pstm_t* stm,
-				 const char* name, const char* ns_uri,
-				 const char* characters);
-
 #endif /* _D_METALINK_PARSER_STATE_V3_H_ */

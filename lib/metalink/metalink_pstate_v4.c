@@ -190,6 +190,45 @@ void file_state_start_fun_v4(metalink_pstm_t* stm,
       return;
     }
     metalink_pstm_enter_hash_state(stm);
+  } else if(strcmp("pieces", name) == 0) {
+    const char* type;
+    const char* value;
+    long int length;
+    metalink_chunk_checksum_t* chunk_checksum;
+
+    type = get_attribute_value(attrs, "type");
+    if(!type) {
+      metalink_pstm_enter_skip_state(stm);
+      return;
+    }
+
+    value = get_attribute_value(attrs, "length");
+    if(value) {
+      errno = 0;
+      length = strtol(value, 0, 10);
+      if(errno == ERANGE || length < 0 || length > INT_MAX) {
+	/* Invalid piece size: skip this tag */
+	metalink_pstm_enter_skip_state(stm);
+	return;
+      }
+    } else {
+      metalink_pstm_enter_skip_state(stm);
+      return;
+    }
+
+    chunk_checksum = metalink_pctrl_new_chunk_checksum_transaction(stm->ctrl);
+    if(!chunk_checksum) {
+      error_handler(stm, METALINK_ERR_BAD_ALLOC);
+      return;
+    }
+    r = metalink_chunk_checksum_set_type(chunk_checksum, type);
+    if(r != 0) {
+      error_handler(stm, METALINK_ERR_BAD_ALLOC);
+      return;
+    }
+    metalink_chunk_checksum_set_length(chunk_checksum, length);
+
+    metalink_pstm_enter_pieces_state(stm);
   } else if(strcmp("signature", name) == 0) {
     const char* mediatype;
     metalink_checksum_t* signature;

@@ -41,6 +41,37 @@ static size_t count_array(void** array)
   return count;
 }
 
+static metalink_error_t extends_array(void*** array, size_t type_size)
+{
+  size_t size;
+  char** cpy;
+
+  if(!*array) {
+    *array = calloc(2, type_size);
+    if(!*array) {
+      return METALINK_ERR_BAD_ALLOC;
+    }
+  } else {
+    size = count_array(*array);
+    cpy = calloc(size+2, type_size);
+    if(!cpy) {
+      return METALINK_ERR_BAD_ALLOC;
+    }
+    memcpy(cpy, *array, (size+1) * type_size);
+    cpy[size+1] = NULL;
+
+    free(*array);
+    *array = calloc(size+2, type_size);
+    if(!*array) {
+      return METALINK_ERR_BAD_ALLOC;
+    }
+    memcpy(*array, cpy, (size+1) * type_size);
+    free(cpy);
+  }
+
+  return 0;
+}
+
 static metalink_error_t allocate_copy_string(char** dest, const char* src)
 {
   free(*dest);
@@ -148,36 +179,15 @@ metalink_error_t
 METALINK_PUBLIC
 metalink_file_add_language(metalink_file_t* file, const char* language)
 {
-  size_t size;
   int i;
-  char** cpy;
-  char** p;
+  metalink_error_t r;
 
-  if(!file->languages) {
-    file->languages = calloc(2, sizeof(char*));
-    if(!file->languages) {
-      return METALINK_ERR_BAD_ALLOC;
-    }
-    i = 0;
-  } else {
-    size = count_array((void**)file->languages);
-    cpy = calloc(size+2, sizeof(char*));
-    if(!cpy) {
-      return METALINK_ERR_BAD_ALLOC;
-    }
-    memcpy(cpy, file->languages, (size+1) * sizeof(char*));
-    cpy[size+1] = NULL;
-
-    free(file->languages);
-    file->languages = calloc(size+2, sizeof(char*));
-    if(!file->languages) {
-      return METALINK_ERR_BAD_ALLOC;
-    }
-    memcpy(file->languages, cpy, (size+1) * sizeof(char*));
-    free(cpy);
-    i = size;
+  r = extends_array((void***)&file->languages, sizeof(char*));
+  if(r != 0) {
+    return r;
   }
 
+  i = count_array(file->languages);
   return allocate_copy_string(&file->languages[i], language);
 }
 
@@ -471,7 +481,7 @@ metalink_delete(metalink_t* metalink)
   if(metalink->origin) {
     free(metalink->origin);
   }
-    
+
   if(metalink->files) {
     filepp = metalink->files;
     while(*filepp) {

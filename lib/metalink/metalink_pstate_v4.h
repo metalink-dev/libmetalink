@@ -80,6 +80,33 @@ void description_state_end_fun_v4(metalink_pstm_t* stm,
 				  const char* name, const char* ns_uri,
 				  const char* characters);
 
+/* copyright state <copyright> */
+void copyright_state_start_fun_v4(metalink_pstm_t* stm,
+				  const char* name, const char* ns_uri,
+				  const char** attrs);
+
+void copyright_state_end_fun_v4(metalink_pstm_t* stm,
+				const char* name, const char* ns_uri,
+				const char* characters);
+
+/* identity state <identity> */
+void identity_state_start_fun_v4(metalink_pstm_t* stm,
+				 const char* name, const char* ns_uri,
+				 const char** attrs);
+
+void identity_state_end_fun_v4(metalink_pstm_t* stm,
+			       const char* name, const char* ns_uri,
+			       const char* characters);
+
+/* logo state <logo> */
+void logo_state_start_fun_v4(metalink_pstm_t* stm,
+			    const char* name, const char* ns_uri,
+			    const char** attrs);
+
+void logo_state_end_fun_v4(metalink_pstm_t* stm,
+			   const char* name, const char* ns_uri,
+			   const char* characters);
+
 /* signature state <signature> */
 void signature_state_start_fun_v4(metalink_pstm_t* stm,
 				  const char* name, const char* ns_uri,

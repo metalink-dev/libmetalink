@@ -115,6 +115,12 @@ void metalink_pstm_enter_origin_state(metalink_pstm_t* stm);
 
 void metalink_pstm_enter_description_state_v4(metalink_pstm_t* stm);
 
+void metalink_pstm_enter_copyright_state_v4(metalink_pstm_t* stm);
+
+void metalink_pstm_enter_identity_state_v4(metalink_pstm_t* stm);
+
+void metalink_pstm_enter_logo_state_v4(metalink_pstm_t* stm);
+
 void metalink_pstm_enter_signature_state_v4(metalink_pstm_t* stm);
 
 void metalink_pstm_enter_pieces_state_v4(metalink_pstm_t* stm);

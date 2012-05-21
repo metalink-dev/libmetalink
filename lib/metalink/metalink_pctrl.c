@@ -357,6 +357,21 @@ metalink_error_t metalink_pctrl_file_set_description(metalink_pctrl_t* ctrl, con
   return metalink_file_set_description(ctrl->temp_file, description);
 }
 
+metalink_error_t metalink_pctrl_file_set_copyright(metalink_pctrl_t* ctrl, const char* copyright)
+{
+  return metalink_file_set_copyright(ctrl->temp_file, copyright);
+}
+
+metalink_error_t metalink_pctrl_file_set_identity(metalink_pctrl_t* ctrl, const char* identity)
+{
+  return metalink_file_set_identity(ctrl->temp_file, identity);
+}
+
+metalink_error_t metalink_pctrl_file_set_logo(metalink_pctrl_t* ctrl, const char* logo)
+{
+  return metalink_file_set_logo(ctrl->temp_file, logo);
+}
+
 void metalink_pctrl_file_set_size(metalink_pctrl_t* ctrl, long long int size)
 {
   metalink_file_set_size(ctrl->temp_file, size);

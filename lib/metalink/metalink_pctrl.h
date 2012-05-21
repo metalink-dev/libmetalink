@@ -110,6 +110,12 @@ metalink_error_t metalink_pctrl_file_set_name(metalink_pctrl_t* ctrl, const char
 
 metalink_error_t metalink_pctrl_file_set_description(metalink_pctrl_t* ctrl, const char* description);
 
+metalink_error_t metalink_pctrl_file_set_copyright(metalink_pctrl_t* ctrl, const char* copyright);
+
+metalink_error_t metalink_pctrl_file_set_identity(metalink_pctrl_t* ctrl, const char* identity);
+
+metalink_error_t metalink_pctrl_file_set_logo(metalink_pctrl_t* ctrl, const char* logo);
+
 void metalink_pctrl_file_set_size(metalink_pctrl_t* ctrl, long long int size);
 
 metalink_error_t metalink_pctrl_file_set_version(metalink_pctrl_t* ctrl, const char* version);

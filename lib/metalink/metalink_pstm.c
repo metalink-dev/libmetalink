@@ -250,6 +250,27 @@ void metalink_pstm_enter_description_state_v4(metalink_pstm_t* stm)
   metalink_pstm_enable_character_buffering(stm);
 }
 
+void metalink_pstm_enter_copyright_state_v4(metalink_pstm_t* stm)
+{
+  metalink_pstm_set_fun(stm, &copyright_state_start_fun_v4,
+			&copyright_state_end_fun_v4);
+  metalink_pstm_enable_character_buffering(stm);
+}
+
+void metalink_pstm_enter_identity_state_v4(metalink_pstm_t* stm)
+{
+  metalink_pstm_set_fun(stm, &identity_state_start_fun_v4,
+			&identity_state_end_fun_v4);
+  metalink_pstm_enable_character_buffering(stm);
+}
+
+void metalink_pstm_enter_logo_state_v4(metalink_pstm_t* stm)
+{
+  metalink_pstm_set_fun(stm, &logo_state_start_fun_v4,
+			&logo_state_end_fun_v4);
+  metalink_pstm_enable_character_buffering(stm);
+}
+
 void metalink_pstm_enter_signature_state_v4(metalink_pstm_t* stm)
 {
   metalink_pstm_set_fun(stm, &signature_state_start_fun_v4,

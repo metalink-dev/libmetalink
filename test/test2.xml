@@ -5,6 +5,7 @@
         <version>0.0.1</version>
         <language>en-US</language>
         <os>Linux-x86</os>
+        <identity>libmetalink</identity>
         <hash type="sha1">a96cf3f0266b91d87d5124cf94326422800b627d</hash>
 	<!-- no type -->
         <hash>notype</hash>

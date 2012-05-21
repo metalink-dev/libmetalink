@@ -251,6 +251,12 @@ void file_state_start_fun_v4(metalink_pstm_t* stm,
     metalink_pstm_enter_signature_state_v4(stm);
   } else if(strcmp("description", name) == 0) {
     metalink_pstm_enter_description_state_v4(stm);
+  } else if(strcmp("copyright", name) == 0) {
+    metalink_pstm_enter_copyright_state_v4(stm);
+  } else if(strcmp("identity", name) == 0) {
+    metalink_pstm_enter_identity_state_v4(stm);
+  } else if(strcmp("logo", name) == 0) {
+    metalink_pstm_enter_logo_state_v4(stm);
   } else if(strcmp("language", name) == 0) {
     metalink_pstm_enter_language_state(stm);
   } else if(strcmp("os", name) == 0) {
@@ -291,6 +297,69 @@ void description_state_end_fun_v4(metalink_pstm_t* stm,
 {
   metalink_error_t r;
   r = metalink_pctrl_file_set_description(stm->ctrl, characters);
+  if(r != 0) {
+    error_handler(stm, r);
+    return;
+  }
+  metalink_pstm_enter_file_state_v4(stm);
+}
+
+/* copyright state <copyright> */
+void copyright_state_start_fun_v4(metalink_pstm_t* stm,
+				  const char* name, const char* ns_uri,
+				  const char** attrs)
+{
+  metalink_pstm_enter_skip_state(stm);
+}
+
+void copyright_state_end_fun_v4(metalink_pstm_t* stm,
+				const char* name, const char* ns_uri,
+				const char* characters)
+{
+  metalink_error_t r;
+  r = metalink_pctrl_file_set_copyright(stm->ctrl, characters);
+  if(r != 0) {
+    error_handler(stm, r);
+    return;
+  }
+  metalink_pstm_enter_file_state_v4(stm);
+}
+
+/* identity state <identity> */
+void identity_state_start_fun_v4(metalink_pstm_t* stm,
+				 const char* name, const char* ns_uri,
+				 const char** attrs)
+{
+  metalink_pstm_enter_skip_state(stm);
+}
+
+void identity_state_end_fun_v4(metalink_pstm_t* stm,
+			       const char* name, const char* ns_uri,
+			       const char* characters)
+{
+  metalink_error_t r;
+  r = metalink_pctrl_file_set_identity(stm->ctrl, characters);
+  if(r != 0) {
+    error_handler(stm, r);
+    return;
+  }
+  metalink_pstm_enter_file_state_v4(stm);
+}
+
+/* logo state <logo> */
+void logo_state_start_fun_v4(metalink_pstm_t* stm,
+			    const char* name, const char* ns_uri,
+			    const char** attrs)
+{
+  metalink_pstm_enter_skip_state(stm);
+}
+
+void logo_state_end_fun_v4(metalink_pstm_t* stm,
+			   const char* name, const char* ns_uri,
+			   const char* characters)
+{
+  metalink_error_t r;
+  r = metalink_pctrl_file_set_logo(stm->ctrl, characters);
   if(r != 0) {
     error_handler(stm, r);
     return;

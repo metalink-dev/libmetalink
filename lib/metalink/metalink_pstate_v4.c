@@ -228,7 +228,7 @@ void file_state_start_fun_v4(metalink_pstm_t* stm,
     }
     metalink_chunk_checksum_set_length(chunk_checksum, length);
 
-    metalink_pstm_enter_pieces_state(stm);
+    metalink_pstm_enter_pieces_state_v4(stm);
   } else if(strcmp("signature", name) == 0) {
     const char* mediatype;
     metalink_checksum_t* signature;
@@ -318,3 +318,39 @@ void signature_state_end_fun_v4(metalink_pstm_t* stm,
   }
   metalink_pstm_enter_file_state_v4(stm);
 }
+
+/* pieces state <pieces> */
+void pieces_state_start_fun_v4(metalink_pstm_t* stm,
+			       const char* name, const char* ns_uri,
+			       const char** attrs)
+{
+  if(strcmp("hash", name) == 0) {
+    metalink_piece_hash_t* piece_hash;
+
+    
+    piece_hash = metalink_pctrl_new_piece_hash_transaction(stm->ctrl);
+    if(!piece_hash) {
+      error_handler(stm, METALINK_ERR_BAD_ALLOC);
+      return;
+    }
+
+    metalink_pstm_enter_piece_hash_state(stm);
+  } else {
+    metalink_pstm_enter_skip_state(stm);
+  }
+}
+
+void pieces_state_end_fun_v4(metalink_pstm_t* stm,
+			     const char* name, const char* ns_uri,
+			     const char* characters)
+{
+  metalink_error_t r;
+  r = metalink_pctrl_commit_chunk_checksum_transaction(stm->ctrl);
+  if(r != 0) {
+    error_handler(stm, r);
+    return;
+  }
+
+  metalink_pstm_enter_file_state_v4(stm);
+}
+

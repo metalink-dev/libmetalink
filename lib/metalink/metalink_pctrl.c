@@ -48,6 +48,10 @@ metalink_pctrl_t* new_metalink_pctrl(void)
   if(!ctrl->resources) {
     goto NEW_METALINK_PCTRL_ERROR;
   }
+  ctrl->metaurls = metalink_list_new();
+  if(!ctrl->metaurls) {
+    goto NEW_METALINK_PCTRL_ERROR;
+  }
   ctrl->checksums = metalink_list_new();
   if(!ctrl->checksums) {
     goto NEW_METALINK_PCTRL_ERROR;
@@ -77,6 +81,11 @@ void delete_metalink_pctrl(metalink_pctrl_t* ctrl)
 			 (void (*)(void*))&metalink_resource_delete);
   metalink_list_delete(ctrl->resources);
   metalink_resource_delete(ctrl->temp_resource);
+
+  metalink_list_for_each(ctrl->metaurls,
+			 (void (*)(void*))&metalink_resource_delete);
+  metalink_list_delete(ctrl->metaurls);
+  metalink_resource_delete(ctrl->temp_metaurl);
 
   metalink_list_for_each(ctrl->checksums,
 			 (void (*)(void*))&metalink_checksum_delete);
@@ -156,6 +165,10 @@ metalink_file_t* metalink_pctrl_new_file_transaction(metalink_pctrl_t* ctrl)
 			 (void (*)(void*))&metalink_resource_delete);
   metalink_list_clear(ctrl->resources);
 
+  metalink_list_for_each(ctrl->metaurls,
+			 (void (*)(void*))&metalink_resource_delete);
+  metalink_list_clear(ctrl->metaurls);
+
   metalink_list_for_each(ctrl->checksums,
 			 (void (*)(void*))&metalink_checksum_delete);
   metalink_list_clear(ctrl->checksums);
@@ -175,7 +188,14 @@ metalink_error_t metalink_pctrl_commit_file_transaction(metalink_pctrl_t* ctrl)
 			   ctrl->resources, sizeof(metalink_resource_t*));
   if(r != 0) {
     return r;
-  } /* copy ctrl->checksums to ctrl->temp_file->checksums */
+  }
+  /* copy ctrl->metaurls to ctrl->temp_file->metaurls */
+  r = commit_list_to_array((void***)&ctrl->temp_file->metaurls,
+			   ctrl->metaurls, sizeof(metalink_resource_t*));
+  if(r != 0) {
+    return r;
+  }
+  /* copy ctrl->checksums to ctrl->temp_file->checksums */
   r = commit_list_to_array((void***)&ctrl->temp_file->checksums,
 			   ctrl->checksums, sizeof(metalink_checksum_t*));
   if(r != 0) {
@@ -210,6 +230,29 @@ metalink_error_t metalink_pctrl_commit_resource_transaction(metalink_pctrl_t* ct
   }
 
   ctrl->temp_resource = NULL;
+  return 0;
+}
+
+metalink_resource_t* metalink_pctrl_new_metaurl_transaction(metalink_pctrl_t* ctrl)
+{
+  if(ctrl->temp_metaurl) {
+    metalink_resource_delete(ctrl->temp_metaurl);
+  }
+  ctrl->temp_metaurl = metalink_resource_new();
+  return ctrl->temp_metaurl;
+}
+
+metalink_error_t metalink_pctrl_commit_metaurl_transaction(metalink_pctrl_t* ctrl)
+{
+  if(!ctrl->temp_metaurl) {
+    return METALINK_ERR_NO_RESOURCE_TRANSACTION;
+  }
+
+  if(metalink_list_append(ctrl->metaurls, ctrl->temp_metaurl) != 0) {
+    return METALINK_ERR_BAD_ALLOC;
+  }
+
+  ctrl->temp_metaurl = NULL;
   return 0;
 }
 

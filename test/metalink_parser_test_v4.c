@@ -32,11 +32,12 @@
 #include "metalink_parser_test_v4.h"
 #include "metalink/metalink_parser.h"
 
-static void validate_result(metalink_t* metalink)
+static void validate_result(volatile metalink_t* metalink)
 {
   metalink_file_t* file;
   metalink_checksum_t* checksum;
   metalink_resource_t* resource;
+  metalink_piece_hash_t* piece_hash;
 
   CU_ASSERT_STRING_EQUAL("MetalinkEditor/2.0dev", metalink->generator);
 
@@ -67,11 +68,76 @@ static void validate_result(metalink_t* metalink)
 
   CU_ASSERT_PTR_NULL(file->chunk_checksum); /* no chunk checksum */
 
+  CU_ASSERT_EQUAL_FATAL(2, count_array((void**)file->resources));
+
   resource = file->resources[0];
+  CU_ASSERT_STRING_EQUAL("ftp://ftphost/libmetalink-0.0.1.tar.bz2",
+			 resource->url);
+  CU_ASSERT_STRING_EQUAL("jp", resource->location);
   CU_ASSERT_EQUAL(100, resource->priority);
 
   resource = file->resources[1];
+  CU_ASSERT_STRING_EQUAL("http://httphost/libmetalink-0.0.1.tar.bz2",
+			 resource->url);
+  CU_ASSERT_PTR_NULL(resource->location); /* no location */
   CU_ASSERT_EQUAL(99, resource->priority);
+
+  /* check 2nd file */
+  file = metalink->files[1];
+  CU_ASSERT_STRING_EQUAL("libmetalink-0.0.2a.tar.bz2", file->name);
+  CU_ASSERT_EQUAL(4294967296LL, file->size);
+
+  CU_ASSERT_PTR_NULL(file->checksums); /* no checksums */
+
+  CU_ASSERT_STRING_EQUAL("sha1", file->chunk_checksum->type);
+  CU_ASSERT_EQUAL(262144, file->chunk_checksum->length);
+  /* Check that the entry which doesn't have type attribute is skipped. */
+  CU_ASSERT_PTR_NOT_NULL_FATAL(file->chunk_checksum);
+  CU_ASSERT_EQUAL(2, count_array((void**)file->chunk_checksum->piece_hashes));
+
+  piece_hash = file->chunk_checksum->piece_hashes[0];
+  CU_ASSERT_STRING_EQUAL("179463a88d79cbf0b1923991708aead914f26142",
+			 piece_hash->hash);
+
+  piece_hash = file->chunk_checksum->piece_hashes[1];
+  CU_ASSERT_STRING_EQUAL("fecf8bc9a1647505fe16746f94e97a477597dbf3",
+			 piece_hash->hash);
+
+  CU_ASSERT_EQUAL_FATAL(5, count_array((void**)file->resources));
+
+  resource = file->resources[0];
+  CU_ASSERT_STRING_EQUAL("ftp://ftphost/libmetalink-0.0.2a.tar.bz2",
+			 resource->url);
+  resource = file->resources[1];
+  CU_ASSERT_STRING_EQUAL("http://httphost/libmetalink-0.0.2a.tar.bz2",
+			 resource->url);
+  CU_ASSERT_EQUAL(0, resource->priority); /* no priority */
+
+  resource = file->resources[2];
+  CU_ASSERT_STRING_EQUAL("http://badpriority/", resource->url);
+  CU_ASSERT_EQUAL(0, resource->priority); /* bad priority, fallback to 0. */
+
+  resource = file->resources[3];
+  CU_ASSERT_STRING_EQUAL("http://mirror1/libmetalink-0.0.2a.tar.bz2",
+			 resource->url);
+  
+#if 0
+  CU_ASSERT_EQUAL_FATAL(1, count_array((void**)file->metaurls));
+  resource = file->metaurls[0];
+  CU_ASSERT_STRING_EQUAL("http://mirror2/libmetalink-0.0.2a.tar.bz2.torrent",
+			 resource->url);
+#endif
+
+  /* Check 3rd file */
+  file = metalink->files[2];
+  CU_ASSERT_STRING_EQUAL("NoVerificationHash", file->name);
+  CU_ASSERT_EQUAL(0, file->size); /* bad size, fallback to 0 */
+  CU_ASSERT_PTR_NULL(file->checksums);
+  CU_ASSERT_PTR_NULL(file->chunk_checksum);
+  
+  CU_ASSERT_EQUAL_FATAL(1, count_array((void**)file->resources));
+  resource = file->resources[0];
+  CU_ASSERT_STRING_EQUAL("ftp://host/file", resource->url);
 
   metalink_delete(metalink);
 }

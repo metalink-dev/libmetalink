@@ -180,7 +180,7 @@ void metalink_pstm_enter_hash_state(metalink_pstm_t* stm)
 
 void metalink_pstm_enter_pieces_state(metalink_pstm_t* stm)
 {
-  metalink_pstm_set_fun(stm, &pieces_state_start_fun, &pieces_state_end_fun);
+  metalink_pstm_set_fun(stm, &pieces_state_start_fun_v3, &pieces_state_end_fun_v3);
   metalink_pstm_enable_character_buffering(stm);
 }
 
@@ -254,5 +254,12 @@ void metalink_pstm_enter_signature_state_v4(metalink_pstm_t* stm)
 {
   metalink_pstm_set_fun(stm, &signature_state_start_fun_v4,
 			&signature_state_end_fun_v4);
+  metalink_pstm_enable_character_buffering(stm);
+}
+
+void metalink_pstm_enter_pieces_state_v4(metalink_pstm_t* stm)
+{
+  metalink_pstm_set_fun(stm, &pieces_state_start_fun_v4,
+			&pieces_state_end_fun_v4);
   metalink_pstm_enable_character_buffering(stm);
 }

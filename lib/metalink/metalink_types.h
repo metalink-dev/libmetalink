@@ -133,12 +133,18 @@ void metalink_chunk_checksum_set_piece_hashes(metalink_chunk_checksum_t* chunk_c
 typedef struct _metalink_file {
   /* filename, null terminated string */
   char* name;
-  /* file description */
+  /* file description, null terminated string */
   char* description;
   /* file size */
   long long int size;
   /* version, null terminated string */
   char* version;
+  /* copyright, null terminated string */
+  char* copyright;
+  /* identity, null terminated string */
+  char* identity;
+  /* logo, null terminated string */
+  char* logo;
   /* list of language, null terminated list of null terminated string */
   char** languages;
   /* list of os, null terminated list of null terminated string */
@@ -152,8 +158,10 @@ typedef struct _metalink_file {
   metalink_checksum_t* signature;
   /* list of metalink_resource_t */
   metalink_resource_t** resources; int maxconnections;
+  /* list of metaurls (metalink_resource_t) */
+  metalink_resource_t** metaurls;
   /* list of metalink_checksum_t. It is possible to include multiple message
- * digest algorithms
+   * digest algorithms
    */
   metalink_checksum_t** checksums;
 
@@ -176,6 +184,12 @@ metalink_error_t metalink_file_set_description(metalink_file_t* file, const char
 void metalink_file_set_size(metalink_file_t* file, long long int size);
 
 metalink_error_t metalink_file_set_version(metalink_file_t* file, const char* version);
+
+metalink_error_t metalink_file_set_copyright(metalink_file_t* file, const char* copyright);
+
+metalink_error_t metalink_file_set_identity(metalink_file_t* file, const char* identity);
+
+metalink_error_t metalink_file_set_logo(metalink_file_t* file, const char* logo);
 
 metalink_error_t metalink_file_add_language(metalink_file_t* file, const char* language);
 

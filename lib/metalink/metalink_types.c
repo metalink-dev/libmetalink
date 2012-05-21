@@ -114,6 +114,15 @@ metalink_file_delete(metalink_file_t* file)
   if(file) {
     free(file->name);
     free(file->version);
+    free(file->description);
+    free(file->copyright);
+    free(file->identity);
+    free(file->logo);
+
+    if(file->signature) {
+      metalink_checksum_delete(file->signature);
+    }
+
     if(file->languages) {
       language = file->languages;
       while(*language) {
@@ -122,6 +131,7 @@ metalink_file_delete(metalink_file_t* file)
       }
       free(file->languages);
     }
+
     if(file->oses) {
       os = file->oses;
       while(*os) {
@@ -138,6 +148,15 @@ metalink_file_delete(metalink_file_t* file)
 	++res;
       }
       free(file->resources);
+    }
+
+    if(file->metaurls) {
+      res = file->metaurls;
+      while(*res) {
+	metalink_resource_delete(*res);
+	 ++res;
+      }
+      free(file->metaurls);
     }
 
     if(file->checksums) {
@@ -181,6 +200,27 @@ METALINK_PUBLIC
 metalink_file_set_version(metalink_file_t* file, const char* version)
 {
   return allocate_copy_string(&file->version, version);
+}
+
+metalink_error_t
+METALINK_PUBLIC
+metalink_file_set_copyright(metalink_file_t* file, const char* copyright)
+{
+  return allocate_copy_string(&file->copyright, copyright);
+}
+
+metalink_error_t
+METALINK_PUBLIC
+metalink_file_set_identity(metalink_file_t* file, const char* identity)
+{
+  return allocate_copy_string(&file->identity, identity);
+}
+
+metalink_error_t
+METALINK_PUBLIC
+metalink_file_set_logo(metalink_file_t* file, const char* logo)
+{
+  return allocate_copy_string(&file->logo, logo);
 }
 
 metalink_error_t

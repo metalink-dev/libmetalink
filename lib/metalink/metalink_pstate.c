@@ -320,66 +320,6 @@ void hash_state_end_fun(metalink_pstm_t* stm,
   }
 }
 
-/* pieces state <pieces> */
-void pieces_state_start_fun(metalink_pstm_t* stm,
-			    const char* name, const char* ns_uri,
-			    const char** attrs)
-{
-  if(strcmp("hash", name) == 0) {
-    const char* value;
-    long int piece;
-    metalink_piece_hash_t* piece_hash;
-
-    value = get_attribute_value(attrs, "piece");
-    if(value) {
-      errno = 0;
-      piece = strtol(value, 0, 10);
-      if(errno == ERANGE || piece < 0 || piece > INT_MAX) {
-	/* error, piece is not positive integer. */
-	/* piece is required attribute, but it is missing. Skip this tag. */
-	metalink_pstm_enter_skip_state(stm);
-	return;      
-      }
-    } else {
-      /* value is required attribute, but it is missing. Skip this tag. */
-      metalink_pstm_enter_skip_state(stm);
-      return;      
-    }
-    
-    piece_hash = metalink_pctrl_new_piece_hash_transaction(stm->ctrl);
-    if(!piece_hash) {
-      error_handler(stm, METALINK_ERR_BAD_ALLOC);
-      return;
-    }
-    metalink_pctrl_piece_hash_set_piece(stm->ctrl, piece);
-
-    metalink_pstm_enter_piece_hash_state(stm);
-  } else {
-    metalink_pstm_enter_skip_state(stm);
-  }
-  
-}
-
-void pieces_state_end_fun(metalink_pstm_t* stm,
-			  const char* name, const char* ns_uri,
-			  const char* characters)
-{
-  metalink_error_t r;
-  r = metalink_pctrl_commit_chunk_checksum_transaction(stm->ctrl);
-  if(r != 0) {
-    error_handler(stm, r);
-    return;
-  }
-
-  if(strcmp(METALINK_V3_NS_URI, ns_uri) == 0) {
-    metalink_pstm_enter_verification_state(stm);
-  } else if(strcmp(METALINK_V4_NS_URI, ns_uri) == 0) {
-    metalink_pstm_enter_file_state_v4(stm);
-  } else {
-    error_handler(stm, METALINK_ERR_NAMESPACE_ERROR);
-  }
-}
-
 /* piece hash state <hash> inside of <pieces> */
 void piece_hash_state_start_fun(metalink_pstm_t* stm,
 			        const char* name, const char* ns_uri,
@@ -399,7 +339,14 @@ void piece_hash_state_end_fun(metalink_pstm_t* stm,
     error_handler(stm, r);
     return;
   }
-  metalink_pstm_enter_pieces_state(stm);
+
+  if(strcmp(METALINK_V3_NS_URI, ns_uri) == 0) {
+    metalink_pstm_enter_pieces_state(stm);
+  } else if(strcmp(METALINK_V4_NS_URI, ns_uri) == 0) {
+    metalink_pstm_enter_pieces_state_v4(stm);
+  } else {
+    error_handler(stm, METALINK_ERR_NAMESPACE_ERROR);
+  }
 }
 
 /* fin state */

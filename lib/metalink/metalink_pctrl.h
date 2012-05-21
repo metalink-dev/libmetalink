@@ -42,6 +42,10 @@ typedef struct metalink_pctrl_t {
 
   metalink_resource_t* temp_resource;
 
+  metalink_list_t/* <metalink_resource_t*> */ * metaurls;
+
+  metalink_resource_t* temp_metaurl;
+
   metalink_list_t/* <metalink_checksum_t*> */ * checksums;
 
   metalink_checksum_t* temp_checksum;
@@ -80,6 +84,10 @@ metalink_error_t metalink_pctrl_commit_file_transaction(metalink_pctrl_t* ctrl);
 metalink_resource_t* metalink_pctrl_new_resource_transaction(metalink_pctrl_t* ctrl);
 
 metalink_error_t metalink_pctrl_commit_resource_transaction(metalink_pctrl_t* ctrl);
+
+metalink_resource_t* metalink_pctrl_new_metaurl_transaction(metalink_pctrl_t* ctrl);
+
+metalink_error_t metalink_pctrl_commit_metaurl_transaction(metalink_pctrl_t* ctrl);
 
 metalink_checksum_t* metalink_pctrl_new_checksum_transaction(metalink_pctrl_t* ctrl);
 

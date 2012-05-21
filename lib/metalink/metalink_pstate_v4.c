@@ -154,8 +154,8 @@ void file_state_start_fun_v4(metalink_pstm_t* stm,
     if(location) {
       r = metalink_pctrl_resource_set_location(stm->ctrl, location);
       if(r != 0) {
-        error_handler(stm, r);
-        return;
+	error_handler(stm, r);
+	return;
       }
     }
 
@@ -164,12 +164,48 @@ void file_state_start_fun_v4(metalink_pstm_t* stm,
       errno = 0;
       priority = strtol(value, 0, 10);
       if(errno == ERANGE || priority < 0 || priority > INT_MAX) {
-        priority = 0;
+	priority = 0;
       }
     }
     metalink_pctrl_resource_set_priority(stm->ctrl, priority);
 
     metalink_pstm_enter_url_state(stm);
+  } else if(strcmp("metaurl", name) == 0) {
+    const char* mediatype;
+    const char* value;
+    long int priority = 0;
+    metalink_resource_t* metaurl;
+
+    metaurl = metalink_pctrl_new_metaurl_transaction(stm->ctrl);
+    if(!metaurl) {
+      error_handler(stm, METALINK_ERR_BAD_ALLOC);
+      return;
+    }
+
+    mediatype = get_attribute_value(attrs, "mediatype");
+    if(mediatype) {
+      r = metalink_pctrl_metaurl_set_mediatype(stm->ctrl, mediatype);
+      if(r != 0) {
+	error_handler(stm, r);
+	return;
+      }
+    } else {
+      /* mediatype argument is mandatory, skip if not present */
+      metalink_pstm_enter_skip_state(stm);
+      return;
+    }
+
+    value = get_attribute_value(attrs, "priority");
+    if(value) {
+      errno = 0;
+      priority = strtol(value, 0, 10);
+      if(errno == ERANGE || priority < 0 || priority > INT_MAX) {
+	priority = 0;
+      }
+    }
+    metalink_pctrl_metaurl_set_priority(stm->ctrl, priority);
+
+    metalink_pstm_enter_metaurl_state_v4(stm);
   } else if(strcmp("hash", name) == 0) {
     const char* type;
     metalink_checksum_t* checksum;
@@ -423,3 +459,30 @@ void pieces_state_end_fun_v4(metalink_pstm_t* stm,
   metalink_pstm_enter_file_state_v4(stm);
 }
 
+/* metaurl state <metaurl> */
+void metaurl_state_start_fun_v4(metalink_pstm_t* stm,
+				const char* name, const char* ns_uri,
+				const char** attrs)
+{
+  metalink_pstm_enter_skip_state(stm);
+}
+
+void metaurl_state_end_fun_v4(metalink_pstm_t* stm,
+			      const char* name, const char* ns_uri,
+			      const char* characters)
+{
+  metalink_error_t r;
+  r = metalink_pctrl_metaurl_set_url(stm->ctrl, characters);
+  if(r != 0) {
+    error_handler(stm, r);
+    return;
+  }
+
+  r = metalink_pctrl_commit_metaurl_transaction(stm->ctrl);
+  if(r != 0) {
+    error_handler(stm, r);
+    return;
+  }
+
+  metalink_pstm_enter_file_state_v4(stm);
+}

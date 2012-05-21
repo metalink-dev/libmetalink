@@ -122,12 +122,10 @@ static void validate_result(volatile metalink_t* metalink)
   CU_ASSERT_STRING_EQUAL("http://mirror1/libmetalink-0.0.2a.tar.bz2",
 			 resource->url);
   
-#if 0
   CU_ASSERT_EQUAL_FATAL(1, count_array((void**)file->metaurls));
   resource = file->metaurls[0];
   CU_ASSERT_STRING_EQUAL("http://mirror2/libmetalink-0.0.2a.tar.bz2.torrent",
 			 resource->url);
-#endif
 
   /* Check 3rd file */
   file = metalink->files[2];

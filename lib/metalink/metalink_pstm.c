@@ -284,3 +284,10 @@ void metalink_pstm_enter_pieces_state_v4(metalink_pstm_t* stm)
 			&pieces_state_end_fun_v4);
   metalink_pstm_enable_character_buffering(stm);
 }
+
+void metalink_pstm_enter_metaurl_state_v4(metalink_pstm_t* stm)
+{
+  metalink_pstm_set_fun(stm, &metaurl_state_start_fun_v4,
+			&metaurl_state_end_fun_v4);
+  metalink_pstm_enable_character_buffering(stm);
+}

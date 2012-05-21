@@ -140,6 +140,16 @@ void metalink_pctrl_resource_set_maxconnections(metalink_pctrl_t* ctrl,
 
 metalink_error_t metalink_pctrl_resource_set_url(metalink_pctrl_t* ctrl, const char* url);
 
+/* metaurl manipulation functions */
+metalink_error_t metalink_pctrl_metaurl_set_mediatype(metalink_pctrl_t* ctrl,
+						      const char* mediatype);
+
+void metalink_pctrl_metaurl_set_priority(metalink_pctrl_t* ctrl,
+					 int priority);
+
+metalink_error_t metalink_pctrl_metaurl_set_url(metalink_pctrl_t* ctrl,
+						const char* url);
+
 /* checksum manipulation functions */
 metalink_error_t metalink_pctrl_checksum_set_type(metalink_pctrl_t* ctrl, const char* type);
 

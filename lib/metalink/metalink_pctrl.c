@@ -427,6 +427,25 @@ metalink_error_t metalink_pctrl_resource_set_url(metalink_pctrl_t* ctrl, const c
   return metalink_resource_set_url(ctrl->temp_resource, url);
 }
 
+/* metaurl manipulation functions */
+metalink_error_t metalink_pctrl_metaurl_set_mediatype(metalink_pctrl_t* ctrl,
+						      const char* mediatype)
+{
+  return metalink_resource_set_type(ctrl->temp_metaurl, mediatype);
+}
+
+void metalink_pctrl_metaurl_set_priority(metalink_pctrl_t* ctrl,
+					 int priority)
+{
+  metalink_resource_set_priority(ctrl->temp_metaurl, priority);
+}
+
+metalink_error_t metalink_pctrl_metaurl_set_url(metalink_pctrl_t* ctrl,
+						const char* url)
+{
+  return metalink_resource_set_url(ctrl->temp_metaurl, url);
+}
+
 /* checksum manipulation functions */
 metalink_error_t metalink_pctrl_checksum_set_type(metalink_pctrl_t* ctrl, const char* type)
 {

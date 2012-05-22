@@ -145,6 +145,10 @@ typedef struct _metalink_file {
   char* identity;
   /* logo, null terminated string */
   char* logo;
+  /* publisher name, null terminated string */
+  char* publisher_name;
+  /* publisher url, null terminated string */
+  char* publisher_url;
   /* list of language, null terminated list of null terminated string */
   char** languages;
   /* list of os, null terminated list of null terminated string */
@@ -190,6 +194,10 @@ metalink_error_t metalink_file_set_copyright(metalink_file_t* file, const char* 
 metalink_error_t metalink_file_set_identity(metalink_file_t* file, const char* identity);
 
 metalink_error_t metalink_file_set_logo(metalink_file_t* file, const char* logo);
+
+metalink_error_t metalink_file_set_publisher_name(metalink_file_t* file, const char* name);
+
+metalink_error_t metalink_file_set_publisher_url(metalink_file_t* file, const char* url);
 
 metalink_error_t metalink_file_add_language(metalink_file_t* file, const char* language);
 

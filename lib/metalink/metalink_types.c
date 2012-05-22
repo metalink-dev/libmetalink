@@ -225,6 +225,20 @@ metalink_file_set_logo(metalink_file_t* file, const char* logo)
 
 metalink_error_t
 METALINK_PUBLIC
+metalink_file_set_publisher_name(metalink_file_t* file, const char* name)
+{
+  return allocate_copy_string(&file->publisher_name, name);
+}
+
+metalink_error_t
+METALINK_PUBLIC
+metalink_file_set_publisher_url(metalink_file_t* file, const char* url)
+{
+  return allocate_copy_string(&file->publisher_url, url);
+}
+
+metalink_error_t
+METALINK_PUBLIC
 metalink_file_add_language(metalink_file_t* file, const char* language)
 {
   int i;

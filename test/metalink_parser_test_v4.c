@@ -51,6 +51,9 @@ static void validate_result(volatile metalink_t* metalink)
   CU_ASSERT_STRING_EQUAL("0.0.1", file->version);
   CU_ASSERT_STRING_EQUAL("libmetalink", file->identity);
 
+  CU_ASSERT_STRING_EQUAL("foo", file->publisher_name);
+  CU_ASSERT_STRING_EQUAL("foo", file->publisher_url);
+
   CU_ASSERT_EQUAL(1, count_array((void**)file->languages));
   CU_ASSERT_STRING_EQUAL("en-US", file->languages[0]);
 

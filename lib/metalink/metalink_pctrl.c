@@ -372,6 +372,16 @@ metalink_error_t metalink_pctrl_file_set_logo(metalink_pctrl_t* ctrl, const char
   return metalink_file_set_logo(ctrl->temp_file, logo);
 }
 
+metalink_error_t metalink_pctrl_file_set_publisher_name(metalink_pctrl_t* ctrl, const char* name)
+{
+  return metalink_file_set_publisher_name(ctrl->temp_file, name);
+}
+
+metalink_error_t metalink_pctrl_file_set_publisher_url(metalink_pctrl_t* ctrl, const char* url)
+{
+  return metalink_file_set_publisher_url(ctrl->temp_file, url);
+}
+
 void metalink_pctrl_file_set_size(metalink_pctrl_t* ctrl, long long int size)
 {
   metalink_file_set_size(ctrl->temp_file, size);

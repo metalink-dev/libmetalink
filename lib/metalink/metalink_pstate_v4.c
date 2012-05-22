@@ -285,6 +285,32 @@ void file_state_start_fun_v4(metalink_pstm_t* stm,
       return;
     }
     metalink_pstm_enter_signature_state_v4(stm);
+  } else if(strcmp("publisher", name) == 0) {
+    const char* name;
+    const char* url;
+
+    name = get_attribute_value(attrs, "name");
+    if(!name) {
+      /* name is mandatory */
+      metalink_pstm_enter_skip_state(stm);
+      return;
+    }
+    r = metalink_pctrl_file_set_publisher_name(stm->ctrl, name);
+    if(r != 0) {
+      error_handler(stm, METALINK_ERR_BAD_ALLOC);
+      return;
+    }
+
+    url = get_attribute_value(attrs, "url");
+    if(url) {
+      /* url is optional */
+      r = metalink_pctrl_file_set_publisher_url(stm->ctrl, url);
+      if(r != 0) {
+        error_handler(stm, METALINK_ERR_BAD_ALLOC);
+        return;
+      }
+    }
+    metalink_pstm_enter_skip_state(stm);
   } else if(strcmp("description", name) == 0) {
     metalink_pstm_enter_description_state_v4(stm);
   } else if(strcmp("copyright", name) == 0) {

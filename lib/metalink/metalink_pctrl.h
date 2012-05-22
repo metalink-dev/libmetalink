@@ -116,6 +116,10 @@ metalink_error_t metalink_pctrl_file_set_identity(metalink_pctrl_t* ctrl, const 
 
 metalink_error_t metalink_pctrl_file_set_logo(metalink_pctrl_t* ctrl, const char* logo);
 
+metalink_error_t metalink_pctrl_file_set_publisher_name(metalink_pctrl_t* ctrl, const char* name);
+
+metalink_error_t metalink_pctrl_file_set_publisher_url(metalink_pctrl_t* ctrl, const char* url);
+
 void metalink_pctrl_file_set_size(metalink_pctrl_t* ctrl, long long int size);
 
 metalink_error_t metalink_pctrl_file_set_version(metalink_pctrl_t* ctrl, const char* version);

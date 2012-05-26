@@ -201,12 +201,18 @@ metalink_error_t metalink_pctrl_commit_file_transaction(metalink_pctrl_t* ctrl)
   if(r != 0) {
     return r;
   }
+  if(ctrl->temp_file->languages) {
+    ctrl->temp_file->language = ctrl->temp_file->languages[0];
+  }
 
   /* copy ctrl->oses to ctrl->temp_file->oses */
   r = commit_list_to_array((void***)&ctrl->temp_file->oses,
 			   ctrl->oses, 100 /* TODO ! */);
   if(r != 0) {
     return r;
+  }
+  if(ctrl->temp_file->oses) {
+    ctrl->temp_file->language = ctrl->temp_file->oses[0];
   }
 
   /* copy ctrl->resources to ctrl->temp_file->resources */

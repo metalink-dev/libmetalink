@@ -37,6 +37,10 @@ typedef struct metalink_pctrl_t {
   metalink_list_t/* <metalink_file_t*> */ * files;
 
   metalink_file_t* temp_file;
+  
+  metalink_list_t/* <char*> */ *languages;
+
+  metalink_list_t/* <char*> */ *oses;
 
   metalink_list_t/* <metalink_resource_t*> */ * resources;
 
@@ -102,8 +106,10 @@ metalink_piece_hash_t* metalink_pctrl_new_piece_hash_transaction(metalink_pctrl_
 metalink_error_t metalink_pctrl_commit_piece_hash_transaction(metalink_pctrl_t* ctrl);
 
 /* metalink manipulation functions */
+metalink_error_t metalink_pctrl_add_language(metalink_pctrl_t* ctrl, const char* language);
+metalink_error_t metalink_pctrl_add_os(metalink_pctrl_t* ctrl, const char* os);
 metalink_error_t metalink_pctrl_set_identity(metalink_pctrl_t* ctrl, const char* identity);
-metalink_error_t metalink_pctrl_set_tags(metalink_pctrl_t* ctrl, const char* tas);
+metalink_error_t metalink_pctrl_set_tags(metalink_pctrl_t* ctrl, const char* tags);
 
 /* file manipulation functions */
 metalink_error_t metalink_pctrl_file_set_name(metalink_pctrl_t* ctrl, const char* name);
@@ -123,10 +129,6 @@ metalink_error_t metalink_pctrl_file_set_publisher_url(metalink_pctrl_t* ctrl, c
 void metalink_pctrl_file_set_size(metalink_pctrl_t* ctrl, long long int size);
 
 metalink_error_t metalink_pctrl_file_set_version(metalink_pctrl_t* ctrl, const char* version);
-
-metalink_error_t metalink_pctrl_file_add_language(metalink_pctrl_t* ctrl, const char* language);
-
-metalink_error_t metalink_pctrl_file_add_os(metalink_pctrl_t* ctrl, const char* os);
 
 void metalink_pctrl_file_set_maxconnections(metalink_pctrl_t* ctrl, int maxconnections);
 

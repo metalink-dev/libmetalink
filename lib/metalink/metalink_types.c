@@ -31,47 +31,6 @@
 #include <assert.h>
 #include <stdio.h>
 
-static size_t count_array(void** array)
-{
-  size_t count = 0;
-  while(*array) {
-    ++count;
-    ++array;
-  }
-  return count;
-}
-
-static metalink_error_t extends_array(void*** array, size_t type_size)
-{
-  size_t size;
-  char** cpy;
-
-  if(!*array) {
-    *array = calloc(2, type_size);
-    if(!*array) {
-      return METALINK_ERR_BAD_ALLOC;
-    }
-  } else {
-    size = count_array(*array);
-    cpy = calloc(size+2, type_size);
-    if(!cpy) {
-      return METALINK_ERR_BAD_ALLOC;
-    }
-    memcpy(cpy, *array, (size+1) * type_size);
-    cpy[size+1] = NULL;
-
-    free(*array);
-    *array = calloc(size+2, type_size);
-    if(!*array) {
-      return METALINK_ERR_BAD_ALLOC;
-    }
-    memcpy(*array, cpy, (size+1) * type_size);
-    free(cpy);
-  }
-
-  return 0;
-}
-
 static metalink_error_t allocate_copy_string(char** dest, const char* src)
 {
   free(*dest);
@@ -118,6 +77,8 @@ metalink_file_delete(metalink_file_t* file)
     free(file->copyright);
     free(file->identity);
     free(file->logo);
+    free(file->publisher_name);
+    free(file->publisher_url);
 
     if(file->signature) {
       metalink_checksum_delete(file->signature);
@@ -235,38 +196,6 @@ METALINK_PUBLIC
 metalink_file_set_publisher_url(metalink_file_t* file, const char* url)
 {
   return allocate_copy_string(&file->publisher_url, url);
-}
-
-metalink_error_t
-METALINK_PUBLIC
-metalink_file_add_language(metalink_file_t* file, const char* language)
-{
-  int i;
-  metalink_error_t r;
-
-  r = extends_array((void***)&file->languages, sizeof(char*));
-  if(r != 0) {
-    return r;
-  }
-
-  i = count_array((void**)file->languages);
-  return allocate_copy_string(&file->languages[i], language);
-}
-
-metalink_error_t
-METALINK_PUBLIC
-metalink_file_add_os(metalink_file_t* file, const char* os)
-{
-  int i;
-  metalink_error_t r;
-
-  r = extends_array((void***)&file->oses, sizeof(char*));
-  if(r != 0) {
-    return r;
-  }
-
-  i = count_array((void**)file->oses);
-  return allocate_copy_string(&file->oses[i], os);
 }
 
 void

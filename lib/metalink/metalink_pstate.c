@@ -210,7 +210,7 @@ void language_state_end_fun(metalink_pstm_t* stm,
 			    const char* characters)
 {
   metalink_error_t r;
-  r = metalink_pctrl_file_add_language(stm->ctrl, characters);
+  r = metalink_pctrl_add_language(stm->ctrl, characters);
   if(r != 0) {
     error_handler(stm, r);
     return;
@@ -238,7 +238,7 @@ void os_state_end_fun(metalink_pstm_t* stm,
 		      const char* characters)
 {
   metalink_error_t r;
-  r = metalink_pctrl_file_add_os(stm->ctrl, characters);
+  r = metalink_pctrl_add_os(stm->ctrl, characters);
   if(r != 0) {
     error_handler(stm, r);
     return;

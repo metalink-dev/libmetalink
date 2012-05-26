@@ -151,8 +151,12 @@ typedef struct _metalink_file {
   char* publisher_url;
   /* list of language, null terminated list of null terminated string */
   char** languages;
+  /* first language, for compatibility with metalink 3 */
+  char* language;
   /* list of os, null terminated list of null terminated string */
   char** oses;
+  /* first os, for compatibility with metalink 3 */
+  char* os;
   /* file signature */
   /**
    * TODO: define a metalink_signature_t type? The metalink_checksum_t
@@ -160,8 +164,10 @@ typedef struct _metalink_file {
    * choice sementically.
    */
   metalink_checksum_t* signature;
+  /* maximum number of connections for this file */
+  int maxconnections;
   /* list of metalink_resource_t */
-  metalink_resource_t** resources; int maxconnections;
+  metalink_resource_t** resources;
   /* list of metaurls (metalink_resource_t) */
   metalink_resource_t** metaurls;
   /* list of metalink_checksum_t. It is possible to include multiple message
@@ -198,10 +204,6 @@ metalink_error_t metalink_file_set_logo(metalink_file_t* file, const char* logo)
 metalink_error_t metalink_file_set_publisher_name(metalink_file_t* file, const char* name);
 
 metalink_error_t metalink_file_set_publisher_url(metalink_file_t* file, const char* url);
-
-metalink_error_t metalink_file_add_language(metalink_file_t* file, const char* language);
-
-metalink_error_t metalink_file_add_os(metalink_file_t* file, const char* os);
 
 metalink_error_t metalink_file_set_resources(metalink_file_t* file, metalink_resource_t** resources);
 

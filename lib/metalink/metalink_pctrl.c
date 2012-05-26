@@ -44,6 +44,14 @@ metalink_pctrl_t* new_metalink_pctrl(void)
   if(!ctrl->files) {
     goto NEW_METALINK_PCTRL_ERROR;
   }
+  ctrl->languages = metalink_list_new();
+  if(!ctrl->languages) {
+    goto NEW_METALINK_PCTRL_ERROR;
+  }
+  ctrl->oses = metalink_list_new();
+  if(!ctrl->oses) {
+    goto NEW_METALINK_PCTRL_ERROR;
+  }
   ctrl->resources = metalink_list_new();
   if(!ctrl->resources) {
     goto NEW_METALINK_PCTRL_ERROR;
@@ -77,6 +85,10 @@ void delete_metalink_pctrl(metalink_pctrl_t* ctrl)
   metalink_list_delete(ctrl->files);
   metalink_file_delete(ctrl->temp_file);
   
+  metalink_list_delete(ctrl->languages);
+
+  metalink_list_delete(ctrl->oses);
+
   metalink_list_for_each(ctrl->resources,
 			 (void (*)(void*))&metalink_resource_delete);
   metalink_list_delete(ctrl->resources);
@@ -181,6 +193,20 @@ metalink_error_t metalink_pctrl_commit_file_transaction(metalink_pctrl_t* ctrl)
   metalink_error_t r;
   if(!ctrl->temp_file) {
     return METALINK_ERR_NO_FILE_TRANSACTION;
+  }
+
+  /* copy ctrl->languages to ctrl->temp_file->languages */
+  r = commit_list_to_array((void***)&ctrl->temp_file->languages,
+			   ctrl->languages, 100 /* TODO ! */);
+  if(r != 0) {
+    return r;
+  }
+
+  /* copy ctrl->oses to ctrl->temp_file->oses */
+  r = commit_list_to_array((void***)&ctrl->temp_file->oses,
+			   ctrl->oses, 100 /* TODO ! */);
+  if(r != 0) {
+    return r;
   }
 
   /* copy ctrl->resources to ctrl->temp_file->resources */
@@ -336,6 +362,22 @@ metalink_error_t metalink_pctrl_commit_piece_hash_transaction(metalink_pctrl_t* 
 }
 
 /* metalink manipulation functions */
+metalink_error_t metalink_pctrl_add_language(metalink_pctrl_t* ctrl, const char* language)
+{
+  if(metalink_list_append(ctrl->languages, strdup(language)) != 0) {
+    return METALINK_ERR_BAD_ALLOC;
+  }
+  return 0;
+}
+
+metalink_error_t metalink_pctrl_add_os(metalink_pctrl_t* ctrl, const char* os)
+{
+  if(metalink_list_append(ctrl->oses, strdup(os)) != 0) {
+    return METALINK_ERR_BAD_ALLOC;
+  }
+  return 0;
+}
+  
 metalink_error_t metalink_pctrl_set_identity(metalink_pctrl_t* ctrl, const char* identity)
 {
   return metalink_set_identity(ctrl->metalink, identity);
@@ -390,16 +432,6 @@ void metalink_pctrl_file_set_size(metalink_pctrl_t* ctrl, long long int size)
 metalink_error_t metalink_pctrl_file_set_version(metalink_pctrl_t* ctrl, const char* version)
 {
   return metalink_file_set_version(ctrl->temp_file, version);
-}
-
-metalink_error_t metalink_pctrl_file_add_language(metalink_pctrl_t* ctrl, const char* language)
-{
-  return metalink_file_add_language(ctrl->temp_file, language);
-}
-
-metalink_error_t metalink_pctrl_file_add_os(metalink_pctrl_t* ctrl, const char* os)
-{
-  return metalink_file_add_os(ctrl->temp_file, os);
 }
 
 void metalink_pctrl_file_set_maxconnections(metalink_pctrl_t* ctrl, int maxconnections)

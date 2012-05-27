@@ -37,6 +37,7 @@ static void validate_result(metalink_t* metalink)
   metalink_file_t* file;
   metalink_checksum_t* checksum;
   metalink_resource_t* resource;
+  metalink_metaurl_t* metaurl;
   metalink_piece_hash_t* piece_hash;
 
   CU_ASSERT_STRING_EQUAL("MetalinkEditor/2.0dev", metalink->generator);
@@ -126,9 +127,9 @@ static void validate_result(metalink_t* metalink)
 			 resource->url);
   
   CU_ASSERT_EQUAL_FATAL(1, count_array((void**)file->metaurls));
-  resource = file->metaurls[0];
+  metaurl = file->metaurls[0];
   CU_ASSERT_STRING_EQUAL("http://mirror2/libmetalink-0.0.2a.tar.bz2.torrent",
-			 resource->url);
+			 metaurl->url);
 
   /* Check 3rd file */
   file = metalink->files[2];

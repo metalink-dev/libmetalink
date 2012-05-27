@@ -172,9 +172,10 @@ void file_state_start_fun_v4(metalink_pstm_t* stm,
     metalink_pstm_enter_url_state(stm);
   } else if(strcmp("metaurl", name) == 0) {
     const char* mediatype;
+    const char* name;
     const char* value;
     long int priority = 0;
-    metalink_resource_t* metaurl;
+    metalink_metaurl_t* metaurl;
 
     metaurl = metalink_pctrl_new_metaurl_transaction(stm->ctrl);
     if(!metaurl) {
@@ -193,6 +194,15 @@ void file_state_start_fun_v4(metalink_pstm_t* stm,
       /* mediatype argument is mandatory, skip if not present */
       metalink_pstm_enter_skip_state(stm);
       return;
+    }
+
+    name = get_attribute_value(attrs, "name");
+    if(name) {
+      r = metalink_pctrl_metaurl_set_name(stm->ctrl, name);
+      if(r != 0) {
+	error_handler(stm, r);
+	return;
+      }
     }
 
     value = get_attribute_value(attrs, "priority");

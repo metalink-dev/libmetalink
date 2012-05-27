@@ -66,6 +66,7 @@ METALINK_PUBLIC
 metalink_file_delete(metalink_file_t* file)
 {
   metalink_resource_t** res;
+  metalink_metaurl_t** metaurls;
   metalink_checksum_t** checksums;
   char** language;
   char** os;
@@ -81,7 +82,7 @@ metalink_file_delete(metalink_file_t* file)
     free(file->publisher_url);
 
     if(file->signature) {
-      metalink_checksum_delete(file->signature);
+      metalink_signature_delete(file->signature);
     }
 
     if(file->languages) {
@@ -112,10 +113,10 @@ metalink_file_delete(metalink_file_t* file)
     }
 
     if(file->metaurls) {
-      res = file->metaurls;
-      while(*res) {
-	metalink_resource_delete(*res);
-	 ++res;
+      metaurls = file->metaurls;
+      while(*metaurls) {
+	metalink_metaurl_delete(*metaurls);
+	 ++metaurls;
       }
       free(file->metaurls);
     }
@@ -310,6 +311,62 @@ metalink_resource_set_url(metalink_resource_t* resource, const char* url)
 {
   return allocate_copy_string(&resource->url, url);
 }
+/* for metalink_metaurl_t */
+metalink_metaurl_t
+METALINK_PUBLIC
+* metalink_metaurl_new(void)
+{
+  metalink_metaurl_t* metaurl;
+  metaurl = malloc(sizeof(metalink_metaurl_t));
+  if(metaurl) {
+    memset(metaurl, 0, sizeof(metalink_metaurl_t));
+  }
+  return metaurl;
+}
+
+void
+METALINK_PUBLIC
+metalink_metaurl_delete(metalink_metaurl_t* metaurl)
+{
+  if(metaurl) {
+    free(metaurl->url);
+    free(metaurl->mediatype);
+    free(metaurl->name);
+    free(metaurl);
+  }
+}
+
+metalink_error_t
+METALINK_PUBLIC
+metalink_metaurl_set_url(metalink_metaurl_t* metaurl,
+			 const char* url)
+{
+  return allocate_copy_string(&metaurl->url, url);
+}
+
+metalink_error_t
+METALINK_PUBLIC
+metalink_metaurl_set_mediatype(metalink_metaurl_t* metaurl,
+			       const char* mediatype)
+{
+  return allocate_copy_string(&metaurl->mediatype, mediatype);
+}
+
+metalink_error_t
+METALINK_PUBLIC
+metalink_metaurl_set_name(metalink_metaurl_t* metaurl,
+			  const char* name)
+{
+  return allocate_copy_string(&metaurl->name, name);
+}
+
+void
+METALINK_PUBLIC
+metalink_metaurl_set_priority(metalink_metaurl_t* metaurl,
+			      int priority)
+{
+  metaurl->priority = priority;
+}
 
 /* for metalink_checksum_t */
 metalink_checksum_t
@@ -451,6 +508,46 @@ metalink_chunk_checksum_set_piece_hashes
     }
   }
   chunk_checksum->piece_hashes = piece_hashes;
+}
+
+/* for metalink_signature_t */
+metalink_signature_t
+METALINK_PUBLIC
+* metalink_signature_new(void)
+{
+  metalink_signature_t* signature;
+  signature = malloc(sizeof(metalink_signature_t));
+  if(signature) {
+    memset(signature, 0, sizeof(metalink_signature_t));
+  }
+  return signature;
+}
+
+void
+METALINK_PUBLIC
+metalink_signature_delete(metalink_signature_t* signature)
+{
+  if(signature) {
+    free(signature->mediatype);
+    free(signature->signature);
+    free(signature);
+  }
+}
+
+metalink_error_t
+METALINK_PUBLIC
+metalink_signature_set_mediatype(metalink_signature_t* signature,
+				 const char* mediatype)
+{
+  return allocate_copy_string(&signature->mediatype, mediatype);
+}
+
+metalink_error_t
+METALINK_PUBLIC
+metalink_signature_set_signature(metalink_signature_t* signature,
+				 const char* value)
+{
+  return allocate_copy_string(&signature->signature, value);
 }
 
 /* for metalink_t */

@@ -65,6 +65,36 @@ void metalink_resource_set_maxconnections(metalink_resource_t* resource,
 
 metalink_error_t metalink_resource_set_url(metalink_resource_t* resource, const char* url);
 
+typedef struct _metalink_metaurl {
+  /* url, null terminated string */
+  char* url;
+  /* typef of the media, like "torrent", null terminated string */
+  char* mediatype;
+  /* name of the metaurl, null terminated string */
+  char* name;
+  /* priority of this resource */
+  int priority;
+} metalink_metaurl_t;
+
+/* constructor */
+metalink_metaurl_t* metalink_metaurl_new(void);
+
+/* destructor */
+void metalink_metaurl_delete(metalink_metaurl_t* metaurl);
+
+/* mutators */
+metalink_error_t metalink_metaurl_set_url(metalink_metaurl_t* metaurl,
+					  const char* url);
+
+metalink_error_t metalink_metaurl_set_mediatype(metalink_metaurl_t* metaurl,
+						const char* mediatype);
+
+metalink_error_t metalink_metaurl_set_name(metalink_metaurl_t* metaurl,
+					   const char* name);
+
+void metalink_metaurl_set_priority(metalink_metaurl_t* metaurl,
+				   int priority);
+
 typedef struct _metalink_checksum {
   /* message digest algorithm, for example, sha1, null terminated string */
   char* type;
@@ -130,6 +160,29 @@ void metalink_chunk_checksum_set_length(metalink_chunk_checksum_t* chunk_checksu
 void metalink_chunk_checksum_set_piece_hashes(metalink_chunk_checksum_t* chunk_checksum,
 					      metalink_piece_hash_t** piece_hashes);
 
+/**
+ *  signature of a file
+ */
+typedef struct _metalink_signature {
+  /* the type of the signature (eg. application/pgp-signature) */
+  char* mediatype;
+  /* the content of the signature */
+  char* signature;
+} metalink_signature_t;
+
+/* constructor */
+metalink_signature_t* metalink_signature_new(void);
+
+/* destructor */
+void metalink_signature_delete(metalink_signature_t* signature);
+
+/* mutators */
+metalink_error_t metalink_signature_set_mediatype(metalink_signature_t* signature,
+						  const char* mediatype);
+
+metalink_error_t metalink_signature_set_signature(metalink_signature_t* signature,
+						  const char* value);
+
 typedef struct _metalink_file {
   /* filename, null terminated string */
   char* name;
@@ -158,18 +211,13 @@ typedef struct _metalink_file {
   /* first os, for compatibility with metalink 3 */
   char* os;
   /* file signature */
-  /**
-   * TODO: define a metalink_signature_t type? The metalink_checksum_t
-   * structure is used because it has the right behavior, but it isn't the best
-   * choice sementically.
-   */
-  metalink_checksum_t* signature;
+  metalink_signature_t* signature;
   /* maximum number of connections for this file */
   int maxconnections;
   /* list of metalink_resource_t */
   metalink_resource_t** resources;
   /* list of metaurls (metalink_resource_t) */
-  metalink_resource_t** metaurls;
+  metalink_metaurl_t** metaurls;
   /* list of metalink_checksum_t. It is possible to include multiple message
    * digest algorithms
    */

@@ -46,9 +46,9 @@ typedef struct metalink_pctrl_t {
 
   metalink_resource_t* temp_resource;
 
-  metalink_list_t/* <metalink_resource_t*> */ * metaurls;
+  metalink_list_t/* <metalink_metaurl_t*> */ * metaurls;
 
-  metalink_resource_t* temp_metaurl;
+  metalink_metaurl_t* temp_metaurl;
 
   metalink_list_t/* <metalink_checksum_t*> */ * checksums;
 
@@ -89,7 +89,7 @@ metalink_resource_t* metalink_pctrl_new_resource_transaction(metalink_pctrl_t* c
 
 metalink_error_t metalink_pctrl_commit_resource_transaction(metalink_pctrl_t* ctrl);
 
-metalink_resource_t* metalink_pctrl_new_metaurl_transaction(metalink_pctrl_t* ctrl);
+metalink_metaurl_t* metalink_pctrl_new_metaurl_transaction(metalink_pctrl_t* ctrl);
 
 metalink_error_t metalink_pctrl_commit_metaurl_transaction(metalink_pctrl_t* ctrl);
 
@@ -149,6 +149,9 @@ metalink_error_t metalink_pctrl_resource_set_url(metalink_pctrl_t* ctrl, const c
 /* metaurl manipulation functions */
 metalink_error_t metalink_pctrl_metaurl_set_mediatype(metalink_pctrl_t* ctrl,
 						      const char* mediatype);
+
+metalink_error_t metalink_pctrl_metaurl_set_name(metalink_pctrl_t* ctrl,
+						 const char* name);
 
 void metalink_pctrl_metaurl_set_priority(metalink_pctrl_t* ctrl,
 					 int priority);

@@ -291,10 +291,20 @@ metalink_resource_set_location(metalink_resource_t* resource,
 
 void
 METALINK_PUBLIC
+metalink_resource_set_preference(metalink_resource_t* resource,
+				 int preference)
+{
+  resource->preference = preference;
+  resource->priority = 1000000 - preference;
+}
+
+void
+METALINK_PUBLIC
 metalink_resource_set_priority(metalink_resource_t* resource,
-				      int priority)
+			       int priority)
 {
   resource->priority = priority;
+  resource->preference = 1000000 - priority;
 }
 
 void
@@ -311,6 +321,7 @@ metalink_resource_set_url(metalink_resource_t* resource, const char* url)
 {
   return allocate_copy_string(&resource->url, url);
 }
+
 /* for metalink_metaurl_t */
 metalink_metaurl_t
 METALINK_PUBLIC

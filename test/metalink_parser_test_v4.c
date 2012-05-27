@@ -116,11 +116,11 @@ static void validate_result(metalink_t* metalink)
   resource = file->resources[1];
   CU_ASSERT_STRING_EQUAL("http://httphost/libmetalink-0.0.2a.tar.bz2",
 			 resource->url);
-  CU_ASSERT_EQUAL(0, resource->priority); /* no priority */
+  CU_ASSERT_EQUAL(999999, resource->priority); /* no priority */
 
   resource = file->resources[2];
   CU_ASSERT_STRING_EQUAL("http://badpriority/", resource->url);
-  CU_ASSERT_EQUAL(0, resource->priority); /* bad priority, fallback to 0. */
+  CU_ASSERT_EQUAL(999999, resource->priority); /* bad priority, fallback to 999999. */
 
   resource = file->resources[3];
   CU_ASSERT_STRING_EQUAL("http://mirror1/libmetalink-0.0.2a.tar.bz2",

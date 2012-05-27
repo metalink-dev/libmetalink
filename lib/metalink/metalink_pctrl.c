@@ -462,6 +462,12 @@ metalink_error_t metalink_pctrl_resource_set_location(metalink_pctrl_t* ctrl,
   return metalink_resource_set_location(ctrl->temp_resource, location);
 }
 
+void metalink_pctrl_resource_set_preference(metalink_pctrl_t* ctrl,
+					    int preference)
+{
+  metalink_resource_set_preference(ctrl->temp_resource, preference);
+}
+
 void metalink_pctrl_resource_set_priority(metalink_pctrl_t* ctrl,
 					    int priority)
 {

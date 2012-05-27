@@ -138,8 +138,11 @@ metalink_error_t metalink_pctrl_resource_set_type(metalink_pctrl_t* ctrl, const 
 metalink_error_t metalink_pctrl_resource_set_location(metalink_pctrl_t* ctrl,
 					 const char* location);
 
+void metalink_pctrl_resource_set_preference(metalink_pctrl_t* ctrl,
+					    int preference);
+
 void metalink_pctrl_resource_set_priority(metalink_pctrl_t* ctrl,
-					    int priority);
+					  int priority);
 
 void metalink_pctrl_resource_set_maxconnections(metalink_pctrl_t* ctrl,
 						int maxconnections);

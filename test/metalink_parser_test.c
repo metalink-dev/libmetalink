@@ -88,7 +88,7 @@ static void validate_result(metalink_t* metalink)
 			 resource->url);
   CU_ASSERT_STRING_EQUAL("ftp", resource->type);
   CU_ASSERT_STRING_EQUAL("jp", resource->location);
-  CU_ASSERT_EQUAL(100, resource->priority);
+  CU_ASSERT_EQUAL(100, resource->preference);
   CU_ASSERT_EQUAL(1, resource->maxconnections);
 
   resource = file->resources[1];
@@ -96,7 +96,7 @@ static void validate_result(metalink_t* metalink)
 			 resource->url);
   CU_ASSERT_STRING_EQUAL("http", resource->type);
   CU_ASSERT_PTR_NULL(resource->location); /* no location */
-  CU_ASSERT_EQUAL(99, resource->priority);
+  CU_ASSERT_EQUAL(99, resource->preference);
   CU_ASSERT_EQUAL(0, resource->maxconnections); /* bad maxconnections, fallback to 0 */
 
   /* check 2nd file */
@@ -133,12 +133,12 @@ static void validate_result(metalink_t* metalink)
   CU_ASSERT_STRING_EQUAL("http://httphost/libmetalink-0.0.2a.tar.bz2",
 			 resource->url);
   CU_ASSERT_STRING_EQUAL("http", resource->type);
-  CU_ASSERT_EQUAL(0, resource->priority); /* no priority */
+  CU_ASSERT_EQUAL(0, resource->preference); /* no preference */
 
   resource = file->resources[2];
   CU_ASSERT_STRING_EQUAL("http://badpreference/", resource->url);
   CU_ASSERT_STRING_EQUAL("http", resource->type);
-  CU_ASSERT_EQUAL(0, resource->priority); /* bad priority, fallback to 0. */
+  CU_ASSERT_EQUAL(0, resource->preference); /* bad preference, fallback to 0. */
 
   resource = file->resources[3];
   CU_ASSERT_STRING_EQUAL("http://mirror1/libmetalink-0.0.2a.tar.bz2",

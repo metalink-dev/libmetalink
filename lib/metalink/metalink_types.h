@@ -41,7 +41,9 @@ typedef struct _metalink_resource {
    * null terminated string
    */
   char* location;
-  /* priority of this resource, higher value has bigger priority. */
+  /* preference of this resource, higher value has bigger preference. */
+  int preference;
+  /* priority of this resource, lower value has bigger priority. */
   int priority;
   /* max connections that a client can establish to this resource */
   int maxconnections;

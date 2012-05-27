@@ -141,7 +141,7 @@ void file_state_start_fun_v4(metalink_pstm_t* stm,
   if(strcmp("url", name) == 0) {
     const char* location;
     const char* value;
-    long int priority = 0;
+    long int priority = 999999;
     metalink_resource_t* resource;
 
     resource = metalink_pctrl_new_resource_transaction(stm->ctrl);
@@ -164,7 +164,7 @@ void file_state_start_fun_v4(metalink_pstm_t* stm,
       errno = 0;
       priority = strtol(value, 0, 10);
       if(errno == ERANGE || priority < 0 || priority > INT_MAX) {
-	priority = 0;
+	priority = 999999;
       }
     }
     metalink_pctrl_resource_set_priority(stm->ctrl, priority);
@@ -174,7 +174,7 @@ void file_state_start_fun_v4(metalink_pstm_t* stm,
     const char* mediatype;
     const char* name;
     const char* value;
-    long int priority = 0;
+    long int priority = 999999;
     metalink_metaurl_t* metaurl;
 
     metaurl = metalink_pctrl_new_metaurl_transaction(stm->ctrl);
@@ -210,7 +210,7 @@ void file_state_start_fun_v4(metalink_pstm_t* stm,
       errno = 0;
       priority = strtol(value, 0, 10);
       if(errno == ERANGE || priority < 0 || priority > INT_MAX) {
-	priority = 0;
+	priority = 999999;
       }
     }
     metalink_pctrl_metaurl_set_priority(stm->ctrl, priority);

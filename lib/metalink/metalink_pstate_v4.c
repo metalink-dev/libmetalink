@@ -31,8 +31,63 @@
 #include <errno.h>
 #include <limits.h>
 
+#ifndef _XOPEN_SOURCE
+  #define _XOPEN_SOURCE /* avoid warning when using strptime */
+#endif
+#include <time.h>
+
 #include "metalink_pstm.h"
 #include "metalink_helper.h"
+
+/* parse a RFC3339 formatted date, ie. 2010-05-01T12:15:02Z or 2010-05-01T12:16:02+01:00 */
+static time_t parse_date(const char* date)
+{
+  time_t t = 0;
+  int sign = 0;
+  struct tm tm = {0}, interval = {0};
+  char* rest;
+
+  if(strlen(date) < 20) 
+  {
+    return t;
+  }
+
+  rest = strptime(date, "%Y-%m-%dT%H:%M:%S", &tm);
+
+  if(rest == NULL)
+  {
+    return t;
+  }
+
+  t = mktime(&tm);
+
+  while(*rest != 'Z' && *rest != '+' && *rest != '-' && *rest != '\0')
+  {
+    rest++;
+  }
+
+  if(*rest == '\0')
+  {
+    /* not a valid RFC3339 date, but we can still return what has already been
+     * parsed */
+    return t;
+  }
+  if(*rest == '+') {
+    sign = -1; 
+  } else if(*rest == '-') {
+    sign = +1; 
+  }
+
+  if(sign != 0) {
+    if(strptime(rest+1, "%H:%M", &interval) == NULL)
+      return t;
+    tm.tm_hour += sign*interval.tm_hour;
+    tm.tm_min += sign*interval.tm_min;
+    t = mktime(&tm);
+  }
+
+  return t;
+}
 
 /* metalink state <metalink> */
 void metalink_state_start_fun_v4(metalink_pstm_t* stm,
@@ -68,9 +123,9 @@ void metalink_state_start_fun_v4(metalink_pstm_t* stm,
   } else if(strcmp("origin", name) == 0) {
     metalink_pstm_enter_origin_state(stm);
   } else if(strcmp("published", name) == 0) {
-    /*metalink_pstm_enter_published_state_v4(stm);*/
+    metalink_pstm_enter_published_state_v4(stm);
   } else if(strcmp("updated", name) == 0) {
-    /*metalink_pstm_enter_updated_state_v4(stm);*/
+    metalink_pstm_enter_updated_state_v4(stm);
   } else {
     metalink_pstm_enter_skip_state(stm);
   }
@@ -521,4 +576,38 @@ void metaurl_state_end_fun_v4(metalink_pstm_t* stm,
   }
 
   metalink_pstm_enter_file_state_v4(stm);
+}
+
+/* published state <published> */
+void published_state_start_fun_v4(metalink_pstm_t* stm,
+				  const char* name, const char* ns_uri,
+				  const char** attrs)
+{
+  metalink_pstm_enter_skip_state(stm);
+}
+
+void published_state_end_fun_v4(metalink_pstm_t* stm,
+				const char* name, const char* ns_uri,
+				const char* characters)
+{
+  time_t t = parse_date(characters);
+  metalink_pctrl_set_published(stm->ctrl, t);
+  metalink_pstm_enter_metalink_state_v4(stm);
+}
+
+/* updated state <updated> */
+void updated_state_start_fun_v4(metalink_pstm_t* stm,
+				const char* name, const char* ns_uri,
+				const char** attrs)
+{
+  metalink_pstm_enter_skip_state(stm);
+}
+
+void updated_state_end_fun_v4(metalink_pstm_t* stm,
+			      const char* name, const char* ns_uri,
+			      const char* characters)
+{
+  time_t t = parse_date(characters);
+  metalink_pctrl_set_updated(stm->ctrl, t);
+  metalink_pstm_enter_metalink_state_v4(stm);
 }

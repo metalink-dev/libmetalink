@@ -291,3 +291,17 @@ void metalink_pstm_enter_metaurl_state_v4(metalink_pstm_t* stm)
 			&metaurl_state_end_fun_v4);
   metalink_pstm_enable_character_buffering(stm);
 }
+
+void metalink_pstm_enter_published_state_v4(metalink_pstm_t* stm)
+{
+  metalink_pstm_set_fun(stm, &published_state_start_fun_v4,
+			&published_state_end_fun_v4);
+  metalink_pstm_enable_character_buffering(stm);
+}
+
+void metalink_pstm_enter_updated_state_v4(metalink_pstm_t* stm)
+{
+  metalink_pstm_set_fun(stm, &updated_state_start_fun_v4,
+			&updated_state_end_fun_v4);
+  metalink_pstm_enable_character_buffering(stm);
+}

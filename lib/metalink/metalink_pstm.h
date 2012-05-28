@@ -127,4 +127,8 @@ void metalink_pstm_enter_pieces_state_v4(metalink_pstm_t* stm);
 
 void metalink_pstm_enter_metaurl_state_v4(metalink_pstm_t* stm);
 
+void metalink_pstm_enter_published_state_v4(metalink_pstm_t* stm);
+
+void metalink_pstm_enter_updated_state_v4(metalink_pstm_t* stm);
+
 #endif /* _D_METALINK_PSTM_H_ */

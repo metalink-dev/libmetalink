@@ -32,6 +32,8 @@ extern "C" {
 
 #include <metalink/metalink_error.h>
 
+#include <time.h>
+
 typedef struct _metalink_resource {
   /* url, null terminated string */
   char* url;
@@ -264,8 +266,8 @@ typedef struct _metalink {
   /* date, publisher or something useful */
   char* generator;
   char* origin;
-  int published;
-  int updated;
+  time_t published;
+  time_t updated;
 
   /* list of metalink_file_t */
   metalink_file_t** files;

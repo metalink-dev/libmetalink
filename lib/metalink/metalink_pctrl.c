@@ -85,8 +85,8 @@ void delete_metalink_pctrl(metalink_pctrl_t* ctrl)
   metalink_list_delete(ctrl->files);
   metalink_file_delete(ctrl->temp_file);
   
+  /* metalink_list_delete takes care of freeing the pointers in those lists */
   metalink_list_delete(ctrl->languages);
-
   metalink_list_delete(ctrl->oses);
 
   metalink_list_for_each(ctrl->resources,
@@ -215,7 +215,7 @@ metalink_error_t metalink_pctrl_commit_file_transaction(metalink_pctrl_t* ctrl)
     return r;
   }
   if(ctrl->temp_file->oses) {
-    ctrl->temp_file->language = ctrl->temp_file->oses[0];
+    ctrl->temp_file->os = ctrl->temp_file->oses[0];
   }
 
   /* copy ctrl->resources to ctrl->temp_file->resources */
@@ -373,7 +373,10 @@ metalink_error_t metalink_pctrl_commit_piece_hash_transaction(metalink_pctrl_t* 
 /* metalink manipulation functions */
 metalink_error_t metalink_pctrl_add_language(metalink_pctrl_t* ctrl, const char* language)
 {
-  if(metalink_list_append(ctrl->languages, strdup(language)) != 0) {
+  char *l;
+
+  l = strdup(language);
+  if(!l || metalink_list_append(ctrl->languages, l) != 0) {
     return METALINK_ERR_BAD_ALLOC;
   }
   return 0;
@@ -381,7 +384,10 @@ metalink_error_t metalink_pctrl_add_language(metalink_pctrl_t* ctrl, const char*
 
 metalink_error_t metalink_pctrl_add_os(metalink_pctrl_t* ctrl, const char* os)
 {
-  if(metalink_list_append(ctrl->oses, strdup(os)) != 0) {
+  char *o;
+
+  o = strdup(os);
+  if(!o || metalink_list_append(ctrl->oses, o) != 0) {
     return METALINK_ERR_BAD_ALLOC;
   }
   return 0;
@@ -398,6 +404,40 @@ metalink_error_t metalink_pctrl_set_tags(metalink_pctrl_t* ctrl, const char* tag
 }
 
 /* file manipulation functions*/
+metalink_error_t metalink_pctrl_file_set_language(metalink_pctrl_t* ctrl, const char* language)
+{
+  char *l;
+
+  if(ctrl->languages) {
+    metalink_list_delete(ctrl->languages);
+  }
+
+  l = strdup(language);
+  ctrl->languages = metalink_list_new();
+  if(!ctrl->languages || !l || metalink_list_append(ctrl->languages, l) != 0) {
+    return METALINK_ERR_BAD_ALLOC;
+  }
+
+  return 0;
+}
+
+metalink_error_t metalink_pctrl_file_set_os(metalink_pctrl_t* ctrl, const char* os)
+{
+  char *o;
+
+  if(ctrl->oses) {
+    metalink_list_delete(ctrl->oses);
+  }
+
+  o = strdup(os);
+  ctrl->oses = metalink_list_new();
+  if(!ctrl->oses || !o || metalink_list_append(ctrl->oses, o) != 0) {
+    return METALINK_ERR_BAD_ALLOC;
+  }
+
+  return 0;
+}
+
 metalink_error_t metalink_pctrl_file_set_name(metalink_pctrl_t* ctrl, const char* name)
 {
   return metalink_file_set_name(ctrl->temp_file, name);

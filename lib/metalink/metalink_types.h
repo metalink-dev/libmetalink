@@ -61,8 +61,11 @@ metalink_error_t metalink_resource_set_type(metalink_resource_t* resource, const
 metalink_error_t metalink_resource_set_location(metalink_resource_t* resource,
 				   const char* location);
 
+void metalink_resource_set_preference(metalink_resource_t* resource,
+				      int preference);
+
 void metalink_resource_set_priority(metalink_resource_t* resource,
-				      int priority);
+				    int priority);
 
 void metalink_resource_set_maxconnections(metalink_resource_t* resource,
 					  int maxconnections);
@@ -256,14 +259,6 @@ metalink_error_t metalink_file_set_logo(metalink_file_t* file, const char* logo)
 metalink_error_t metalink_file_set_publisher_name(metalink_file_t* file, const char* name);
 
 metalink_error_t metalink_file_set_publisher_url(metalink_file_t* file, const char* url);
-
-metalink_error_t metalink_file_set_language(metalink_file_t* file, const char* language);
-
-metalink_error_t metalink_file_set_languages(metalink_file_t* file, const char** languages);
-
-metalink_error_t metalink_file_set_os(metalink_file_t* file, const char* os);
-
-metalink_error_t metalink_file_set_oses(metalink_file_t* file, const char** oses);
 
 metalink_error_t metalink_file_set_resources(metalink_file_t* file, metalink_resource_t** resources);
 

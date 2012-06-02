@@ -112,6 +112,10 @@ metalink_error_t metalink_pctrl_set_identity(metalink_pctrl_t* ctrl, const char*
 metalink_error_t metalink_pctrl_set_tags(metalink_pctrl_t* ctrl, const char* tags);
 
 /* file manipulation functions */
+metalink_error_t metalink_pctrl_file_set_language(metalink_pctrl_t* ctrl, const char* language);
+
+metalink_error_t metalink_pctrl_file_set_os(metalink_pctrl_t* ctrl, const char* os);
+
 metalink_error_t metalink_pctrl_file_set_name(metalink_pctrl_t* ctrl, const char* name);
 
 metalink_error_t metalink_pctrl_file_set_description(metalink_pctrl_t* ctrl, const char* description);

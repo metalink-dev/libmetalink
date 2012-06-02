@@ -194,53 +194,6 @@ metalink_file_set_publisher_name(metalink_file_t* file, const char* name)
 
 metalink_error_t
 METALINK_PUBLIC
-metalink_file_set_language(metalink_file_t* file, const char* language)
-{
-  metalink_error_t r;
-  char** l;
-
-  if(file->languages) {
-    l = file->languages;
-    while(*l) {
-      free(*l);
-      l++;
-    }
-    free(file->languages);
-  }
-
-  file->languages = calloc(2, sizeof(char*));
-  file->languages[0] = NULL;
-  file->languages[1] = NULL;
-
-  r = allocate_copy_string(&file->languages[0], language);
-  if(r != 0) {
-    return r;
-  }
-
-  file->language = file->languages[0];
-  return 0;
-}
-
-metalink_error_t
-METALINK_PUBLIC
-metalink_file_set_languages(metalink_file_t* file, const char** languages)
-{
-  char** l;
-
-  if(file->languages) {
-    l = file->languages;
-    while(*l) {
-      free(*l);
-      l++;
-    }
-    free(file->languages);
-  }
-
-  file->languages = languages;
-}
-
-metalink_error_t
-METALINK_PUBLIC
 metalink_file_set_publisher_url(metalink_file_t* file, const char* url)
 {
   return allocate_copy_string(&file->publisher_url, url);

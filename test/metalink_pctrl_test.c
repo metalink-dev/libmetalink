@@ -44,11 +44,8 @@ void test_metalink_pctrl_file_transaction(void)
   CU_ASSERT_EQUAL(0, metalink_pctrl_file_set_name(ctrl, "libmetalink.tar.bz2"));
   metalink_pctrl_file_set_size(ctrl, 4294967296LL);
   CU_ASSERT_EQUAL(0, metalink_pctrl_file_set_version(ctrl, "1.0.0"));
-  /* TODO */
-#if 0
   CU_ASSERT_EQUAL(0, metalink_pctrl_file_set_language(ctrl, "en_US"));
   CU_ASSERT_EQUAL(0, metalink_pctrl_file_set_os(ctrl, "linux"));
-#endif
   metalink_pctrl_file_set_maxconnections(ctrl, 5);
 
   /* Commit */
@@ -62,11 +59,8 @@ void test_metalink_pctrl_file_transaction(void)
   CU_ASSERT_STRING_EQUAL("libmetalink.tar.bz2", file->name);
   CU_ASSERT_EQUAL(4294967296LL, file->size);
   CU_ASSERT_STRING_EQUAL("1.0.0", file->version);
-  /* TODO */
-#if 0
   CU_ASSERT_STRING_EQUAL("en_US", file->language);
   CU_ASSERT_STRING_EQUAL("linux", file->os);
-#endif
   CU_ASSERT_EQUAL(5, file->maxconnections);
 
   delete_metalink_pctrl(ctrl);

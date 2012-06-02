@@ -264,12 +264,25 @@ metalink_error_t metalink_file_set_resources(metalink_file_t* file, metalink_res
 
 void metalink_file_set_maxconnections(metalink_file_t* file, int maxconnections);
 
+typedef enum metalink_version_e {
+  METALINK_VERSION_UNKNOWN,
+  METALINK_VERSION_3 = 3,
+  METALINK_VERSION_4 = 4
+} metalink_version_t;
+
 typedef struct _metalink {
   /* put more descriptable information here... */
   /* date, publisher or something useful */
+  
+  /* metalink version of this file */
+  metalink_version_t version;
+  /* generator of this metalink, null terminated string */
   char* generator;
+  /* origin of this metalink, null terminated string */
   char* origin;
+  /* timestamp corresponding to the publication of this metalink */
   time_t published;
+  /* timestamp corresponding to the last update of this metalink */
   time_t updated;
 
   /* list of metalink_file_t */
@@ -282,8 +295,9 @@ metalink_error_t metalink_set_identity(metalink_t* metalink, const char* identit
 metalink_error_t metalink_set_tags(metalink_t* metalink, const char* tags);
 metalink_error_t metalink_set_generator(metalink_t* metalink, const char* generator);
 metalink_error_t metalink_set_origin(metalink_t* metalink, const char* origin);
-void metalink_set_published(metalink_t* metalink, int published);
-void metalink_set_updated(metalink_t* metalink, int updated);
+void metalink_set_published(metalink_t* metalink, time_t published);
+void metalink_set_updated(metalink_t* metalink, time_t updated);
+void metalink_set_version(metalink_t* metalink, metalink_version_t version);
 
 metalink_t* metalink_new(void);
 

@@ -50,6 +50,7 @@ static void validate_result(metalink_t* metalink)
 
   CU_ASSERT_STRING_EQUAL("libmetalink-0.0.1", metalink->identity);
   CU_ASSERT_STRING_EQUAL("metalink,xml", metalink->tags);
+  CU_ASSERT_EQUAL(metalink->version, METALINK_VERSION_3);
 
   /* count files */
   CU_ASSERT_EQUAL_FATAL(3, count_array((void**)metalink->files));

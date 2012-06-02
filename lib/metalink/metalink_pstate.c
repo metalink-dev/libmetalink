@@ -102,11 +102,14 @@ void initial_state_start_fun(metalink_pstm_t* stm,
 {
   if(strcmp("metalink", name) == 0) {
     if (strcmp(METALINK_V3_NS_URI, ns_uri) == 0) {
+      metalink_pctrl_set_version(stm->ctrl, METALINK_VERSION_3);
       metalink_pstm_enter_metalink_state(stm);
     }
     else if (strcmp(METALINK_V4_NS_URI, ns_uri) == 0) {
+      metalink_pctrl_set_version(stm->ctrl, METALINK_VERSION_4);
       metalink_pstm_enter_metalink_state_v4(stm);
     } else {
+      metalink_pctrl_set_version(stm->ctrl, METALINK_VERSION_UNKNOWN);
       metalink_pstm_enter_skip_state(stm);
     }
   } else {

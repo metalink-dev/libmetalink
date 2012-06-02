@@ -262,16 +262,23 @@ metalink_set_origin(metalink_t* metalink, const char* origin)
 
 void
 METALINK_PUBLIC
-metalink_set_published(metalink_t* metalink, int published)
+metalink_set_published(metalink_t* metalink, time_t published)
 {
   metalink->published = published;
 }
 
 void
 METALINK_PUBLIC
-metalink_set_updated(metalink_t* metalink, int updated)
+metalink_set_updated(metalink_t* metalink, time_t updated)
 {
+  metalink->updated = updated;
+}
 
+void
+METALINK_PUBLIC
+metalink_set_version(metalink_t* metalink, metalink_version_t version)
+{
+  metalink->version = version;
 }
 
 metalink_error_t

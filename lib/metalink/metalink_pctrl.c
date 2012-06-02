@@ -371,6 +371,11 @@ metalink_error_t metalink_pctrl_commit_piece_hash_transaction(metalink_pctrl_t* 
 }
 
 /* metalink manipulation functions */
+void metalink_pctrl_set_version(metalink_pctrl_t* ctrl, metalink_version_t version)
+{
+  metalink_set_version(ctrl->metalink, version);
+}
+
 metalink_error_t metalink_pctrl_add_language(metalink_pctrl_t* ctrl, const char* language)
 {
   char *l;

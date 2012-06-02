@@ -42,6 +42,7 @@ static void validate_result(metalink_t* metalink)
 
   CU_ASSERT_STRING_EQUAL("MetalinkEditor/2.0dev", metalink->generator);
   CU_ASSERT_EQUAL(metalink->published, 1242386603);
+  CU_ASSERT_EQUAL(metalink->version, METALINK_VERSION_4);
 
   /* count files */
   CU_ASSERT_EQUAL_FATAL(3, count_array((void**)metalink->files));

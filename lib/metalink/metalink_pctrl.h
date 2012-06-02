@@ -106,6 +106,7 @@ metalink_piece_hash_t* metalink_pctrl_new_piece_hash_transaction(metalink_pctrl_
 metalink_error_t metalink_pctrl_commit_piece_hash_transaction(metalink_pctrl_t* ctrl);
 
 /* metalink manipulation functions */
+void metalink_pctrl_set_version(metalink_pctrl_t* ctrl, metalink_version_t version);
 metalink_error_t metalink_pctrl_add_language(metalink_pctrl_t* ctrl, const char* language);
 metalink_error_t metalink_pctrl_add_os(metalink_pctrl_t* ctrl, const char* os);
 metalink_error_t metalink_pctrl_set_identity(metalink_pctrl_t* ctrl, const char* identity);

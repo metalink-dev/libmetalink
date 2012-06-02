@@ -173,7 +173,6 @@ metalink_file_t* metalink_pctrl_new_file_transaction(metalink_pctrl_t* ctrl)
   }
   ctrl->temp_file = metalink_file_new();
 
-  /* TODO: check leaks */
   metalink_list_clear(ctrl->languages);
   metalink_list_clear(ctrl->oses);
 
@@ -201,7 +200,7 @@ metalink_error_t metalink_pctrl_commit_file_transaction(metalink_pctrl_t* ctrl)
 
   /* copy ctrl->languages to ctrl->temp_file->languages */
   r = commit_list_to_array((void***)&ctrl->temp_file->languages,
-			   ctrl->languages, 100 /* TODO ! */);
+			   ctrl->languages, sizeof(char*));
   if(r != 0) {
     return r;
   }
@@ -211,7 +210,7 @@ metalink_error_t metalink_pctrl_commit_file_transaction(metalink_pctrl_t* ctrl)
 
   /* copy ctrl->oses to ctrl->temp_file->oses */
   r = commit_list_to_array((void***)&ctrl->temp_file->oses,
-			   ctrl->oses, 100 /* TODO ! */);
+			   ctrl->oses, sizeof(char*));
   if(r != 0) {
     return r;
   }

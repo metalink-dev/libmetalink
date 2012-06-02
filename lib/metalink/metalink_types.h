@@ -257,6 +257,14 @@ metalink_error_t metalink_file_set_publisher_name(metalink_file_t* file, const c
 
 metalink_error_t metalink_file_set_publisher_url(metalink_file_t* file, const char* url);
 
+metalink_error_t metalink_file_set_language(metalink_file_t* file, const char* language);
+
+metalink_error_t metalink_file_set_languages(metalink_file_t* file, const char** languages);
+
+metalink_error_t metalink_file_set_os(metalink_file_t* file, const char* os);
+
+metalink_error_t metalink_file_set_oses(metalink_file_t* file, const char** oses);
+
 metalink_error_t metalink_file_set_resources(metalink_file_t* file, metalink_resource_t** resources);
 
 void metalink_file_set_maxconnections(metalink_file_t* file, int maxconnections);

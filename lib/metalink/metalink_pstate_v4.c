@@ -59,7 +59,7 @@ static time_t parse_date(const char* date)
     return t;
   }
 
-  t = mktime(&tm);
+  t = timegm(&tm);
 
   while(*rest != 'Z' && *rest != '+' && *rest != '-' && *rest != '\0')
   {
@@ -83,7 +83,7 @@ static time_t parse_date(const char* date)
       return t;
     tm.tm_hour += sign*interval.tm_hour;
     tm.tm_min += sign*interval.tm_min;
-    t = mktime(&tm);
+    t = timegm(&tm);
   }
 
   return t;

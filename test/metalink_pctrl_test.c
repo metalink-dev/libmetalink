@@ -44,7 +44,7 @@ void test_metalink_pctrl_file_transaction(void)
   CU_ASSERT_EQUAL(0, metalink_pctrl_file_set_name(ctrl, "libmetalink.tar.bz2"));
   metalink_pctrl_file_set_size(ctrl, 4294967296LL);
   CU_ASSERT_EQUAL(0, metalink_pctrl_file_set_version(ctrl, "1.0.0"));
-  CU_ASSERT_EQUAL(0, metalink_pctrl_file_set_language(ctrl, "en"));
+  CU_ASSERT_EQUAL(0, metalink_pctrl_file_set_language(ctrl, "en_US"));
   CU_ASSERT_EQUAL(0, metalink_pctrl_file_set_os(ctrl, "linux"));
   metalink_pctrl_file_set_maxconnections(ctrl, 5);
 
@@ -59,7 +59,7 @@ void test_metalink_pctrl_file_transaction(void)
   CU_ASSERT_STRING_EQUAL("libmetalink.tar.bz2", file->name);
   CU_ASSERT_EQUAL(4294967296LL, file->size);
   CU_ASSERT_STRING_EQUAL("1.0.0", file->version);
-  CU_ASSERT_STRING_EQUAL("en", file->language);
+  CU_ASSERT_STRING_EQUAL("en_US", file->language);
   CU_ASSERT_STRING_EQUAL("linux", file->os);
   CU_ASSERT_EQUAL(5, file->maxconnections);
 
@@ -84,7 +84,7 @@ void test_metalink_pctrl_resource_transaction(void)
    */
   metalink_pctrl_resource_set_type(ctrl, "http");
   metalink_pctrl_resource_set_location(ctrl, "FI");
-  metalink_pctrl_resource_set_preference(ctrl, 100);
+  metalink_pctrl_resource_set_priority(ctrl, 100);
   metalink_pctrl_resource_set_maxconnections(ctrl, 4);
   metalink_pctrl_resource_set_url(ctrl, "http://host/dir/file");
 
@@ -99,7 +99,7 @@ void test_metalink_pctrl_resource_transaction(void)
   resource = metalink_list_get_data(ctrl->resources, 0);
   CU_ASSERT_STRING_EQUAL("http", resource->type);
   CU_ASSERT_STRING_EQUAL("FI", resource->location);
-  CU_ASSERT_EQUAL(100, resource->preference);
+  CU_ASSERT_EQUAL(100, resource->priority);
   CU_ASSERT_EQUAL(4, resource->maxconnections);
   CU_ASSERT_STRING_EQUAL("http://host/dir/file", resource->url);
 

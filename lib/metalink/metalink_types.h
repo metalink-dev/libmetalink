@@ -32,6 +32,8 @@ extern "C" {
 
 #include <metalink/metalink_error.h>
 
+#include <time.h>
+
 typedef struct _metalink_resource {
   /* url, null terminated string */
   char* url;
@@ -43,6 +45,8 @@ typedef struct _metalink_resource {
   char* location;
   /* preference of this resource, higher value has bigger preference. */
   int preference;
+  /* priority of this resource, lower value has bigger priority. */
+  int priority;
   /* max connections that a client can establish to this resource */
   int maxconnections;
 } metalink_resource_t;
@@ -60,10 +64,43 @@ metalink_error_t metalink_resource_set_location(metalink_resource_t* resource,
 void metalink_resource_set_preference(metalink_resource_t* resource,
 				      int preference);
 
+void metalink_resource_set_priority(metalink_resource_t* resource,
+				    int priority);
+
 void metalink_resource_set_maxconnections(metalink_resource_t* resource,
 					  int maxconnections);
 
 metalink_error_t metalink_resource_set_url(metalink_resource_t* resource, const char* url);
+
+typedef struct _metalink_metaurl {
+  /* url, null terminated string */
+  char* url;
+  /* typef of the media, like "torrent", null terminated string */
+  char* mediatype;
+  /* name of the metaurl, null terminated string */
+  char* name;
+  /* priority of this resource */
+  int priority;
+} metalink_metaurl_t;
+
+/* constructor */
+metalink_metaurl_t* metalink_metaurl_new(void);
+
+/* destructor */
+void metalink_metaurl_delete(metalink_metaurl_t* metaurl);
+
+/* mutators */
+metalink_error_t metalink_metaurl_set_url(metalink_metaurl_t* metaurl,
+					  const char* url);
+
+metalink_error_t metalink_metaurl_set_mediatype(metalink_metaurl_t* metaurl,
+						const char* mediatype);
+
+metalink_error_t metalink_metaurl_set_name(metalink_metaurl_t* metaurl,
+					   const char* name);
+
+void metalink_metaurl_set_priority(metalink_metaurl_t* metaurl,
+				   int priority);
 
 typedef struct _metalink_checksum {
   /* message digest algorithm, for example, sha1, null terminated string */
@@ -130,20 +167,64 @@ void metalink_chunk_checksum_set_length(metalink_chunk_checksum_t* chunk_checksu
 void metalink_chunk_checksum_set_piece_hashes(metalink_chunk_checksum_t* chunk_checksum,
 					      metalink_piece_hash_t** piece_hashes);
 
+/**
+ *  signature of a file
+ */
+typedef struct _metalink_signature {
+  /* the type of the signature (eg. application/pgp-signature) */
+  char* mediatype;
+  /* the content of the signature */
+  char* signature;
+} metalink_signature_t;
+
+/* constructor */
+metalink_signature_t* metalink_signature_new(void);
+
+/* destructor */
+void metalink_signature_delete(metalink_signature_t* signature);
+
+/* mutators */
+metalink_error_t metalink_signature_set_mediatype(metalink_signature_t* signature,
+						  const char* mediatype);
+
+metalink_error_t metalink_signature_set_signature(metalink_signature_t* signature,
+						  const char* value);
+
 typedef struct _metalink_file {
   /* filename, null terminated string */
   char* name;
+  /* file description, null terminated string */
+  char* description;
   /* file size */
   long long int size;
   /* version, null terminated string */
   char* version;
-  /* language, null terminated string */
+  /* copyright, null terminated string */
+  char* copyright;
+  /* identity, null terminated string */
+  char* identity;
+  /* logo, null terminated string */
+  char* logo;
+  /* publisher name, null terminated string */
+  char* publisher_name;
+  /* publisher url, null terminated string */
+  char* publisher_url;
+  /* list of language, null terminated list of null terminated string */
+  char** languages;
+  /* first language, for compatibility with metalink 3 */
   char* language;
-  /* os, null terminated string */
+  /* list of os, null terminated list of null terminated string */
+  char** oses;
+  /* first os, for compatibility with metalink 3 */
   char* os;
+  /* file signature */
+  metalink_signature_t* signature;
+  /* maximum number of connections for this file */
+  int maxconnections;
   /* list of metalink_resource_t */
   metalink_resource_t** resources;
-  int maxconnections;
+  /* list of metaurls (metalink_resource_t) */
+  metalink_metaurl_t** metaurls;
   /* list of metalink_checksum_t. It is possible to include multiple message
    * digest algorithms
    */
@@ -163,21 +244,46 @@ void metalink_file_delete(metalink_file_t* file);
 /* mutators */
 metalink_error_t metalink_file_set_name(metalink_file_t* file, const char* name);
 
+metalink_error_t metalink_file_set_description(metalink_file_t* file, const char* description);
+
 void metalink_file_set_size(metalink_file_t* file, long long int size);
 
 metalink_error_t metalink_file_set_version(metalink_file_t* file, const char* version);
 
-metalink_error_t metalink_file_set_language(metalink_file_t* file, const char* language);
+metalink_error_t metalink_file_set_copyright(metalink_file_t* file, const char* copyright);
 
-metalink_error_t metalink_file_set_os(metalink_file_t* file, const char* os);
+metalink_error_t metalink_file_set_identity(metalink_file_t* file, const char* identity);
+
+metalink_error_t metalink_file_set_logo(metalink_file_t* file, const char* logo);
+
+metalink_error_t metalink_file_set_publisher_name(metalink_file_t* file, const char* name);
+
+metalink_error_t metalink_file_set_publisher_url(metalink_file_t* file, const char* url);
 
 metalink_error_t metalink_file_set_resources(metalink_file_t* file, metalink_resource_t** resources);
 
 void metalink_file_set_maxconnections(metalink_file_t* file, int maxconnections);
 
+typedef enum metalink_version_e {
+  METALINK_VERSION_UNKNOWN,
+  METALINK_VERSION_3 = 3,
+  METALINK_VERSION_4 = 4
+} metalink_version_t;
+
 typedef struct _metalink {
   /* put more descriptable information here... */
   /* date, publisher or something useful */
+  
+  /* metalink version of this file */
+  metalink_version_t version;
+  /* generator of this metalink, null terminated string */
+  char* generator;
+  /* origin of this metalink, null terminated string */
+  char* origin;
+  /* timestamp corresponding to the publication of this metalink */
+  time_t published;
+  /* timestamp corresponding to the last update of this metalink */
+  time_t updated;
 
   /* list of metalink_file_t */
   metalink_file_t** files;
@@ -187,7 +293,11 @@ typedef struct _metalink {
 
 metalink_error_t metalink_set_identity(metalink_t* metalink, const char* identity);
 metalink_error_t metalink_set_tags(metalink_t* metalink, const char* tags);
-
+metalink_error_t metalink_set_generator(metalink_t* metalink, const char* generator);
+metalink_error_t metalink_set_origin(metalink_t* metalink, const char* origin);
+void metalink_set_published(metalink_t* metalink, time_t published);
+void metalink_set_updated(metalink_t* metalink, time_t updated);
+void metalink_set_version(metalink_t* metalink, metalink_version_t version);
 
 metalink_t* metalink_new(void);
 

@@ -71,42 +71,6 @@ void file_state_end_fun_v3(metalink_pstm_t* stm,
 			   const char* name, const char* ns_uri,
 			   const char* characters);
 
-/* size state <size> */
-void size_state_start_fun_v3(metalink_pstm_t* stm,
-			     const char* name, const char* ns_uri,
-			     const char** attrs);
-
-void size_state_end_fun_v3(metalink_pstm_t* stm,
-			   const char* name, const char* ns_uri,
-			   const char* characters);
-
-/* version state <version> */
-void version_state_start_fun_v3(metalink_pstm_t* stm,
-				const char* name, const char* ns_uri,
-				const char** attrs);
-
-void version_state_end_fun_v3(metalink_pstm_t* stm,
-			      const char* name, const char* ns_uri,
-			      const char* characters);
-
-/* language state <language> */
-void language_state_start_fun_v3(metalink_pstm_t* stm,
-				 const char* name, const char* ns_uri,
-				 const char** attrs);
-
-void language_state_end_fun_v3(metalink_pstm_t* stm,
-			       const char* name, const char* ns_uri,
-			       const char* characters);
-
-/* os state <os> */
-void os_state_start_fun_v3(metalink_pstm_t* stm,
-			   const char* name, const char* ns_uri,
-			   const char** attrs);
-
-void os_state_end_fun_v3(metalink_pstm_t* stm,
-			 const char* name, const char* ns_uri,
-			 const char* characters);
-
 /* resources state <resources> */
 void resources_state_start_fun_v3(metalink_pstm_t* stm,
 				  const char* name, const char* ns_uri,
@@ -115,15 +79,6 @@ void resources_state_start_fun_v3(metalink_pstm_t* stm,
 void resources_state_end_fun_v3(metalink_pstm_t* stm,
 				const char* name, const char* ns_uri,
 				const char* characters);
-
-/* url state <url> */
-void url_state_start_fun_v3(metalink_pstm_t* stm,
-			    const char* name, const char* ns_uri,
-			    const char** attrs);
-
-void url_state_end_fun_v3(metalink_pstm_t* stm,
-			  const char* name, const char* ns_uri,
-			  const char* characters);
 
 /* verification state <verification> */
 void verification_state_start_fun_v3(metalink_pstm_t* stm,
@@ -134,15 +89,6 @@ void verification_state_end_fun_v3(metalink_pstm_t* stm,
 				   const char* name, const char* ns_uri,
 				   const char* characters);
 
-/* hash state <hash> */
-void hash_state_start_fun_v3(metalink_pstm_t* stm,
-			     const char* name, const char* ns_uri,
-			     const char** attrs);
-
-void hash_state_end_fun_v3(metalink_pstm_t* stm,
-			   const char* name, const char* ns_uri,
-			   const char* characters);
-
 /* pieces state <pieces> */
 void pieces_state_start_fun_v3(metalink_pstm_t* stm,
 			       const char* name, const char* ns_uri,
@@ -151,23 +97,5 @@ void pieces_state_start_fun_v3(metalink_pstm_t* stm,
 void pieces_state_end_fun_v3(metalink_pstm_t* stm,
 			     const char* name, const char* ns_uri,
 			     const char* characters);
-
-/* piece hash state <hash> inside of <pieces> */
-void piece_hash_state_start_fun_v3(metalink_pstm_t* stm,
-				   const char* name, const char* ns_uri,
-				   const char** attrs);
-
-void piece_hash_state_end_fun_v3(metalink_pstm_t* stm,
-				 const char* name, const char* ns_uri,
-				 const char* characters);
-
-/* fin state */
-void fin_state_start_fun_v3(metalink_pstm_t* stm,
-			    const char* name, const char* ns_uri,
-			    const char** attrs);
-
-void fin_state_end_fun_v3(metalink_pstm_t* stm,
-			  const char* name, const char* ns_uri,
-			  const char* characters);
 
 #endif /* _D_METALINK_PARSER_STATE_V3_H_ */

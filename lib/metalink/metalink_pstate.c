@@ -101,7 +101,17 @@ void initial_state_start_fun(metalink_pstm_t* stm,
 			     const char** attrs)
 {
   if(strcmp("metalink", name) == 0) {
-    metalink_pstm_enter_metalink_state(stm);
+    if (strcmp(METALINK_V3_NS_URI, ns_uri) == 0) {
+      metalink_pctrl_set_version(stm->ctrl, METALINK_VERSION_3);
+      metalink_pstm_enter_metalink_state(stm);
+    }
+    else if (strcmp(METALINK_V4_NS_URI, ns_uri) == 0) {
+      metalink_pctrl_set_version(stm->ctrl, METALINK_VERSION_4);
+      metalink_pstm_enter_metalink_state_v4(stm);
+    } else {
+      metalink_pctrl_set_version(stm->ctrl, METALINK_VERSION_UNKNOWN);
+      metalink_pstm_enter_skip_state(stm);
+    }
   } else {
     metalink_pstm_enter_skip_state(stm);
   }
@@ -127,3 +137,227 @@ void skip_state_end_fun(metalink_pstm_t* stm,
     metalink_pstm_exit_skip_state(stm);
   }
 }
+
+/* size state <size> */
+void size_state_start_fun(metalink_pstm_t* stm,
+			  const char* name, const char* ns_uri,
+			  const char** attrs)
+{
+  metalink_pstm_enter_skip_state(stm);
+}
+
+void size_state_end_fun(metalink_pstm_t* stm,
+		        const char* name, const char* ns_uri,
+		        const char* characters)
+{
+  long long int size = 0;
+
+  /* TODO evaluate endptr(2nd argument) */
+  errno = 0;
+  size = strtoll(characters, 0, 10);
+  if(errno == ERANGE || size < 0) {
+    /* overflow or parse error or negative integer detected. */
+    /* current Metalink specification does not require size. */
+    size = 0;
+  }
+  metalink_pctrl_file_set_size(stm->ctrl, size);
+
+  if(strcmp(METALINK_V3_NS_URI, ns_uri) == 0) {
+    metalink_pstm_enter_file_state(stm);
+  } else if(strcmp(METALINK_V4_NS_URI, ns_uri) == 0) {
+    metalink_pstm_enter_file_state_v4(stm);
+  } else {
+    error_handler(stm, METALINK_ERR_NAMESPACE_ERROR);
+  }
+}
+
+/* version state <version> */
+void version_state_start_fun(metalink_pstm_t* stm,
+			     const char* name, const char* ns_uri,
+			     const char** attrs)
+{
+  metalink_pstm_enter_skip_state(stm);
+}
+
+void version_state_end_fun(metalink_pstm_t* stm,
+			   const char* name, const char* ns_uri,
+			   const char* characters)
+{
+  metalink_error_t r;
+  r = metalink_pctrl_file_set_version(stm->ctrl, characters);
+  if(r == 0) {
+    metalink_pstm_enter_file_state(stm);
+  } else {
+    error_handler(stm, r);
+  }
+
+  if(strcmp(METALINK_V3_NS_URI, ns_uri) == 0) {
+    metalink_pstm_enter_file_state(stm);
+  } else if(strcmp(METALINK_V4_NS_URI, ns_uri) == 0) {
+    metalink_pstm_enter_file_state_v4(stm);
+  } else {
+    error_handler(stm, METALINK_ERR_NAMESPACE_ERROR);
+  }
+}
+
+/* language state <language> */
+void language_state_start_fun(metalink_pstm_t* stm,
+			      const char* name, const char* ns_uri,
+			      const char** attrs)
+{
+  metalink_pstm_enter_skip_state(stm);
+}
+
+void language_state_end_fun(metalink_pstm_t* stm,
+			    const char* name, const char* ns_uri,
+			    const char* characters)
+{
+  metalink_error_t r;
+  r = metalink_pctrl_add_language(stm->ctrl, characters);
+  if(r != 0) {
+    error_handler(stm, r);
+    return;
+  }
+
+  if(strcmp(METALINK_V3_NS_URI, ns_uri) == 0) {
+    metalink_pstm_enter_file_state(stm);
+  } else if(strcmp(METALINK_V4_NS_URI, ns_uri) == 0) {
+    metalink_pstm_enter_file_state_v4(stm);
+  } else {
+    error_handler(stm, METALINK_ERR_NAMESPACE_ERROR);
+  }
+}
+
+/* os state <os> */
+void os_state_start_fun(metalink_pstm_t* stm,
+		        const char* name, const char* ns_uri,
+		        const char** attrs)
+{
+  metalink_pstm_enter_skip_state(stm);
+}
+
+void os_state_end_fun(metalink_pstm_t* stm,
+		      const char* name, const char* ns_uri,
+		      const char* characters)
+{
+  metalink_error_t r;
+  r = metalink_pctrl_add_os(stm->ctrl, characters);
+  if(r != 0) {
+    error_handler(stm, r);
+    return;
+  }
+
+  if(strcmp(METALINK_V3_NS_URI, ns_uri) == 0) {
+    metalink_pstm_enter_file_state(stm);
+  } else if(strcmp(METALINK_V4_NS_URI, ns_uri) == 0) {
+    metalink_pstm_enter_file_state_v4(stm);
+  } else {
+    error_handler(stm, METALINK_ERR_NAMESPACE_ERROR);
+  }
+}
+
+/* url state <url> */
+void url_state_start_fun(metalink_pstm_t* stm,
+			 const char* name, const char* ns_uri,
+			 const char** attrs)
+{
+  metalink_pstm_enter_skip_state(stm);
+}
+
+void url_state_end_fun(metalink_pstm_t* stm,
+		       const char* name, const char* ns_uri,
+		       const char* characters)
+{
+  metalink_error_t r;
+  r = metalink_pctrl_resource_set_url(stm->ctrl, characters);
+  if(r != 0) {
+    /* TODO clear intermidiate resource transaction. */
+    error_handler(stm, r);
+    return;
+  }
+  r = metalink_pctrl_commit_resource_transaction(stm->ctrl);
+  if(r != 0) {
+    error_handler(stm, r);
+    return;
+  }
+
+  if(strcmp(METALINK_V3_NS_URI, ns_uri) == 0) {
+    metalink_pstm_enter_resources_state(stm);
+  } else if(strcmp(METALINK_V4_NS_URI, ns_uri) == 0) {
+    metalink_pstm_enter_file_state_v4(stm);
+  } else {
+    error_handler(stm, METALINK_ERR_NAMESPACE_ERROR);
+  }
+}
+
+/* hash state <hash> */
+void hash_state_start_fun(metalink_pstm_t* stm,
+			  const char* name, const char* ns_uri,
+			  const char** attrs)
+{
+  metalink_pstm_enter_skip_state(stm);
+}
+
+void hash_state_end_fun(metalink_pstm_t* stm,
+		        const char* name, const char* ns_uri,
+		        const char* characters)
+{
+  metalink_error_t r;
+  r = metalink_pctrl_checksum_set_hash(stm->ctrl, characters);
+  if(r != 0) {
+    error_handler(stm, r);
+    return;
+  }
+  r = metalink_pctrl_commit_checksum_transaction(stm->ctrl);
+  if(r != 0) {
+    error_handler(stm, r);
+    return;
+  }
+
+  if(strcmp(METALINK_V3_NS_URI, ns_uri) == 0) {
+    metalink_pstm_enter_verification_state(stm);
+  } else if(strcmp(METALINK_V4_NS_URI, ns_uri) == 0) {
+    metalink_pstm_enter_file_state_v4(stm);
+  } else {
+    error_handler(stm, METALINK_ERR_NAMESPACE_ERROR);
+  }
+}
+
+/* piece hash state <hash> inside of <pieces> */
+void piece_hash_state_start_fun(metalink_pstm_t* stm,
+			        const char* name, const char* ns_uri,
+			        const char** attrs)
+{
+  metalink_pstm_enter_skip_state(stm);
+}
+
+void piece_hash_state_end_fun(metalink_pstm_t* stm,
+			      const char* name, const char* ns_uri,
+			      const char* characters)
+{
+  metalink_error_t r;
+  metalink_pctrl_piece_hash_set_hash(stm->ctrl, characters);
+  r = metalink_pctrl_commit_piece_hash_transaction(stm->ctrl);
+  if(r != 0) {
+    error_handler(stm, r);
+    return;
+  }
+
+  if(strcmp(METALINK_V3_NS_URI, ns_uri) == 0) {
+    metalink_pstm_enter_pieces_state(stm);
+  } else if(strcmp(METALINK_V4_NS_URI, ns_uri) == 0) {
+    metalink_pstm_enter_pieces_state_v4(stm);
+  } else {
+    error_handler(stm, METALINK_ERR_NAMESPACE_ERROR);
+  }
+}
+
+/* fin state */
+void fin_state_start_fun(metalink_pstm_t* stm,
+			 const char* name, const char* ns_uri,
+			 const char** attrs) {}
+
+void fin_state_end_fun(metalink_pstm_t* stm,
+		       const char* name, const char* ns_uri,
+		       const char* characters) {}
+

@@ -23,33 +23,9 @@
  * THE SOFTWARE.
  */
 /* copyright --> */
-#ifndef _D_METALINK_ERROR_H_
-#define _D_METALINK_ERROR_H_
+#ifndef _D_METALINK_PARSER_TEST_V4_H_
+#define _D_METALINK_PARSER_TEST_V4_H_
 
-typedef enum metalink_error_e {
-	/* 9xx: fatal error */
-	METALINK_ERR_BAD_ALLOC = 901,
+void test_metalink_parse_file_v4(void);
 
-	METALINK_ERR_CANNOT_OPEN_FILE = 902,
-
-	/* 1xx: XML semantic error */
-	METALINK_ERR_MISSING_REQUIRED_ATTR = 101,
-
-	METALINK_ERR_NAMESPACE_ERROR = 102,
-
-	/* 2xx: parser error */
-	METALINK_ERR_PARSER_ERROR = 201,
-
-	/* 3xx transaction error */
-	METALINK_ERR_NO_FILE_TRANSACTION = 301,
-
-	METALINK_ERR_NO_RESOURCE_TRANSACTION = 302,
-
-	METALINK_ERR_NO_CHECKSUM_TRANSACTION = 303,
-
-	METALINK_ERR_NO_CHUNK_CHECKSUM_TRANSACTION = 304,
-
-	METALINK_ERR_NO_PIECE_HASH_TRANSACTION = 305
-} metalink_error_t;
-
-#endif /* _D_METALINK_ERROR_H_ */
+#endif /* _D_METALINK_PARSER_TEST_V4_H_ */

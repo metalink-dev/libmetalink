@@ -44,8 +44,20 @@ metalink_pctrl_t* new_metalink_pctrl(void)
   if(!ctrl->files) {
     goto NEW_METALINK_PCTRL_ERROR;
   }
+  ctrl->languages = metalink_list_new();
+  if(!ctrl->languages) {
+    goto NEW_METALINK_PCTRL_ERROR;
+  }
+  ctrl->oses = metalink_list_new();
+  if(!ctrl->oses) {
+    goto NEW_METALINK_PCTRL_ERROR;
+  }
   ctrl->resources = metalink_list_new();
   if(!ctrl->resources) {
+    goto NEW_METALINK_PCTRL_ERROR;
+  }
+  ctrl->metaurls = metalink_list_new();
+  if(!ctrl->metaurls) {
     goto NEW_METALINK_PCTRL_ERROR;
   }
   ctrl->checksums = metalink_list_new();
@@ -73,10 +85,19 @@ void delete_metalink_pctrl(metalink_pctrl_t* ctrl)
   metalink_list_delete(ctrl->files);
   metalink_file_delete(ctrl->temp_file);
   
+  /* metalink_list_delete takes care of freeing the pointers in those lists */
+  metalink_list_delete(ctrl->languages);
+  metalink_list_delete(ctrl->oses);
+
   metalink_list_for_each(ctrl->resources,
 			 (void (*)(void*))&metalink_resource_delete);
   metalink_list_delete(ctrl->resources);
   metalink_resource_delete(ctrl->temp_resource);
+
+  metalink_list_for_each(ctrl->metaurls,
+			 (void (*)(void*))&metalink_metaurl_delete);
+  metalink_list_delete(ctrl->metaurls);
+  metalink_metaurl_delete(ctrl->temp_metaurl);
 
   metalink_list_for_each(ctrl->checksums,
 			 (void (*)(void*))&metalink_checksum_delete);
@@ -152,9 +173,16 @@ metalink_file_t* metalink_pctrl_new_file_transaction(metalink_pctrl_t* ctrl)
   }
   ctrl->temp_file = metalink_file_new();
 
+  metalink_list_clear(ctrl->languages);
+  metalink_list_clear(ctrl->oses);
+
   metalink_list_for_each(ctrl->resources,
 			 (void (*)(void*))&metalink_resource_delete);
   metalink_list_clear(ctrl->resources);
+
+  metalink_list_for_each(ctrl->metaurls,
+			 (void (*)(void*))&metalink_metaurl_delete);
+  metalink_list_clear(ctrl->metaurls);
 
   metalink_list_for_each(ctrl->checksums,
 			 (void (*)(void*))&metalink_checksum_delete);
@@ -170,9 +198,35 @@ metalink_error_t metalink_pctrl_commit_file_transaction(metalink_pctrl_t* ctrl)
     return METALINK_ERR_NO_FILE_TRANSACTION;
   }
 
+  /* copy ctrl->languages to ctrl->temp_file->languages */
+  r = commit_list_to_array((void***)&ctrl->temp_file->languages,
+			   ctrl->languages, sizeof(char*));
+  if(r != 0) {
+    return r;
+  }
+  if(ctrl->temp_file->languages) {
+    ctrl->temp_file->language = ctrl->temp_file->languages[0];
+  }
+
+  /* copy ctrl->oses to ctrl->temp_file->oses */
+  r = commit_list_to_array((void***)&ctrl->temp_file->oses,
+			   ctrl->oses, sizeof(char*));
+  if(r != 0) {
+    return r;
+  }
+  if(ctrl->temp_file->oses) {
+    ctrl->temp_file->os = ctrl->temp_file->oses[0];
+  }
+
   /* copy ctrl->resources to ctrl->temp_file->resources */
   r = commit_list_to_array((void***)&ctrl->temp_file->resources,
 			   ctrl->resources, sizeof(metalink_resource_t*));
+  if(r != 0) {
+    return r;
+  }
+  /* copy ctrl->metaurls to ctrl->temp_file->metaurls */
+  r = commit_list_to_array((void***)&ctrl->temp_file->metaurls,
+			   ctrl->metaurls, sizeof(metalink_metaurl_t*));
   if(r != 0) {
     return r;
   }
@@ -211,6 +265,29 @@ metalink_error_t metalink_pctrl_commit_resource_transaction(metalink_pctrl_t* ct
   }
 
   ctrl->temp_resource = NULL;
+  return 0;
+}
+
+metalink_metaurl_t* metalink_pctrl_new_metaurl_transaction(metalink_pctrl_t* ctrl)
+{
+  if(ctrl->temp_metaurl) {
+    metalink_metaurl_delete(ctrl->temp_metaurl);
+  }
+  ctrl->temp_metaurl = metalink_metaurl_new();
+  return ctrl->temp_metaurl;
+}
+
+metalink_error_t metalink_pctrl_commit_metaurl_transaction(metalink_pctrl_t* ctrl)
+{
+  if(!ctrl->temp_metaurl) {
+    return METALINK_ERR_NO_RESOURCE_TRANSACTION;
+  }
+
+  if(metalink_list_append(ctrl->metaurls, ctrl->temp_metaurl) != 0) {
+    return METALINK_ERR_BAD_ALLOC;
+  }
+
+  ctrl->temp_metaurl = NULL;
   return 0;
 }
 
@@ -294,6 +371,33 @@ metalink_error_t metalink_pctrl_commit_piece_hash_transaction(metalink_pctrl_t* 
 }
 
 /* metalink manipulation functions */
+void metalink_pctrl_set_version(metalink_pctrl_t* ctrl, metalink_version_t version)
+{
+  metalink_set_version(ctrl->metalink, version);
+}
+
+metalink_error_t metalink_pctrl_add_language(metalink_pctrl_t* ctrl, const char* language)
+{
+  char *l;
+
+  l = strdup(language);
+  if(!l || metalink_list_append(ctrl->languages, l) != 0) {
+    return METALINK_ERR_BAD_ALLOC;
+  }
+  return 0;
+}
+
+metalink_error_t metalink_pctrl_add_os(metalink_pctrl_t* ctrl, const char* os)
+{
+  char *o;
+
+  o = strdup(os);
+  if(!o || metalink_list_append(ctrl->oses, o) != 0) {
+    return METALINK_ERR_BAD_ALLOC;
+  }
+  return 0;
+}
+  
 metalink_error_t metalink_pctrl_set_identity(metalink_pctrl_t* ctrl, const char* identity)
 {
   return metalink_set_identity(ctrl->metalink, identity);
@@ -305,9 +409,73 @@ metalink_error_t metalink_pctrl_set_tags(metalink_pctrl_t* ctrl, const char* tag
 }
 
 /* file manipulation functions*/
+metalink_error_t metalink_pctrl_file_set_language(metalink_pctrl_t* ctrl, const char* language)
+{
+  char *l;
+
+  if(ctrl->languages) {
+    metalink_list_delete(ctrl->languages);
+  }
+
+  l = strdup(language);
+  ctrl->languages = metalink_list_new();
+  if(!ctrl->languages || !l || metalink_list_append(ctrl->languages, l) != 0) {
+    return METALINK_ERR_BAD_ALLOC;
+  }
+
+  return 0;
+}
+
+metalink_error_t metalink_pctrl_file_set_os(metalink_pctrl_t* ctrl, const char* os)
+{
+  char *o;
+
+  if(ctrl->oses) {
+    metalink_list_delete(ctrl->oses);
+  }
+
+  o = strdup(os);
+  ctrl->oses = metalink_list_new();
+  if(!ctrl->oses || !o || metalink_list_append(ctrl->oses, o) != 0) {
+    return METALINK_ERR_BAD_ALLOC;
+  }
+
+  return 0;
+}
+
 metalink_error_t metalink_pctrl_file_set_name(metalink_pctrl_t* ctrl, const char* name)
 {
   return metalink_file_set_name(ctrl->temp_file, name);
+}
+
+metalink_error_t metalink_pctrl_file_set_description(metalink_pctrl_t* ctrl, const char* description)
+{
+  return metalink_file_set_description(ctrl->temp_file, description);
+}
+
+metalink_error_t metalink_pctrl_file_set_copyright(metalink_pctrl_t* ctrl, const char* copyright)
+{
+  return metalink_file_set_copyright(ctrl->temp_file, copyright);
+}
+
+metalink_error_t metalink_pctrl_file_set_identity(metalink_pctrl_t* ctrl, const char* identity)
+{
+  return metalink_file_set_identity(ctrl->temp_file, identity);
+}
+
+metalink_error_t metalink_pctrl_file_set_logo(metalink_pctrl_t* ctrl, const char* logo)
+{
+  return metalink_file_set_logo(ctrl->temp_file, logo);
+}
+
+metalink_error_t metalink_pctrl_file_set_publisher_name(metalink_pctrl_t* ctrl, const char* name)
+{
+  return metalink_file_set_publisher_name(ctrl->temp_file, name);
+}
+
+metalink_error_t metalink_pctrl_file_set_publisher_url(metalink_pctrl_t* ctrl, const char* url)
+{
+  return metalink_file_set_publisher_url(ctrl->temp_file, url);
 }
 
 void metalink_pctrl_file_set_size(metalink_pctrl_t* ctrl, long long int size)
@@ -318,16 +486,6 @@ void metalink_pctrl_file_set_size(metalink_pctrl_t* ctrl, long long int size)
 metalink_error_t metalink_pctrl_file_set_version(metalink_pctrl_t* ctrl, const char* version)
 {
   return metalink_file_set_version(ctrl->temp_file, version);
-}
-
-metalink_error_t metalink_pctrl_file_set_language(metalink_pctrl_t* ctrl, const char* language)
-{
-  return metalink_file_set_language(ctrl->temp_file, language);
-}
-
-metalink_error_t metalink_pctrl_file_set_os(metalink_pctrl_t* ctrl, const char* os)
-{
-  return metalink_file_set_os(ctrl->temp_file, os);
 }
 
 void metalink_pctrl_file_set_maxconnections(metalink_pctrl_t* ctrl, int maxconnections)
@@ -354,6 +512,12 @@ void metalink_pctrl_resource_set_preference(metalink_pctrl_t* ctrl,
   metalink_resource_set_preference(ctrl->temp_resource, preference);
 }
 
+void metalink_pctrl_resource_set_priority(metalink_pctrl_t* ctrl,
+					    int priority)
+{
+  metalink_resource_set_priority(ctrl->temp_resource, priority);
+}
+
 void metalink_pctrl_resource_set_maxconnections(metalink_pctrl_t* ctrl,
 						int maxconnections)
 {
@@ -363,6 +527,31 @@ void metalink_pctrl_resource_set_maxconnections(metalink_pctrl_t* ctrl,
 metalink_error_t metalink_pctrl_resource_set_url(metalink_pctrl_t* ctrl, const char* url)
 {
   return metalink_resource_set_url(ctrl->temp_resource, url);
+}
+
+/* metaurl manipulation functions */
+metalink_error_t metalink_pctrl_metaurl_set_mediatype(metalink_pctrl_t* ctrl,
+						      const char* mediatype)
+{
+  return metalink_metaurl_set_mediatype(ctrl->temp_metaurl, mediatype);
+}
+
+metalink_error_t metalink_pctrl_metaurl_set_name(metalink_pctrl_t* ctrl,
+						 const char* name)
+{
+  return metalink_metaurl_set_name(ctrl->temp_metaurl, name);
+}
+
+void metalink_pctrl_metaurl_set_priority(metalink_pctrl_t* ctrl,
+					 int priority)
+{
+  metalink_metaurl_set_priority(ctrl->temp_metaurl, priority);
+}
+
+metalink_error_t metalink_pctrl_metaurl_set_url(metalink_pctrl_t* ctrl,
+						const char* url)
+{
+  return metalink_metaurl_set_url(ctrl->temp_metaurl, url);
 }
 
 /* checksum manipulation functions */
@@ -403,4 +592,25 @@ void metalink_pctrl_chunk_checksum_set_piece_hashes
 {
   metalink_chunk_checksum_set_piece_hashes(ctrl->temp_chunk_checksum,
 					   piece_hashes);
+}
+
+/* information functions */
+metalink_error_t metalink_pctrl_set_generator(metalink_pctrl_t* ctrl, const char* generator)
+{
+  return metalink_set_generator(ctrl->metalink, generator);
+}
+
+metalink_error_t metalink_pctrl_set_origin(metalink_pctrl_t* ctrl, const char* origin)
+{
+  return metalink_set_origin(ctrl->metalink, origin);
+}
+
+void metalink_pctrl_set_published(metalink_pctrl_t* ctrl, int published)
+{
+  metalink_set_published(ctrl->metalink, published);
+}
+
+void metalink_pctrl_set_updated(metalink_pctrl_t* ctrl, int updated)
+{
+  return metalink_set_updated(ctrl->metalink, updated);
 }

@@ -195,96 +195,6 @@ void file_state_end_fun_v3(metalink_pstm_t* stm,
   metalink_pstm_enter_files_state(stm);
 }
 
-/* size state <size> */
-void size_state_start_fun_v3(metalink_pstm_t* stm,
-			     const char* name, const char* ns_uri,
-			     const char** attrs)
-{
-  metalink_pstm_enter_skip_state(stm);
-}
-
-void size_state_end_fun_v3(metalink_pstm_t* stm,
-			   const char* name, const char* ns_uri,
-			   const char* characters)
-{
-  long long int size = 0;
-
-  /* TODO evaluate endptr(2nd argument) */
-  errno = 0;
-  size = strtoll(characters, 0, 10);
-  if(errno == ERANGE || size < 0) {
-    /* overflow or parse error or negative integer detected. */
-    /* current Metalink specification does not require size. */
-    size = 0;
-  }
-  metalink_pctrl_file_set_size(stm->ctrl, size);
-
-  metalink_pstm_enter_file_state(stm);
-}
-
-/* version state <version> */
-void version_state_start_fun_v3(metalink_pstm_t* stm,
-				const char* name, const char* ns_uri,
-				const char** attrs)
-{
-  metalink_pstm_enter_skip_state(stm);
-}
-
-void version_state_end_fun_v3(metalink_pstm_t* stm,
-			      const char* name, const char* ns_uri,
-			      const char* characters)
-{
-  metalink_error_t r;
-  r = metalink_pctrl_file_set_version(stm->ctrl, characters);
-  if(r == 0) {
-    metalink_pstm_enter_file_state(stm);
-  } else {
-    error_handler(stm, r);
-  }
-}
-
-/* language state <language> */
-void language_state_start_fun_v3(metalink_pstm_t* stm,
-				 const char* name, const char* ns_uri,
-				 const char** attrs)
-{
-  metalink_pstm_enter_skip_state(stm);
-}
-
-void language_state_end_fun_v3(metalink_pstm_t* stm,
-			       const char* name, const char* ns_uri,
-			       const char* characters)
-{
-  metalink_error_t r;
-  r = metalink_pctrl_file_set_language(stm->ctrl, characters);
-  if(r == 0) {
-    metalink_pstm_enter_file_state(stm);
-  } else {
-    error_handler(stm, r);
-  }
-}
-
-/* os state <os> */
-void os_state_start_fun_v3(metalink_pstm_t* stm,
-			   const char* name, const char* ns_uri,
-			   const char** attrs)
-{
-  metalink_pstm_enter_skip_state(stm);
-}
-
-void os_state_end_fun_v3(metalink_pstm_t* stm,
-			 const char* name, const char* ns_uri,
-			 const char* characters)
-{
-  metalink_error_t r;
-  r = metalink_pctrl_file_set_os(stm->ctrl, characters);
-  if(r == 0) {
-    metalink_pstm_enter_file_state(stm);
-  } else {
-    error_handler(stm, r);
-  }
-}
-
 /* resources state <resources> */
 void resources_state_start_fun_v3(metalink_pstm_t* stm,
 				  const char* name, const char* ns_uri,
@@ -360,33 +270,6 @@ void resources_state_end_fun_v3(metalink_pstm_t* stm,
 				const char* characters)
 {
   metalink_pstm_enter_file_state(stm);
-}
-
-/* url state <url> */
-void url_state_start_fun_v3(metalink_pstm_t* stm,
-			    const char* name, const char* ns_uri,
-			    const char** attrs)
-{
-  metalink_pstm_enter_skip_state(stm);
-}
-
-void url_state_end_fun_v3(metalink_pstm_t* stm,
-			  const char* name, const char* ns_uri,
-			  const char* characters)
-{
-  metalink_error_t r;
-  r = metalink_pctrl_resource_set_url(stm->ctrl, characters);
-  if(r != 0) {
-    /* TODO clear intermidiate resource transaction. */
-    error_handler(stm, r);
-    return;
-  }
-  r = metalink_pctrl_commit_resource_transaction(stm->ctrl);
-  if(r != 0) {
-    error_handler(stm, r);
-    return;
-  }
-  metalink_pstm_enter_resources_state(stm);
 }
 
 /* verification state <verification> */
@@ -470,32 +353,6 @@ void verification_state_end_fun_v3(metalink_pstm_t* stm,
   metalink_pstm_enter_file_state(stm);
 }
 
-/* hash state <hash> */
-void hash_state_start_fun_v3(metalink_pstm_t* stm,
-			     const char* name, const char* ns_uri,
-			     const char** attrs)
-{
-  metalink_pstm_enter_skip_state(stm);
-}
-
-void hash_state_end_fun_v3(metalink_pstm_t* stm,
-			   const char* name, const char* ns_uri,
-			   const char* characters)
-{
-  metalink_error_t r;
-  r = metalink_pctrl_checksum_set_hash(stm->ctrl, characters);
-  if(r != 0) {
-    error_handler(stm, r);
-    return;
-  }
-  r = metalink_pctrl_commit_checksum_transaction(stm->ctrl);
-  if(r != 0) {
-    error_handler(stm, r);
-    return;
-  }
-  metalink_pstm_enter_verification_state(stm);
-}
-
 /* pieces state <pieces> */
 void pieces_state_start_fun_v3(metalink_pstm_t* stm,
 			       const char* name, const char* ns_uri,
@@ -533,7 +390,6 @@ void pieces_state_start_fun_v3(metalink_pstm_t* stm,
   } else {
     metalink_pstm_enter_skip_state(stm);
   }
-  
 }
 
 void pieces_state_end_fun_v3(metalink_pstm_t* stm,
@@ -546,37 +402,7 @@ void pieces_state_end_fun_v3(metalink_pstm_t* stm,
     error_handler(stm, r);
     return;
   }
+
   metalink_pstm_enter_verification_state(stm);
 }
-
-/* piece hash state <hash> inside of <pieces> */
-void piece_hash_state_start_fun_v3(metalink_pstm_t* stm,
-				   const char* name, const char* ns_uri,
-				   const char** attrs)
-{
-  metalink_pstm_enter_skip_state(stm);
-}
-
-void piece_hash_state_end_fun_v3(metalink_pstm_t* stm,
-				 const char* name, const char* ns_uri,
-				 const char* characters)
-{
-  metalink_error_t r;
-  metalink_pctrl_piece_hash_set_hash(stm->ctrl, characters);
-  r = metalink_pctrl_commit_piece_hash_transaction(stm->ctrl);
-  if(r != 0) {
-    error_handler(stm, r);
-    return;
-  }
-  metalink_pstm_enter_pieces_state(stm);
-}
-
-/* fin state */
-void fin_state_start_fun_v3(metalink_pstm_t* stm,
-			    const char* name, const char* ns_uri,
-			    const char** attrs) {}
-
-void fin_state_end_fun_v3(metalink_pstm_t* stm,
-			  const char* name, const char* ns_uri,
-			  const char* characters) {}
 

@@ -99,6 +99,12 @@ void metalink_pstm_enter_metalink_state(metalink_pstm_t* stm)
   metalink_pstm_disable_character_buffering(stm);
 }
 
+void metalink_pstm_enter_metalink_state_v4(metalink_pstm_t* stm)
+{
+  metalink_pstm_set_fun(stm, &metalink_state_start_fun_v4, &metalink_state_end_fun_v4);
+  metalink_pstm_disable_character_buffering(stm);
+}
+
 void metalink_pstm_enter_identity_state(metalink_pstm_t* stm)
 {
   metalink_pstm_set_fun(stm, &identity_state_start_fun_v3, &identity_state_end_fun_v3);
@@ -125,25 +131,25 @@ void metalink_pstm_enter_file_state(metalink_pstm_t* stm)
 
 void metalink_pstm_enter_size_state(metalink_pstm_t* stm)
 {
-  metalink_pstm_set_fun(stm, &size_state_start_fun_v3, &size_state_end_fun_v3);
+  metalink_pstm_set_fun(stm, &size_state_start_fun, &size_state_end_fun);
   metalink_pstm_enable_character_buffering(stm);
 }
 
 void metalink_pstm_enter_version_state(metalink_pstm_t* stm)
 {
-  metalink_pstm_set_fun(stm, &version_state_start_fun_v3, &version_state_end_fun_v3);
+  metalink_pstm_set_fun(stm, &version_state_start_fun, &version_state_end_fun);
   metalink_pstm_enable_character_buffering(stm);
 }
 
 void metalink_pstm_enter_language_state(metalink_pstm_t* stm)
 {
-  metalink_pstm_set_fun(stm, &language_state_start_fun_v3, &language_state_end_fun_v3);
+  metalink_pstm_set_fun(stm, &language_state_start_fun, &language_state_end_fun);
   metalink_pstm_enable_character_buffering(stm);
 }
 
 void metalink_pstm_enter_os_state(metalink_pstm_t* stm)
 {
-  metalink_pstm_set_fun(stm, &os_state_start_fun_v3, &os_state_end_fun_v3);
+  metalink_pstm_set_fun(stm, &os_state_start_fun, &os_state_end_fun);
   metalink_pstm_enable_character_buffering(stm);
 }
 
@@ -155,7 +161,7 @@ void metalink_pstm_enter_resources_state(metalink_pstm_t* stm)
 
 void metalink_pstm_enter_url_state(metalink_pstm_t* stm)
 {
-  metalink_pstm_set_fun(stm, &url_state_start_fun_v3, &url_state_end_fun_v3);
+  metalink_pstm_set_fun(stm, &url_state_start_fun, &url_state_end_fun);
   metalink_pstm_enable_character_buffering(stm);
 }
 
@@ -168,7 +174,7 @@ void metalink_pstm_enter_verification_state(metalink_pstm_t* stm)
 
 void metalink_pstm_enter_hash_state(metalink_pstm_t* stm)
 {
-  metalink_pstm_set_fun(stm, &hash_state_start_fun_v3, &hash_state_end_fun_v3);
+  metalink_pstm_set_fun(stm, &hash_state_start_fun, &hash_state_end_fun);
   metalink_pstm_enable_character_buffering(stm);
 }
 
@@ -180,14 +186,14 @@ void metalink_pstm_enter_pieces_state(metalink_pstm_t* stm)
 
 void metalink_pstm_enter_piece_hash_state(metalink_pstm_t* stm)
 {
-  metalink_pstm_set_fun(stm, &piece_hash_state_start_fun_v3,
-			&piece_hash_state_end_fun_v3);
+  metalink_pstm_set_fun(stm, &piece_hash_state_start_fun,
+			&piece_hash_state_end_fun);
   metalink_pstm_enable_character_buffering(stm);
 }
 
 void metalink_pstm_enter_fin_state(metalink_pstm_t* stm)
 {
-  metalink_pstm_set_fun(stm, &fin_state_start_fun_v3, &fin_state_end_fun_v3);
+  metalink_pstm_set_fun(stm, &fin_state_start_fun, &fin_state_end_fun);
   metalink_pstm_disable_character_buffering(stm);
 }
 
@@ -213,4 +219,89 @@ void metalink_pstm_exit_skip_state(metalink_pstm_t* stm)
   } else {
     metalink_pstm_disable_character_buffering(stm);
   }
+}
+
+/* Metalink 4 states */
+void metalink_pstm_enter_file_state_v4(metalink_pstm_t* stm)
+{
+  metalink_pstm_set_fun(stm, &file_state_start_fun_v4,
+			&file_state_end_fun_v4);
+  metalink_pstm_disable_character_buffering(stm);
+}
+
+void metalink_pstm_enter_generator_state(metalink_pstm_t* stm)
+{
+  metalink_pstm_set_fun(stm, &generator_state_start_fun_v4,
+			&generator_state_end_fun_v4);
+  metalink_pstm_enable_character_buffering(stm);
+}
+
+void metalink_pstm_enter_origin_state(metalink_pstm_t* stm)
+{
+  metalink_pstm_set_fun(stm, &origin_state_start_fun_v4,
+			&origin_state_end_fun_v4);
+  metalink_pstm_enable_character_buffering(stm);
+}
+
+void metalink_pstm_enter_description_state_v4(metalink_pstm_t* stm)
+{
+  metalink_pstm_set_fun(stm, &description_state_start_fun_v4,
+			&description_state_end_fun_v4);
+  metalink_pstm_enable_character_buffering(stm);
+}
+
+void metalink_pstm_enter_copyright_state_v4(metalink_pstm_t* stm)
+{
+  metalink_pstm_set_fun(stm, &copyright_state_start_fun_v4,
+			&copyright_state_end_fun_v4);
+  metalink_pstm_enable_character_buffering(stm);
+}
+
+void metalink_pstm_enter_identity_state_v4(metalink_pstm_t* stm)
+{
+  metalink_pstm_set_fun(stm, &identity_state_start_fun_v4,
+			&identity_state_end_fun_v4);
+  metalink_pstm_enable_character_buffering(stm);
+}
+
+void metalink_pstm_enter_logo_state_v4(metalink_pstm_t* stm)
+{
+  metalink_pstm_set_fun(stm, &logo_state_start_fun_v4,
+			&logo_state_end_fun_v4);
+  metalink_pstm_enable_character_buffering(stm);
+}
+
+void metalink_pstm_enter_signature_state_v4(metalink_pstm_t* stm)
+{
+  metalink_pstm_set_fun(stm, &signature_state_start_fun_v4,
+			&signature_state_end_fun_v4);
+  metalink_pstm_enable_character_buffering(stm);
+}
+
+void metalink_pstm_enter_pieces_state_v4(metalink_pstm_t* stm)
+{
+  metalink_pstm_set_fun(stm, &pieces_state_start_fun_v4,
+			&pieces_state_end_fun_v4);
+  metalink_pstm_enable_character_buffering(stm);
+}
+
+void metalink_pstm_enter_metaurl_state_v4(metalink_pstm_t* stm)
+{
+  metalink_pstm_set_fun(stm, &metaurl_state_start_fun_v4,
+			&metaurl_state_end_fun_v4);
+  metalink_pstm_enable_character_buffering(stm);
+}
+
+void metalink_pstm_enter_published_state_v4(metalink_pstm_t* stm)
+{
+  metalink_pstm_set_fun(stm, &published_state_start_fun_v4,
+			&published_state_end_fun_v4);
+  metalink_pstm_enable_character_buffering(stm);
+}
+
+void metalink_pstm_enter_updated_state_v4(metalink_pstm_t* stm)
+{
+  metalink_pstm_set_fun(stm, &updated_state_start_fun_v4,
+			&updated_state_end_fun_v4);
+  metalink_pstm_enable_character_buffering(stm);
 }

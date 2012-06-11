@@ -3,7 +3,7 @@ lib_LTLIBRARIES = libmetalink.la
 libmetalink_la_SOURCES =
 libmetalink_la_LIBADD = \
 	metalink/libmetalinkcore.la\
-	@XML_LIBS@ @LIBEXPAT_LIBS@
+	@XML_LIBS@ @EXPAT_LIBS@
 libmetalink_la_LDFLAGS = -no-undefined \
         -version-info $(LT_CURRENT):$(LT_REVISION):$(LT_AGE)
 nobase_include_HEADERS = \

@@ -1,3 +1,5 @@
+if HAVE_CUNIT
+
 check_PROGRAMS = main
 main_SOURCES = \
 	main.c\
@@ -6,9 +8,11 @@ main_SOURCES = \
 	metalink_parser_test.c metalink_parser_test.h\
 	metalink_parser_test_v4.c metalink_parser_test_v4.h\
 	metalink_helper_test.c metalink_helper_test.h
-main_LDADD = ${top_builddir}/lib/libmetalink.la -lcunit
-main_LDFLAGS = -static
-AM_CFLAGS = -Wall -I${top_srcdir}/lib
+main_LDADD = ${top_builddir}/lib/libmetalink.la
+main_LDFLAGS = -static  @CUNIT_LIBS@
+AM_CFLAGS = -I${top_srcdir}/lib @CUNIT_CFLAGS@
 TESTS = main
 
-EXTRA_DIST = test1.xml
+EXTRA_DIST = test1.xml test2.xml
+
+endif # HAVE_CUNIT

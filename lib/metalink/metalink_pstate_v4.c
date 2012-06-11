@@ -26,15 +26,18 @@
 #include "metalink_pstate.h"
 #include "metalink_config.h"
 
+#ifndef _XOPEN_SOURCE
+#  define _XOPEN_SOURCE /* avoid warning when using strptime */
+#endif
+#ifndef _BSD_SOURCE
+#  define _BSD_SOURCE /* avoid warning when using timegm */
+#endif
+
+#include <time.h>
 #include <string.h>
 #include <stdlib.h>
 #include <errno.h>
 #include <limits.h>
-
-#ifndef _XOPEN_SOURCE
-  #define _XOPEN_SOURCE /* avoid warning when using strptime */
-#endif
-#include <time.h>
 
 #include "metalink_pstm.h"
 #include "metalink_helper.h"

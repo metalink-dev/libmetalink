@@ -20,6 +20,11 @@ AC_CONFIG_MACRO_DIR([m4])
 AC_ARG_WITH([libexpat], [  --with-libexpat            use libexpat library if installed. Default: yes], [with_libexpat=$withval], [with_libexpat=yes])
 AC_ARG_WITH([libxml2], [  --with-libxml2             use libxml2 library if installed. Default: yes], [with_libxml2=$withval], [with_libxml2=yes])
 
+AC_ARG_ENABLE([maintainer-mode],
+    [AS_HELP_STRING([--enable-maintainer-mode],
+                    [Turn on compile time warnings])],
+    [maintainer_mode=$withval], [maintainer_mode=no])
+
 # Checks for programs
 AC_PROG_CC
 AC_PROG_INSTALL
@@ -37,8 +42,25 @@ if test "x$with_libxml2" = "xyes" && test "x$have_libexpat" != "xyes"; then
    fi
 fi
 
+# cunit
+PKG_CHECK_MODULES([CUNIT], [cunit >= 2.1], [have_cunit=yes], [have_cunit=no])
+# If pkg-config does not find cunit, check it using AC_CHECK_LIB.  We
+# do this because Debian (Ubuntu) lacks pkg-config file for cunit.
+if test "x${have_cunit}" = "xno"; then
+  AC_MSG_WARN([${CUNIT_PKG_ERRORS}])
+  AC_CHECK_LIB([cunit], [CU_initialize_registry],
+               [have_cunit=yes], [have_cunit=no])
+  if test "x${have_cunit}" = "xyes"; then
+    CUNIT_LIBS="-lcunit"
+    CUNIT_CFLAGS=""
+    AC_SUBST([CUNIT_LIBS])
+    AC_SUBST([CUNIT_CFLAGS])
+  fi
+fi
+
 AM_CONDITIONAL([ENABLE_LIBEXPAT], [test "x$have_libexpat" = "xyes"])
 AM_CONDITIONAL([ENABLE_LIBXML2], [test "x$have_libxml2" = "xyes"])
+AM_CONDITIONAL([HAVE_CUNIT], [ test "x${have_cunit}" = "xyes" ])
 
 # Checks for header files.
 AC_HEADER_STDC
@@ -53,6 +75,10 @@ AC_FUNC_MALLOC
 AC_FUNC_REALLOC
 AC_CHECK_FUNCS([memset strtol strtoll])
 
+if test "x$maintainer_mode" != "xno"; then
+    CFLAGS="-Wall -Wmissing-prototypes -Wstrict-prototypes -Wmissing-declarations -Wpointer-arith -Wdeclaration-after-statement -Werror=declaration-after-statement -Wformat -Wformat-security -Werror=format-security -Wimplicit-function-declaration -Werror=implicit-function-declaration $CFLAGS"
+fi
+
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_FILES([
 	Makefile
@@ -65,3 +91,20 @@ AC_CONFIG_FILES([
 	m4/Makefile
 ])
 AC_OUTPUT
+
+AC_MSG_NOTICE([summary of build options:
+
+    Version:        ${VERSION} shared $LT_CURRENT:$LT_REVISION:$LT_AGE
+    Host type:      ${host}
+    Install prefix: ${prefix}
+    C compiler:     ${CC}
+    CFLAGS:         ${CFLAGS}
+    LDFLAGS:        ${LDFLAGS}
+    LIBS:           ${LIBS}
+    CPPFLAGS:       ${CPPFLAGS}
+    C preprocessor: ${CPP}
+    Library types:  Shared=${enable_shared}, Static=${enable_static}
+    Libexpat:       ${have_libexpat}
+    Libxml2:        ${have_libxml2}
+    CUnit:          ${have_cunit}
+])

@@ -524,6 +524,7 @@ metalink_chunk_checksum_set_piece_hashes
       metalink_piece_hash_delete(*p);
       ++p;
     }
+    free(chunk_checksum->piece_hashes);
   }
   chunk_checksum->piece_hashes = piece_hashes;
 }

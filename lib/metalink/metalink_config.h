@@ -30,6 +30,10 @@
 # include "config.h"
 #endif /* HAVE_CONFIG_H */
 
-#define METALINK_PUBLIC __attribute__ ((visibility ("default")))
+#ifdef GCC_VISIBILITY
+#  define METALINK_PUBLIC __attribute__ ((visibility ("default")))
+#else /* !GCC_VISIBILITY */
+#  define METALINK_PUBLIC
+#endif /* !GCC_VISIBILITY */
 
 #endif /* _D_METALINK_CONFIG_H_ */

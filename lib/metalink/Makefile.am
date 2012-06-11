@@ -24,5 +24,5 @@ if ENABLE_LIBEXPAT
 libmetalinkcore_la_SOURCES += libexpat_metalink_parser.c
 endif
 
-AM_CFLAGS = -Wall -I${top_srcdir}/lib -fvisibility=hidden
+AM_CFLAGS = -Wall -I${top_srcdir}/lib
 AM_CPPFLAGS = @XML_CPPFLAGS@ @LIBEXPAT_CPPFLAGS@

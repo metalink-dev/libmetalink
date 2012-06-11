@@ -25,6 +25,11 @@ AC_ARG_ENABLE([maintainer-mode],
                     [Turn on compile time warnings])],
     [maintainer_mode=$withval], [maintainer_mode=no])
 
+AC_ARG_ENABLE([gcc-visibility],
+    [AS_HELP_STRING([--enable-gcc-visibility],
+                    [Use gcc visibility attribute. This option may be removed in the future release.])],
+    [gcc_visibility=$withval], [gcc_visibility=no])
+
 # Checks for programs
 AC_PROG_CC
 AC_PROG_INSTALL
@@ -77,6 +82,11 @@ AC_CHECK_FUNCS([memset strtol strtoll])
 
 if test "x$maintainer_mode" != "xno"; then
     CFLAGS="-Wall -Wmissing-prototypes -Wstrict-prototypes -Wmissing-declarations -Wpointer-arith -Wdeclaration-after-statement -Werror=declaration-after-statement -Wformat -Wformat-security -Werror=format-security -Wimplicit-function-declaration -Werror=implicit-function-declaration $CFLAGS"
+fi
+
+if test "x$gcc_visibility" != "xno"; then
+    CFLAGS="-fvisibility=hidden $CFLAGS"
+    AC_DEFINE([GCC_VISIBILITY], [1], [Define to 1 if you use gcc visibility attribute.])
 fi
 
 AC_CONFIG_HEADERS([config.h])

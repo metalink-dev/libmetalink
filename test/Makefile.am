@@ -12,7 +12,8 @@ main_LDADD = ${top_builddir}/lib/libmetalink.la
 main_LDFLAGS = -static  @CUNIT_LIBS@
 
 AM_CFLAGS = -I${top_srcdir}/lib -I${top_srcdir}/lib/includes \
-	-I${top_builddir}/lib/includes @CUNIT_CFLAGS@
+	-I${top_builddir}/lib/includes \
+	-DLIBMETALINK_TEST_DIR=\"$(top_srcdir)/test/\" @CUNIT_CFLAGS@
 TESTS = main
 
 EXTRA_DIST = test1.xml test2.xml

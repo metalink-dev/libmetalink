@@ -177,7 +177,7 @@ void test_metalink_parse_file(void)
   metalink_error_t r;
   metalink_t* metalink;
 
-  r = metalink_parse_file("test1.xml", &metalink);
+  r = metalink_parse_file(LIBMETALINK_TEST_DIR"test1.xml", &metalink);
   CU_ASSERT_EQUAL(0, r);
 
   validate_result(metalink);
@@ -189,7 +189,7 @@ void test_metalink_parse_fp(void)
   metalink_t* metalink;
   FILE* fp;
 
-  fp = fopen("test1.xml", "rb");
+  fp = fopen(LIBMETALINK_TEST_DIR"test1.xml", "rb");
   if(fp == NULL) {
     CU_FAIL_FATAL("cannot open test1.xml");
   }
@@ -206,7 +206,7 @@ void test_metalink_parse_fd(void)
   metalink_t* metalink;
   int fd;
 
-  fd = openfile("test1.xml", O_RDONLY);
+  fd = openfile(LIBMETALINK_TEST_DIR"test1.xml", O_RDONLY);
   r = metalink_parse_fd(fd, &metalink);  
   CU_ASSERT_EQUAL(0, r);
   close(fd);
@@ -219,7 +219,7 @@ void test_metalink_parse_memory(void)
   metalink_t* metalink;
   int fd;
 
-  fd = openfile("test1.xml", O_RDONLY);
+  fd = openfile(LIBMETALINK_TEST_DIR"test1.xml", O_RDONLY);
   while(1) {
     char buf[4096];
     ssize_t nread;
@@ -245,7 +245,7 @@ void test_metalink_parse_update(void)
   ctx = metalink_parser_context_new();
   CU_ASSERT_FATAL(NULL != ctx);
 
-  fd = openfile("test1.xml", O_RDONLY);
+  fd = openfile(LIBMETALINK_TEST_DIR"test1.xml", O_RDONLY);
   while(1) {
     char buf[4096];
     ssize_t nread;
@@ -285,7 +285,7 @@ void test_metalink_parse_update_fail(void)
   ctx = metalink_parser_context_new();
   CU_ASSERT_FATAL(NULL != ctx);
 
-  fd = openfile("test1.xml", O_RDONLY);
+  fd = openfile(LIBMETALINK_TEST_DIR"test1.xml", O_RDONLY);
 
   while(1) {
     char buf[128];

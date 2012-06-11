@@ -152,7 +152,7 @@ void test_metalink_parse_file_v4(void)
   metalink_error_t r;
   metalink_t* metalink;
 
-  r = metalink_parse_file("test2.xml", &metalink);
+  r = metalink_parse_file(LIBMETALINK_TEST_DIR"test2.xml", &metalink);
   CU_ASSERT_EQUAL_FATAL(0, r);
 
   validate_result(metalink);

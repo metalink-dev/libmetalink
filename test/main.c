@@ -22,6 +22,7 @@ static int clean_suite1(void)
 int main(void)
 {
    CU_pSuite pSuite = NULL;
+   unsigned int num_tests_failed;
 
    /* initialize the CUnit test registry */
    if (CUE_SUCCESS != CU_initialize_registry())
@@ -83,6 +84,12 @@ int main(void)
    /* Run all tests using the CUnit Basic interface */
    CU_basic_set_mode(CU_BRM_VERBOSE);
    CU_basic_run_tests();
+   num_tests_failed = CU_get_number_of_tests_failed();
    CU_cleanup_registry();
-   return CU_get_error();
+   if(CU_get_error() == CUE_SUCCESS) {
+     return num_tests_failed;
+   } else {
+     printf("CUnit Error: %s\n", CU_get_error_msg());
+     return CU_get_error();
+   }
 }

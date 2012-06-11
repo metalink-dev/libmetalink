@@ -41,6 +41,21 @@
 
 #include "metalink_pstm.h"
 #include "metalink_helper.h"
+#ifndef HAVE_STRPTIME
+#  include "strptime.h"
+#endif /* !HAVE_STRPTIME */
+
+static time_t my_timegm(struct tm *tm)
+{
+#ifdef HAVE__MKGMTIME
+  /* WINE does not implement _mkgmtime() yet */
+  return _mkgmtime(tm);
+#elif HAVE_TIMEGM
+  return timegm(tm);
+#else
+#  error no timegm() function available
+#endif
+}
 
 /* parse a RFC3339 formatted date, ie. 2010-05-01T12:15:02Z or 2010-05-01T12:16:02+01:00 */
 static time_t parse_date(const char* date)
@@ -62,7 +77,7 @@ static time_t parse_date(const char* date)
     return t;
   }
 
-  t = timegm(&tm);
+  t = my_timegm(&tm);
 
   while(*rest != 'Z' && *rest != '+' && *rest != '-' && *rest != '\0')
   {
@@ -86,7 +101,7 @@ static time_t parse_date(const char* date)
       return t;
     tm.tm_hour += sign*interval.tm_hour;
     tm.tm_min += sign*interval.tm_min;
-    t = timegm(&tm);
+    t = my_timegm(&tm);
   }
 
   return t;

@@ -78,7 +78,16 @@ AC_TYPE_SIZE_T
 # Checks for library functions.
 AC_FUNC_MALLOC
 AC_FUNC_REALLOC
-AC_CHECK_FUNCS([memset strtol strtoll])
+
+# _mkgmtime is available in Windows, behaves like timegm
+AC_CHECK_FUNCS([memset strtol strtoll timegm _mkgmtime])
+AC_CHECK_FUNC([strptime], [have_strptime=yes], [have_strptime=no])
+
+if test "x$have_strptime" = "xyes"; then
+    AC_DEFINE([HAVE_STRPTIME], [1],
+              [Define to 1 if you have strptime function.])
+fi
+AM_CONDITIONAL([HAVE_STRPTIME], [ test "x$have_strptime" = "xyes" ])
 
 if test "x$maintainer_mode" != "xno"; then
     CFLAGS="-Wall -Wmissing-prototypes -Wstrict-prototypes -Wmissing-declarations -Wpointer-arith -Wdeclaration-after-statement -Werror=declaration-after-statement -Wformat -Wformat-security -Werror=format-security -Wimplicit-function-declaration -Werror=implicit-function-declaration $CFLAGS"

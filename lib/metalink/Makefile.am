@@ -16,6 +16,10 @@ libmetalinkcore_la_SOURCES =\
 	metalink_string_buffer.c metalink_string_buffer.h\
 	metalink_helper.c metalink_helper.h
 
+if !HAVE_STRPTIME
+libmetalinkcore_la_SOURCES += strptime.c strptime.h
+endif
+
 if ENABLE_LIBXML2
 libmetalinkcore_la_SOURCES += libxml2_metalink_parser.c
 endif

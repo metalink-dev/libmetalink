@@ -23,7 +23,6 @@
  * THE SOFTWARE.
  */
 /* copyright --> */
-#include <sys/mman.h>
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <unistd.h>
@@ -173,24 +172,6 @@ static int openfile(const char* filepath, int flags)
   return fd;
 }
 
-static void getfstat(struct stat* stptr, int fd)
-{
-  if(fstat(fd, stptr) == -1) {
-    CU_FAIL_FATAL("fstat failed");
-  }
-}
-
-static void* mapfile(int fd, off_t size)
-{
-  char* addr;
-
-  addr = mmap(NULL, size, PROT_READ, MAP_PRIVATE, fd, 0);
-  if(addr == MAP_FAILED) {
-    CU_FAIL_FATAL("mmap failed");
-  }
-  return addr;
-}
-
 void test_metalink_parse_file(void)
 {
   metalink_error_t r;
@@ -237,16 +218,19 @@ void test_metalink_parse_memory(void)
   metalink_error_t r;
   metalink_t* metalink;
   int fd;
-  struct stat st;
-  char* addr;
 
   fd = openfile("test1.xml", O_RDONLY);
-  getfstat(&st, fd);
-
-  addr = mapfile(fd, st.st_size);
-
-  r = metalink_parse_memory(addr, st.st_size, &metalink);
-  CU_ASSERT_EQUAL(0, r);
+  while(1) {
+    char buf[4096];
+    ssize_t nread;
+    while((nread = read(fd, buf, sizeof(buf))) == -1 && errno == EINTR);
+    CU_ASSERT_FATAL(nread != -1);
+    if(nread == 0) {
+      break;
+    }
+    r = metalink_parse_memory(buf, nread, &metalink);
+    CU_ASSERT_EQUAL(0, r);
+  }
   close(fd);
   validate_result(metalink);
 }
@@ -256,27 +240,24 @@ void test_metalink_parse_update(void)
   metalink_error_t r;
   metalink_t* metalink;
   int fd;
-  struct stat st;
-  char* addr;
-  char* ptr;
-  char* last;
-  const int advance = 256;
   metalink_parser_context_t* ctx;
-
-  fd = openfile("test1.xml", O_RDONLY);
-  getfstat(&st, fd);
-  addr = mapfile(fd, st.st_size);
 
   ctx = metalink_parser_context_new();
   CU_ASSERT_FATAL(NULL != ctx);
 
-  last = addr+st.st_size;
-  for(ptr = addr; ptr+advance < last; ptr += advance) {
-    r = metalink_parse_update(ctx, ptr, advance);
+  fd = openfile("test1.xml", O_RDONLY);
+  while(1) {
+    char buf[4096];
+    ssize_t nread;
+    while((nread = read(fd, buf, sizeof(buf))) == -1 && errno == EINTR);
+    CU_ASSERT_FATAL(nread != -1);
+    if(nread == 0) {
+      break;
+    }
+    r = metalink_parse_update(ctx, buf, nread);
     CU_ASSERT_EQUAL_FATAL(r, 0);
   }
-
-  r = metalink_parse_final(ctx, ptr, last-ptr, &metalink);
+  r = metalink_parse_final(ctx, 0, 0, &metalink);
   CU_ASSERT_EQUAL(r, 0);
   close(fd);
   validate_result(metalink);
@@ -288,11 +269,6 @@ void test_metalink_parse_update_fail(void)
   metalink_error_t r;
   metalink_t* metalink;
   int fd;
-  struct stat st;
-  char* addr;
-  char* ptr;
-  char* last;
-  const int advance = 256;
   metalink_parser_context_t* ctx;
 
   /* Initialize ctx */
@@ -310,18 +286,19 @@ void test_metalink_parse_update_fail(void)
   CU_ASSERT_FATAL(NULL != ctx);
 
   fd = openfile("test1.xml", O_RDONLY);
-  getfstat(&st, fd);
-  addr = mapfile(fd, st.st_size);
 
-  last = addr+st.st_size;
-  for(ptr = addr; ptr+advance < last; ptr += advance) {
-    r = metalink_parse_update(ctx, ptr, advance);
-    CU_ASSERT_EQUAL_FATAL(r, 0);
+  while(1) {
+    char buf[128];
+    ssize_t nread;
+    while((nread = read(fd, buf, sizeof(buf))) == -1 && errno == EINTR);
+    CU_ASSERT_FATAL(nread != -1);
+    /* See when prematured XML data is supplied */
+    r = metalink_parse_final(ctx, buf, nread, &metalink);
+    CU_ASSERT(0 != r);
+    break;
   }
-  /* See when prematured XML data is supplied */
-  r = metalink_parse_final(ctx, 0, 0, &metalink);
 
-  CU_ASSERT(0 != r);
+
 
   close(fd);
 }

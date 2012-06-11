@@ -228,7 +228,7 @@ void test_metalink_parse_fd(void)
   fd = openfile("test1.xml", O_RDONLY);
   r = metalink_parse_fd(fd, &metalink);  
   CU_ASSERT_EQUAL(0, r);
-  CU_ASSERT_EQUAL(0, TEMP_FAILURE_RETRY(close(fd)));
+  close(fd);
   validate_result(metalink);
 }
 
@@ -247,9 +247,7 @@ void test_metalink_parse_memory(void)
 
   r = metalink_parse_memory(addr, st.st_size, &metalink);
   CU_ASSERT_EQUAL(0, r);
-
-  CU_ASSERT_EQUAL(0, TEMP_FAILURE_RETRY(close(fd)));
-
+  close(fd);
   validate_result(metalink);
 }
 
@@ -280,9 +278,7 @@ void test_metalink_parse_update(void)
 
   r = metalink_parse_final(ctx, ptr, last-ptr, &metalink);
   CU_ASSERT_EQUAL(r, 0);
-
-  CU_ASSERT_EQUAL(0, TEMP_FAILURE_RETRY(close(fd)));
-
+  close(fd);
   validate_result(metalink);
 }
 
@@ -327,5 +323,5 @@ void test_metalink_parse_update_fail(void)
 
   CU_ASSERT(0 != r);
 
-  CU_ASSERT_EQUAL(0, TEMP_FAILURE_RETRY(close(fd)));
+  close(fd);
 }

@@ -9,7 +9,6 @@ main_SOURCES = \
 main_LDADD = ${top_builddir}/lib/libmetalink.la -lcunit
 main_LDFLAGS = -static
 AM_CFLAGS = -Wall -I${top_srcdir}/lib
-DEFS += -D_ISOC99_SOURCE -D_GNU_SOURCE
 TESTS = main
 
 EXTRA_DIST = test1.xml

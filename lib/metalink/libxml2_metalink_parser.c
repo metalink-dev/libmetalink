@@ -309,7 +309,7 @@ metalink_parse_fd(int fd, metalink_t** res)
   while(1) {
     ssize_t len;
     char buf[BUFSIZ];
-    len = TEMP_FAILURE_RETRY(read(fd, buf, BUFSIZ));
+    while((len = read(fd, buf, BUFSIZ)) == -1 && errno == EINTR);
     if(len == 0) {
       r = metalink_parse_final(context, NULL, 0, res);
       break;

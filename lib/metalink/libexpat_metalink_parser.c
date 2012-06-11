@@ -202,7 +202,7 @@ metalink_parse_fd(int fd, metalink_t** res)
       r = METALINK_ERR_PARSER_ERROR;
       break;
     }
-    num_read = TEMP_FAILURE_RETRY(read(fd, buff, BUFSIZ));
+    while((num_read = read(fd, buff, BUFSIZ)) == -1 && errno == EINTR);
     if(num_read == -1) {
       r = METALINK_ERR_PARSER_ERROR;
       break;

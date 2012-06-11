@@ -26,4 +26,3 @@ endif
 
 AM_CFLAGS = -Wall -I${top_srcdir}/lib -fvisibility=hidden
 AM_CPPFLAGS = @XML_CPPFLAGS@ @LIBEXPAT_CPPFLAGS@
-DEFS += -D_ISOC99_SOURCE -D_GNU_SOURCE

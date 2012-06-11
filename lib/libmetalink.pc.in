@@ -7,5 +7,6 @@ Name: libmetalink
 Description: Metalink library
 URL: https://launchpad.net/libmetalink
 Version: @PACKAGE_VERSION@
+Libs: -L${libdir} -lmetalink
+Libs.private: @XML_LIBS@ @LIBEXPAT_LIBS@
 Cflags: -I${includedir}
-Libs: -L${libdir} @XML_LIBS@ @LIBEXPAT_LIBS@ -lmetalink

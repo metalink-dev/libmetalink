@@ -103,7 +103,7 @@ AC_CONFIG_FILES([
 	Makefile
 	lib/Makefile
 	lib/libmetalink.pc
-	lib/metalink/Makefile
+	lib/includes/Makefile
 	test/Makefile
 	doc/Makefile
 	doc/man3/Makefile
@@ -123,7 +123,7 @@ AC_MSG_NOTICE([summary of build options:
     CPPFLAGS:       ${CPPFLAGS}
     C preprocessor: ${CPP}
     Library types:  Shared=${enable_shared}, Static=${enable_static}
-    Libexpat:       ${have_libexpat}
-    Libxml2:        ${have_libxml2}
-    CUnit:          ${have_cunit}
+    Libexpat:       ${have_libexpat} ${EXPAT_CFLAGS} ${EXPAT_LIBS}
+    Libxml2:        ${have_libxml2} ${XML_CPPFLAGS} ${XML_LIBS}
+    CUnit:          ${have_cunit} ${CUNIT_CFLAGS} ${CUNIT_LIBS}
 ])

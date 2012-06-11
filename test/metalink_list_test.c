@@ -27,7 +27,7 @@
 
 #include <CUnit/CUnit.h>
 
-#include "metalink/metalink_list.h"
+#include "metalink_list.h"
 
 void test_metalink_list(void)
 {

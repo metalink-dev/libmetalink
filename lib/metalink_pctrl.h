@@ -26,7 +26,8 @@
 #ifndef _D_METALINK_PCTRL_H_
 #define _D_METALINK_PCTRL_H_
 
-#include "metalink_types.h"
+#include <metalink/metalink_types.h>
+
 #include "metalink_list.h"
 
 typedef struct metalink_pctrl_t {

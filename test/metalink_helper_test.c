@@ -27,7 +27,7 @@
 
 #include <CUnit/CUnit.h>
 
-#include "metalink/metalink_helper.h"
+#include "metalink_helper.h"
 
 void test_metalink_check_safe_path(void)
 {

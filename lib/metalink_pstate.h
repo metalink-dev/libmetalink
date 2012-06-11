@@ -26,7 +26,7 @@
 #ifndef _D_METALINK_PSTATE_H_
 #define _D_METALINK_PSTATE_H_
 
-#include "metalink_error.h"
+#include <metalink/metalink_error.h>
 
 #define METALINK_V3_NS_URI "http://www.metalinker.org/"
 #define METALINK_V4_NS_URI "urn:ietf:params:xml:ns:metalink"

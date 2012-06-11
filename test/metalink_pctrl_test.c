@@ -24,9 +24,11 @@
  */
 /* copyright --> */
 #include "metalink_pctrl_test.h"
+
 #include <CUnit/CUnit.h>
-#include "metalink/metalink_pctrl.h"
-#include "metalink/metalink_error.h"
+
+#include <metalink/metalink_error.h>
+#include "metalink_pctrl.h"
 
 void test_metalink_pctrl_file_transaction(void)
 {

@@ -26,9 +26,10 @@
 #ifndef _D_METALINK_PARSER_COMMON_H_
 #define _D_METALINK_PARSER_COMMON_H_
 
-#include "metalink_types.h"
+#include <metalink/metalink_types.h>
+#include <metalink/metalink_error.h>
+
 #include "metalink_session_data.h"
-#include "metalink_error.h"
 
 /*
  * See session_data and parser_retval which is a return value of parser object

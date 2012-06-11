@@ -10,7 +10,9 @@ main_SOURCES = \
 	metalink_helper_test.c metalink_helper_test.h
 main_LDADD = ${top_builddir}/lib/libmetalink.la
 main_LDFLAGS = -static  @CUNIT_LIBS@
-AM_CFLAGS = -I${top_srcdir}/lib @CUNIT_CFLAGS@
+
+AM_CFLAGS = -I${top_srcdir}/lib -I${top_srcdir}/lib/includes \
+	-I${top_builddir}/lib/includes @CUNIT_CFLAGS@
 TESTS = main
 
 EXTRA_DIST = test1.xml test2.xml

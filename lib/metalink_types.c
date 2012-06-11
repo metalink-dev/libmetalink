@@ -23,7 +23,7 @@
  * THE SOFTWARE.
  */
 /* copyright --> */
-#include "metalink_types.h"
+#include <metalink/metalink_types.h>
 #include "metalink_config.h"
 
 #include <string.h>

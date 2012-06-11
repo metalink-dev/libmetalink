@@ -1,6 +1,20 @@
 AC_PREREQ(2.61)
 AC_INIT([libmetalink], [0.0.3], [t-tujikawa@users.sourceforge.net])
+LT_PREREQ([2.2.6])
+LT_INIT()
+
+dnl See versioning rule:
+dnl  http://www.gnu.org/software/libtool/manual/html_node/Updating-version-info.html
+AC_SUBST(LT_CURRENT, 1)
+AC_SUBST(LT_REVISION, 0)
+AC_SUBST(LT_AGE, 0)
+
+AC_CANONICAL_BUILD
+AC_CANONICAL_HOST
+AC_CANONICAL_TARGET
+
 AM_INIT_AUTOMAKE()
+AC_CONFIG_MACRO_DIR([m4])
 
 # Checks for arguments.
 AC_ARG_WITH([libexpat], [  --with-libexpat            use libexpat library if installed. Default: yes], [with_libexpat=$withval], [with_libexpat=yes])
@@ -8,11 +22,9 @@ AC_ARG_WITH([libxml2], [  --with-libxml2             use libxml2 library if inst
 
 # Checks for programs
 AC_PROG_CC
-AM_PROG_LIBTOOL
-AC_PROG_RANLIB
+AC_PROG_INSTALL
 
 # Checks for libraries.
-
 
 if test "x$with_libexpat" = "xyes"; then
   AM_PATH_LIBEXPAT

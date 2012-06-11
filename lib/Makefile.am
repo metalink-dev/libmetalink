@@ -4,7 +4,8 @@ libmetalink_la_SOURCES =
 libmetalink_la_LIBADD = \
 	metalink/libmetalinkcore.la\
 	@XML_LIBS@ @LIBEXPAT_LIBS@
-libmetalink_la_LDFLAGS = -version-info 1:0:0
+libmetalink_la_LDFLAGS = -no-undefined \
+        -version-info $(LT_CURRENT):$(LT_REVISION):$(LT_AGE)
 nobase_include_HEADERS = \
 	metalink/metalink_parser.h\
 	metalink/metalink_types.h\

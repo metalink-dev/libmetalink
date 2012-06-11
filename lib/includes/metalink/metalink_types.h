@@ -26,13 +26,13 @@
 #ifndef _D_METALINK_TYPES_H_
 #define _D_METALINK_TYPES_H_
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+#include <time.h>
 
 #include <metalink/metalink_error.h>
 
-#include <time.h>
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 typedef struct _metalink_resource {
   /* url, null terminated string */

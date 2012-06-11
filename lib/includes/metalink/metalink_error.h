@@ -26,6 +26,10 @@
 #ifndef _D_METALINK_ERROR_H_
 #define _D_METALINK_ERROR_H_
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef enum metalink_error_e {
 	/* 9xx: fatal error */
 	METALINK_ERR_BAD_ALLOC = 901,
@@ -51,5 +55,9 @@ typedef enum metalink_error_e {
 
 	METALINK_ERR_NO_PIECE_HASH_TRANSACTION = 305
 } metalink_error_t;
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* _D_METALINK_ERROR_H_ */

@@ -43,9 +43,13 @@ typedef struct _metalink_resource {
    * null terminated string
    */
   char* location;
-  /* preference of this resource, higher value has bigger preference. */
+  /* preference of this resource, higher value has bigger
+     preference. This is used for metalink 3. To keep compatibility
+     with it, when reading metalink 4, 100000 - priority is assigned
+     to preference. */
   int preference;
-  /* priority of this resource, lower value has bigger priority. */
+  /* priority of this resource, lower value has bigger priority. This
+     is used for metalink 4. */
   int priority;
   /* max connections that a client can establish to this resource */
   int maxconnections;

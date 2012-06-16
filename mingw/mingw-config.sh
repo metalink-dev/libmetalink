@@ -1,7 +1,5 @@
 # Define _USE_32BIT_TIME_T because 32bit library of MinGW-w64 does not
 # implement many 64bit version function.
-export ac_cv_func_malloc_0_nonnull=yes
-export ac_cv_func_realloc_0_nonnull=yes
 HOST=i686-w64-mingw32
 ./configure \
     --prefix=/usr/local/$HOST \

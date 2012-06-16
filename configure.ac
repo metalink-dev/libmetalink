@@ -16,6 +16,17 @@ AC_CANONICAL_TARGET
 AM_INIT_AUTOMAKE()
 AC_CONFIG_MACRO_DIR([m4])
 
+# Special host-dependent stuff
+case ${host} in
+    *mingw*)
+        ac_cv_func_malloc_0_nonnull=yes
+        ac_cv_func_realloc_0_nonnull=yes
+        ;;
+
+    *)
+        ;;
+esac
+
 # Checks for arguments.
 AC_ARG_WITH([libexpat], [  --with-libexpat            use libexpat library if installed. Default: yes], [with_libexpat=$withval], [with_libexpat=yes])
 AC_ARG_WITH([libxml2], [  --with-libxml2             use libxml2 library if installed. Default: yes], [with_libxml2=$withval], [with_libxml2=yes])

@@ -33,3 +33,11 @@ API
 
 All public APIs are in metalink/metalink_parser.h,
 metalink/metalink_types.h and metalink/metalink_error.h.
+
+Please note that metalink_*_set_*, metalink_*_new and
+metalink_*_delete functions in metalink/metalink_types.h will be
+hidden from public API in the future release. The newly written
+application should not use these functions. The existing applications
+are advised to stop using these functions. If you want to hold the
+modified data of Metalink, define application specific data structure
+for this.

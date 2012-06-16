@@ -90,8 +90,9 @@ AC_TYPE_SIZE_T
 AC_FUNC_MALLOC
 AC_FUNC_REALLOC
 
-# _mkgmtime is available in Windows, behaves like timegm
-AC_CHECK_FUNCS([memset strtol strtoll timegm _mkgmtime])
+# _mkgmtime is available in Windows, behaves like timegm.
+# _mkgmtime is for mingw. mkgmtime is for NetWare.
+AC_CHECK_FUNCS([memset strtol strtoll timegm _mkgmtime mkgmtime])
 AC_CHECK_FUNC([strptime], [have_strptime=yes], [have_strptime=no])
 
 if test "x$have_strptime" = "xyes"; then

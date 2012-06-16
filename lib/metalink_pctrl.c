@@ -612,5 +612,5 @@ void metalink_pctrl_set_published(metalink_pctrl_t* ctrl, int published)
 
 void metalink_pctrl_set_updated(metalink_pctrl_t* ctrl, int updated)
 {
-  return metalink_set_updated(ctrl->metalink, updated);
+  metalink_set_updated(ctrl->metalink, updated);
 }

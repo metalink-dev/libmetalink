@@ -50,6 +50,8 @@ static time_t my_timegm(struct tm *tm)
 #ifdef HAVE__MKGMTIME
   /* WINE does not implement _mkgmtime() yet */
   return _mkgmtime(tm);
+#elif HAVE_MKGMTIME
+  return mkgmtime(tm);
 #elif HAVE_TIMEGM
   return timegm(tm);
 #else

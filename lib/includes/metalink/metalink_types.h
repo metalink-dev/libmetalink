@@ -264,8 +264,6 @@ metalink_error_t metalink_file_set_publisher_name(metalink_file_t* file, const c
 
 metalink_error_t metalink_file_set_publisher_url(metalink_file_t* file, const char* url);
 
-metalink_error_t metalink_file_set_resources(metalink_file_t* file, metalink_resource_t** resources);
-
 void metalink_file_set_maxconnections(metalink_file_t* file, int maxconnections);
 
 typedef enum metalink_version_e {

@@ -34,6 +34,9 @@
 #endif
 
 #include <time.h>
+#ifdef HAVE_TIME64_H
+#include <time64.h>
+#endif
 #include <string.h>
 #include <stdlib.h>
 #include <errno.h>
@@ -52,6 +55,8 @@ static time_t my_timegm(struct tm *tm)
   return _mkgmtime(tm);
 #elif defined(HAVE_MKGMTIME)
   return mkgmtime(tm);
+#elif defined(HAVE_TIMEGM64)
+  return (time_t)timegm64(tm);
 #elif defined(HAVE_TIMEGM)
   return timegm(tm);
 #else

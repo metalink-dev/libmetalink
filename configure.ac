@@ -39,7 +39,7 @@ AC_CONFIG_MACRO_DIR([m4])
 
 # Special host-dependent stuff
 case ${host} in
-    *mingw*)
+    *android*|*mingw*)
         ac_cv_func_malloc_0_nonnull=yes
         ac_cv_func_realloc_0_nonnull=yes
         ;;
@@ -101,7 +101,7 @@ AM_CONDITIONAL([HAVE_CUNIT], [ test "x${have_cunit}" = "xyes" ])
 
 # Checks for header files.
 AC_HEADER_STDC
-AC_CHECK_HEADERS([limits.h stdlib.h string.h])
+AC_CHECK_HEADERS([limits.h stdlib.h string.h time64.h])
 
 # Checks for typedefs, structures, and compiler characteristics.
 AC_C_CONST
@@ -113,7 +113,8 @@ AC_FUNC_REALLOC
 
 # _mkgmtime is available in Windows, behaves like timegm.
 # _mkgmtime is for mingw. mkgmtime is for NetWare.
-AC_CHECK_FUNCS([memset strtol strtoll timegm _mkgmtime mkgmtime])
+# Newer Android NDKs have timegm64 in the time64.h header.
+AC_CHECK_FUNCS([memset strtol strtoll timegm timegm64 _mkgmtime mkgmtime])
 AC_CHECK_FUNC([strptime], [have_strptime=yes], [have_strptime=no])
 
 if test "x$have_strptime" = "xyes"; then

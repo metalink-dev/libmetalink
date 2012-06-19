@@ -1,4 +1,4 @@
 #!/bin/sh
 autoreconf -i
-automake
+automake --add-missing
 autoconf

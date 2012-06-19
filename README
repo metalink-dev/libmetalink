@@ -23,7 +23,7 @@ Build from bzr
 To build from bzr, run following commands (you need autoconf)::
 
     $ autoreconf -i
-    $ automake
+    $ automake --add-missing
     $ autoconf
     $ ./configure
     $ make

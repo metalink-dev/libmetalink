@@ -2,7 +2,8 @@ Libmetalink
 ===========
 
 Libmetalink is a library to read Metalink XML download description
-format. It supports Metalink version 3 and RFC 5854.
+format. It supports Metalink version 3 and Metalink version 4 (RFC
+5854).
 
 Requirements
 ------------

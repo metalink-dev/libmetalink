@@ -30,6 +30,10 @@
  * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
+#include "metalink_config.h"
+
+#ifndef HAVE_STRPTIME
+
 #include <stddef.h>
 #include <stdio.h>
 #include <time.h>
@@ -39,11 +43,11 @@
 
 #ifdef HAVE_ALLOCA_H
 # include <alloca.h>
-#endif // HAVE_ALLOCA_H
+#endif /* HAVE_ALLOCA_H */
 
 #ifdef HAVE_MALLOC_H
 # include <malloc.h>
-#endif // HAVE_MALLOC_H
+#endif /* HAVE_MALLOC_H */
 
 #include "strptime.h"
 
@@ -487,3 +491,5 @@ strptime (const char *buf, const char *format, struct tm *timeptr)
 	ret = _strptime(buf, format, timeptr, &gmt);
 	return (ret);
 }
+
+#endif /* !HAVE_STRPTIME */

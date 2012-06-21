@@ -219,8 +219,8 @@ _strptime (const char *buf, const char *format, struct tm *timeptr, int *gmt)
 	char *s;
 	int ret;
 
-	if (isspace (c)) {
-	    while (isspace (*buf))
+	if (isspace ((int)c)) {
+	    while (isspace ((int)*buf))
 		++buf;
 	} else if (c == '%' && format[1] != '\0') {
 	    c = *++format;

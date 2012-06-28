@@ -29,12 +29,6 @@
 #include <string.h>
 #include <stdlib.h>
 
-static int starts_with(const char* a, const char *b)
-{
-  for(; *a && *b && *a == *b; ++a, ++b);
-  return *b == '\0';
-}
-
 static int ends_with(const char* a, const char *b)
 {
   size_t alen = strlen(a);
@@ -48,14 +42,45 @@ static int ends_with(const char* a, const char *b)
 
 int metalink_check_safe_path(const char* path)
 {
-  size_t len;
-  size_t i;
-  if(!path) {
+  /* See discussions of treating filename from the remote server in
+     http://tools.ietf.org/html/rfc6266#section-4.3,
+     http://tools.ietf.org/html/rfc2183#section-5 and
+     http://tools.ietf.org/html/rfc5854.html#section-4.1.2.1
+   */
+  size_t len, i;
+  ssize_t filename_idx = 0;
+  /* If path or filename (string following the final '/' in path)
+     start with one of the characters in bad_prefix, we consider it as
+     invalid. */
+  const char bad_prefix[] = " .~|/";
+  /* If path ends with one of the characters in bad_suffix, we
+     consider it as invalid. */
+  const char bad_suffix[] = " /";
+  if(!path || !path[0]) {
     return 0;
   }
-  len = strlen(path);
-  if(len == 0 || strcmp(path, ".") == 0 || strcmp(path, "..") == 0 ||
-     path[0] == '/' || path[len-1] == '/') {
+  for(i = 0; path[i]; ++i) {
+    unsigned char c = path[i];
+    if(c <= 0x1f || c == 0x7f || c == '\\') {
+      return 0;
+    }
+    if(path[i] == '/') {
+      filename_idx = i + 1;
+    }
+  }
+  len = i;
+  if(filename_idx == len) {
+    return 0;
+  }
+  if(strchr(bad_prefix, path[0]) != NULL) {
+    return 0;
+  }
+  if(filename_idx != 0) {
+    if(strchr(bad_prefix, path[filename_idx]) != NULL) {
+      return 0;
+    }
+  }
+  if(strchr(bad_suffix, path[len-1]) != NULL) {
     return 0;
   }
   /* Don't allow DOS drive letter (e.g., C:) */
@@ -64,15 +89,9 @@ int metalink_check_safe_path(const char* path)
       ('a' <= path[0] && path[0] <= 'z')) && path[1] == ':') {
     return 0;
   }
-  for(i = 0; i < len; ++i) {
-    unsigned char c = path[i];
-    if(c <= 0x1f || c == 0x7f || c == '\\') {
-      return 0;
-    }
-  }
-  if(starts_with(path, "./") ||
-     starts_with(path, "../") ||
-     strstr(path, "/./") != NULL ||
+  /* "." and ".." and prefix "./" and "../" are considered in
+     bad_prefix */
+  if(strstr(path, "/./") != NULL ||
      strstr(path, "/../") != NULL ||
      ends_with(path, "/.") ||
      ends_with(path, "/..")) {

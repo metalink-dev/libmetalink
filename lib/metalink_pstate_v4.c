@@ -23,15 +23,7 @@
  * THE SOFTWARE.
  */
 /* copyright --> */
-#include "metalink_pstate.h"
-#include "metalink_config.h"
-
-#ifndef _XOPEN_SOURCE
-#  define _XOPEN_SOURCE /* avoid warning when using strptime */
-#endif
-#ifndef _BSD_SOURCE
-#  define _BSD_SOURCE /* avoid warning when using timegm */
-#endif
+#include "metalink_pstate_v4.h"
 
 #include <time.h>
 #ifdef HAVE_TIME64_H

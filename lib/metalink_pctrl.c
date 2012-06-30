@@ -24,7 +24,6 @@
  */
 /* copyright --> */
 #include "metalink_pctrl.h"
-#include "metalink_config.h"
 
 #include <string.h>
 

@@ -26,7 +26,11 @@
 #ifndef _D_METALINK_LIST_H_
 #define _D_METALINK_LIST_H_
 
+#include "metalink_config.h"
+
 #include <stdlib.h>
+
+#include <metalink/metalink.h>
 
 typedef struct _metalink_list_entry {
   void* data;

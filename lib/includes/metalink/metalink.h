@@ -23,13 +23,14 @@
  * THE SOFTWARE.
  */
 /* copyright --> */
-#ifndef _D_STRPTIME_H
-#define _D_STRPTIME_H
+#ifndef _D_METALINK_H_
+#define _D_METALINK_H_
 
-#include "metalink_config.h"
+/* Convenient header file to include all libmetalink include files. */
 
-#include <time.h>
+#include <metalink/metalinkver.h>
+#include <metalink/metalink_error.h>
+#include <metalink/metalink_types.h>
+#include <metalink/metalink_parser.h>
 
-char * strptime (const char *buf, const char *format, struct tm *timeptr);
-
-#endif /* not _D_STRPTIME_H */
+#endif /* _D_METALINK_H_ */

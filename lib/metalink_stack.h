@@ -26,6 +26,10 @@
 #ifndef _D_METALINK_STACK_H_
 #define _D_METALINK_STACK_H_
 
+#include "metalink_config.h"
+
+#include <metalink/metalink.h>
+
 typedef struct _metalink_stack_entry {
   void* data;
   struct _metalink_stack_entry* next;

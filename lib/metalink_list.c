@@ -24,7 +24,6 @@
  */
 /* copyright --> */
 #include "metalink_list.h"
-#include "metalink_config.h"
 
 metalink_list_t* metalink_list_new(void)
 {

@@ -26,7 +26,9 @@
 #ifndef _D_METALINK_PCTRL_H_
 #define _D_METALINK_PCTRL_H_
 
-#include <metalink/metalink_types.h>
+#include "metalink_config.h"
+
+#include <metalink/metalink.h>
 
 #include "metalink_list.h"
 

@@ -23,8 +23,7 @@
  * THE SOFTWARE.
  */
 /* copyright --> */
-#include "metalink_pstate.h"
-#include "metalink_config.h"
+#include "metalink_pstate_v3.h"
 
 #include <string.h>
 #include <stdlib.h>

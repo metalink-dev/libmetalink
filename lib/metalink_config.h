@@ -30,6 +30,13 @@
 # include "config.h"
 #endif /* HAVE_CONFIG_H */
 
+#ifndef _XOPEN_SOURCE
+#  define _XOPEN_SOURCE /* avoid warning when using strptime */
+#endif
+#ifndef _BSD_SOURCE
+#  define _BSD_SOURCE /* avoid warning when using timegm */
+#endif
+
 #ifdef GCC_VISIBILITY
 #  define METALINK_PUBLIC __attribute__ ((visibility ("default")))
 #else /* !GCC_VISIBILITY */

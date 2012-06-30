@@ -24,7 +24,6 @@
  */
 /* copyright --> */
 #include "metalink_pstm.h"
-#include "metalink_config.h"
 
 #include <string.h>
 

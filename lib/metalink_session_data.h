@@ -26,6 +26,10 @@
 #ifndef _D_METALINK_SESSION_DATA_H_
 #define _D_METALINK_SESSION_DATA_H_
 
+#include "metalink_config.h"
+
+#include <metalink/metalink.h>
+
 #include "metalink_pstm.h"
 #include "metalink_stack.h"
 

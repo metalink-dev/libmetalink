@@ -26,8 +26,9 @@
 #ifndef _D_METALINK_PARSER_COMMON_H_
 #define _D_METALINK_PARSER_COMMON_H_
 
-#include <metalink/metalink_types.h>
-#include <metalink/metalink_error.h>
+#include "metalink_config.h"
+
+#include <metalink/metalink.h>
 
 #include "metalink_session_data.h"
 

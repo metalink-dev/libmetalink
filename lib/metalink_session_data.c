@@ -24,7 +24,6 @@
  */
 /* copyright --> */
 #include "metalink_session_data.h"
-#include "metalink_config.h"
 #include "metalink_string_buffer.h"
 
 metalink_session_data_t* metalink_session_data_new(void)

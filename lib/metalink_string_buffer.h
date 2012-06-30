@@ -26,7 +26,11 @@
 #ifndef _D_METALINK_STRING_BUFFER_H_
 #define _D_METALINK_STRING_BUFFER_H_
 
+#include "metalink_config.h"
+
 #include <stdlib.h>
+
+#include <metalink/metalink.h>
 
 typedef struct metalink_string_buffer_t {
   char* buffer;

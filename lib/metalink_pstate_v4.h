@@ -26,6 +26,12 @@
 #ifndef _D_METALINK_PSTATE_V4_H_
 #define _D_METALINK_PSTATE_V4_H_
 
+#include "metalink_config.h"
+
+#include <metalink/metalink.h>
+
+#include "metalink_pstate.h"
+
 /* metalink state <metalink> */
 void metalink_state_start_fun_v4(metalink_pstm_t* stm,
 				 const char* name, const char* ns_uri,

@@ -26,6 +26,10 @@
 #ifndef _D_METALINK_HELPER_H_
 #define _D_METALINK_HELPER_H_
 
+#include "metalink_config.h"
+
+#include <metalink/metalink.h>
+
 /*
  * Returns nonzero if a given path is safe by checking directory
  * traversal and certain control characters in it. If path is NULL,

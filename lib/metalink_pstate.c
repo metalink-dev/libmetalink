@@ -24,7 +24,6 @@
  */
 /* copyright --> */
 #include "metalink_pstate.h"
-#include "metalink_config.h"
 
 #include <string.h>
 #include <stdlib.h>

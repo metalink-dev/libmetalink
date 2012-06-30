@@ -30,7 +30,7 @@
  * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. */
 
-#include "metalink_config.h"
+#include "strptime.h"
 
 #ifndef HAVE_STRPTIME
 
@@ -48,8 +48,6 @@
 #ifdef HAVE_MALLOC_H
 # include <malloc.h>
 #endif /* HAVE_MALLOC_H */
-
-#include "strptime.h"
 
 static const char *abb_weekdays[] = {
     "Sun",

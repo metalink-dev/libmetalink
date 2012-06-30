@@ -24,7 +24,6 @@
  */
 /* copyright --> */
 #include "metalink_string_buffer.h"
-#include "metalink_config.h"
 
 #include <string.h>
 #include <stdio.h>

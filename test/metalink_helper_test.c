@@ -90,7 +90,7 @@ void test_metalink_check_version(void)
                  LIBMETALINK_VERSION_MINOR,
                  LIBMETALINK_VERSION_PATCH);
   res = metalink_check_version(req_version);
-  CU_ASSERT(res);
+  CU_ASSERT_PTR_NOT_NULL(res);
   if(res) {
     CU_ASSERT(0 == strcmp(PACKAGE_VERSION, res));
   }
@@ -100,46 +100,46 @@ void test_metalink_check_version(void)
                  LIBMETALINK_VERSION_MINOR,
                  LIBMETALINK_VERSION_PATCH-1);
   res = metalink_check_version(req_version);
-  CU_ASSERT(res);
+  CU_ASSERT_PTR_NOT_NULL(res);
 
   format_version(req_version, sizeof(req_version),
                  LIBMETALINK_VERSION_MAJOR,
                  LIBMETALINK_VERSION_MINOR-1,
                  LIBMETALINK_VERSION_PATCH);
   res = metalink_check_version(req_version);
-  CU_ASSERT(res);
+  CU_ASSERT_PTR_NOT_NULL(res);
 
   format_version(req_version, sizeof(req_version),
                  LIBMETALINK_VERSION_MAJOR-1,
                  LIBMETALINK_VERSION_MINOR,
                  LIBMETALINK_VERSION_PATCH);
   res = metalink_check_version(req_version);
-  CU_ASSERT(res);
+  CU_ASSERT_PTR_NOT_NULL(res);
 
   format_version(req_version, sizeof(req_version),
                  LIBMETALINK_VERSION_MAJOR,
                  LIBMETALINK_VERSION_MINOR,
                  LIBMETALINK_VERSION_PATCH+1);
   res = metalink_check_version(req_version);
-  CU_ASSERT(!res);
+  CU_ASSERT_PTR_NULL(res);
 
   format_version(req_version, sizeof(req_version),
                  LIBMETALINK_VERSION_MAJOR,
                  LIBMETALINK_VERSION_MINOR+1,
                  LIBMETALINK_VERSION_PATCH);
   res = metalink_check_version(req_version);
-  CU_ASSERT(!res);
+  CU_ASSERT_PTR_NULL(res);
 
   format_version(req_version, sizeof(req_version),
                  LIBMETALINK_VERSION_MAJOR+1,
                  LIBMETALINK_VERSION_MINOR,
                  LIBMETALINK_VERSION_PATCH);
   res = metalink_check_version(req_version);
-  CU_ASSERT(!res);
+  CU_ASSERT_PTR_NULL(res);
 
   res = metalink_check_version("0.0");
-  CU_ASSERT(!res);
+  CU_ASSERT_PTR_NULL(res);
 
   res = metalink_check_version(NULL);
-  CU_ASSERT(res);
+  CU_ASSERT_PTR_NOT_NULL(res);
 }

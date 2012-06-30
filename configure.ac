@@ -66,6 +66,15 @@ AC_ARG_ENABLE([gcc-visibility],
 AC_PROG_CC
 AC_PROG_INSTALL
 
+# Package version
+AC_SUBST([MAJOR_VERSION],
+         `echo $PACKAGE_VERSION | sed 's/\([[[0-9]]]\+\)\.[[[0-9]]]\+\.[[[0-9]]]\+.*/\1/'`)
+AC_SUBST([MINOR_VERSION],
+         `echo $PACKAGE_VERSION | sed 's/[[[0-9]]]\+\.\([[[0-9]]]\+\)\.[[[0-9]]]\+.*/\1/'`)
+AC_SUBST([PATCH_VERSION],
+         `echo $PACKAGE_VERSION | sed 's/[[[0-9]]]\+\.[[[0-9]]]\+\.\([[[0-9]]]\+\).*/\1/'`)
+AC_SUBST([NUMBER_VERSION], `printf "0x%02x%02x%02x" $MAJOR_VERSION $MINOR_VERSION $PATCH_VERSION`)
+
 # Checks for libraries.
 
 if test "x$with_libexpat" = "xyes"; then
@@ -137,6 +146,7 @@ AC_CONFIG_FILES([
 	Makefile
 	lib/Makefile
 	lib/libmetalink.pc
+        lib/includes/metalink/metalinkver.h
 	lib/includes/Makefile
 	test/Makefile
 	doc/Makefile
@@ -147,7 +157,7 @@ AC_OUTPUT
 
 AC_MSG_NOTICE([summary of build options:
 
-    Version:        ${VERSION} shared $LT_CURRENT:$LT_REVISION:$LT_AGE
+    Version:        ${VERSION} (${MAJOR_VERSION}:${MINOR_VERSION}:${PATCH_VERSION}), shared $LT_CURRENT:$LT_REVISION:$LT_AGE
     Host type:      ${host}
     Install prefix: ${prefix}
     C compiler:     ${CC}

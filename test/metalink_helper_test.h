@@ -27,5 +27,6 @@
 #define _D_METALINK_HELPER_TEST_H_
 
 void test_metalink_check_safe_path(void);
+void test_metalink_check_version(void);
 
 #endif /* _D_METALINK_HELPER_TEST_H_ */

@@ -27,6 +27,8 @@
 
 #include <CUnit/CUnit.h>
 
+#include <metalink/metalink.h>
+
 #include "metalink_helper.h"
 
 void test_metalink_check_safe_path(void)
@@ -71,4 +73,73 @@ void test_metalink_check_safe_path(void)
   CU_ASSERT(metalink_check_safe_path("foo~"));
   CU_ASSERT(metalink_check_safe_path("foo/bar"));
   CU_ASSERT(metalink_check_safe_path("foo/bar.baz"));
+}
+
+static void format_version(char* buf, size_t len,
+                           int major, int minor, int patch)
+{
+  snprintf(buf, len, "%d.%d.%d", major, minor, patch);
+}
+
+void test_metalink_check_version(void)
+{
+  char req_version[20];
+  const char* res;
+  format_version(req_version, sizeof(req_version),
+                 LIBMETALINK_VERSION_MAJOR,
+                 LIBMETALINK_VERSION_MINOR,
+                 LIBMETALINK_VERSION_PATCH);
+  res = metalink_check_version(req_version);
+  CU_ASSERT(res);
+  if(res) {
+    CU_ASSERT(0 == strcmp(PACKAGE_VERSION, res));
+  }
+
+  format_version(req_version, sizeof(req_version),
+                 LIBMETALINK_VERSION_MAJOR,
+                 LIBMETALINK_VERSION_MINOR,
+                 LIBMETALINK_VERSION_PATCH-1);
+  res = metalink_check_version(req_version);
+  CU_ASSERT(res);
+
+  format_version(req_version, sizeof(req_version),
+                 LIBMETALINK_VERSION_MAJOR,
+                 LIBMETALINK_VERSION_MINOR-1,
+                 LIBMETALINK_VERSION_PATCH);
+  res = metalink_check_version(req_version);
+  CU_ASSERT(res);
+
+  format_version(req_version, sizeof(req_version),
+                 LIBMETALINK_VERSION_MAJOR-1,
+                 LIBMETALINK_VERSION_MINOR,
+                 LIBMETALINK_VERSION_PATCH);
+  res = metalink_check_version(req_version);
+  CU_ASSERT(res);
+
+  format_version(req_version, sizeof(req_version),
+                 LIBMETALINK_VERSION_MAJOR,
+                 LIBMETALINK_VERSION_MINOR,
+                 LIBMETALINK_VERSION_PATCH+1);
+  res = metalink_check_version(req_version);
+  CU_ASSERT(!res);
+
+  format_version(req_version, sizeof(req_version),
+                 LIBMETALINK_VERSION_MAJOR,
+                 LIBMETALINK_VERSION_MINOR+1,
+                 LIBMETALINK_VERSION_PATCH);
+  res = metalink_check_version(req_version);
+  CU_ASSERT(!res);
+
+  format_version(req_version, sizeof(req_version),
+                 LIBMETALINK_VERSION_MAJOR+1,
+                 LIBMETALINK_VERSION_MINOR,
+                 LIBMETALINK_VERSION_PATCH);
+  res = metalink_check_version(req_version);
+  CU_ASSERT(!res);
+
+  res = metalink_check_version("0.0");
+  CU_ASSERT(!res);
+
+  res = metalink_check_version(NULL);
+  CU_ASSERT(res);
 }

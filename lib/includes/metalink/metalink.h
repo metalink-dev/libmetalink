@@ -33,4 +33,23 @@
 #include <metalink/metalink_types.h>
 #include <metalink/metalink_parser.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/**
+ * Checks that the version of the library is equal or later than given
+ * |req_version|. If |req_version| is NULL, this function just returns
+ * the version string of the library. The |req_version| must be in the
+ * format "$MAJOR.$MINOR.$PATCH".
+ *
+ * This function returns the version string of the library if the
+ * version requirement is satisfied, or NULL.
+ */
+const char* metalink_check_version(const char* req_version);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif /* _D_METALINK_H_ */

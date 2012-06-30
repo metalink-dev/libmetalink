@@ -74,6 +74,9 @@ int main(void)
       (!CU_add_test(pSuite, "test of metalink_check_safe_path",
                     test_metalink_check_safe_path))
       ||
+      (!CU_add_test(pSuite, "test of metalink_check_version",
+                    test_metalink_check_version))
+      ||
       (!CU_add_test(pSuite, "test of metalink_parse_file_v4",
 		    test_metalink_parse_file_v4))
       ) {

@@ -52,7 +52,7 @@ int metalink_check_safe_path(const char* path)
   /* If path or filename (string following the final '/' in path)
      start with one of the characters in bad_prefix, we consider it as
      invalid. */
-  const char bad_prefix[] = " .~|/";
+  const char bad_prefix[] = " .~/";
   /* If path ends with one of the characters in bad_suffix, we
      consider it as invalid. */
   const char bad_suffix[] = " /";
@@ -61,7 +61,8 @@ int metalink_check_safe_path(const char* path)
   }
   for(i = 0; path[i]; ++i) {
     unsigned char c = path[i];
-    if(c <= 0x1f || c == 0x7f || c == '\\') {
+    if(c <= 0x1f || c == 0x7f || c == '\\' || c == '<' || c == '>' ||
+       c == '|') {
       return 0;
     }
     if(path[i] == '/') {

@@ -67,6 +67,8 @@ void test_metalink_check_safe_path(void)
   CU_ASSERT(!metalink_check_safe_path("foo/.bar"));
   CU_ASSERT(!metalink_check_safe_path("foo/~bar"));
   CU_ASSERT(!metalink_check_safe_path("foo/|bar"));
+  CU_ASSERT(!metalink_check_safe_path("foo|bar"));
+  CU_ASSERT(!metalink_check_safe_path("foo > /dev/null"));
 
   CU_ASSERT(metalink_check_safe_path("foo"));
   CU_ASSERT(metalink_check_safe_path("foo."));

@@ -23,7 +23,7 @@ int main(int argc, char** argv)
     r = metalink_parse_file(argv[i], &metalink);
 
     if(r != 0) {
-      fprintf(stderr, "ERROR: code=%d\n", r);
+      fprintf(stderr, "ERROR (%d): %s\n", r, metalink_strerror(r));
       exit(EXIT_FAILURE);
     }
  

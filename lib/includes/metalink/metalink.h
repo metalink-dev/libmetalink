@@ -43,6 +43,13 @@ extern "C" {
  */
 void metalink_get_version(int* major, int* minor, int* patch);
 
+/**
+ * Returns the string error message describing the error code
+ * |error_code|. The error code is defined in
+ * metalink/metalink_error.h.
+ */
+const char* metalink_strerror(int error_code);
+
 #ifdef __cplusplus
 }
 #endif

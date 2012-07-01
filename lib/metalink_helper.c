@@ -106,3 +106,37 @@ void metalink_get_version(int* major, int* minor, int* patch)
   *minor = LIBMETALINK_VERSION_MINOR;
   *patch = LIBMETALINK_VERSION_PATCH;
 }
+
+const char* metalink_strerror(int error_code)
+{
+  switch(error_code) {
+  case 0:
+    return "success";
+  case METALINK_ERR_BAD_ALLOC:
+    return "out of memory";
+  case METALINK_ERR_CANNOT_OPEN_FILE:
+    return "could not open file";
+  case METALINK_ERR_MISSING_REQUIRED_ATTR:
+    return "required attribute not found";
+  case METALINK_ERR_NAMESPACE_ERROR:
+    return "unexpected namespace";
+  case METALINK_ERR_PARSER_ERROR:
+    return "xml parser failure";
+    /* METALINK_ERR_NO_*_TRANSACTION error code should not be returned
+       to the application code. If they are, it is a bug of
+       libmetalink. In the future release, they will be removed and
+       assert() will be used instead. */
+  case METALINK_ERR_NO_FILE_TRANSACTION:
+    return "no file transaction";
+  case METALINK_ERR_NO_RESOURCE_TRANSACTION:
+    return "no resource transaction";
+  case METALINK_ERR_NO_CHECKSUM_TRANSACTION:
+    return "no checksum transaction";
+  case METALINK_ERR_NO_CHUNK_CHECKSUM_TRANSACTION:
+    return "no chunk checksum transaction";
+  case METALINK_ERR_NO_PIECE_HASH_TRANSACTION:
+    return "no piece hash transaction";
+  default:
+    return "unknown error code";
+  }
+}

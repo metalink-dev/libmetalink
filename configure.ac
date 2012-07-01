@@ -150,6 +150,7 @@ AC_CONFIG_FILES([
 	lib/includes/Makefile
 	test/Makefile
 	doc/Makefile
+	doc/examples/Makefile
 	doc/man3/Makefile
 	m4/Makefile
 ])

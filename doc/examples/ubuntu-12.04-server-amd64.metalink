@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="http://download.eclipse.org/eclipse/metalink.xsl"?>
+
+<metalink version="3.0" pubdate="Thu, 26 Apr 2012 09:52:22 +0000" xmlns="http://www.metalinker.org/">
+  <publisher>
+    <name>Ubuntu</name>
+    <url>http://www.ubuntu.com/</url>
+  </publisher>
+  <version>12.04</version>
+  <description>Ubuntu CD Image</description>
+  <logo>http://www.ubuntu.com/themes/ubuntu07/images/ubuntulogo.png</logo>
+  <files>
+    <file name="ubuntu-12.04-server-amd64.iso">
+      <size>717533184</size>
+      <os>Linux-x64</os>
+      <verification>
+        <hash type="md5">f2e921788d35bbdf0336d05d228136eb</hash>
+      </verification>
+      <resources maxconnections="1">
+	<url type="bittorrent" preference="200">http://releases.ubuntu.com/12.04/ubuntu-12.04-server-amd64.iso.torrent</url>
+			<url type="http" location="za" preference="70">http://ubuntu.mirror.ac.za/ubuntu-release/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="ls" preference="70">http://ls.releases.ubuntu.com/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="zw" preference="70">http://zw.releases.ubuntu.com/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="na" preference="70">http://na.releases.ubuntu.com/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="sz" preference="70">http://sz.releases.ubuntu.com/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="mz" preference="70">http://mz.releases.ubuntu.com/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="bw" preference="70">http://bw.releases.ubuntu.com/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="tr" preference="70">http://ftp.linux.org.tr/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="pk" preference="70">http://mirror-cybernet.lums.edu.pk/pub/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="pk" preference="70">http://stingray.cyber.net.pk/pub/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="il" preference="70">http://mirror.isoc.org.il/pub/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="il" preference="70">http://ubuntu.interhost.co.il/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="id" preference="110">http://ubuntu.idrepo.or.id/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="id" preference="70">http://sulawesi.idrepo.or.id/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="om" preference="70">http://mirror.squ.edu.om/ubuntureleases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="sg" preference="80">http://mirror.nus.edu.sg/ubuntu-ISO/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="vn" preference="70">http://mirrors.digipower.vn/ubuntu/releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="vn" preference="70">http://mirror-fpt-telecom.fpt.net/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="kr" preference="80">http://ftp.daum.net/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="in" preference="70">http://ubunturelease.hnsdc.com/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="in" preference="70">http://glug.nith.ac.in/ubuntu/releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="in" preference="65">http://ubuntumirror.go4hosting.in/ubuntureleases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="uz" preference="60">http://releases.ubuntu.uz/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="uz" preference="65">http://ubuntu.snet.uz/releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="my" preference="70">http://ossm.utm.my/ubuntu-DVD/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="my" preference="60">http://ubuntu.tuxuri.com/releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="my" preference="70">http://archive.mmu.edu.my/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="ge" preference="60">http://ubuntu.grena.ge/releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="cn" preference="80">http://ftp.sjtu.edu.cn/ubuntu-cd/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="cn" preference="70">http://mirror.bjtu.edu.cn/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="th" preference="80">http://mirror.kku.ac.th/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="th" preference="80">http://mirrors.psu.ac.th/pub/ubuntu-releases/iso/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="lk" preference="70">http://mirror.learn.ac.lk/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="jp" preference="70">http://www.ftp.ne.jp/Linux/packages/ubuntu/releases-cd/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="jp" preference="100">http://ftp.jaist.ac.jp/pub/Linux/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="jp" preference="80">http://ftp.tsukuba.wide.ad.jp/Linux/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="jp" preference="70">http://ubuntu.mithril-linux.org/releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="jp" preference="80">http://ubuntutym2.u-toyama.ac.jp/ubuntu/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="tw" preference="70">http://ftp.ncnu.edu.tw/Linux/ubuntu/ubuntu-cd/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="tw" preference="80">http://ubuntu.stu.edu.tw/ubuntu-cd/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="tw" preference="80">http://ftp.tku.edu.tw/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="tw" preference="80">http://ftp.nsysu.edu.tw/Ubuntu/ubuntu-cd/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="kw" preference="70">http://ubuntu.qualitynet.net/releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="it" preference="70">http://na.mirror.garr.it/mirrors/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="it" preference="70">http://ubuntu.ictvalleumbra.it/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="it" preference="70">http://mirror.crazynetwork.it/ubuntu/release/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="it" preference="80">http://ftp.unina.it/pub/linux/distributions/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="cz" preference="90">http://releases.ubuntu.mirror.dkm.cz/releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="cz" preference="90">http://ucho.ignum.cz/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="cz" preference="60">http://releases.ubuntu.cz/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="cz" preference="90">http://releases.ubuntu.cz/releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="lt" preference="80">http://ubuntu.mirror.vu.lt/releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="lt" preference="80">http://mirror.soften.ktu.lt/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="lt" preference="70">http://ftp.litnet.lt/pub/ubuntu-cd/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="ftp" location="fr" preference="70">ftp://ftp.rezopole.net/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="fr" preference="90">http://ubuntu.mirrors.proxad.net/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="fr" preference="80">http://mirrors.ircam.fr/pub/ubuntu/releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="fr" preference="80">http://ubuntu.univ-nantes.fr/ubuntu-cd/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="fr" preference="90">http://mirror.ovh.net/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="fr" preference="80">http://wwwftp.ciril.fr/pub/linux/ubuntu/releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="fr" preference="70">http://ftp.u-picardie.fr/mirror/ubuntu/releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="fr" preference="80">http://ftp.oleane.net/ubuntu-cd/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="fr" preference="80">http://www-ftp.lip6.fr/pub/linux/distributions/Ubuntu/releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="fr" preference="65">http://distrib-coffee.ipsl.jussieu.fr/pub/linux/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="fr" preference="90">http://ubuntu.lafibre.info/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="fr" preference="80">http://ftp.crihan.fr/releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="sk" preference="80">http://tux.rainside.sk/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="sk" preference="80">http://ftp.antik.sk/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="sk" preference="70">http://ubuntu.antik.sk/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="ie" preference="110">http://ftp.heanet.ie/pub/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="no" preference="80">http://no.releases.ubuntu.com/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="no" preference="80">http://ftp.uninett.no/linux/ubuntu-iso/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="by" preference="90">http://by.releases.ubuntu.com/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="si" preference="65">http://mirror.lihnidos.org/ubuntu/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="si" preference="70">http://ftp.arnes.si/pub/mirrors/ubuntu-cdimage/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="ftp" location="de" preference="80">ftp://ftp.rrzn.uni-hannover.de/pub/mirror/linux/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="de" preference="90">http://mirror.informatik.uni-mannheim.de/pub/linux/distributions/ubuntu-release/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="de" preference="70">http://ftp.tu-clausthal.de/ftp/mirror/ubuntu/releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="de" preference="80">http://ftp.uni-muenster.de/pub/mirrors/ftp.ubuntu.com/releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="de" preference="80">http://ftp.rrzn.uni-hannover.de/pub/mirror/linux/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="de" preference="110">http://ftp.halifax.rwth-aachen.de/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="de" preference="70">http://releases.ubuntu.uasw.edu/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="de" preference="60">http://ftp-stud.fht-esslingen.de/Mirrors/releases.ubuntu.com/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="de" preference="60">http://ftp.tu-chemnitz.de/pub/linux/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="de" preference="80">http://ftp.stw-bonn.de/ubuntu-cd/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="de" preference="90">http://ftp.uni-kl.de/pub/linux/ubuntu.iso/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="de" preference="80">http://ftp5.gwdg.de/pub/linux/debian/ubuntu/iso/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="de" preference="110">http://ubuntu.mirror.tudos.de/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="ftp" location="de" preference="80">ftp://ftp.rrzn.uni-hannover.de/pub/mirror/linux/ubuntu-releases12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="de" preference="60">http://ubuntu.bheil.net/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="de" preference="80">http://ftp.uni-bayreuth.de/linux/ubuntu/releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="de" preference="90">http://ftp-stud.hs-esslingen.de/pub/Mirrors/releases.ubuntu.com/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="de" preference="80">http://mirror.checkdomain.de/ubuntureleases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="ftp" location="ba" preference="80">ftp://releases.ubuntu.com.ba/ubuntu/releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="ru" preference="80">http://mirror.yandex.ru/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="ru" preference="70">http://linux.nsu.ru/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="ru" preference="80">http://mirror.corbina.net/ubuntu-cd/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="ru" preference="80">http://ftp.mtu.ru/pub/ubuntu/releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="es" preference="70">http://ftp.caliu.cat/pub/distribucions/ubuntu/releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="es" preference="70">http://ubuntu.grn.cat/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="es" preference="90">http://ubuntu.cica.es/releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="ftp" location="es" preference="80">ftp://ftp.rediris.es/sites/releases.ubuntu.com/releases12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="es" preference="80">http://ubuntu.uc3m.es/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="ua" preference="80">http://ftp.linux.kiev.ua/pub/Linux/Ubuntu/releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="ua" preference="80">http://mirrors.uaip.org/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="nl" preference="80">http://ftp.telfort.nl/pub/mirror/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="nl" preference="80">http://ftp.tudelft.nl/releases.ubuntu.com/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="nl" preference="110">http://ftp.snt.utwente.nl/pub/os/linux/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="nl" preference="80">http://ubuntu.mirror.atratoip.net/releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="ftp" location="nl" preference="60">ftp://ftpserv.tudelft.nl/pub/Linux/releases.ubuntu.com/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="nl" preference="100">http://nl.releases.ubuntu.com/releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="nl" preference="90">http://ftp.snt.utwente.nl/pub/linux/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="nl" preference="100">http://mirror.nl.leaseweb.net/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="nl" preference="80">http://mirrors.nl.eu.kernel.org/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="dk" preference="80">http://ftp.klid.dk/ftp/ubuntu-cd/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="dk" preference="80">http://mirrors.telianet.dk/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="dk" preference="80">http://mirrors.dotsrc.org/ubuntu-cd/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="pl" preference="80">http://ubuntu.task.gda.pl/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="ftp" location="pl" preference="60">ftp://ftp.man.szczecin.pl/pub/Linux/ubuntu-cd/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="pl" preference="80">http://ftp.wcss.pl/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="pl" preference="80">http://ftp.vectranet.pl/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="pl" preference="80">http://ftp.icm.edu.pl/pub/Linux/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="ftp" location="pl" preference="80">ftp://ftp.tpnet.pl/pub/linux/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="fi" preference="80">http://www.nic.funet.fi/pub/mirrors/releases.ubuntu.com/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="fi" preference="80">http://ubuntu.trumpetti.atm.tut.fi/releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="be" preference="60">http://ubuntu.mirrors.skynet.be/pub/ubuntu.com/releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="be" preference="80">http://ftp.belnet.be/mirror/ubuntu.com/releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="be" preference="70">http://ubuntu.rave.org/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="se" preference="80">http://ftp.availo.se/ubuntu-cd/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="se" preference="80">http://mirrors.se.eu.kernel.org/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="se" preference="80">http://ftp.df.lth.se/ubuntu-iso/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="se" preference="80">http://ftp.lysator.liu.se/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="se" preference="80">http://ftp.ds.karen.hj.se/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="se" preference="110">http://se.releases.ubuntu.com/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="se" preference="80">http://ftp.portlane.com/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="lv" preference="80">http://ubuntu.koyanet.lv/releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="lv" preference="80">http://ftp.linux.edu.lv/pub/ubuntu/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="hr" preference="80">http://hr.releases.ubuntu.com/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="ch" preference="110">http://mirror.switch.ch/ftp/mirror/ubuntu-cdimage/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="bg" preference="90">http://ubuntu.ipacct.com/releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="ro" preference="80">http://ftp.astral.ro/mirrors/ubuntu.com/releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="ro" preference="80">http://ftp.roedu.net/mirrors/ubuntulinux.org/releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="ro" preference="60">http://mirror.arlug.ro/pub/ubuntu/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="ro" preference="60">http://ftp.lug.ro/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="ee" preference="80">http://ftp.estpak.ee/pub/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="pt" preference="80">http://cesium.di.uminho.pt/pub/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="pt" preference="50">http://releases.ubuntumirror.dei.uc.pt/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="ftp" location="pt" preference="65">ftp://glua.ua.pt/ubuntu/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="pt" preference="80">http://mirrors.nfsi.pt/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="pt" preference="80">http://mirrors.fe.up.pt/pub/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="rs" preference="80">http://ubuntu.etf.bg.ac.rs/releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="gb" preference="80">http://gb.releases.ubuntu.com/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="gb" preference="80">http://mirror.as29550.net/releases.ubuntu.com/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="gb" preference="80">http://mirror01.th.ifl.net/releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="gb" preference="80">http://releases.ubuntu.mirrors.uk2.net/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="gb" preference="70">http://releases.ubuntu.com/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="gb" preference="70">http://mirrors.melbourne.co.uk/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="gb" preference="80">http://mirror.ox.ac.uk/sites/releases.ubuntu.com/releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="gb" preference="80">http://mirror.bytemark.co.uk/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="at" preference="70">http://ubuntu.lagis.at/releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="gr" preference="80">http://ubuntureleases.tsl.gr/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="ftp" location="gr" preference="80">ftp://ftp.otenet.gr/pub/linux/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="gr" preference="80">http://ftp.cc.uoc.gr/mirrors/linux/ubuntu/releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="hu" preference="70">http://ftp.freepark.org/pub/CDROM-Images/ubuntu/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="ca" preference="80">http://mirror.csclub.uwaterloo.ca/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="ca" preference="80">http://ubuntu-cd.mirror.iweb.ca/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="ca" preference="80">http://mirror.clibre.uqam.ca/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="ca" preference="120">http://ubuntu-releases.mirror.nexicom.net/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="ca" preference="60">http://mirror.cpsc.ucalgary.ca/mirror/ubuntu.com/releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="us" preference="110">http://mirror.pnl.gov/releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="us" preference="60">http://mirrors.cs.wmich.edu/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="us" preference="80">http://mirror.metrocast.net/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="us" preference="80">http://ubuntu.mirrorcatalogs.com/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="us" preference="100">http://linuxfreedom.com/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="us" preference="80">http://mirrors.syringanetworks.net/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="us" preference="60">http://ftp.ucsb.edu/pub/mirrors/linux/ubuntu/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="us" preference="80">http://ubuntu.mirrors.tds.net/pub/releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="us" preference="60">http://ftp.wayne.edu/linux_distributions/ubuntu/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="us" preference="60">http://ftp.ussg.iu.edu/linux/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="us" preference="90">http://ubuntu.osuosl.org/releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="us" preference="100">http://mirror.us.leaseweb.net/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="us" preference="80">http://ubuntu-releases.cs.umn.edu/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="us" preference="70">http://mirrors.einstein.yu.edu/ubuntu/ubuntureleases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="us" preference="80">http://mirrors.easynews.com/linux/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="us" preference="80">http://mirror.yellowfiber.net/ubuntu/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="us" preference="80">http://mirror.symnds.com/distributions/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="us" preference="70">http://mirror.hosef.org/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="us" preference="80">http://mirrors.mit.edu/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="us" preference="80">http://mirrors.ccs.neu.edu/releases.ubuntu.com/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="us" preference="80">http://mirror.steadfast.net/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="us" preference="90">http://mirror.lstn.net/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="us" preference="90">http://mirrors.us.kernel.org/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="us" preference="80">http://www.gtlib.gatech.edu/pub/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="us" preference="70">http://ubuntu.mirrors.hoobly.com/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="us" preference="80">http://mirrors.xmission.com/ubuntu-cd/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="us" preference="70">http://mirror.hmc.edu/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="us" preference="110">http://mirror.anl.gov/pub/ubuntu-iso/CDs/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="us" preference="60">http://osmirrors.cerias.purdue.edu/pub/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="us" preference="80">http://mirrors.gigenet.com/ubuntu/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="us" preference="80">http://mirror.umd.edu/ubuntu-iso/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="us" preference="80">http://mirrors.rit.edu/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="us" preference="80">http://mirrors.cat.pdx.edu/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="us" preference="80">http://mirrors.fwankie.com/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="gl" preference="65">http://mirror.greennet.gl/releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="cr" preference="60">http://mirrors.ucr.ac.cr/ubuntu-cd/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="nz" preference="80">http://ftp.citylink.co.nz/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="au" preference="70">http://mirror.internode.on.net/pub/ubuntu/releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="au" preference="80">http://mirror.aarnet.edu.au/pub/ubuntu/releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="nc" preference="70">http://releases.ubuntu.nautile.nc/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="br" preference="120">http://mirror.globo.com/ubuntu/releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="br" preference="80">http://www.las.ic.unicamp.br/pub/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="br" preference="80">http://mirror.unesp.br/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="br" preference="110">http://ubuntu.c3sl.ufpr.br/releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="br" preference="80">http://espelhos.edugraf.ufsc.br/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="br" preference="110">http://ubuntu.laps.ufpa.br/releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="ar" preference="80">http://ubuntureleases.xfree.com.ar/releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="ar" preference="80">http://mirrors.coopvgg.com.ar/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="ar" preference="80">http://ubuntureleases.xfree.com.ar/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="co" preference="80">http://mirror.edatel.net.co/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="cl" preference="80">http://mirrors.tecnoera.com/ubuntu-releases/12.04/ubuntu-12.04-server-amd64.iso</url>
+			<url type="http" location="cl" preference="80">http://cl.releases.ubuntu.com/12.04/ubuntu-12.04-server-amd64.iso</url>
+      </resources>
+    </file>
+  </files>
+</metalink>

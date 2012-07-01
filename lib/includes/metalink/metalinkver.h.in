@@ -36,6 +36,11 @@ extern "C" {
 #define LIBMETALINK_VERSION_MINOR @MINOR_VERSION@
 #define LIBMETALINK_VERSION_PATCH @PATCH_VERSION@
 
+/*
+ *Version concatenated in one integer. In this hexadecimal notation,
+ * after first 0x prefix, each 2 bytes group represents major, minor
+ * and patch version in this order from most significant byte.
+ */
 #define LIBMETALINK_VERSION_NUMBER @NUMBER_VERSION@
 
 #ifdef __cplusplus

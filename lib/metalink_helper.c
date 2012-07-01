@@ -27,7 +27,6 @@
 
 #include <string.h>
 #include <stdlib.h>
-#include <stdio.h>
 
 static int ends_with(const char* a, const char *b)
 {
@@ -101,22 +100,9 @@ int metalink_check_safe_path(const char* path)
   return 1;
 }
 
-const char* metalink_check_version(const char* req_version)
+void metalink_get_version(int* major, int* minor, int* patch)
 {
-  int major, minor, patch;
-  if(!req_version) {
-    return LIBMETALINK_VERSION;
-  }
-  if(sscanf(req_version, "%d.%d.%d", &major, &minor, &patch) < 3) {
-    return NULL;
-  }
-  if(LIBMETALINK_VERSION_MAJOR > major||
-    (LIBMETALINK_VERSION_MAJOR == major &&
-     (LIBMETALINK_VERSION_MINOR > minor ||
-      (LIBMETALINK_VERSION_MINOR == minor &&
-       LIBMETALINK_VERSION_PATCH >= patch)))) {
-    return PACKAGE_VERSION;
-  } else {
-    return NULL;
-  }
+  *major = LIBMETALINK_VERSION_MAJOR;
+  *minor = LIBMETALINK_VERSION_MINOR;
+  *patch = LIBMETALINK_VERSION_PATCH;
 }

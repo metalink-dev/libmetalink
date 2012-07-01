@@ -38,15 +38,10 @@ extern "C" {
 #endif
 
 /**
- * Checks that the version of the library is equal or later than given
- * |req_version|. If |req_version| is NULL, this function just returns
- * the version string of the library. The |req_version| must be in the
- * format "$MAJOR.$MINOR.$PATCH".
- *
- * This function returns the version string of the library if the
- * version requirement is satisfied, or NULL.
+ * Stores the major, minor and patch version of the libmetalink to the
+ * variables pointed by |major|, |minor| and |patch| respectively.
  */
-const char* metalink_check_version(const char* req_version);
+void metalink_get_version(int* major, int* minor, int* patch);
 
 #ifdef __cplusplus
 }

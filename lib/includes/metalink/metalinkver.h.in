@@ -30,6 +30,8 @@
 extern "C" {
 #endif
 
+#define LIBMETALINK_COPYRIGHT "2008-2012 Tatsuhiro Tsujikawa"
+
 #define LIBMETALINK_VERSION "@PACKAGE_VERSION@"
 
 #define LIBMETALINK_VERSION_MAJOR @MAJOR_VERSION@
@@ -38,7 +40,7 @@ extern "C" {
 
 /*
  *Version concatenated in one integer. In this hexadecimal notation,
- * after first 0x prefix, each 2 bytes group represents major, minor
+ * after first 0x prefix, each 2 digits group represents major, minor
  * and patch version in this order from most significant byte.
  */
 #define LIBMETALINK_VERSION_NUMBER @NUMBER_VERSION@

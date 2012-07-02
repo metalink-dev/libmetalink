@@ -112,6 +112,14 @@ AM_CONDITIONAL([HAVE_CUNIT], [ test "x${have_cunit}" = "xyes" ])
 AC_HEADER_STDC
 AC_CHECK_HEADERS([limits.h stdlib.h string.h time64.h])
 
+AC_CHECK_HEADER([inttypes.h], [have_inttypes_h=yes], [have_inttypes_h=no])
+
+if test "x$have_inttypes_h" = "xyes"; then
+    AC_DEFINE([HAVE_INTTYPES_H], [1],
+              [Define to 1 if you have <inttypes.h> header file.])
+    CPPFLAGS="-DHAVE_INTTYPES_H ${CPPFLAGS}"
+fi
+
 # Checks for typedefs, structures, and compiler characteristics.
 AC_C_CONST
 AC_TYPE_SIZE_T

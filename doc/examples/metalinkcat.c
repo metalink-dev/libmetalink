@@ -5,15 +5,36 @@
  * To compile:
  * gcc -Wall -g -O2 -o sample sample.c -lmetalink
  *
- * Usage: sample <METALINK_FILE>...
+ * Usage: metalinkcat <METALINK_FILE>...
  */
 #include <stdio.h>
 #include <stdlib.h>
+#ifdef HAVE_INTTYPES_H
+#include <inttypes.h>
+#endif
 #include <metalink/metalink.h>
+
+/* 
+ * Usually on most platforms one would just include inttypes.h,
+ * but unfortunately some platforms either might lack this
+ * header, or do not define the PRI* macros, so we do it here.
+ */ 
+#ifndef PRId64
+#ifdef _WIN32
+#define PRId64 "I64d"
+#else
+#define PRId64 "lld"
+#endif  /* _WIN32 */
+#endif  /* PRId64 */
+
 
 int main(int argc, char** argv)
 {
   int i;
+  if(argc < 2) {
+    printf("Usage: %s <METALINK_FILE> [...]\n", argv[0]);
+    return EXIT_SUCCESS;
+  }
   for(i = 1; i < argc; ++i) {
     metalink_error_t r;
     metalink_t* metalink;
@@ -29,7 +50,7 @@ int main(int argc, char** argv)
  
     file = metalink->files[0];
     printf("name: %s\n", file->name);
-    printf("size: %lld\n", file->size);
+    printf("size: %" PRId64 "\n", (int64_t)file->size);
     printf("os  : %s\n", file->os);
 
     if(file->checksums) {

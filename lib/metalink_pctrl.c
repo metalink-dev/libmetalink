@@ -190,6 +190,18 @@ metalink_file_t* metalink_pctrl_new_file_transaction(metalink_pctrl_t* ctrl)
   return ctrl->temp_file;
 }
 
+static int resource_pri_comp(const void *lhs, const void *rhs)
+{
+  return (*(const metalink_resource_t**)lhs)->priority -
+    (*(const metalink_resource_t**)rhs)->priority;
+}
+
+static int metaurl_pri_comp(const void *lhs, const void *rhs)
+{
+  return (*(const metalink_metaurl_t**)lhs)->priority -
+    (*(const metalink_metaurl_t**)rhs)->priority;
+}
+
 metalink_error_t metalink_pctrl_commit_file_transaction(metalink_pctrl_t* ctrl)
 {
   metalink_error_t r;
@@ -223,12 +235,28 @@ metalink_error_t metalink_pctrl_commit_file_transaction(metalink_pctrl_t* ctrl)
   if(r != 0) {
     return r;
   }
+  if(ctrl->temp_file->resources) {
+    size_t size;
+    for(size = 0; ctrl->temp_file->resources[size]; ++size);
+    /* Sort by priority */
+    qsort(ctrl->temp_file->resources, size, sizeof(metalink_resource_t*),
+          resource_pri_comp);
+  }
+
   /* copy ctrl->metaurls to ctrl->temp_file->metaurls */
   r = commit_list_to_array((void***)&ctrl->temp_file->metaurls,
 			   ctrl->metaurls, sizeof(metalink_metaurl_t*));
   if(r != 0) {
     return r;
   }
+  if(ctrl->temp_file->metaurls) {
+    size_t size;
+    for(size = 0; ctrl->temp_file->metaurls[size]; ++size);
+    /* Sort by priority */
+    qsort(ctrl->temp_file->metaurls, size, sizeof(metalink_metaurl_t*),
+          metaurl_pri_comp);
+  }    
+
   /* copy ctrl->checksums to ctrl->temp_file->checksums */
   r = commit_list_to_array((void***)&ctrl->temp_file->checksums,
 			   ctrl->checksums, sizeof(metalink_checksum_t*));

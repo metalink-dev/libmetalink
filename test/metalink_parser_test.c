@@ -52,7 +52,7 @@ static void validate_result(metalink_t* metalink)
   CU_ASSERT_EQUAL(metalink->version, METALINK_VERSION_3);
 
   /* count files */
-  CU_ASSERT_EQUAL_FATAL(3, count_array((void**)metalink->files));
+  CU_ASSERT_EQUAL_FATAL(4, count_array((void**)metalink->files));
 
   /* check 1st file */
   file = metalink->files[0];
@@ -124,30 +124,26 @@ static void validate_result(metalink_t* metalink)
 			 piece_hash->hash);
 
   /* Check that entry which doesn't have type attribute is skipped. */
-  CU_ASSERT_EQUAL_FATAL(5, count_array((void**)file->resources));
+  CU_ASSERT_EQUAL_FATAL(4, count_array((void**)file->resources));
 
   resource = file->resources[0];
   CU_ASSERT_STRING_EQUAL("ftp://ftphost/libmetalink-0.0.2a.tar.bz2",
 			 resource->url);
+
   resource = file->resources[1];
+  CU_ASSERT_STRING_EQUAL("http://mirror1/libmetalink-0.0.2a.tar.bz2",
+			 resource->url);
+  
+  resource = file->resources[2];
+  CU_ASSERT_STRING_EQUAL("http://mirror2/libmetalink-0.0.2a.tar.bz2.torrent",
+			 resource->url);
+  CU_ASSERT_STRING_EQUAL("bittorrent", resource->type);
+
+  resource = file->resources[3];
   CU_ASSERT_STRING_EQUAL("http://httphost/libmetalink-0.0.2a.tar.bz2",
 			 resource->url);
   CU_ASSERT_STRING_EQUAL("http", resource->type);
   CU_ASSERT_EQUAL(0, resource->preference); /* no preference */
-
-  resource = file->resources[2];
-  CU_ASSERT_STRING_EQUAL("http://badpreference/", resource->url);
-  CU_ASSERT_STRING_EQUAL("http", resource->type);
-  CU_ASSERT_EQUAL(0, resource->preference); /* bad preference, fallback to 0. */
-
-  resource = file->resources[3];
-  CU_ASSERT_STRING_EQUAL("http://mirror1/libmetalink-0.0.2a.tar.bz2",
-			 resource->url);
-  
-  resource = file->resources[4];
-  CU_ASSERT_STRING_EQUAL("http://mirror2/libmetalink-0.0.2a.tar.bz2.torrent",
-			 resource->url);
-  CU_ASSERT_STRING_EQUAL("bittorrent", resource->type);
 
   /* Check 3rd file */
   file = metalink->files[2];
@@ -159,6 +155,15 @@ static void validate_result(metalink_t* metalink)
   CU_ASSERT_EQUAL_FATAL(1, count_array((void**)file->resources));
   resource = file->resources[0];
   CU_ASSERT_STRING_EQUAL("ftp://host/file", resource->url);
+
+  /* Check 4th file */
+  file = metalink->files[3];
+  CU_ASSERT_STRING_EQUAL("badpref", file->name);
+  CU_ASSERT_EQUAL_FATAL(1, count_array((void**)file->resources));
+  resource = file->resources[0];
+  CU_ASSERT_STRING_EQUAL("http://badpreference/", resource->url);
+  CU_ASSERT_STRING_EQUAL("http", resource->type);
+  CU_ASSERT_EQUAL(0, resource->preference); /* bad preference, fallback to 0. */
 
   metalink_delete(metalink);
 }

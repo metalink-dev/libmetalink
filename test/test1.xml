@@ -44,12 +44,10 @@
         <url type="ftp" preference="100">ftp://ftphost/libmetalink-0.0.2a.tar.bz2</url>
 	<!-- no preference -->
         <url type="http">http://httphost/libmetalink-0.0.2a.tar.bz2</url>
-	<!-- bad preference -->
-	<url type="http" preference="-100">http://badpreference/</url>
 	<url type="http" preference="99">http://mirror1/libmetalink-0.0.2a.tar.bz2</url>
 	<!-- no type -->
 	<url>http://mirror2/libmetalink-0.0.2a.tar.bz2</url>
-	<url type="bittorrent">http://mirror2/libmetalink-0.0.2a.tar.bz2.torrent</url>
+	<url type="bittorrent" preference="1">http://mirror2/libmetalink-0.0.2a.tar.bz2.torrent</url>
       </resources>
     </file>
     <!-- no name -->
@@ -69,6 +67,12 @@
     <file name="../unsafe">
       <resources>
 	<url type="ftp" preference="100">ftp://host/file</url>
+      </resources>
+    </file>
+    <file name="badpref">
+      <resources>
+	<!-- bad preference -->
+	<url type="http" preference="-100">http://badpreference/</url>
       </resources>
     </file>
   </files>

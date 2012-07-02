@@ -23,14 +23,13 @@
             <hash>179463a88d79cbf0b1923991708aead914f26142</hash>
             <hash>fecf8bc9a1647505fe16746f94e97a477597dbf3</hash>
         </pieces>
-        <url priority="100">ftp://ftphost/libmetalink-0.0.2a.tar.bz2</url>
+        <url priority="1">ftp://ftphost/libmetalink-0.0.2a.tar.bz2</url>
 	<!-- no priority -->
         <url>http://httphost/libmetalink-0.0.2a.tar.bz2</url>
-	<!-- bad priority -->
-        <url priority="-100">http://badpriority/</url>
         <url priority="99">http://mirror1/libmetalink-0.0.2a.tar.bz2</url>
-        <url>http://mirror2/libmetalink-0.0.2a.tar.bz2</url>
+        <metaurl mediatype="torrent" priority="99">http://mirror1/libmetalink-0.0.2a.tar.bz2.torrent</metaurl>
         <metaurl mediatype="torrent">http://mirror2/libmetalink-0.0.2a.tar.bz2.torrent</metaurl>
+        <metaurl mediatype="torrent" priority="1">http://mirror3/libmetalink-0.0.2a.tar.bz2.torrent</metaurl>
     </file>
     <!-- no name -->
     <file>
@@ -44,5 +43,10 @@
     <!-- unsafe path -->
     <file name="../unsafe">
         <url priority="100">ftp://host/file</url>
+    </file>
+    <!-- bad priority -->
+    <file name="badpri">
+      <!-- bad priority -->
+      <url priority="-100">http://badpriority/</url>
     </file>
 </metalink>

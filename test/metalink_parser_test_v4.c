@@ -45,7 +45,7 @@ static void validate_result(metalink_t* metalink)
   CU_ASSERT_EQUAL(metalink->version, METALINK_VERSION_4);
 
   /* count files */
-  CU_ASSERT_EQUAL_FATAL(3, count_array((void**)metalink->files));
+  CU_ASSERT_EQUAL_FATAL(4, count_array((void**)metalink->files));
 
   /* check 1st file */
   file = metalink->files[0];
@@ -77,17 +77,19 @@ static void validate_result(metalink_t* metalink)
 
   CU_ASSERT_EQUAL_FATAL(2, count_array((void**)file->resources));
 
+  /* file->resources were sorted by priority */
   resource = file->resources[0];
+  CU_ASSERT_STRING_EQUAL("http://httphost/libmetalink-0.0.1.tar.bz2",
+			 resource->url);
+  CU_ASSERT_PTR_NULL(resource->location); /* no location */
+  CU_ASSERT_EQUAL(99, resource->priority);
+
+  resource = file->resources[1];
   CU_ASSERT_STRING_EQUAL("ftp://ftphost/libmetalink-0.0.1.tar.bz2",
 			 resource->url);
   CU_ASSERT_STRING_EQUAL("jp", resource->location);
   CU_ASSERT_EQUAL(100, resource->priority);
 
-  resource = file->resources[1];
-  CU_ASSERT_STRING_EQUAL("http://httphost/libmetalink-0.0.1.tar.bz2",
-			 resource->url);
-  CU_ASSERT_PTR_NULL(resource->location); /* no location */
-  CU_ASSERT_EQUAL(99, resource->priority);
 
   /* check 2nd file */
   file = metalink->files[1];
@@ -110,28 +112,32 @@ static void validate_result(metalink_t* metalink)
   CU_ASSERT_STRING_EQUAL("fecf8bc9a1647505fe16746f94e97a477597dbf3",
 			 piece_hash->hash);
 
-  CU_ASSERT_EQUAL_FATAL(5, count_array((void**)file->resources));
+  CU_ASSERT_EQUAL_FATAL(3, count_array((void**)file->resources));
 
   resource = file->resources[0];
   CU_ASSERT_STRING_EQUAL("ftp://ftphost/libmetalink-0.0.2a.tar.bz2",
 			 resource->url);
+
   resource = file->resources[1];
+  CU_ASSERT_STRING_EQUAL("http://mirror1/libmetalink-0.0.2a.tar.bz2",
+			 resource->url);
+
+  resource = file->resources[2];
   CU_ASSERT_STRING_EQUAL("http://httphost/libmetalink-0.0.2a.tar.bz2",
 			 resource->url);
   CU_ASSERT_EQUAL(999999, resource->priority); /* no priority */
 
-  resource = file->resources[2];
-  CU_ASSERT_STRING_EQUAL("http://badpriority/", resource->url);
-  CU_ASSERT_EQUAL(999999, resource->priority); /* bad priority, fallback to 999999. */
-
-  resource = file->resources[3];
-  CU_ASSERT_STRING_EQUAL("http://mirror1/libmetalink-0.0.2a.tar.bz2",
-			 resource->url);
-  
-  CU_ASSERT_EQUAL_FATAL(1, count_array((void**)file->metaurls));
+  CU_ASSERT_EQUAL_FATAL(3, count_array((void**)file->metaurls));
   metaurl = file->metaurls[0];
+  CU_ASSERT_STRING_EQUAL("http://mirror3/libmetalink-0.0.2a.tar.bz2.torrent",
+			 metaurl->url);
+  metaurl = file->metaurls[1];
+  CU_ASSERT_STRING_EQUAL("http://mirror1/libmetalink-0.0.2a.tar.bz2.torrent",
+			 metaurl->url);
+  metaurl = file->metaurls[2];
   CU_ASSERT_STRING_EQUAL("http://mirror2/libmetalink-0.0.2a.tar.bz2.torrent",
 			 metaurl->url);
+  CU_ASSERT_EQUAL(999999, metaurl->priority);
 
   /* Check 3rd file */
   file = metalink->files[2];
@@ -143,6 +149,14 @@ static void validate_result(metalink_t* metalink)
   CU_ASSERT_EQUAL_FATAL(1, count_array((void**)file->resources));
   resource = file->resources[0];
   CU_ASSERT_STRING_EQUAL("ftp://host/file", resource->url);
+
+  /* Check 4th file */
+  file = metalink->files[3];
+  CU_ASSERT_STRING_EQUAL("badpri", file->name);
+  resource = file->resources[0];
+  CU_ASSERT_STRING_EQUAL("http://badpriority/", resource->url);
+  /* bad priority, fallback to 999999. */
+  CU_ASSERT_EQUAL(999999, resource->priority);
 
   metalink_delete(metalink);
 }

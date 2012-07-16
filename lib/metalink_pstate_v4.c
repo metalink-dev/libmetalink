@@ -27,7 +27,7 @@
 
 #include <time.h>
 #ifdef HAVE_TIME64_H
-#include <time64.h>
+#  include <time64.h>
 #endif
 #include <string.h>
 #include <stdlib.h>
@@ -39,6 +39,9 @@
 #ifndef HAVE_STRPTIME
 #  include "strptime.h"
 #endif /* !HAVE_STRPTIME */
+#ifndef HAVE_TIMEGM
+#  include "timegm.h"
+#endif /* !HAVE_TIMEGM */
 
 static time_t my_timegm(struct tm *tm)
 {
@@ -49,14 +52,13 @@ static time_t my_timegm(struct tm *tm)
   return mkgmtime(tm);
 #elif defined(HAVE_TIMEGM64)
   return (time_t)timegm64(tm);
-#elif defined(HAVE_TIMEGM)
-  return timegm(tm);
 #else
-#  error no timegm() function available
+  return timegm(tm);
 #endif
 }
 
-/* parse a RFC3339 formatted date, ie. 2010-05-01T12:15:02Z or 2010-05-01T12:16:02+01:00 */
+/* parse a RFC3339 formatted date, ie. 2010-05-01T12:15:02Z or
+   2010-05-01T12:16:02+01:00 */
 static time_t parse_date(const char* date)
 {
   time_t t = 0;
@@ -98,9 +100,7 @@ static time_t parse_date(const char* date)
   if(sign != 0) {
     if(strptime(rest+1, "%H:%M", &interval) == NULL)
       return t;
-    tm.tm_hour += sign*interval.tm_hour;
-    tm.tm_min += sign*interval.tm_min;
-    t = my_timegm(&tm);
+    t += sign*(interval.tm_hour*3600+interval.tm_min*60);
   }
 
   return t;

@@ -44,6 +44,11 @@ OBJECTS += strptime.c
 HFILES += strptime.h
 endif
 
+if !HAVE_TIMEGM
+OBJECTS += timegm.c
+HFILES += timegm.h
+endif
+
 if ENABLE_LIBXML2
 OBJECTS += libxml2_metalink_parser.c
 endif

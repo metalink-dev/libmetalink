@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <metalink xmlns="urn:ietf:params:xml:ns:metalink">
     <generator>MetalinkEditor/2.0dev</generator>
-    <published>2009-05-15T12:23:23Z</published>
+    <published>2009-05-15T12:23:23+09:30</published>
     <file name="libmetalink-0.0.1.tar.bz2">
         <version>0.0.1</version>
         <language>en-US</language>

@@ -131,7 +131,16 @@ AC_FUNC_REALLOC
 # _mkgmtime is available in Windows, behaves like timegm.
 # _mkgmtime is for mingw. mkgmtime is for NetWare.
 # Newer Android NDKs have timegm64 in the time64.h header.
-AC_CHECK_FUNCS([memset strtol strtoll timegm timegm64 _mkgmtime mkgmtime])
+AC_CHECK_FUNCS([memset strtol strtoll timegm64 _mkgmtime mkgmtime])
+AC_CHECK_FUNC([timegm], [have_timegm=yes], [have_timegm=no])
+
+if test "x$have_timegm" = "xyes"; then
+    AC_DEFINE([HAVE_TIMEGM], [1],
+              [Define to 1 if you have timegm function.])
+fi
+AM_CONDITIONAL([HAVE_TIMEGM], [ test "x$have_timegm" = "xyes" ])
+
+
 AC_CHECK_FUNC([strptime], [have_strptime=yes], [have_strptime=no])
 
 if test "x$have_strptime" = "xyes"; then

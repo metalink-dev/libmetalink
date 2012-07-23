@@ -1,0 +1,10 @@
+libmetalink 0.1.0
+=================
+
+Release Note
+------------
+
+This release adds RFC 5854 Metalink 4.0 support, thanks to Quentin
+Stievenart. It also adds the ability to filter out dangerous filename
+in Metalink files. Many portability patches contributed by Guenter
+Knauf were merged.

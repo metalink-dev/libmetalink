@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 AC_PREREQ(2.61)
-AC_INIT([libmetalink], [0.1.0-dev], [t-tujikawa@users.sourceforge.net])
+AC_INIT([libmetalink], [0.1.0], [t-tujikawa@users.sourceforge.net])
 LT_PREREQ([2.2.6])
 LT_INIT()
 

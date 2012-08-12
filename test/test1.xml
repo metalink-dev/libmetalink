@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<metalink version="3.0" xmlns="http://www.metalinker.org/">
+<metalink version="3.0" xmlns="http://www.metalinker.org/"
+	  origin="http://example.org/foo.metalink"
+	  type="dynamic">
   <publisher>
     <name>libmetalink</name>
     <url>http://libmetalink/</url>

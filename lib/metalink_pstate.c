@@ -101,7 +101,19 @@ void initial_state_start_fun(metalink_pstm_t* stm,
 {
   if(strcmp("metalink", name) == 0) {
     if (strcmp(METALINK_V3_NS_URI, ns_uri) == 0) {
+      const char* type;
+      const char* origin;
       metalink_pctrl_set_version(stm->ctrl, METALINK_VERSION_3);
+
+      type = get_attribute_value(attrs, "type");
+      if(type && strcmp("dynamic", type) == 0) {
+        metalink_pctrl_set_origin_dynamic(stm->ctrl, 1);
+      }
+      origin = get_attribute_value(attrs, "origin");
+      if(origin) {
+        metalink_pctrl_set_origin(stm->ctrl, origin);
+      }
+
       metalink_pstm_enter_metalink_state(stm);
     }
     else if (strcmp(METALINK_V4_NS_URI, ns_uri) == 0) {

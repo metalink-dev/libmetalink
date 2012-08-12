@@ -280,7 +280,10 @@ typedef struct _metalink {
   metalink_version_t version;
   /* generator of this metalink, null terminated string */
   char* generator;
-  /* origin of this metalink, null terminated string */
+  /* origin of this metalink, null terminated string. In Metalink
+     version 4, this is the content of the origin element. In Metalink
+     version 3, this is the origin attribute of the metalink
+     element. */
   char* origin;
   /* In Metalink version 4, this value is 1 if the dynamic attribute
    * of the origin element is "true". In Metalink version 3, this

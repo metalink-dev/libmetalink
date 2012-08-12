@@ -195,6 +195,15 @@ metalink_error_t metalink_pctrl_set_generator(metalink_pctrl_t* ctrl, const char
 
 metalink_error_t metalink_pctrl_set_origin(metalink_pctrl_t* ctrl, const char* origin);
 
+/* Sets the dynamic attribute of the origin element as per Metalink
+   version 4. If it is "true", origin_dynamic must be 1. Otherwise, it
+   must be 0. For Metalink version 3, origin_dynamic must be 1 if the
+   type attribute of metalink element is "dynamic". Otherwise, it must
+   be 0.
+ */
+void metalink_pctrl_set_origin_dynamic(metalink_pctrl_t* ctrl,
+                                       int origin_dynamic);
+
 void metalink_pctrl_set_published(metalink_pctrl_t* ctrl, int published);
 
 void metalink_pctrl_set_updated(metalink_pctrl_t* ctrl, int updated);

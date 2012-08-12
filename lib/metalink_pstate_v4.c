@@ -138,6 +138,11 @@ void metalink_state_start_fun_v4(metalink_pstm_t* stm,
   } else if(strcmp("generator", name) == 0) {
     metalink_pstm_enter_generator_state(stm);
   } else if(strcmp("origin", name) == 0) {
+    const char* dynamic_attr;
+    dynamic_attr = get_attribute_value(attrs, "dynamic");
+    if(dynamic_attr && strcmp("true", dynamic_attr) == 0) {
+      metalink_pctrl_set_origin_dynamic(stm->ctrl, 1);
+    }
     metalink_pstm_enter_origin_state(stm);
   } else if(strcmp("published", name) == 0) {
     metalink_pstm_enter_published_state_v4(stm);

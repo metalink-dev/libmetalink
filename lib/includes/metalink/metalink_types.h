@@ -282,6 +282,11 @@ typedef struct _metalink {
   char* generator;
   /* origin of this metalink, null terminated string */
   char* origin;
+  /* In Metalink version 4, this value is 1 if the dynamic attribute
+   * of the origin element is "true". In Metalink version 3, this
+   * value is 1 if the type attribute of the metalink element is
+   * "dynamic". */
+  int origin_dynamic;
   /* timestamp corresponding to the publication of this metalink */
   time_t published;
   /* timestamp corresponding to the last update of this metalink */
@@ -297,6 +302,7 @@ metalink_error_t metalink_set_identity(metalink_t* metalink, const char* identit
 metalink_error_t metalink_set_tags(metalink_t* metalink, const char* tags);
 metalink_error_t metalink_set_generator(metalink_t* metalink, const char* generator);
 metalink_error_t metalink_set_origin(metalink_t* metalink, const char* origin);
+void metalink_set_origin_dynamic(metalink_t* metalink, int origin_dynamic);
 void metalink_set_published(metalink_t* metalink, time_t published);
 void metalink_set_updated(metalink_t* metalink, time_t updated);
 void metalink_set_version(metalink_t* metalink, metalink_version_t version);

@@ -632,6 +632,12 @@ metalink_error_t metalink_pctrl_set_origin(metalink_pctrl_t* ctrl, const char* o
   return metalink_set_origin(ctrl->metalink, origin);
 }
 
+void metalink_pctrl_set_origin_dynamic(metalink_pctrl_t* ctrl,
+                                       int origin_dynamic)
+{
+  metalink_set_origin_dynamic(ctrl->metalink, origin_dynamic);
+}
+
 void metalink_pctrl_set_published(metalink_pctrl_t* ctrl, int published)
 {
   metalink_set_published(ctrl->metalink, published);

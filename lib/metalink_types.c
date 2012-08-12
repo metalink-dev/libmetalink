@@ -262,6 +262,13 @@ metalink_set_origin(metalink_t* metalink, const char* origin)
 
 void
 METALINK_PUBLIC
+metalink_set_origin_dynamic(metalink_t* metalink, int origin_dynamic)
+{
+  metalink->origin_dynamic = origin_dynamic;
+}
+
+void
+METALINK_PUBLIC
 metalink_set_published(metalink_t* metalink, time_t published)
 {
   metalink->published = published;

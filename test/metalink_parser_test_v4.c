@@ -45,6 +45,7 @@ static void validate_result(metalink_t* metalink)
   CU_ASSERT_EQUAL(metalink->version, METALINK_VERSION_4);
 
   CU_ASSERT_STRING_EQUAL("http://example.org/foo.metalink", metalink->origin);
+  CU_ASSERT(metalink->origin_dynamic);
 
   /* count files */
   CU_ASSERT_EQUAL_FATAL(4, count_array((void**)metalink->files));

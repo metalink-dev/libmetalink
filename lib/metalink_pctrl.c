@@ -210,7 +210,7 @@ metalink_error_t metalink_pctrl_commit_file_transaction(metalink_pctrl_t* ctrl)
   }
 
   /* copy ctrl->languages to ctrl->temp_file->languages */
-  r = commit_list_to_array((void***)&ctrl->temp_file->languages,
+  r = commit_list_to_array((void*)&ctrl->temp_file->languages,
 			   ctrl->languages, sizeof(char*));
   if(r != 0) {
     return r;
@@ -220,7 +220,7 @@ metalink_error_t metalink_pctrl_commit_file_transaction(metalink_pctrl_t* ctrl)
   }
 
   /* copy ctrl->oses to ctrl->temp_file->oses */
-  r = commit_list_to_array((void***)&ctrl->temp_file->oses,
+  r = commit_list_to_array((void*)&ctrl->temp_file->oses,
 			   ctrl->oses, sizeof(char*));
   if(r != 0) {
     return r;
@@ -230,7 +230,7 @@ metalink_error_t metalink_pctrl_commit_file_transaction(metalink_pctrl_t* ctrl)
   }
 
   /* copy ctrl->resources to ctrl->temp_file->resources */
-  r = commit_list_to_array((void***)&ctrl->temp_file->resources,
+  r = commit_list_to_array((void*)&ctrl->temp_file->resources,
 			   ctrl->resources, sizeof(metalink_resource_t*));
   if(r != 0) {
     return r;
@@ -244,7 +244,7 @@ metalink_error_t metalink_pctrl_commit_file_transaction(metalink_pctrl_t* ctrl)
   }
 
   /* copy ctrl->metaurls to ctrl->temp_file->metaurls */
-  r = commit_list_to_array((void***)&ctrl->temp_file->metaurls,
+  r = commit_list_to_array((void*)&ctrl->temp_file->metaurls,
 			   ctrl->metaurls, sizeof(metalink_metaurl_t*));
   if(r != 0) {
     return r;
@@ -258,7 +258,7 @@ metalink_error_t metalink_pctrl_commit_file_transaction(metalink_pctrl_t* ctrl)
   }    
 
   /* copy ctrl->checksums to ctrl->temp_file->checksums */
-  r = commit_list_to_array((void***)&ctrl->temp_file->checksums,
+  r = commit_list_to_array((void*)&ctrl->temp_file->checksums,
 			   ctrl->checksums, sizeof(metalink_checksum_t*));
   if(r != 0) {
     return r;
@@ -364,7 +364,7 @@ metalink_error_t metalink_pctrl_commit_chunk_checksum_transaction(metalink_pctrl
   if(!ctrl->temp_file) {
     return METALINK_ERR_NO_FILE_TRANSACTION;
   }
-  r = commit_list_to_array((void***)&ctrl->temp_chunk_checksum->piece_hashes,
+  r = commit_list_to_array((void*)&ctrl->temp_chunk_checksum->piece_hashes,
 			   ctrl->piece_hashes, sizeof(metalink_piece_hash_t*));
   if(r != 0) {
     return r;

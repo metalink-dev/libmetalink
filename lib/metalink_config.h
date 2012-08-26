@@ -36,6 +36,9 @@
 #ifndef _BSD_SOURCE
 #  define _BSD_SOURCE /* avoid warning when using timegm */
 #endif
+#ifndef _NETBSD_SOURCE
+#  define _NETBSD_SOURCE /* avoid warning when using strtoll on netbsd */
+#endif
 
 #ifdef GCC_VISIBILITY
 #  define METALINK_PUBLIC __attribute__ ((visibility ("default")))

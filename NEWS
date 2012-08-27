@@ -1,3 +1,15 @@
+libmetalink 0.1.1
+=================
+
+Release Note
+------------
+
+This release adds dynamic attribute of the origin element in Metalink
+4 and the origin and type attributes of the metalink element in
+Metalink 3.  It fixes configure and compile errors on netbsd and OSX.
+
+
+
 libmetalink 0.1.0
 =================
 

@@ -20,13 +20,13 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 AC_PREREQ(2.61)
-AC_INIT([libmetalink], [0.1.1], [t-tujikawa@users.sourceforge.net])
+AC_INIT([libmetalink], [0.1.2], [t-tujikawa@users.sourceforge.net])
 LT_PREREQ([2.2.6])
 LT_INIT()
 
 dnl See versioning rule:
 dnl  http://www.gnu.org/software/libtool/manual/html_node/Updating-version-info.html
-AC_SUBST(LT_CURRENT, 2)
+AC_SUBST(LT_CURRENT, 3)
 AC_SUBST(LT_REVISION, 0)
 AC_SUBST(LT_AGE, 0)
 

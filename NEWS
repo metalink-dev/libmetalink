@@ -1,3 +1,14 @@
+libmetalink 0.1.2
+=================
+
+Release Note
+------------
+
+This release fixes the bug that the library version was not updated in
+the previous release.
+
+
+
 libmetalink 0.1.1
 =================
 

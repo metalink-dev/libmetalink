@@ -88,6 +88,11 @@ if test "x$with_libxml2" = "xyes" && test "x$have_libexpat" != "xyes"; then
    fi
 fi
 
+if test "x$have_libexpat" != "xyes" && test "x$have_libxml2" != "xyes"; then
+    AC_MSG_FAILURE([Neither expat nor libxml2 found. Please install one of \
+them and run configure again.])
+fi
+
 # cunit
 PKG_CHECK_MODULES([CUNIT], [cunit >= 2.1], [have_cunit=yes], [have_cunit=no])
 # If pkg-config does not find cunit, check it using AC_CHECK_LIB.  We

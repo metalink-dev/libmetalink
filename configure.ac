@@ -115,7 +115,7 @@ AM_CONDITIONAL([HAVE_CUNIT], [ test "x${have_cunit}" = "xyes" ])
 
 # Checks for header files.
 AC_HEADER_STDC
-AC_CHECK_HEADERS([limits.h stdlib.h string.h time64.h])
+AC_CHECK_HEADERS([limits.h stdlib.h string.h time64.h alloca.h])
 
 AC_CHECK_HEADER([inttypes.h], [have_inttypes_h=yes], [have_inttypes_h=no])
 

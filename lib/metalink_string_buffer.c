@@ -31,7 +31,14 @@
 metalink_string_buffer_t* metalink_string_buffer_new(size_t initial_capacity)
 {
   metalink_string_buffer_t* sbuf = malloc(sizeof(metalink_string_buffer_t));
+  if(!sbuf) {
+    return NULL;
+  }
   sbuf->buffer = calloc(sizeof(char), initial_capacity+1);
+  if(!sbuf->buffer) {
+    free(sbuf);
+    return NULL;
+  }
   sbuf->length = 0;
   sbuf->buffer[sbuf->length] = '\0';
   sbuf->capacity = initial_capacity;

@@ -35,6 +35,7 @@ metalink_pstm_t* new_metalink_pstm(void)
   if(!stm) {
     return NULL;
   }
+  stm->state = NULL;
   stm->ctrl = new_metalink_pctrl();
   if(!stm->ctrl) {
     goto NEW_METALINK_PSTM_ERROR;

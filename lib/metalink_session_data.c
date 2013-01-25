@@ -33,6 +33,7 @@ metalink_session_data_t* metalink_session_data_new(void)
   if(!sd) {
     return NULL;
   }
+  sd->characters_stack = NULL;
   sd->stm = new_metalink_pstm();
   if(!sd->stm) {
     goto NEW_SESSION_DATA_ERROR;

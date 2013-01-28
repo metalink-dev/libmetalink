@@ -51,7 +51,9 @@ int main(int argc, char** argv)
     file = metalink->files[0];
     printf("name: %s\n", file->name);
     printf("size: %" PRId64 "\n", (int64_t)file->size);
-    printf("os  : %s\n", file->os);
+    if(file->os) {
+      printf("os  : %s\n", file->os);
+    }
 
     if(file->checksums) {
       checksums = file->checksums;
@@ -82,7 +84,8 @@ int main(int argc, char** argv)
       resources = file->resources;
       while(*resources && count < 5) {
         printf("type=%s, location=%s, preference=%d, url=%s\n",
-               (*resources)->type, (*resources)->location,
+               (*resources)->type ? (*resources)->type : "<null>",
+               (*resources)->location ? (*resources)->location : "<null>",
                (*resources)->preference, (*resources)->url);
         ++resources;
         ++count;

@@ -222,3 +222,43 @@ void test_metalink_pctrl_piece_hash_transaction(void)
 
   delete_metalink_pctrl(ctrl);
 }
+
+void test_metalink_pctrl_signature_transaction(void)
+{
+  metalink_pctrl_t* ctrl;
+  metalink_signature_t* signature;
+  metalink_file_t* file;
+
+  ctrl = new_metalink_pctrl();
+  CU_ASSERT_PTR_NOT_NULL(ctrl);
+
+  /* start new file transaction, signature transaction needs this */
+  file = metalink_pctrl_new_file_transaction(ctrl);
+  CU_ASSERT_PTR_NOT_NULL(file);
+
+  /* start new signature transaction */
+  signature = metalink_pctrl_new_signature_transaction(ctrl);
+  CU_ASSERT_PTR_NOT_NULL(signature);
+
+  /* Set mediatype and signature */
+  metalink_signature_set_mediatype(signature, "application/pgp-signature");
+  CU_ASSERT_EQUAL(0, metalink_pctrl_signature_set_signature
+                  (ctrl, "THIS IS SIGNATURE"));
+
+  /* Commit */
+  CU_ASSERT_EQUAL(0, metalink_pctrl_commit_signature_transaction(ctrl));
+  signature = NULL;
+
+  CU_ASSERT_PTR_NULL(ctrl->temp_signature);
+  CU_ASSERT_PTR_NOT_NULL(ctrl->temp_file->signature);
+
+  signature = ctrl->temp_file->signature;
+  CU_ASSERT_STRING_EQUAL("application/pgp-signature", signature->mediatype);
+  CU_ASSERT_STRING_EQUAL("THIS IS SIGNATURE", signature->signature);
+
+  /* Try to commit while transaction is not started */
+  CU_ASSERT_EQUAL(METALINK_ERR_NO_SIGNATURE_TRANSACTION,
+                  metalink_pctrl_commit_signature_transaction(ctrl));
+
+  delete_metalink_pctrl(ctrl);
+}

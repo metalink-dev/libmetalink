@@ -53,6 +53,9 @@ int main(void)
       (!CU_add_test(pSuite, "test of metalink_pctrl_chunk_checksum_transaction",
 		    test_metalink_pctrl_chunk_checksum_transaction))
       ||
+      (!CU_add_test(pSuite, "test of metalink_pctrl_signature_transaction",
+                    test_metalink_pctrl_signature_transaction))
+      ||
       (!CU_add_test(pSuite, "test of metalink_parse_file",
 		    test_metalink_parse_file))
       ||

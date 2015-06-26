@@ -110,6 +110,8 @@ void delete_metalink_pctrl(metalink_pctrl_t* ctrl)
   metalink_list_delete(ctrl->piece_hashes);
   metalink_piece_hash_delete(ctrl->temp_piece_hash);
 
+  metalink_signature_delete(ctrl->temp_signature);
+
   free(ctrl);
 }
 
@@ -397,6 +399,26 @@ metalink_error_t metalink_pctrl_commit_piece_hash_transaction(metalink_pctrl_t* 
   return 0;
 }
 
+metalink_signature_t* metalink_pctrl_new_signature_transaction(metalink_pctrl_t* ctrl) {
+  if(ctrl->temp_signature) {
+    metalink_signature_delete(ctrl->temp_signature);
+  }
+  ctrl->temp_signature = metalink_signature_new();
+  return ctrl->temp_signature;
+}
+
+metalink_error_t metalink_pctrl_commit_signature_transaction(metalink_pctrl_t* ctrl) {
+  if(!ctrl->temp_signature) {
+    return METALINK_ERR_NO_SIGNATURE_TRANSACTION;
+  }
+  if(ctrl->temp_file->signature) {
+    metalink_signature_delete(ctrl->temp_file->signature);
+  }
+  ctrl->temp_file->signature = ctrl->temp_signature;
+  ctrl->temp_signature = NULL;
+  return 0;
+}
+
 /* metalink manipulation functions */
 void metalink_pctrl_set_version(metalink_pctrl_t* ctrl, metalink_version_t version)
 {
@@ -619,6 +641,11 @@ void metalink_pctrl_chunk_checksum_set_piece_hashes
 {
   metalink_chunk_checksum_set_piece_hashes(ctrl->temp_chunk_checksum,
 					   piece_hashes);
+}
+
+/* signature manipulation functions */
+metalink_error_t metalink_pctrl_signature_set_signature(metalink_pctrl_t* ctrl, const char* signature) {
+  return metalink_signature_set_signature(ctrl->temp_signature, signature);
 }
 
 /* information functions */

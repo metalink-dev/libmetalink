@@ -354,19 +354,19 @@ void file_state_start_fun_v4(metalink_pstm_t* stm,
     metalink_pstm_enter_pieces_state_v4(stm);
   } else if(strcmp("signature", name) == 0) {
     const char* mediatype;
-    metalink_checksum_t* signature;
+    metalink_signature_t* signature;
 
     mediatype = get_attribute_value(attrs, "mediatype");
     if(!mediatype) {
       metalink_pstm_enter_skip_state(stm);
       return;
     }
-    signature = metalink_pctrl_new_checksum_transaction(stm->ctrl);
+    signature = metalink_pctrl_new_signature_transaction(stm->ctrl);
     if(!signature) {
       error_handler(stm, METALINK_ERR_BAD_ALLOC);
       return;
     }
-    r = metalink_checksum_set_type(signature, mediatype);
+    r = metalink_signature_set_mediatype(signature, mediatype);
     if(r != 0) {
       error_handler(stm, METALINK_ERR_BAD_ALLOC);
       return;
@@ -529,11 +529,18 @@ void signature_state_end_fun_v4(metalink_pstm_t* stm,
 				const char* characters)
 {
   metalink_error_t r;
-  r = metalink_pctrl_checksum_set_hash(stm->ctrl, characters);
+  r = metalink_pctrl_signature_set_signature(stm->ctrl, characters);
   if(r != 0) {
     error_handler(stm, r);
     return;
   }
+
+  r = metalink_pctrl_commit_signature_transaction(stm->ctrl);
+  if(r != 0) {
+    error_handler(stm, r);
+    return;
+  }
+
   metalink_pstm_enter_file_state_v4(stm);
 }
 

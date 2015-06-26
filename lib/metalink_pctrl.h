@@ -63,6 +63,7 @@ typedef struct metalink_pctrl_t {
 
   metalink_piece_hash_t* temp_piece_hash;
 
+  metalink_signature_t* temp_signature;
 } metalink_pctrl_t;
 
 metalink_pctrl_t* new_metalink_pctrl(void);
@@ -107,6 +108,10 @@ metalink_error_t metalink_pctrl_commit_chunk_checksum_transaction(metalink_pctrl
 metalink_piece_hash_t* metalink_pctrl_new_piece_hash_transaction(metalink_pctrl_t* ctrl);
 
 metalink_error_t metalink_pctrl_commit_piece_hash_transaction(metalink_pctrl_t* ctrl);
+
+metalink_signature_t* metalink_pctrl_new_signature_transaction(metalink_pctrl_t* ctrl);
+
+metalink_error_t metalink_pctrl_commit_signature_transaction(metalink_pctrl_t* ctrl);
 
 /* metalink manipulation functions */
 void metalink_pctrl_set_version(metalink_pctrl_t* ctrl, metalink_version_t version);
@@ -184,6 +189,9 @@ metalink_error_t metalink_pctrl_piece_hash_set_hash(metalink_pctrl_t* ctrl, cons
 metalink_error_t metalink_pctrl_chunk_checksum_set_type(metalink_pctrl_t* ctrl, const char* type);
 
 void metalink_pctrl_chunk_checksum_set_length(metalink_pctrl_t* ctrl, int length);
+
+/* signature manipulation functions */
+metalink_error_t metalink_pctrl_signature_set_signature(metalink_pctrl_t* ctrl, const char* signature);
 
 /* Unlike other mutator functions, this function doesn't create copy of
    piece_hashes. So don't free piece_hashes manually after this call.*/

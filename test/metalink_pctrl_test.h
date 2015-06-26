@@ -36,6 +36,8 @@ void test_metalink_pctrl_chunk_checksum_transaction(void);
 
 void test_metalink_pctrl_piece_hash_transaction(void);
 
+void test_metalink_pctrl_signature_transaction(void);
+
 void test_metalink_pctrl_metalink_accumulate_files(void);
 
 void test_metalink_pctrl_detach_metalink(void);

@@ -93,6 +93,12 @@ int main(int argc, char** argv)
       printf("...\n");
     }
 
+    if(file->signature) {
+      metalink_signature_t* signature;
+      signature = file->signature;
+      printf("signature: mediatype=%s\n\t%s\n", signature->mediatype,
+             signature->signature);
+    }
     /* delete metalink_t */
     metalink_delete(metalink);
   }

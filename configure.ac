@@ -80,7 +80,11 @@ AC_SUBST([NUMBER_VERSION], `printf "0x%02x%02x%02x" $MAJOR_VERSION $MINOR_VERSIO
 # Checks for libraries.
 
 if test "x$with_libexpat" = "xyes"; then
-  AM_PATH_LIBEXPAT
+  PKG_CHECK_MODULES([EXPAT], [expat >= 2.1.0], [have_libexpat=yes], [have_libexpat=no])
+  if test "x$have_libexpat" != "xyes"; then
+    AC_MSG_WARN([$EXPAT_PKG_ERRORS])
+    AM_PATH_LIBEXPAT
+  fi
 fi
 
 if test "x$with_libxml2" = "xyes" && test "x$have_libexpat" != "xyes"; then

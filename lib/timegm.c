@@ -29,6 +29,10 @@
 
 #include <stdint.h>
 
+#ifndef INT32_MIN
+#define INT32_MIN ((int32_t)(1u << 31))
+#endif /* INT32_MIN */
+
 /* Counter the number of leap year in the range [0, y). The |y| is the
    year, including century (e.g., 2012) */
 static int count_leap_year(int y)

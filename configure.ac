@@ -21,6 +21,7 @@
 # THE SOFTWARE.
 AC_PREREQ(2.61)
 AC_INIT([libmetalink], [0.1.3-DEV], [t-tujikawa@users.sourceforge.net])
+
 LT_PREREQ([2.2.6])
 LT_INIT()
 
@@ -137,7 +138,6 @@ AC_TYPE_SIZE_T
 
 # Checks for library functions.
 AC_FUNC_MALLOC
-AC_FUNC_REALLOC
 
 # _mkgmtime is available in Windows, behaves like timegm.
 # _mkgmtime is for mingw. mkgmtime is for NetWare.

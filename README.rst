@@ -18,10 +18,10 @@ needed:
 
 cunit >= 2.1
 
-Build from bzr
+Build from git
 --------------
 
-To build from bzr, run following commands (you need autoconf)::
+To build from git, run following commands (you need autoconf)::
 
     $ autoreconf -i
     $ automake --add-missing

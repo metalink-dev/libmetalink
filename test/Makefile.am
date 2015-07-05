@@ -11,8 +11,9 @@ metalinktest_SOURCES = \
 metalinktest_LDADD = ${top_builddir}/lib/libmetalink.la
 metalinktest_LDFLAGS = -static  @CUNIT_LIBS@
 
-AM_CFLAGS = -I${top_srcdir}/lib -I${top_srcdir}/lib/includes \
+AM_CPPFLAGS = -I${top_srcdir}/lib -I${top_srcdir}/lib/includes \
 	-I${top_builddir}/lib/includes \
+	$(WARNCFLAGS) $(ADDCFLAGS) \
 	-DLIBMETALINK_TEST_DIR=\"$(top_srcdir)/test/\" @CUNIT_CFLAGS@
 TESTS = metalinktest
 

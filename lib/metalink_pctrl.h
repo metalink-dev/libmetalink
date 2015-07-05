@@ -248,8 +248,8 @@ metalink_error_t metalink_pctrl_set_origin(metalink_pctrl_t *ctrl,
 void metalink_pctrl_set_origin_dynamic(metalink_pctrl_t *ctrl,
                                        int origin_dynamic);
 
-void metalink_pctrl_set_published(metalink_pctrl_t *ctrl, int published);
+void metalink_pctrl_set_published(metalink_pctrl_t *ctrl, time_t published);
 
-void metalink_pctrl_set_updated(metalink_pctrl_t *ctrl, int updated);
+void metalink_pctrl_set_updated(metalink_pctrl_t *ctrl, time_t updated);
 
 #endif /* _D_METALINK_PCTRL_H_ */

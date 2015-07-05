@@ -76,11 +76,6 @@ void test_metalink_check_safe_path(void) {
   CU_ASSERT(metalink_check_safe_path("foo/bar.baz"));
 }
 
-static void format_version(char *buf, size_t len, int major, int minor,
-                           int patch) {
-  snprintf(buf, len, "%d.%d.%d", major, minor, patch);
-}
-
 void test_metalink_get_version(void) {
   int major, minor, patch;
   major = minor = patch = -1;

@@ -647,10 +647,10 @@ void metalink_pctrl_set_origin_dynamic(metalink_pctrl_t *ctrl,
   metalink_set_origin_dynamic(ctrl->metalink, origin_dynamic);
 }
 
-void metalink_pctrl_set_published(metalink_pctrl_t *ctrl, int published) {
+void metalink_pctrl_set_published(metalink_pctrl_t *ctrl, time_t published) {
   metalink_set_published(ctrl->metalink, published);
 }
 
-void metalink_pctrl_set_updated(metalink_pctrl_t *ctrl, int updated) {
+void metalink_pctrl_set_updated(metalink_pctrl_t *ctrl, time_t updated) {
   metalink_set_updated(ctrl->metalink, updated);
 }

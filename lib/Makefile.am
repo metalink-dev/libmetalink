@@ -1,6 +1,7 @@
 SUBDIRS = includes
 
 AM_CPPFLAGS = -I$(srcdir)/includes -I$(builddir)/includes \
+	$(WARNCFLAGS) $(ADDCFLAGS) \
 	@XML_CPPFLAGS@ @EXPAT_CFLAGS@ \
 	@DEFS@
 

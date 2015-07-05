@@ -45,7 +45,7 @@ int metalink_check_safe_path(const char *path) {
      http://tools.ietf.org/html/rfc5854.html#section-4.1.2.1
    */
   size_t len, i;
-  ssize_t filename_idx = 0;
+  size_t filename_idx = 0;
   /* If path or filename (string following the final '/' in path)
      start with one of the characters in bad_prefix, we consider it as
      invalid. */

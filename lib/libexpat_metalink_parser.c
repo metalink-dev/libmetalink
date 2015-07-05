@@ -165,7 +165,7 @@ metalink_parse_fp(FILE *docfp, metalink_t **res) {
         assert(0);
       }
     }
-    if (!XML_ParseBuffer(parser, num_read, 0)) {
+    if (!XML_ParseBuffer(parser, (int)num_read, 0)) {
       r = METALINK_ERR_PARSER_ERROR;
       break;
     }
@@ -204,7 +204,7 @@ metalink_error_t METALINK_PUBLIC metalink_parse_fd(int fd, metalink_t **res) {
     } else if (num_read == 0) {
       break;
     }
-    if (!XML_ParseBuffer(parser, num_read, 0)) {
+    if (!XML_ParseBuffer(parser, (int)num_read, 0)) {
       r = METALINK_ERR_PARSER_ERROR;
       break;
     }
@@ -228,7 +228,7 @@ metalink_parse_memory(const char *buf, size_t len, metalink_t **res) {
 
   parser = setup_parser(session_data);
 
-  if (!XML_Parse(parser, buf, len, 1)) {
+  if (!XML_Parse(parser, buf, (int)len, 1)) {
     r = METALINK_ERR_PARSER_ERROR;
   }
 
@@ -284,7 +284,7 @@ metalink_parse_update(metalink_parser_context_t *ctx, const char *buf,
                       size_t len) {
   metalink_error_t r = 0;
 
-  if (!XML_Parse(ctx->parser, buf, len, 0)) {
+  if (!XML_Parse(ctx->parser, buf, (int)len, 0)) {
     r = METALINK_ERR_PARSER_ERROR;
   }
 
@@ -299,7 +299,7 @@ metalink_parse_final(metalink_parser_context_t *ctx, const char *buf,
                      size_t len, metalink_t **res) {
   metalink_error_t r = 0, retval;
 
-  if (!XML_Parse(ctx->parser, buf, len, 1)) {
+  if (!XML_Parse(ctx->parser, buf, (int)len, 1)) {
     r = METALINK_ERR_PARSER_ERROR;
   }
 

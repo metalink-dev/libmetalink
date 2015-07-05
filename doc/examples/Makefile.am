@@ -1,4 +1,5 @@
-AM_CPPFLAGS = -I$(top_srcdir)/lib/includes -I$(top_builddir)/lib/includes
+AM_CPPFLAGS = -I$(top_srcdir)/lib/includes -I$(top_builddir)/lib/includes \
+	$(WARNCFLAGS) $(ADDCFLAGS)
 LDADD = $(top_builddir)/lib/libmetalink.la
 
 noinst_PROGRAMS = metalinkcat

@@ -31,14 +31,13 @@
 #include <assert.h>
 #include <stdio.h>
 
-static metalink_error_t allocate_copy_string(char** dest, const char* src)
-{
+static metalink_error_t allocate_copy_string(char **dest, const char *src) {
   free(*dest);
-  if(src) {
+  if (src) {
     size_t length;
-    length = strlen(src)+1;
+    length = strlen(src) + 1;
     *dest = malloc(length);
-    if(*dest == NULL) {
+    if (*dest == NULL) {
       return METALINK_ERR_BAD_ALLOC;
     }
     memcpy(*dest, src, length);
@@ -49,29 +48,23 @@ static metalink_error_t allocate_copy_string(char** dest, const char* src)
   }
 }
 
-metalink_file_t
-METALINK_PUBLIC
-* metalink_file_new(void)
-{
-  metalink_file_t* file;
+metalink_file_t METALINK_PUBLIC *metalink_file_new(void) {
+  metalink_file_t *file;
   file = malloc(sizeof(metalink_file_t));
-  if(file) {
+  if (file) {
     memset(file, 0, sizeof(metalink_file_t));
   }
   return file;
 }
 
-void
-METALINK_PUBLIC
-metalink_file_delete(metalink_file_t* file)
-{
-  metalink_resource_t** res;
-  metalink_metaurl_t** metaurls;
-  metalink_checksum_t** checksums;
-  char** language;
-  char** os;
+void METALINK_PUBLIC metalink_file_delete(metalink_file_t *file) {
+  metalink_resource_t **res;
+  metalink_metaurl_t **metaurls;
+  metalink_checksum_t **checksums;
+  char **language;
+  char **os;
 
-  if(file) {
+  if (file) {
     free(file->name);
     free(file->version);
     free(file->description);
@@ -81,51 +74,51 @@ metalink_file_delete(metalink_file_t* file)
     free(file->publisher_name);
     free(file->publisher_url);
 
-    if(file->signature) {
+    if (file->signature) {
       metalink_signature_delete(file->signature);
     }
 
-    if(file->languages) {
+    if (file->languages) {
       language = file->languages;
-      while(*language) {
-	free(*language);
-	++language;
+      while (*language) {
+        free(*language);
+        ++language;
       }
       free(file->languages);
     }
 
-    if(file->oses) {
+    if (file->oses) {
       os = file->oses;
-      while(*os) {
-	free(*os);
-	++os;
+      while (*os) {
+        free(*os);
+        ++os;
       }
       free(file->oses);
     }
 
-    if(file->resources) {
+    if (file->resources) {
       res = file->resources;
-      while(*res) {
-	metalink_resource_delete(*res);
-	++res;
+      while (*res) {
+        metalink_resource_delete(*res);
+        ++res;
       }
       free(file->resources);
     }
 
-    if(file->metaurls) {
+    if (file->metaurls) {
       metaurls = file->metaurls;
-      while(*metaurls) {
-	metalink_metaurl_delete(*metaurls);
-	 ++metaurls;
+      while (*metaurls) {
+        metalink_metaurl_delete(*metaurls);
+        ++metaurls;
       }
       free(file->metaurls);
     }
 
-    if(file->checksums) {
+    if (file->checksums) {
       checksums = file->checksums;
-      while(*checksums) {
-	metalink_checksum_delete(*checksums);
-	++checksums;
+      while (*checksums) {
+        metalink_checksum_delete(*checksums);
+        ++checksums;
       }
       free(file->checksums);
     }
@@ -136,95 +129,69 @@ metalink_file_delete(metalink_file_t* file)
   }
 }
 
-metalink_error_t
-METALINK_PUBLIC
-metalink_file_set_name(metalink_file_t* file, const char* name)
-{
+metalink_error_t METALINK_PUBLIC
+metalink_file_set_name(metalink_file_t *file, const char *name) {
   return allocate_copy_string(&file->name, name);
 }
 
-metalink_error_t
-METALINK_PUBLIC
-metalink_file_set_description(metalink_file_t* file, const char* description)
-{
+metalink_error_t METALINK_PUBLIC
+metalink_file_set_description(metalink_file_t *file, const char *description) {
   return allocate_copy_string(&file->description, description);
 }
 
-void
-METALINK_PUBLIC
-metalink_file_set_size(metalink_file_t* file, long long int size)
-{
+void METALINK_PUBLIC
+metalink_file_set_size(metalink_file_t *file, long long int size) {
   file->size = size;
 }
 
-metalink_error_t
-METALINK_PUBLIC
-metalink_file_set_version(metalink_file_t* file, const char* version)
-{
+metalink_error_t METALINK_PUBLIC
+metalink_file_set_version(metalink_file_t *file, const char *version) {
   return allocate_copy_string(&file->version, version);
 }
 
-metalink_error_t
-METALINK_PUBLIC
-metalink_file_set_copyright(metalink_file_t* file, const char* copyright)
-{
+metalink_error_t METALINK_PUBLIC
+metalink_file_set_copyright(metalink_file_t *file, const char *copyright) {
   return allocate_copy_string(&file->copyright, copyright);
 }
 
-metalink_error_t
-METALINK_PUBLIC
-metalink_file_set_identity(metalink_file_t* file, const char* identity)
-{
+metalink_error_t METALINK_PUBLIC
+metalink_file_set_identity(metalink_file_t *file, const char *identity) {
   return allocate_copy_string(&file->identity, identity);
 }
 
-metalink_error_t
-METALINK_PUBLIC
-metalink_file_set_logo(metalink_file_t* file, const char* logo)
-{
+metalink_error_t METALINK_PUBLIC
+metalink_file_set_logo(metalink_file_t *file, const char *logo) {
   return allocate_copy_string(&file->logo, logo);
 }
 
-metalink_error_t
-METALINK_PUBLIC
-metalink_file_set_publisher_name(metalink_file_t* file, const char* name)
-{
+metalink_error_t METALINK_PUBLIC
+metalink_file_set_publisher_name(metalink_file_t *file, const char *name) {
   return allocate_copy_string(&file->publisher_name, name);
 }
 
-metalink_error_t
-METALINK_PUBLIC
-metalink_file_set_publisher_url(metalink_file_t* file, const char* url)
-{
+metalink_error_t METALINK_PUBLIC
+metalink_file_set_publisher_url(metalink_file_t *file, const char *url) {
   return allocate_copy_string(&file->publisher_url, url);
 }
 
-void
-METALINK_PUBLIC
-metalink_file_set_maxconnections(metalink_file_t* file, int maxconnections)
-{
+void METALINK_PUBLIC
+metalink_file_set_maxconnections(metalink_file_t *file, int maxconnections) {
   file->maxconnections = maxconnections;
 }
 
 /* for metalink_resource_t */
 
-metalink_resource_t
-METALINK_PUBLIC
-* metalink_resource_new(void)
-{
-  metalink_resource_t* resource;
+metalink_resource_t METALINK_PUBLIC *metalink_resource_new(void) {
+  metalink_resource_t *resource;
   resource = malloc(sizeof(metalink_resource_t));
-  if(resource) {
+  if (resource) {
     memset(resource, 0, sizeof(metalink_resource_t));
   }
   return resource;
 }
 
-void
-METALINK_PUBLIC
-metalink_resource_delete(metalink_resource_t* resource)
-{
-  if(resource) {
+void METALINK_PUBLIC metalink_resource_delete(metalink_resource_t *resource) {
+  if (resource) {
     free(resource->url);
     free(resource->type);
     free(resource->location);
@@ -232,128 +199,93 @@ metalink_resource_delete(metalink_resource_t* resource)
   }
 }
 
-metalink_error_t
-METALINK_PUBLIC
-metalink_set_identity(metalink_t* metalink, const char* identity)
-{
+metalink_error_t METALINK_PUBLIC
+metalink_set_identity(metalink_t *metalink, const char *identity) {
   return allocate_copy_string(&metalink->identity, identity);
 }
 
-metalink_error_t
-METALINK_PUBLIC
-metalink_set_tags(metalink_t* metalink, const char* tags)
-{
+metalink_error_t METALINK_PUBLIC
+metalink_set_tags(metalink_t *metalink, const char *tags) {
   return allocate_copy_string(&metalink->tags, tags);
 }
 
-metalink_error_t
-METALINK_PUBLIC
-metalink_set_generator(metalink_t* metalink, const char* generator)
-{
+metalink_error_t METALINK_PUBLIC
+metalink_set_generator(metalink_t *metalink, const char *generator) {
   return allocate_copy_string(&metalink->generator, generator);
 }
 
-metalink_error_t
-METALINK_PUBLIC
-metalink_set_origin(metalink_t* metalink, const char* origin)
-{
+metalink_error_t METALINK_PUBLIC
+metalink_set_origin(metalink_t *metalink, const char *origin) {
   return allocate_copy_string(&metalink->origin, origin);
 }
 
-void
-METALINK_PUBLIC
-metalink_set_origin_dynamic(metalink_t* metalink, int origin_dynamic)
-{
+void METALINK_PUBLIC
+metalink_set_origin_dynamic(metalink_t *metalink, int origin_dynamic) {
   metalink->origin_dynamic = origin_dynamic;
 }
 
-void
-METALINK_PUBLIC
-metalink_set_published(metalink_t* metalink, time_t published)
-{
+void METALINK_PUBLIC
+metalink_set_published(metalink_t *metalink, time_t published) {
   metalink->published = published;
 }
 
-void
-METALINK_PUBLIC
-metalink_set_updated(metalink_t* metalink, time_t updated)
-{
+void METALINK_PUBLIC
+metalink_set_updated(metalink_t *metalink, time_t updated) {
   metalink->updated = updated;
 }
 
-void
-METALINK_PUBLIC
-metalink_set_version(metalink_t* metalink, metalink_version_t version)
-{
+void METALINK_PUBLIC
+metalink_set_version(metalink_t *metalink, metalink_version_t version) {
   metalink->version = version;
 }
 
-metalink_error_t
-METALINK_PUBLIC
-metalink_resource_set_type(metalink_resource_t* resource, const char* type)
-{
+metalink_error_t METALINK_PUBLIC
+metalink_resource_set_type(metalink_resource_t *resource, const char *type) {
   return allocate_copy_string(&resource->type, type);
 }
 
-metalink_error_t
-METALINK_PUBLIC
-metalink_resource_set_location(metalink_resource_t* resource,
-				   const char* location)
-{
+metalink_error_t METALINK_PUBLIC
+metalink_resource_set_location(metalink_resource_t *resource,
+                               const char *location) {
   return allocate_copy_string(&resource->location, location);
 }
 
-void
-METALINK_PUBLIC
-metalink_resource_set_preference(metalink_resource_t* resource,
-				 int preference)
-{
+void METALINK_PUBLIC
+metalink_resource_set_preference(metalink_resource_t *resource,
+                                 int preference) {
   resource->preference = preference;
   resource->priority = 1000000 - preference;
 }
 
-void
-METALINK_PUBLIC
-metalink_resource_set_priority(metalink_resource_t* resource,
-			       int priority)
-{
+void METALINK_PUBLIC
+metalink_resource_set_priority(metalink_resource_t *resource, int priority) {
   resource->priority = priority;
   resource->preference = 1000000 - priority;
 }
 
-void
-METALINK_PUBLIC
-metalink_resource_set_maxconnections(metalink_resource_t* resource,
-					  int maxconnections)
-{
+void METALINK_PUBLIC
+metalink_resource_set_maxconnections(metalink_resource_t *resource,
+                                     int maxconnections) {
   resource->maxconnections = maxconnections;
 }
 
-metalink_error_t
-METALINK_PUBLIC
-metalink_resource_set_url(metalink_resource_t* resource, const char* url)
-{
+metalink_error_t METALINK_PUBLIC
+metalink_resource_set_url(metalink_resource_t *resource, const char *url) {
   return allocate_copy_string(&resource->url, url);
 }
 
 /* for metalink_metaurl_t */
-metalink_metaurl_t
-METALINK_PUBLIC
-* metalink_metaurl_new(void)
-{
-  metalink_metaurl_t* metaurl;
+metalink_metaurl_t METALINK_PUBLIC *metalink_metaurl_new(void) {
+  metalink_metaurl_t *metaurl;
   metaurl = malloc(sizeof(metalink_metaurl_t));
-  if(metaurl) {
+  if (metaurl) {
     memset(metaurl, 0, sizeof(metalink_metaurl_t));
   }
   return metaurl;
 }
 
-void
-METALINK_PUBLIC
-metalink_metaurl_delete(metalink_metaurl_t* metaurl)
-{
-  if(metaurl) {
+void METALINK_PUBLIC metalink_metaurl_delete(metalink_metaurl_t *metaurl) {
+  if (metaurl) {
     free(metaurl->url);
     free(metaurl->mediatype);
     free(metaurl->name);
@@ -361,139 +293,105 @@ metalink_metaurl_delete(metalink_metaurl_t* metaurl)
   }
 }
 
-metalink_error_t
-METALINK_PUBLIC
-metalink_metaurl_set_url(metalink_metaurl_t* metaurl,
-			 const char* url)
-{
+metalink_error_t METALINK_PUBLIC
+metalink_metaurl_set_url(metalink_metaurl_t *metaurl, const char *url) {
   return allocate_copy_string(&metaurl->url, url);
 }
 
-metalink_error_t
-METALINK_PUBLIC
-metalink_metaurl_set_mediatype(metalink_metaurl_t* metaurl,
-			       const char* mediatype)
-{
+metalink_error_t METALINK_PUBLIC
+metalink_metaurl_set_mediatype(metalink_metaurl_t *metaurl,
+                               const char *mediatype) {
   return allocate_copy_string(&metaurl->mediatype, mediatype);
 }
 
-metalink_error_t
-METALINK_PUBLIC
-metalink_metaurl_set_name(metalink_metaurl_t* metaurl,
-			  const char* name)
-{
+metalink_error_t METALINK_PUBLIC
+metalink_metaurl_set_name(metalink_metaurl_t *metaurl, const char *name) {
   return allocate_copy_string(&metaurl->name, name);
 }
 
-void
-METALINK_PUBLIC
-metalink_metaurl_set_priority(metalink_metaurl_t* metaurl,
-			      int priority)
-{
+void METALINK_PUBLIC
+metalink_metaurl_set_priority(metalink_metaurl_t *metaurl, int priority) {
   metaurl->priority = priority;
 }
 
 /* for metalink_checksum_t */
-metalink_checksum_t
-METALINK_PUBLIC
-* metalink_checksum_new(void)
-{
-  metalink_checksum_t* checksum;
+metalink_checksum_t METALINK_PUBLIC *metalink_checksum_new(void) {
+  metalink_checksum_t *checksum;
   checksum = malloc(sizeof(metalink_checksum_t));
-  if(checksum) {
+  if (checksum) {
     memset(checksum, 0, sizeof(metalink_checksum_t));
   }
   return checksum;
 }
 
-void
-METALINK_PUBLIC
-metalink_checksum_delete(metalink_checksum_t* checksum)
-{
-  if(checksum) {
+void METALINK_PUBLIC metalink_checksum_delete(metalink_checksum_t *checksum) {
+  if (checksum) {
     free(checksum->type);
     free(checksum->hash);
     free(checksum);
   }
 }
 
-metalink_error_t
-METALINK_PUBLIC
-metalink_checksum_set_type(metalink_checksum_t* checksum, const char* type)
-{
+metalink_error_t METALINK_PUBLIC
+metalink_checksum_set_type(metalink_checksum_t *checksum, const char *type) {
   return allocate_copy_string(&checksum->type, type);
 }
 
-metalink_error_t
-METALINK_PUBLIC
-metalink_checksum_set_hash(metalink_checksum_t* checksum, const char* hash)
-{
+metalink_error_t METALINK_PUBLIC
+metalink_checksum_set_hash(metalink_checksum_t *checksum, const char *hash) {
   return allocate_copy_string(&checksum->hash, hash);
 }
 
 /* for metalink_piece_hash_t */
-metalink_piece_hash_t
-METALINK_PUBLIC
-* metalink_piece_hash_new(void)
-{
-  metalink_piece_hash_t* piece_hash;
+metalink_piece_hash_t METALINK_PUBLIC *metalink_piece_hash_new(void) {
+  metalink_piece_hash_t *piece_hash;
   piece_hash = malloc(sizeof(metalink_piece_hash_t));
-  if(piece_hash) {
+  if (piece_hash) {
     memset(piece_hash, 0, sizeof(metalink_piece_hash_t));
   }
   return piece_hash;
 }
 
-void
-METALINK_PUBLIC
-metalink_piece_hash_delete(metalink_piece_hash_t* piece_hash)
-{
-  if(!piece_hash) {
+void METALINK_PUBLIC
+metalink_piece_hash_delete(metalink_piece_hash_t *piece_hash) {
+  if (!piece_hash) {
     return;
   }
   free(piece_hash->hash);
   free(piece_hash);
 }
 
-void
-METALINK_PUBLIC
-metalink_piece_hash_set_piece(metalink_piece_hash_t* piece_hash, int piece)
-{
+void METALINK_PUBLIC
+metalink_piece_hash_set_piece(metalink_piece_hash_t *piece_hash, int piece) {
   piece_hash->piece = piece;
 }
 
-metalink_error_t
-METALINK_PUBLIC
-metalink_piece_hash_set_hash(metalink_piece_hash_t* piece_hash, const char* hash)
-{
+metalink_error_t METALINK_PUBLIC
+metalink_piece_hash_set_hash(metalink_piece_hash_t *piece_hash,
+                             const char *hash) {
   return allocate_copy_string(&piece_hash->hash, hash);
 }
 
 /* for metalink_chunk_checksum_t */
-metalink_chunk_checksum_t
-METALINK_PUBLIC
-* metalink_chunk_checksum_new(void)
-{
-  metalink_chunk_checksum_t* chunk_checksum;
+metalink_chunk_checksum_t METALINK_PUBLIC *metalink_chunk_checksum_new(void) {
+  metalink_chunk_checksum_t *chunk_checksum;
   chunk_checksum = malloc(sizeof(metalink_chunk_checksum_t));
-  if(chunk_checksum) {
+  if (chunk_checksum) {
     memset(chunk_checksum, 0, sizeof(metalink_chunk_checksum_t));
   }
   return chunk_checksum;
 }
 
-void
-METALINK_PUBLIC
-metalink_chunk_checksum_delete(metalink_chunk_checksum_t* chunk_checksum)
-{
-  metalink_piece_hash_t** p;
-  if(!chunk_checksum) {
+void METALINK_PUBLIC
+metalink_chunk_checksum_delete(metalink_chunk_checksum_t *chunk_checksum) {
+  metalink_piece_hash_t **p;
+  if (!chunk_checksum) {
     return;
   }
   free(chunk_checksum->type);
-  if(chunk_checksum->piece_hashes) {
+  if (chunk_checksum->piece_hashes) {
     p = chunk_checksum->piece_hashes;
-    while(*p) {
+    while (*p) {
       metalink_piece_hash_delete(*p);
       ++p;
     }
@@ -502,32 +400,25 @@ metalink_chunk_checksum_delete(metalink_chunk_checksum_t* chunk_checksum)
   free(chunk_checksum);
 }
 
-metalink_error_t
-METALINK_PUBLIC
-metalink_chunk_checksum_set_type(metalink_chunk_checksum_t* chunk_checksum,
-				     const char* type)
-{
+metalink_error_t METALINK_PUBLIC
+metalink_chunk_checksum_set_type(metalink_chunk_checksum_t *chunk_checksum,
+                                 const char *type) {
   return allocate_copy_string(&chunk_checksum->type, type);
 }
 
-void
-METALINK_PUBLIC
-metalink_chunk_checksum_set_length(metalink_chunk_checksum_t* chunk_checksum,
-					int length)
-{
+void METALINK_PUBLIC
+metalink_chunk_checksum_set_length(metalink_chunk_checksum_t *chunk_checksum,
+                                   int length) {
   chunk_checksum->length = length;
 }
 
-void
-METALINK_PUBLIC
-metalink_chunk_checksum_set_piece_hashes
-(metalink_chunk_checksum_t* chunk_checksum,
- metalink_piece_hash_t** piece_hashes)
-{
-  if(chunk_checksum->piece_hashes) {
-    metalink_piece_hash_t** p;
+void METALINK_PUBLIC metalink_chunk_checksum_set_piece_hashes(
+    metalink_chunk_checksum_t *chunk_checksum,
+    metalink_piece_hash_t **piece_hashes) {
+  if (chunk_checksum->piece_hashes) {
+    metalink_piece_hash_t **p;
     p = chunk_checksum->piece_hashes;
-    while(*p) {
+    while (*p) {
       metalink_piece_hash_delete(*p);
       ++p;
     }
@@ -537,86 +428,71 @@ metalink_chunk_checksum_set_piece_hashes
 }
 
 /* for metalink_signature_t */
-metalink_signature_t
-METALINK_PUBLIC
-* metalink_signature_new(void)
-{
-  metalink_signature_t* signature;
+metalink_signature_t METALINK_PUBLIC *metalink_signature_new(void) {
+  metalink_signature_t *signature;
   signature = malloc(sizeof(metalink_signature_t));
-  if(signature) {
+  if (signature) {
     memset(signature, 0, sizeof(metalink_signature_t));
   }
   return signature;
 }
 
-void
-METALINK_PUBLIC
-metalink_signature_delete(metalink_signature_t* signature)
-{
-  if(signature) {
+void METALINK_PUBLIC
+metalink_signature_delete(metalink_signature_t *signature) {
+  if (signature) {
     free(signature->mediatype);
     free(signature->signature);
     free(signature);
   }
 }
 
-metalink_error_t
-METALINK_PUBLIC
-metalink_signature_set_mediatype(metalink_signature_t* signature,
-				 const char* mediatype)
-{
+metalink_error_t METALINK_PUBLIC
+metalink_signature_set_mediatype(metalink_signature_t *signature,
+                                 const char *mediatype) {
   return allocate_copy_string(&signature->mediatype, mediatype);
 }
 
-metalink_error_t
-METALINK_PUBLIC
-metalink_signature_set_signature(metalink_signature_t* signature,
-				 const char* value)
-{
+metalink_error_t METALINK_PUBLIC
+metalink_signature_set_signature(metalink_signature_t *signature,
+                                 const char *value) {
   return allocate_copy_string(&signature->signature, value);
 }
 
 /* for metalink_t */
-metalink_t
-METALINK_PUBLIC
-* metalink_new(void)
-{
-  metalink_t* metalink;
+metalink_t METALINK_PUBLIC *metalink_new(void) {
+  metalink_t *metalink;
   metalink = malloc(sizeof(metalink_t));
-  if(metalink) {
+  if (metalink) {
     memset(metalink, 0, sizeof(metalink_t));
   }
   return metalink;
 }
 
-void
-METALINK_PUBLIC
-metalink_delete(metalink_t* metalink)
-{
-  metalink_file_t** filepp;
-  if(!metalink) {
+void METALINK_PUBLIC metalink_delete(metalink_t *metalink) {
+  metalink_file_t **filepp;
+  if (!metalink) {
     return;
   }
 
-  if(metalink->generator) {
+  if (metalink->generator) {
     free(metalink->generator);
   }
-  if(metalink->origin) {
+  if (metalink->origin) {
     free(metalink->origin);
   }
 
-  if(metalink->files) {
+  if (metalink->files) {
     filepp = metalink->files;
-    while(*filepp) {
+    while (*filepp) {
       metalink_file_delete(*filepp);
       ++filepp;
     }
     free(metalink->files);
   }
-  if(metalink->identity){
+  if (metalink->identity) {
     free(metalink->identity);
   }
-  if(metalink->tags){
+  if (metalink->tags) {
     free(metalink->tags);
   }
   free(metalink);

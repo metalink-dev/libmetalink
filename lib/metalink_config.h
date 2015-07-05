@@ -27,23 +27,23 @@
 #define _D_METALINK_CONFIG_H_
 
 #ifdef HAVE_CONFIG_H
-# include "config.h"
+#include "config.h"
 #endif /* HAVE_CONFIG_H */
 
 #ifndef _XOPEN_SOURCE
-#  define _XOPEN_SOURCE /* avoid warning when using strptime */
+#define _XOPEN_SOURCE /* avoid warning when using strptime */
 #endif
 #ifndef _BSD_SOURCE
-#  define _BSD_SOURCE /* avoid warning when using timegm */
+#define _BSD_SOURCE /* avoid warning when using timegm */
 #endif
 #ifndef _NETBSD_SOURCE
-#  define _NETBSD_SOURCE /* avoid warning when using strtoll on netbsd */
+#define _NETBSD_SOURCE /* avoid warning when using strtoll on netbsd */
 #endif
 
 #ifdef GCC_VISIBILITY
-#  define METALINK_PUBLIC __attribute__ ((visibility ("default")))
+#define METALINK_PUBLIC __attribute__((visibility("default")))
 #else /* !GCC_VISIBILITY */
-#  define METALINK_PUBLIC
+#define METALINK_PUBLIC
 #endif /* !GCC_VISIBILITY */
 
 #endif /* _D_METALINK_CONFIG_H_ */

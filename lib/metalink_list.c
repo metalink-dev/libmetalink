@@ -25,27 +25,24 @@
 /* copyright --> */
 #include "metalink_list.h"
 
-metalink_list_t* metalink_list_new(void)
-{
-  metalink_list_t* l = malloc(sizeof(metalink_list_t));
-  if(l) {
+metalink_list_t *metalink_list_new(void) {
+  metalink_list_t *l = malloc(sizeof(metalink_list_t));
+  if (l) {
     l->head = NULL;
     l->tail = NULL;
   }
   return l;
 }
 
-void metalink_list_delete(metalink_list_t* list)
-{
+void metalink_list_delete(metalink_list_t *list) {
   metalink_list_clear(list);
   free(list);
 }
 
-void metalink_list_clear(metalink_list_t* list)
-{
-  metalink_list_entry_t* e = list->head;
-  metalink_list_entry_t* next;
-  while(e) {
+void metalink_list_clear(metalink_list_t *list) {
+  metalink_list_entry_t *e = list->head;
+  metalink_list_entry_t *next;
+  while (e) {
     next = e->next;
     free(e);
     e = next;
@@ -54,11 +51,10 @@ void metalink_list_clear(metalink_list_t* list)
   list->tail = NULL;
 }
 
-void metalink_list_clear_data(metalink_list_t* list)
-{
-  metalink_list_entry_t* e = list->head;
-  metalink_list_entry_t* next;
-  while(e) {
+void metalink_list_clear_data(metalink_list_t *list) {
+  metalink_list_entry_t *e = list->head;
+  metalink_list_entry_t *next;
+  while (e) {
     next = e->next;
     free(e->data);
     free(e);
@@ -68,64 +64,59 @@ void metalink_list_clear_data(metalink_list_t* list)
   list->tail = NULL;
 }
 
-void* metalink_list_get_data(metalink_list_t* list, size_t index)
-{
-  metalink_list_entry_t* e = list->head;
-  while(index-- && e) {
+void *metalink_list_get_data(metalink_list_t *list, size_t index) {
+  metalink_list_entry_t *e = list->head;
+  while (index-- && e) {
     e = e->next;
   }
-  if(e) {
+  if (e) {
     return e->data;
   } else {
     return 0;
   }
 }
 
-size_t metalink_list_length(metalink_list_t* list)
-{
+size_t metalink_list_length(metalink_list_t *list) {
   size_t length = 0;
-  metalink_list_entry_t* e = list->head;
-  while(e) {
+  metalink_list_entry_t *e = list->head;
+  while (e) {
     e = e->next;
     ++length;
   }
   return length;
 }
 
-int metalink_list_append(metalink_list_t* list, void* data)
-{
-  metalink_list_entry_t* new_entry = malloc(sizeof(metalink_list_entry_t));
+int metalink_list_append(metalink_list_t *list, void *data) {
+  metalink_list_entry_t *new_entry = malloc(sizeof(metalink_list_entry_t));
 
-  if(!new_entry) {
+  if (!new_entry) {
     return 1;
   }
   new_entry->data = data;
   new_entry->next = NULL;
 
-  if(!list->head) {
+  if (!list->head) {
     list->head = new_entry;
   }
-  if(list->tail) {
+  if (list->tail) {
     list->tail->next = new_entry;
   }
   list->tail = new_entry;
   return 0;
 }
 
-void metalink_list_to_array(metalink_list_t* list, void** array)
-{
-  void** p = array;
-  metalink_list_entry_t* e = list->head;
-  while(e) {
+void metalink_list_to_array(metalink_list_t *list, void **array) {
+  void **p = array;
+  metalink_list_entry_t *e = list->head;
+  while (e) {
     *p++ = e->data;
     e = e->next;
   }
 }
 
-void metalink_list_for_each(metalink_list_t* list, void (*fun)(void* data))
-{
-  metalink_list_entry_t* e = list->head;
-  while(e) {
+void metalink_list_for_each(metalink_list_t *list, void (*fun)(void *data)) {
+  metalink_list_entry_t *e = list->head;
+  while (e) {
     fun(e->data);
     e = e->next;
   }

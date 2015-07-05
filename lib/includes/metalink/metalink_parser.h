@@ -43,7 +43,7 @@ extern "C" {
  * @return 0 for success, non-zero for error. See metalink_error.h for
  * the meaning of error code.
  */
-metalink_error_t metalink_parse_file(const char* filename, metalink_t** res);
+metalink_error_t metalink_parse_file(const char *filename, metalink_t **res);
 
 /*
  * Parses metalink XML file.
@@ -53,7 +53,7 @@ metalink_error_t metalink_parse_file(const char* filename, metalink_t** res);
  * @return 0 for success, non-zero for error. See metalink_error.h for
  * the meaning of error code.
  */
-metalink_error_t metalink_parse_fp(FILE *docfp, metalink_t** res);
+metalink_error_t metalink_parse_fp(FILE *docfp, metalink_t **res);
 
 /*
  * Parses metalink XML from a file descriptor.
@@ -63,7 +63,7 @@ metalink_error_t metalink_parse_fp(FILE *docfp, metalink_t** res);
  * @return 0 for success, non-zero for error. See metalink_error.h for
  * the meaning of error code.
  */
-metalink_error_t metalink_parse_fd(int docfd, metalink_t** res);
+metalink_error_t metalink_parse_fd(int docfd, metalink_t **res);
 
 /*
  * Parses metalink XML stored in buf and its length is len.
@@ -74,7 +74,8 @@ metalink_error_t metalink_parse_fd(int docfd, metalink_t** res);
  * @return 0 for success, non-zero for error. See metalink_error.h for
  * the meaning of error code.
  */
-metalink_error_t metalink_parse_memory(const char* buf, size_t len, metalink_t** res);
+metalink_error_t metalink_parse_memory(const char *buf, size_t len,
+                                       metalink_t **res);
 
 /**
  * a parser context to keep current progress of XML parser.
@@ -85,14 +86,14 @@ typedef struct _metalink_parser_context metalink_parser_context_t;
  * Allocates, initializes and returns a parser context.
  * @return a parser context on success, otherwise NULL.
  */
-metalink_parser_context_t* metalink_parser_context_new(void);
+metalink_parser_context_t *metalink_parser_context_new(void);
 
 /**
  * Deallocates a parser context ctx.
  * @param ctx a parser context to deallocate. If ctx is NULL, this function does
  * nothing.
  */
-void metalink_parser_context_delete(metalink_parser_context_t* ctx);
+void metalink_parser_context_delete(metalink_parser_context_t *ctx);
 
 /**
  * Processes len bytes of data at buf. This function can be called several times
@@ -103,8 +104,8 @@ void metalink_parser_context_delete(metalink_parser_context_t* ctx);
  * @return 0 on success, non-zero for error. See metalink_error.h for the
  * meaning of error code.
  */
-metalink_error_t metalink_parse_update(metalink_parser_context_t* ctx,
-			  const char* buf, size_t len);
+metalink_error_t metalink_parse_update(metalink_parser_context_t *ctx,
+                                       const char *buf, size_t len);
 
 /**
  * Processes len bytes of data at buf and places metalink_t to res.
@@ -118,8 +119,9 @@ metalink_error_t metalink_parse_update(metalink_parser_context_t* ctx,
  * @return 0 on success, non-zero for error. See metalink_error_h for
  * the meaning of error code.
  */
-metalink_error_t metalink_parse_final(metalink_parser_context_t* ctx,
-			 const char* buf, size_t len, metalink_t** res);
+metalink_error_t metalink_parse_final(metalink_parser_context_t *ctx,
+                                      const char *buf, size_t len,
+                                      metalink_t **res);
 
 #ifdef __cplusplus
 }

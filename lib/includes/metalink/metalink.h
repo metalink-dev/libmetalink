@@ -41,14 +41,14 @@ extern "C" {
  * Stores the major, minor and patch version of the libmetalink to the
  * variables pointed by |major|, |minor| and |patch| respectively.
  */
-void metalink_get_version(int* major, int* minor, int* patch);
+void metalink_get_version(int *major, int *minor, int *patch);
 
 /**
  * Returns the string error message describing the error code
  * |error_code|. The error code is defined in
  * metalink/metalink_error.h.
  */
-const char* metalink_strerror(int error_code);
+const char *metalink_strerror(int error_code);
 
 #ifdef __cplusplus
 }

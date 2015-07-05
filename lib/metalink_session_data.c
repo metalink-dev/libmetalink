@@ -26,35 +26,33 @@
 #include "metalink_session_data.h"
 #include "metalink_string_buffer.h"
 
-metalink_session_data_t* metalink_session_data_new(void)
-{
-  metalink_session_data_t* sd;
+metalink_session_data_t *metalink_session_data_new(void) {
+  metalink_session_data_t *sd;
   sd = malloc(sizeof(metalink_session_data_t));
-  if(!sd) {
+  if (!sd) {
     return NULL;
   }
   sd->characters_stack = NULL;
   sd->stm = new_metalink_pstm();
-  if(!sd->stm) {
+  if (!sd->stm) {
     goto NEW_SESSION_DATA_ERROR;
   }
   sd->characters_stack = metalink_stack_new();
-  if(!sd->characters_stack) {
+  if (!sd->characters_stack) {
     goto NEW_SESSION_DATA_ERROR;
   }
   return sd;
- NEW_SESSION_DATA_ERROR:
+NEW_SESSION_DATA_ERROR:
   metalink_session_data_delete(sd);
   return NULL;
 }
 
-void metalink_session_data_delete(metalink_session_data_t* sd)
-{
-  if(!sd) {
+void metalink_session_data_delete(metalink_session_data_t *sd) {
+  if (!sd) {
     return;
   }
   delete_metalink_pstm(sd->stm);
-  while(!metalink_stack_empty(sd->characters_stack)) {
+  while (!metalink_stack_empty(sd->characters_stack)) {
     metalink_string_buffer_delete(metalink_stack_pop(sd->characters_stack));
   }
   metalink_stack_delete(sd->characters_stack);

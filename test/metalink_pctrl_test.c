@@ -30,10 +30,9 @@
 #include <metalink/metalink_error.h>
 #include "metalink_pctrl.h"
 
-void test_metalink_pctrl_file_transaction(void)
-{
-  metalink_pctrl_t* ctrl;
-  metalink_file_t* file;
+void test_metalink_pctrl_file_transaction(void) {
+  metalink_pctrl_t *ctrl;
+  metalink_file_t *file;
 
   ctrl = new_metalink_pctrl();
   CU_ASSERT_PTR_NOT_NULL(ctrl);
@@ -68,10 +67,9 @@ void test_metalink_pctrl_file_transaction(void)
   delete_metalink_pctrl(ctrl);
 }
 
-void test_metalink_pctrl_resource_transaction(void)
-{
-  metalink_pctrl_t* ctrl;
-  metalink_resource_t* resource;
+void test_metalink_pctrl_resource_transaction(void) {
+  metalink_pctrl_t *ctrl;
+  metalink_resource_t *resource;
 
   ctrl = new_metalink_pctrl();
   CU_ASSERT_PTR_NOT_NULL(ctrl);
@@ -108,10 +106,9 @@ void test_metalink_pctrl_resource_transaction(void)
   delete_metalink_pctrl(ctrl);
 }
 
-void test_metalink_pctrl_checksum_transaction(void)
-{
-  metalink_pctrl_t* ctrl;
-  metalink_checksum_t* checksum;
+void test_metalink_pctrl_checksum_transaction(void) {
+  metalink_pctrl_t *ctrl;
+  metalink_checksum_t *checksum;
 
   ctrl = new_metalink_pctrl();
   CU_ASSERT_PTR_NOT_NULL(ctrl);
@@ -122,12 +119,12 @@ void test_metalink_pctrl_checksum_transaction(void)
 
   /* Set type, hash to checksum */
   CU_ASSERT_EQUAL(0, metalink_pctrl_checksum_set_type(ctrl, "sha1"));
-  CU_ASSERT_EQUAL(0, metalink_pctrl_checksum_set_hash
-	    (ctrl, "234f3611ad77aaf1241a0dc8ac708007935844d5"));
+  CU_ASSERT_EQUAL(0, metalink_pctrl_checksum_set_hash(
+                         ctrl, "234f3611ad77aaf1241a0dc8ac708007935844d5"));
 
   CU_ASSERT_STRING_EQUAL("sha1", checksum->type);
   CU_ASSERT_STRING_EQUAL("234f3611ad77aaf1241a0dc8ac708007935844d5",
-			 checksum->hash);
+                         checksum->hash);
 
   /* Commit appends ctrl->temp_checksum to ctrl->checksums. */
   CU_ASSERT_EQUAL(0, metalink_pctrl_commit_checksum_transaction(ctrl));
@@ -139,20 +136,19 @@ void test_metalink_pctrl_checksum_transaction(void)
   checksum = metalink_list_get_data(ctrl->checksums, 0);
   CU_ASSERT_STRING_EQUAL("sha1", checksum->type);
   CU_ASSERT_STRING_EQUAL("234f3611ad77aaf1241a0dc8ac708007935844d5",
-			 checksum->hash);
+                         checksum->hash);
 
   /* Try to commit while transaction is not started */
   CU_ASSERT_EQUAL(METALINK_ERR_NO_CHECKSUM_TRANSACTION,
-		  metalink_pctrl_commit_checksum_transaction(ctrl));
+                  metalink_pctrl_commit_checksum_transaction(ctrl));
 
   delete_metalink_pctrl(ctrl);
 }
 
-void test_metalink_pctrl_chunk_checksum_transaction(void)
-{
-  metalink_pctrl_t* ctrl;
-  metalink_chunk_checksum_t* chunk_checksum;
-  metalink_file_t* file;
+void test_metalink_pctrl_chunk_checksum_transaction(void) {
+  metalink_pctrl_t *ctrl;
+  metalink_chunk_checksum_t *chunk_checksum;
+  metalink_file_t *file;
 
   ctrl = new_metalink_pctrl();
   CU_ASSERT_PTR_NOT_NULL(ctrl);
@@ -182,15 +178,14 @@ void test_metalink_pctrl_chunk_checksum_transaction(void)
 
   /* Try to commit while transaction is not started */
   CU_ASSERT_EQUAL(METALINK_ERR_NO_CHUNK_CHECKSUM_TRANSACTION,
-		  metalink_pctrl_commit_chunk_checksum_transaction(ctrl));
+                  metalink_pctrl_commit_chunk_checksum_transaction(ctrl));
 
   delete_metalink_pctrl(ctrl);
 }
 
-void test_metalink_pctrl_piece_hash_transaction(void)
-{
-  metalink_pctrl_t* ctrl;
-  metalink_piece_hash_t* piece_hash;
+void test_metalink_pctrl_piece_hash_transaction(void) {
+  metalink_pctrl_t *ctrl;
+  metalink_piece_hash_t *piece_hash;
 
   ctrl = new_metalink_pctrl();
   CU_ASSERT_PTR_NOT_NULL(ctrl);
@@ -201,8 +196,8 @@ void test_metalink_pctrl_piece_hash_transaction(void)
 
   /* Set piece and hash */
   metalink_pctrl_piece_hash_set_piece(ctrl, 100);
-  CU_ASSERT_EQUAL(0, metalink_pctrl_piece_hash_set_hash
-		  (ctrl, "234f3611ad77aaf1241a0dc8ac708007935844d5"));
+  CU_ASSERT_EQUAL(0, metalink_pctrl_piece_hash_set_hash(
+                         ctrl, "234f3611ad77aaf1241a0dc8ac708007935844d5"));
 
   /* Commit */
   CU_ASSERT_EQUAL(0, metalink_pctrl_commit_piece_hash_transaction(ctrl));
@@ -214,20 +209,19 @@ void test_metalink_pctrl_piece_hash_transaction(void)
   piece_hash = metalink_list_get_data(ctrl->piece_hashes, 0);
   CU_ASSERT_EQUAL(100, piece_hash->piece);
   CU_ASSERT_STRING_EQUAL("234f3611ad77aaf1241a0dc8ac708007935844d5",
-			 piece_hash->hash);
+                         piece_hash->hash);
 
   /* Try to commit while transaction is not started */
   CU_ASSERT_EQUAL(METALINK_ERR_NO_PIECE_HASH_TRANSACTION,
-		  metalink_pctrl_commit_piece_hash_transaction(ctrl));
+                  metalink_pctrl_commit_piece_hash_transaction(ctrl));
 
   delete_metalink_pctrl(ctrl);
 }
 
-void test_metalink_pctrl_signature_transaction(void)
-{
-  metalink_pctrl_t* ctrl;
-  metalink_signature_t* signature;
-  metalink_file_t* file;
+void test_metalink_pctrl_signature_transaction(void) {
+  metalink_pctrl_t *ctrl;
+  metalink_signature_t *signature;
+  metalink_file_t *file;
 
   ctrl = new_metalink_pctrl();
   CU_ASSERT_PTR_NOT_NULL(ctrl);
@@ -242,8 +236,8 @@ void test_metalink_pctrl_signature_transaction(void)
 
   /* Set mediatype and signature */
   metalink_signature_set_mediatype(signature, "application/pgp-signature");
-  CU_ASSERT_EQUAL(0, metalink_pctrl_signature_set_signature
-                  (ctrl, "THIS IS SIGNATURE"));
+  CU_ASSERT_EQUAL(
+      0, metalink_pctrl_signature_set_signature(ctrl, "THIS IS SIGNATURE"));
 
   /* Commit */
   CU_ASSERT_EQUAL(0, metalink_pctrl_commit_signature_transaction(ctrl));

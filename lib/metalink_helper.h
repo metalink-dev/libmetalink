@@ -35,6 +35,6 @@
  * traversal and certain control characters in it. If path is NULL,
  * this function returns 0.
  */
-int metalink_check_safe_path(const char* path);
+int metalink_check_safe_path(const char *path);
 
 #endif /* _D_METALINK_HELPER_H_ */

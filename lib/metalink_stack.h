@@ -31,25 +31,25 @@
 #include <metalink/metalink.h>
 
 typedef struct _metalink_stack_entry {
-  void* data;
-  struct _metalink_stack_entry* next;
+  void *data;
+  struct _metalink_stack_entry *next;
 } metalink_stack_entry_t;
 
 typedef struct _metalink_stack {
-  metalink_stack_entry_t* entry;
+  metalink_stack_entry_t *entry;
 } metalink_stack_t;
 
-metalink_stack_t* metalink_stack_new(void);
+metalink_stack_t *metalink_stack_new(void);
 
-void metalink_stack_delete(metalink_stack_t* stack);
+void metalink_stack_delete(metalink_stack_t *stack);
 
-int metalink_stack_empty(const metalink_stack_t* stack);
+int metalink_stack_empty(const metalink_stack_t *stack);
 
-void* metalink_stack_top(metalink_stack_t* stack);
+void *metalink_stack_top(metalink_stack_t *stack);
 
 /* returns data */
-void* metalink_stack_pop(metalink_stack_t* stack);
+void *metalink_stack_pop(metalink_stack_t *stack);
 
-int metalink_stack_push(metalink_stack_t* stack, void* data);
+int metalink_stack_push(metalink_stack_t *stack, void *data);
 
 #endif /* _D_METALINK_STACK_H_ */

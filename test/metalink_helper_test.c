@@ -31,9 +31,8 @@
 
 #include "metalink_helper.h"
 
-void test_metalink_check_safe_path(void)
-{
-  char ctrlchars[] = { 0x1f, 0x7f, 0x00 };
+void test_metalink_check_safe_path(void) {
+  char ctrlchars[] = {0x1f, 0x7f, 0x00};
   CU_ASSERT(!metalink_check_safe_path(NULL));
   CU_ASSERT(!metalink_check_safe_path(""));
   CU_ASSERT(!metalink_check_safe_path(" "));
@@ -77,14 +76,12 @@ void test_metalink_check_safe_path(void)
   CU_ASSERT(metalink_check_safe_path("foo/bar.baz"));
 }
 
-static void format_version(char* buf, size_t len,
-                           int major, int minor, int patch)
-{
+static void format_version(char *buf, size_t len, int major, int minor,
+                           int patch) {
   snprintf(buf, len, "%d.%d.%d", major, minor, patch);
 }
 
-void test_metalink_get_version(void)
-{
+void test_metalink_get_version(void) {
   int major, minor, patch;
   major = minor = patch = -1;
   metalink_get_version(&major, &minor, &patch);

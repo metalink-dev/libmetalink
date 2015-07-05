@@ -26,7 +26,7 @@
 #ifndef _D_METALINK_PARSER_TEST_H_
 #define _D_METALINK_PARSER_TEST_H_
 
-size_t count_array(void** array);
+size_t count_array(void **array);
 
 void test_metalink_parse_file(void);
 

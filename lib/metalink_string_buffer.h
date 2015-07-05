@@ -33,22 +33,22 @@
 #include <metalink/metalink.h>
 
 typedef struct metalink_string_buffer_t {
-  char* buffer;
+  char *buffer;
   size_t length;
   size_t capacity;
 } metalink_string_buffer_t;
 
-metalink_string_buffer_t* metalink_string_buffer_new(size_t initial_capacity);
+metalink_string_buffer_t *metalink_string_buffer_new(size_t initial_capacity);
 
-void metalink_string_buffer_delete(metalink_string_buffer_t* str_buf);
+void metalink_string_buffer_delete(metalink_string_buffer_t *str_buf);
 
-void metalink_string_buffer_append(metalink_string_buffer_t* str_buf,
-				   const char* str, size_t length);
+void metalink_string_buffer_append(metalink_string_buffer_t *str_buf,
+                                   const char *str, size_t length);
 
-const char* metalink_string_buffer_str(const metalink_string_buffer_t* str_buf);
+const char *metalink_string_buffer_str(const metalink_string_buffer_t *str_buf);
 
-size_t metalink_string_buffer_capacity(const metalink_string_buffer_t* str_buf);
+size_t metalink_string_buffer_capacity(const metalink_string_buffer_t *str_buf);
 
-size_t metalink_string_buffer_strlen(const metalink_string_buffer_t* str_buf);
+size_t metalink_string_buffer_strlen(const metalink_string_buffer_t *str_buf);
 
 #endif /* _D_METALINK_STRING_BUFFER_H_ */

@@ -33,17 +33,16 @@
 #include "metalink_pstm.h"
 #include "metalink_stack.h"
 
-typedef struct _metalink_session_data
-{
-  metalink_pstm_t* stm;
+typedef struct _metalink_session_data {
+  metalink_pstm_t *stm;
 
-  metalink_stack_t* characters_stack;
+  metalink_stack_t *characters_stack;
 } metalink_session_data_t;
 
 /* constructor */
-metalink_session_data_t* metalink_session_data_new(void);
+metalink_session_data_t *metalink_session_data_new(void);
 
 /* destructor */
-void metalink_session_data_delete(metalink_session_data_t* sd);
+void metalink_session_data_delete(metalink_session_data_t *sd);
 
 #endif /* _D_METALINK_SESSION_DATA_H_ */

@@ -29,11 +29,10 @@
 
 #include "metalink_list.h"
 
-void test_metalink_list(void)
-{
-  metalink_list_t* l;
+void test_metalink_list(void) {
+  metalink_list_t *l;
   int a, b, c;
-  int* int_ptr_array[3];
+  int *int_ptr_array[3];
 
   l = metalink_list_new();
   CU_ASSERT_PTR_NOT_NULL(l);
@@ -48,10 +47,10 @@ void test_metalink_list(void)
   CU_ASSERT_EQUAL(3, metalink_list_length(l));
 
   /* get 2nd(index = 1) element = (2) */
-  CU_ASSERT_EQUAL(2, *(int*)metalink_list_get_data(l, 1));
- 
+  CU_ASSERT_EQUAL(2, *(int *)metalink_list_get_data(l, 1));
+
   /* dump the contents of list to array */
-  metalink_list_to_array(l, (void**)int_ptr_array);
+  metalink_list_to_array(l, (void **)int_ptr_array);
   CU_ASSERT_EQUAL(1, *int_ptr_array[0]);
   CU_ASSERT_EQUAL(2, *int_ptr_array[1]);
   CU_ASSERT_EQUAL(4, *int_ptr_array[2]);

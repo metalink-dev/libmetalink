@@ -27,27 +27,22 @@
 
 #include <stdlib.h>
 
-static void init_stack(metalink_stack_t* s)
-{
-  s->entry = NULL;
-}
+static void init_stack(metalink_stack_t *s) { s->entry = NULL; }
 
-metalink_stack_t* metalink_stack_new(void)
-{
-  metalink_stack_t* s = malloc(sizeof(metalink_stack_t));
-  if(s) {
+metalink_stack_t *metalink_stack_new(void) {
+  metalink_stack_t *s = malloc(sizeof(metalink_stack_t));
+  if (s) {
     init_stack(s);
   }
   return s;
 }
 
-void metalink_stack_delete(metalink_stack_t* stack)
-{
-  metalink_stack_entry_t* e;
-  metalink_stack_entry_t* next;
+void metalink_stack_delete(metalink_stack_t *stack) {
+  metalink_stack_entry_t *e;
+  metalink_stack_entry_t *next;
 
   e = stack->entry;
-  while(e) {
+  while (e) {
     next = e->next;
     free(e);
     e = next;
@@ -55,18 +50,15 @@ void metalink_stack_delete(metalink_stack_t* stack)
   free(stack);
 }
 
-
-int metalink_stack_empty(const metalink_stack_t* stack)
-{
+int metalink_stack_empty(const metalink_stack_t *stack) {
   return stack->entry == NULL;
 }
 
-int metalink_stack_push(metalink_stack_t* stack, void* data)
-{
-  metalink_stack_entry_t* new_entry;
+int metalink_stack_push(metalink_stack_t *stack, void *data) {
+  metalink_stack_entry_t *new_entry;
 
   new_entry = malloc(sizeof(metalink_stack_entry_t));
-  if(!new_entry) {
+  if (!new_entry) {
     return 1;
   }
   new_entry->data = data;
@@ -75,10 +67,9 @@ int metalink_stack_push(metalink_stack_t* stack, void* data)
   return 0;
 }
 
-void* metalink_stack_pop(metalink_stack_t* stack)
-{
-  metalink_stack_entry_t* pop_entry;
-  void* data;
+void *metalink_stack_pop(metalink_stack_t *stack) {
+  metalink_stack_entry_t *pop_entry;
+  void *data;
 
   pop_entry = stack->entry;
   stack->entry = pop_entry->next;
@@ -87,9 +78,8 @@ void* metalink_stack_pop(metalink_stack_t* stack)
   return data;
 }
 
-void* metalink_stack_top(metalink_stack_t* stack)
-{
-  if(metalink_stack_empty(stack)) {
+void *metalink_stack_top(metalink_stack_t *stack) {
+  if (metalink_stack_empty(stack)) {
     return NULL;
   } else {
     return stack->entry->data;

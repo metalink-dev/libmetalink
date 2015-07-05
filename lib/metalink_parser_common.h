@@ -43,11 +43,11 @@
  * @param parser_retval return value of parser object.
  * @return error code listed in metalink_error.h if error, otherwise 0 for
  *  success.
- * 
+ *
  */
-metalink_error_t metalink_handle_parse_result(metalink_t** res,
-				 metalink_session_data_t* session_data,
-				 metalink_error_t parser_retval);
-
+metalink_error_t
+metalink_handle_parse_result(metalink_t **res,
+                             metalink_session_data_t *session_data,
+                             metalink_error_t parser_retval);
 
 #endif /* _D_METALINK_PARSER_COMMON_H_ */

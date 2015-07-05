@@ -28,14 +28,13 @@
 #include <string.h>
 #include <stdio.h>
 
-metalink_string_buffer_t* metalink_string_buffer_new(size_t initial_capacity)
-{
-  metalink_string_buffer_t* sbuf = malloc(sizeof(metalink_string_buffer_t));
-  if(!sbuf) {
+metalink_string_buffer_t *metalink_string_buffer_new(size_t initial_capacity) {
+  metalink_string_buffer_t *sbuf = malloc(sizeof(metalink_string_buffer_t));
+  if (!sbuf) {
     return NULL;
   }
-  sbuf->buffer = calloc(sizeof(char), initial_capacity+1);
-  if(!sbuf->buffer) {
+  sbuf->buffer = calloc(sizeof(char), initial_capacity + 1);
+  if (!sbuf->buffer) {
     free(sbuf);
     return NULL;
   }
@@ -45,52 +44,48 @@ metalink_string_buffer_t* metalink_string_buffer_new(size_t initial_capacity)
   return sbuf;
 }
 
-void metalink_string_buffer_delete(metalink_string_buffer_t* str_buf)
-{
-  if(str_buf) {
+void metalink_string_buffer_delete(metalink_string_buffer_t *str_buf) {
+  if (str_buf) {
     free(str_buf->buffer);
     free(str_buf);
   }
 }
 
-static void metalink_string_buffer_resize(metalink_string_buffer_t* str_buf,
-					  size_t new_capacity)
-{
-  char* new_buffer;
+static void metalink_string_buffer_resize(metalink_string_buffer_t *str_buf,
+                                          size_t new_capacity) {
+  char *new_buffer;
 
-  new_buffer = realloc(str_buf->buffer, new_capacity+1);
+  new_buffer = realloc(str_buf->buffer, new_capacity + 1);
 
   str_buf->buffer = new_buffer;
   str_buf->capacity = new_capacity;
-  if(str_buf->length > new_capacity) {
+  if (str_buf->length > new_capacity) {
     str_buf->length = new_capacity;
     str_buf->buffer[str_buf->length] = '\0';
   }
 }
 
-void metalink_string_buffer_append(metalink_string_buffer_t* str_buf,
-				   const char* str, size_t length)
-{
-  if(str_buf->length+length > str_buf->capacity) {
-    metalink_string_buffer_resize(str_buf, str_buf->length+length);
+void metalink_string_buffer_append(metalink_string_buffer_t *str_buf,
+                                   const char *str, size_t length) {
+  if (str_buf->length + length > str_buf->capacity) {
+    metalink_string_buffer_resize(str_buf, str_buf->length + length);
   }
 
-  memcpy(str_buf->buffer+str_buf->length, str, length);
+  memcpy(str_buf->buffer + str_buf->length, str, length);
   str_buf->length += length;
   str_buf->buffer[str_buf->length] = '\0';
 }
 
-const char* metalink_string_buffer_str(const metalink_string_buffer_t* str_buf)
-{
+const char *
+metalink_string_buffer_str(const metalink_string_buffer_t *str_buf) {
   return str_buf->buffer;
 }
 
-size_t metalink_string_buffer_capacity(const metalink_string_buffer_t* str_buf)
-{
+size_t
+metalink_string_buffer_capacity(const metalink_string_buffer_t *str_buf) {
   return str_buf->capacity;
 }
 
-size_t metalink_string_buffer_strlen(const metalink_string_buffer_t* str_buf)
-{
+size_t metalink_string_buffer_strlen(const metalink_string_buffer_t *str_buf) {
   return str_buf->length;
 }

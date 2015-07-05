@@ -30,6 +30,6 @@
 
 #include <time.h>
 
-char * strptime (const char *buf, const char *format, struct tm *timeptr);
+char *strptime(const char *buf, const char *format, struct tm *timeptr);
 
 #endif /* not _D_STRPTIME_H */

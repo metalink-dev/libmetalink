@@ -37,101 +37,100 @@
 
 /* parser state machine */
 struct _metalink_pstm {
-  metalink_pctrl_t* ctrl;
-  metalink_pstate_t* state;
+  metalink_pctrl_t *ctrl;
+  metalink_pstate_t *state;
 } /* metalink_pstm_t */;
 
 /* constructor */
-metalink_pstm_t* new_metalink_pstm(void);
+metalink_pstm_t *new_metalink_pstm(void);
 
 /* destructor */
-void delete_metalink_pstm(metalink_pstm_t* stm);
+void delete_metalink_pstm(metalink_pstm_t *stm);
 
 /* Setting callback functions for start element and end element */
-void metalink_pstm_set_fun(metalink_pstm_t* stm,
-			   metalink_start_fun start_fun,
-			   metalink_end_fun end_fun);
+void metalink_pstm_set_fun(metalink_pstm_t *stm, metalink_start_fun start_fun,
+                           metalink_end_fun end_fun);
 
 /**
- * Returns 1 if character buffering in XML parser is enabled, 
+ * Returns 1 if character buffering in XML parser is enabled,
  * otherwise returns 0.
  */
-int metalink_pstm_character_buffering_enabled(const metalink_pstm_t* stm);
+int metalink_pstm_character_buffering_enabled(const metalink_pstm_t *stm);
 
 /**
  * Enable character buffersing in XML parser.
  */
-void metalink_pstm_enable_character_buffering(metalink_pstm_t* stm);
+void metalink_pstm_enable_character_buffering(metalink_pstm_t *stm);
 
 /**
  * Disable character buffersing in XML parser.
  */
-void metalink_pstm_disable_character_buffering(metalink_pstm_t* stm);
+void metalink_pstm_disable_character_buffering(metalink_pstm_t *stm);
 
 /* functions for state transition */
-void metalink_pstm_enter_null_state(metalink_pstm_t* stm);
+void metalink_pstm_enter_null_state(metalink_pstm_t *stm);
 
-void metalink_pstm_enter_metalink_state(metalink_pstm_t* stm);
+void metalink_pstm_enter_metalink_state(metalink_pstm_t *stm);
 
-void metalink_pstm_enter_metalink_state_v4(metalink_pstm_t* stm);
+void metalink_pstm_enter_metalink_state_v4(metalink_pstm_t *stm);
 
-void metalink_pstm_enter_identity_state(metalink_pstm_t* stm);
+void metalink_pstm_enter_identity_state(metalink_pstm_t *stm);
 
-void metalink_pstm_enter_tags_state(metalink_pstm_t* stm);
+void metalink_pstm_enter_tags_state(metalink_pstm_t *stm);
 
-void metalink_pstm_enter_files_state(metalink_pstm_t* stm);
+void metalink_pstm_enter_files_state(metalink_pstm_t *stm);
 
-void metalink_pstm_enter_file_state(metalink_pstm_t* stm);
+void metalink_pstm_enter_file_state(metalink_pstm_t *stm);
 
-void metalink_pstm_enter_size_state(metalink_pstm_t* stm);
+void metalink_pstm_enter_size_state(metalink_pstm_t *stm);
 
-void metalink_pstm_enter_version_state(metalink_pstm_t* stm);
+void metalink_pstm_enter_version_state(metalink_pstm_t *stm);
 
-void metalink_pstm_enter_language_state(metalink_pstm_t* stm);
+void metalink_pstm_enter_language_state(metalink_pstm_t *stm);
 
-void metalink_pstm_enter_os_state(metalink_pstm_t* stm);
+void metalink_pstm_enter_os_state(metalink_pstm_t *stm);
 
-void metalink_pstm_enter_resources_state(metalink_pstm_t* stm);
+void metalink_pstm_enter_resources_state(metalink_pstm_t *stm);
 
-void metalink_pstm_enter_url_state(metalink_pstm_t* stm);
+void metalink_pstm_enter_url_state(metalink_pstm_t *stm);
 
-void metalink_pstm_enter_verification_state(metalink_pstm_t* stm);
+void metalink_pstm_enter_verification_state(metalink_pstm_t *stm);
 
-void metalink_pstm_enter_hash_state(metalink_pstm_t* stm);
+void metalink_pstm_enter_hash_state(metalink_pstm_t *stm);
 
-void metalink_pstm_enter_pieces_state(metalink_pstm_t* stm);
+void metalink_pstm_enter_pieces_state(metalink_pstm_t *stm);
 
-void metalink_pstm_enter_piece_hash_state(metalink_pstm_t* stm);
+void metalink_pstm_enter_piece_hash_state(metalink_pstm_t *stm);
 
-void metalink_pstm_enter_fin_state(metalink_pstm_t* stm);
+void metalink_pstm_enter_fin_state(metalink_pstm_t *stm);
 
-void metalink_pstm_enter_skip_state(metalink_pstm_t* stm);
+void metalink_pstm_enter_skip_state(metalink_pstm_t *stm);
 
-void metalink_pstm_exit_skip_state(metalink_pstm_t* stm);
+void metalink_pstm_exit_skip_state(metalink_pstm_t *stm);
 
 /* Metalink 4 states */
-void metalink_pstm_enter_file_state_v4(metalink_pstm_t* stm);
+void metalink_pstm_enter_file_state_v4(metalink_pstm_t *stm);
 
-void metalink_pstm_enter_generator_state(metalink_pstm_t* stm);
+void metalink_pstm_enter_generator_state(metalink_pstm_t *stm);
 
-void metalink_pstm_enter_origin_state(metalink_pstm_t* stm);
+void metalink_pstm_enter_origin_state(metalink_pstm_t *stm);
 
-void metalink_pstm_enter_description_state_v4(metalink_pstm_t* stm);
+void metalink_pstm_enter_description_state_v4(metalink_pstm_t *stm);
 
-void metalink_pstm_enter_copyright_state_v4(metalink_pstm_t* stm);
+void metalink_pstm_enter_copyright_state_v4(metalink_pstm_t *stm);
 
-void metalink_pstm_enter_identity_state_v4(metalink_pstm_t* stm);
+void metalink_pstm_enter_identity_state_v4(metalink_pstm_t *stm);
 
-void metalink_pstm_enter_logo_state_v4(metalink_pstm_t* stm);
+void metalink_pstm_enter_logo_state_v4(metalink_pstm_t *stm);
 
-void metalink_pstm_enter_signature_state_v4(metalink_pstm_t* stm);
+void metalink_pstm_enter_signature_state_v4(metalink_pstm_t *stm);
 
-void metalink_pstm_enter_pieces_state_v4(metalink_pstm_t* stm);
+void metalink_pstm_enter_pieces_state_v4(metalink_pstm_t *stm);
 
-void metalink_pstm_enter_metaurl_state_v4(metalink_pstm_t* stm);
+void metalink_pstm_enter_metaurl_state_v4(metalink_pstm_t *stm);
 
-void metalink_pstm_enter_published_state_v4(metalink_pstm_t* stm);
+void metalink_pstm_enter_published_state_v4(metalink_pstm_t *stm);
 
-void metalink_pstm_enter_updated_state_v4(metalink_pstm_t* stm);
+void metalink_pstm_enter_updated_state_v4(metalink_pstm_t *stm);
 
 #endif /* _D_METALINK_PSTM_H_ */

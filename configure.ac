@@ -58,15 +58,15 @@ esac
 AC_ARG_WITH([libexpat], [  --with-libexpat            use libexpat library if installed. Default: yes], [with_libexpat=$withval], [with_libexpat=yes])
 AC_ARG_WITH([libxml2], [  --with-libxml2             use libxml2 library if installed. Default: yes], [with_libxml2=$withval], [with_libxml2=yes])
 
-AC_ARG_ENABLE([maintainer-mode],
-    [AS_HELP_STRING([--enable-maintainer-mode],
-                    [Turn on compile time warnings])],
-    [maintainer_mode=$withval], [maintainer_mode=no])
+AC_ARG_ENABLE([werror],
+    [AS_HELP_STRING([--enable-werror],
+                    [Turn on strict compile time warnings])],
+    [werror=$enableval], [werror=no])
 
 AC_ARG_ENABLE([gcc-visibility],
     [AS_HELP_STRING([--enable-gcc-visibility],
                     [Use gcc visibility attribute. This option may be removed in the future release.])],
-    [gcc_visibility=$withval], [gcc_visibility=no])
+    [gcc_visibility=$enableval], [gcc_visibility=no])
 
 # Checks for programs
 AC_PROG_CC
@@ -166,7 +166,7 @@ AM_CONDITIONAL([HAVE_STRPTIME], [ test "x$have_strptime" = "xyes" ])
 ac_save_CFLAGS=$CFLAGS
 CFLAGS=
 
-if test "x$maintainer_mode" != "xno"; then
+if test "x$werror" != "xno"; then
     AX_CHECK_COMPILE_FLAG([-Wall], [CFLAGS="$CFLAGS -Wall"])
     AX_CHECK_COMPILE_FLAG([-Wextra], [CFLAGS="$CFLAGS -Wextra"])
     AX_CHECK_COMPILE_FLAG([-Werror], [CFLAGS="$CFLAGS -Werror"])

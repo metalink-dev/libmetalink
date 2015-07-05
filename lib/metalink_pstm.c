@@ -154,7 +154,7 @@ void metalink_pstm_enter_url_state(metalink_pstm_t *stm) {
 void metalink_pstm_enter_verification_state(metalink_pstm_t *stm) {
   metalink_pstm_set_fun(stm, &verification_state_start_fun_v3,
                         &verification_state_end_fun_v3);
-  metalink_pstm_enable_character_buffering(stm);
+  metalink_pstm_disable_character_buffering(stm);
 }
 
 void metalink_pstm_enter_hash_state(metalink_pstm_t *stm) {

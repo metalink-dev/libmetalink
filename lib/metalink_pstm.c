@@ -143,7 +143,7 @@ void metalink_pstm_enter_os_state(metalink_pstm_t *stm) {
 void metalink_pstm_enter_resources_state(metalink_pstm_t *stm) {
   metalink_pstm_set_fun(stm, &resources_state_start_fun_v3,
                         &resources_state_end_fun_v3);
-  metalink_pstm_enable_character_buffering(stm);
+  metalink_pstm_disable_character_buffering(stm);
 }
 
 void metalink_pstm_enter_url_state(metalink_pstm_t *stm) {

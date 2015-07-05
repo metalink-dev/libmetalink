@@ -52,6 +52,11 @@ static void start_element_handler(void *user_data, const xmlChar *localname,
   size_t value_alloc_space = 0;
   int i, j;
 
+  (void)prefix;
+  (void)numNamespaces;
+  (void)namespaces;
+  (void)numDefaulted;
+
   for (i = 0; i < numAttrs * 5; i += 5) {
     value_alloc_space += attrs[i + 4] - attrs[i + 3] + 1;
   }
@@ -83,6 +88,8 @@ static void end_element_handler(void *user_data, const xmlChar *localname,
   metalink_session_data_t *session_data = (metalink_session_data_t *)user_data;
   metalink_string_buffer_t *str_buf =
       metalink_stack_pop(session_data->characters_stack);
+
+  (void)prefix;
 
   session_data->stm->state->end_fun(session_data->stm, (const char *)localname,
                                     (const char *)ns_uri,

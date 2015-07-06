@@ -33,59 +33,59 @@
 #include "metalink_pstate.h"
 
 /* metalink state <metalink> */
-void metalink_state_start_fun_v3(metalink_pstm_t *stm, const char *name,
-                                 int ns_uri, const char **attrs);
+void metalink_state_start_fun_v3(metalink_pstm_t *stm, int name, int ns_uri,
+                                 const char **attrs);
 
-void metalink_state_end_fun_v3(metalink_pstm_t *stm, const char *name,
-                               int ns_uri, const char *characters);
+void metalink_state_end_fun_v3(metalink_pstm_t *stm, int name, int ns_uri,
+                               const char *characters);
 
 /* identity state <identity> */
-void identity_state_start_fun_v3(metalink_pstm_t *stm, const char *name,
-                                 int ns_uri, const char **attrs);
+void identity_state_start_fun_v3(metalink_pstm_t *stm, int name, int ns_uri,
+                                 const char **attrs);
 
-void identity_state_end_fun_v3(metalink_pstm_t *stm, const char *name,
-                               int ns_uri, const char *characters);
+void identity_state_end_fun_v3(metalink_pstm_t *stm, int name, int ns_uri,
+                               const char *characters);
 
 /* tags state <tags> */
-void tags_state_start_fun_v3(metalink_pstm_t *stm, const char *name, int ns_uri,
+void tags_state_start_fun_v3(metalink_pstm_t *stm, int name, int ns_uri,
                              const char **attrs);
 
-void tags_state_end_fun_v3(metalink_pstm_t *stm, const char *name, int ns_uri,
+void tags_state_end_fun_v3(metalink_pstm_t *stm, int name, int ns_uri,
                            const char *characters);
 
 /* files state <files> */
-void files_state_start_fun_v3(metalink_pstm_t *stm, const char *name,
-                              int ns_uri, const char **attrs);
+void files_state_start_fun_v3(metalink_pstm_t *stm, int name, int ns_uri,
+                              const char **attrs);
 
-void files_state_end_fun_v3(metalink_pstm_t *stm, const char *name, int ns_uri,
+void files_state_end_fun_v3(metalink_pstm_t *stm, int name, int ns_uri,
                             const char *characters);
 
 /* file state <file> */
-void file_state_start_fun_v3(metalink_pstm_t *stm, const char *name, int ns_uri,
+void file_state_start_fun_v3(metalink_pstm_t *stm, int name, int ns_uri,
                              const char **attrs);
 
-void file_state_end_fun_v3(metalink_pstm_t *stm, const char *name, int ns_uri,
+void file_state_end_fun_v3(metalink_pstm_t *stm, int name, int ns_uri,
                            const char *characters);
 
 /* resources state <resources> */
-void resources_state_start_fun_v3(metalink_pstm_t *stm, const char *name,
-                                  int ns_uri, const char **attrs);
+void resources_state_start_fun_v3(metalink_pstm_t *stm, int name, int ns_uri,
+                                  const char **attrs);
 
-void resources_state_end_fun_v3(metalink_pstm_t *stm, const char *name,
-                                int ns_uri, const char *characters);
+void resources_state_end_fun_v3(metalink_pstm_t *stm, int name, int ns_uri,
+                                const char *characters);
 
 /* verification state <verification> */
-void verification_state_start_fun_v3(metalink_pstm_t *stm, const char *name,
-                                     int ns_uri, const char **attrs);
+void verification_state_start_fun_v3(metalink_pstm_t *stm, int name, int ns_uri,
+                                     const char **attrs);
 
-void verification_state_end_fun_v3(metalink_pstm_t *stm, const char *name,
-                                   int ns_uri, const char *characters);
+void verification_state_end_fun_v3(metalink_pstm_t *stm, int name, int ns_uri,
+                                   const char *characters);
 
 /* pieces state <pieces> */
-void pieces_state_start_fun_v3(metalink_pstm_t *stm, const char *name,
-                               int ns_uri, const char **attrs);
+void pieces_state_start_fun_v3(metalink_pstm_t *stm, int name, int ns_uri,
+                               const char **attrs);
 
-void pieces_state_end_fun_v3(metalink_pstm_t *stm, const char *name, int ns_uri,
+void pieces_state_end_fun_v3(metalink_pstm_t *stm, int name, int ns_uri,
                              const char *characters);
 
 #endif /* _D_METALINK_PARSER_STATE_V3_H_ */

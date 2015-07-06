@@ -84,9 +84,9 @@ static void start_element_handler(void *user_data, const xmlChar *localname,
   } else {
     session_data->ns_uri = METALINK_NS_NONE;
   }
-
-  session_data->stm->state->start_fun(session_data->stm,
-                                      (const char *)localname,
+  session_data->name = metalink_lookup_token((const char *)localname,
+                                             strlen((const char *)localname));
+  session_data->stm->state->start_fun(session_data->stm, session_data->name,
                                       session_data->ns_uri, attr_index);
   free(attrblock);
 }
@@ -97,10 +97,11 @@ static void end_element_handler(void *user_data, const xmlChar *localname,
   metalink_string_buffer_t *str_buf =
       metalink_stack_pop(session_data->characters_stack);
 
+  (void)localname;
   (void)prefix;
   (void)ns_uri;
 
-  session_data->stm->state->end_fun(session_data->stm, (const char *)localname,
+  session_data->stm->state->end_fun(session_data->stm, session_data->name,
                                     session_data->ns_uri,
                                     metalink_string_buffer_str(str_buf));
 

@@ -64,8 +64,10 @@ static void start_element_handler(void *user_data, const char *name,
   metalink_session_data_t *session_data = (metalink_session_data_t *)user_data;
 
   session_data->ns_uri = split_ns_name(&localname, name);
-  session_data->stm->state->start_fun(
-      session_data->stm, localname, session_data->ns_uri, (const char **)attrs);
+  session_data->name = metalink_lookup_token(localname, strlen(localname));
+  session_data->stm->state->start_fun(session_data->stm, session_data->name,
+                                      session_data->ns_uri,
+                                      (const char **)attrs);
 
   if (metalink_pstm_character_buffering_enabled(session_data->stm)) {
     metalink_string_buffer_t *str_buf = metalink_string_buffer_new(128);
@@ -75,18 +77,17 @@ static void start_element_handler(void *user_data, const char *name,
 }
 
 static void end_element_handler(void *user_data, const char *name) {
-  const char *localname = NULL;
-
   metalink_session_data_t *session_data = (metalink_session_data_t *)user_data;
   metalink_string_buffer_t *str_buf = NULL;
+
+  (void)name;
 
   if (metalink_pstm_character_buffering_enabled(session_data->stm)) {
     str_buf = metalink_stack_pop(session_data->characters_stack);
   }
 
-  split_ns_name(&localname, name);
   session_data->stm->state->end_fun(
-      session_data->stm, localname, session_data->ns_uri,
+      session_data->stm, session_data->name, session_data->ns_uri,
       str_buf ? metalink_string_buffer_str(str_buf) : "");
 
   metalink_string_buffer_delete(str_buf);

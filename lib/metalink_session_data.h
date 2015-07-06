@@ -38,6 +38,7 @@ typedef struct _metalink_session_data {
 
   metalink_stack_t *characters_stack;
 
+  int name;
   int ns_uri;
 } metalink_session_data_t;
 

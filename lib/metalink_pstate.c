@@ -47,25 +47,18 @@ void delete_metalink_pstate(metalink_pstate_t *state) { free(state); }
 
 const char *get_attribute_value(const char **attrs, const char *name) {
   const char **p;
-  const char *cname;
 
   if (attrs == NULL) {
     return NULL;
   }
 
-  p = attrs;
-  while (*p) {
-    cname = *p++;
-    if (*p == 0) {
-      break;
-    }
-    if (strcmp(cname, name) == 0) {
-      break;
-    } else {
-      ++p;
+  for (p = attrs; *p; p += 2) {
+    if (strcmp(*p, name) == 0) {
+      return *(p + 1);
     }
   }
-  return *p;
+
+  return NULL;
 }
 
 /**

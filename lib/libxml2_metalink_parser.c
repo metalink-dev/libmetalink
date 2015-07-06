@@ -48,10 +48,10 @@ static void start_element_handler(void *user_data, const xmlChar *localname,
   metalink_session_data_t *session_data = (metalink_session_data_t *)user_data;
   metalink_string_buffer_t *str_buf = metalink_string_buffer_new(128);
   char *attrblock;
-  const char **attr_index;
   char *value_dst_ptr;
   size_t value_alloc_space = 0;
   int i, j;
+  const char *mattrs[METALINK_ATTR_TOKEN_MAX];
 
   (void)prefix;
   (void)numNamespaces;
@@ -62,19 +62,25 @@ static void start_element_handler(void *user_data, const xmlChar *localname,
     value_alloc_space += attrs[i + 4] - attrs[i + 3] + 1;
   }
 
-  attrblock = malloc((numAttrs * 2 + 1) * sizeof(char *) + value_alloc_space);
-  attr_index = (const char **)(void *)attrblock;
-  value_dst_ptr = attrblock + (numAttrs * 2 + 1) * sizeof(char *);
+  attrblock = malloc(value_alloc_space);
+  value_dst_ptr = attrblock;
+
+  memset(mattrs, 0, sizeof(mattrs));
 
   for (i = 0, j = 0; i < numAttrs * 5; i += 5, j += 2) {
     size_t value_len = attrs[i + 4] - attrs[i + 3];
+    int key = metalink_lookup_attr_token((const char *)attrs[i],
+                                         strlen((const char *)attrs[i]));
+    if (key == -1) {
+      continue;
+    }
+
     memcpy(value_dst_ptr, attrs[i + 3], value_len);
     value_dst_ptr[value_len] = '\0';
-    attr_index[j] = (const char *)attrs[i];
-    attr_index[j + 1] = value_dst_ptr;
+    mattrs[key] = value_dst_ptr;
     value_dst_ptr += value_len + 1;
   }
-  attr_index[j] = NULL;
+
   /* TODO evaluate return value of stack_push; non-zero value is error. */
   metalink_stack_push(session_data->characters_stack, str_buf);
 
@@ -87,7 +93,7 @@ static void start_element_handler(void *user_data, const xmlChar *localname,
   session_data->name = metalink_lookup_token((const char *)localname,
                                              strlen((const char *)localname));
   session_data->stm->state->start_fun(session_data->stm, session_data->name,
-                                      session_data->ns_uri, attr_index);
+                                      session_data->ns_uri, mattrs);
   free(attrblock);
 }
 

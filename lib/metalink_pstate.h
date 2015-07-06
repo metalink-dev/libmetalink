@@ -59,10 +59,28 @@ typedef enum {
   METALINK_TOKEN_UPDATED,
   METALINK_TOKEN_URL,
   METALINK_TOKEN_VERIFICATION,
-  METALINK_TOKEN_VERSION,
+  METALINK_TOKEN_VERSION
 } metalink_token;
 
+typedef enum {
+  METALINK_ATTR_TOKEN_DYNAMIC,
+  METALINK_ATTR_TOKEN_LENGTH,
+  METALINK_ATTR_TOKEN_LOCATION,
+  METALINK_ATTR_TOKEN_MAXCONNECTIONS,
+  METALINK_ATTR_TOKEN_MEDIATYPE,
+  METALINK_ATTR_TOKEN_NAME,
+  METALINK_ATTR_TOKEN_ORIGIN,
+  METALINK_ATTR_TOKEN_PIECE,
+  METALINK_ATTR_TOKEN_PREFERENCE,
+  METALINK_ATTR_TOKEN_PRIORITY,
+  METALINK_ATTR_TOKEN_TYPE,
+  METALINK_ATTR_TOKEN_URL,
+  METALINK_ATTR_TOKEN_MAX
+} metalink_attr_token;
+
 int metalink_lookup_token(const char *name, size_t namelen);
+
+int metalink_lookup_attr_token(const char *name, size_t namelen);
 
 typedef struct _metalink_pstm metalink_pstm_t;
 
@@ -95,8 +113,6 @@ metalink_pstate_t *new_metalink_pstate(void);
 
 /* destructor */
 void delete_metalink_pstate(metalink_pstate_t *state);
-
-const char *get_attribute_value(const char **attrs, const char *name);
 
 void error_handler(metalink_pstm_t *stm, metalink_error_t error);
 

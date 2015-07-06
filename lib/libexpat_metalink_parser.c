@@ -60,14 +60,26 @@ static int split_ns_name(const char **localname, const char *src) {
 static void start_element_handler(void *user_data, const char *name,
                                   const char **attrs) {
   const char *localname = NULL;
+  const char *mattrs[METALINK_ATTR_TOKEN_MAX];
+  const char **p;
 
   metalink_session_data_t *session_data = (metalink_session_data_t *)user_data;
 
   session_data->ns_uri = split_ns_name(&localname, name);
   session_data->name = metalink_lookup_token(localname, strlen(localname));
+
+  memset(mattrs, 0, sizeof(mattrs));
+
+  for (p = attrs; *p; p += 2) {
+    int key = metalink_lookup_attr_token(*p, strlen(*p));
+    if (key == -1) {
+      continue;
+    }
+    mattrs[key] = *(p + 1);
+  }
+
   session_data->stm->state->start_fun(session_data->stm, session_data->name,
-                                      session_data->ns_uri,
-                                      (const char **)attrs);
+                                      session_data->ns_uri, mattrs);
 
   if (metalink_pstm_character_buffering_enabled(session_data->stm)) {
     metalink_string_buffer_t *str_buf = metalink_string_buffer_new(128);

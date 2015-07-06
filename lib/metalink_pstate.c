@@ -45,22 +45,6 @@ metalink_pstate_t *new_metalink_pstate(void) {
 
 void delete_metalink_pstate(metalink_pstate_t *state) { free(state); }
 
-const char *get_attribute_value(const char **attrs, const char *name) {
-  const char **p;
-
-  if (attrs == NULL) {
-    return NULL;
-  }
-
-  for (p = attrs; *p; p += 2) {
-    if (strcmp(*p, name) == 0) {
-      return *(p + 1);
-    }
-  }
-
-  return NULL;
-}
-
 /**
  * set error code to metalink_pctrl and transit to null state, where no further
  * state transition takes place.
@@ -100,11 +84,11 @@ void initial_state_start_fun(metalink_pstm_t *stm, int name, int ns_uri,
       const char *origin;
       metalink_pctrl_set_version(stm->ctrl, METALINK_VERSION_3);
 
-      type = get_attribute_value(attrs, "type");
+      type = attrs[METALINK_ATTR_TOKEN_TYPE];
       if (type && strcmp("dynamic", type) == 0) {
         metalink_pctrl_set_origin_dynamic(stm->ctrl, 1);
       }
-      origin = get_attribute_value(attrs, "origin");
+      origin = attrs[METALINK_ATTR_TOKEN_ORIGIN];
       if (origin) {
         metalink_pctrl_set_origin(stm->ctrl, origin);
       }
@@ -582,6 +566,106 @@ int metalink_lookup_token(const char *name, size_t namelen) {
     case 'n':
       if (lstreq("verificatio", name, 11)) {
         return METALINK_TOKEN_VERIFICATION;
+      }
+      break;
+    }
+    break;
+  }
+  return -1;
+}
+
+int metalink_lookup_attr_token(const char *name, size_t namelen) {
+  switch (namelen) {
+  case 3:
+    switch (name[2]) {
+    case 'l':
+      if (lstreq("ur", name, 2)) {
+        return METALINK_ATTR_TOKEN_URL;
+      }
+      break;
+    }
+    break;
+  case 4:
+    switch (name[3]) {
+    case 'e':
+      if (lstreq("nam", name, 3)) {
+        return METALINK_ATTR_TOKEN_NAME;
+      }
+      if (lstreq("typ", name, 3)) {
+        return METALINK_ATTR_TOKEN_TYPE;
+      }
+      break;
+    }
+    break;
+  case 5:
+    switch (name[4]) {
+    case 'e':
+      if (lstreq("piec", name, 4)) {
+        return METALINK_ATTR_TOKEN_PIECE;
+      }
+      break;
+    }
+    break;
+  case 6:
+    switch (name[5]) {
+    case 'h':
+      if (lstreq("lengt", name, 5)) {
+        return METALINK_ATTR_TOKEN_LENGTH;
+      }
+      break;
+    case 'n':
+      if (lstreq("origi", name, 5)) {
+        return METALINK_ATTR_TOKEN_ORIGIN;
+      }
+      break;
+    }
+    break;
+  case 7:
+    switch (name[6]) {
+    case 'c':
+      if (lstreq("dynami", name, 6)) {
+        return METALINK_ATTR_TOKEN_DYNAMIC;
+      }
+      break;
+    }
+    break;
+  case 8:
+    switch (name[7]) {
+    case 'n':
+      if (lstreq("locatio", name, 7)) {
+        return METALINK_ATTR_TOKEN_LOCATION;
+      }
+      break;
+    case 'y':
+      if (lstreq("priorit", name, 7)) {
+        return METALINK_ATTR_TOKEN_PRIORITY;
+      }
+      break;
+    }
+    break;
+  case 9:
+    switch (name[8]) {
+    case 'e':
+      if (lstreq("mediatyp", name, 8)) {
+        return METALINK_ATTR_TOKEN_MEDIATYPE;
+      }
+      break;
+    }
+    break;
+  case 10:
+    switch (name[9]) {
+    case 'e':
+      if (lstreq("preferenc", name, 9)) {
+        return METALINK_ATTR_TOKEN_PREFERENCE;
+      }
+      break;
+    }
+    break;
+  case 14:
+    switch (name[13]) {
+    case 's':
+      if (lstreq("maxconnection", name, 13)) {
+        return METALINK_ATTR_TOKEN_MAXCONNECTIONS;
       }
       break;
     }

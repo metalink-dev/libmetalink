@@ -131,7 +131,7 @@ void files_state_start_fun_v3(metalink_pstm_t *stm, int name, int ns_uri,
     const char *fname;
     metalink_file_t *file;
 
-    fname = get_attribute_value(attrs, "name");
+    fname = attrs[METALINK_ATTR_TOKEN_NAME];
     if (!metalink_check_safe_path(fname)) {
       /* name is required attribute. If name is NULL or it is not
          safe, skip this entry. */
@@ -199,7 +199,7 @@ void file_state_start_fun_v3(metalink_pstm_t *stm, int name, int ns_uri,
     const char *value;
     long int maxconnections = 0;
 
-    value = get_attribute_value(attrs, "maxconnections");
+    value = attrs[METALINK_ATTR_TOKEN_MAXCONNECTIONS];
     if (value) {
       errno = 0;
       maxconnections = strtol(value, 0, 10);
@@ -258,7 +258,7 @@ void resources_state_start_fun_v3(metalink_pstm_t *stm, int name, int ns_uri,
       return;
     }
 
-    type = get_attribute_value(attrs, "type");
+    type = attrs[METALINK_ATTR_TOKEN_TYPE];
     if (!type) {
       /* type attribute is required, but not found. Skip current url tag. */
       metalink_pstm_enter_skip_state(stm);
@@ -270,7 +270,7 @@ void resources_state_start_fun_v3(metalink_pstm_t *stm, int name, int ns_uri,
       return;
     }
 
-    location = get_attribute_value(attrs, "location");
+    location = attrs[METALINK_ATTR_TOKEN_LOCATION];
     if (location) {
       r = metalink_pctrl_resource_set_location(stm->ctrl, location);
       if (r != 0) {
@@ -279,7 +279,7 @@ void resources_state_start_fun_v3(metalink_pstm_t *stm, int name, int ns_uri,
       }
     }
 
-    value = get_attribute_value(attrs, "preference");
+    value = attrs[METALINK_ATTR_TOKEN_PREFERENCE];
     if (value) {
       errno = 0;
       preference = strtol(value, 0, 10);
@@ -290,7 +290,7 @@ void resources_state_start_fun_v3(metalink_pstm_t *stm, int name, int ns_uri,
     }
     metalink_pctrl_resource_set_preference(stm->ctrl, (int)preference);
 
-    value = get_attribute_value(attrs, "maxconnections");
+    value = attrs[METALINK_ATTR_TOKEN_MAXCONNECTIONS];
     if (value) {
       errno = 0;
       maxconnections = strtol(value, 0, 10);
@@ -331,7 +331,7 @@ void verification_state_start_fun_v3(metalink_pstm_t *stm, int name, int ns_uri,
     const char *type;
     metalink_checksum_t *checksum;
 
-    type = get_attribute_value(attrs, "type");
+    type = attrs[METALINK_ATTR_TOKEN_TYPE];
     if (!type) {
       /* type is required attribute, if not specified, then skip this tag */
       metalink_pstm_enter_skip_state(stm);
@@ -356,14 +356,14 @@ void verification_state_start_fun_v3(metalink_pstm_t *stm, int name, int ns_uri,
     long int length;
     metalink_chunk_checksum_t *chunk_checksum;
 
-    type = get_attribute_value(attrs, "type");
+    type = attrs[METALINK_ATTR_TOKEN_TYPE];
     if (!type) {
       /* type is required attribute, so if not specified, then skip this tag. */
       metalink_pstm_enter_skip_state(stm);
       return;
     }
 
-    value = get_attribute_value(attrs, "length");
+    value = attrs[METALINK_ATTR_TOKEN_LENGTH];
     if (value) {
       errno = 0;
       length = strtol(value, 0, 10);
@@ -422,7 +422,7 @@ void pieces_state_start_fun_v3(metalink_pstm_t *stm, int name, int ns_uri,
     long int piece;
     metalink_piece_hash_t *piece_hash;
 
-    value = get_attribute_value(attrs, "piece");
+    value = attrs[METALINK_ATTR_TOKEN_PIECE];
     if (value) {
       errno = 0;
       piece = strtol(value, 0, 10);

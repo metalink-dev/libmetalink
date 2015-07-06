@@ -118,7 +118,7 @@ void metalink_state_start_fun_v4(metalink_pstm_t *stm, int name, int ns_uri,
     const char *fname;
     metalink_file_t *file;
 
-    fname = get_attribute_value(attrs, "name");
+    fname = attrs[METALINK_ATTR_TOKEN_NAME];
     if (!metalink_check_safe_path(fname)) {
       metalink_pstm_enter_skip_state(stm);
       return;
@@ -143,7 +143,7 @@ void metalink_state_start_fun_v4(metalink_pstm_t *stm, int name, int ns_uri,
     break;
   case METALINK_TOKEN_ORIGIN: {
     const char *dynamic_attr;
-    dynamic_attr = get_attribute_value(attrs, "dynamic");
+    dynamic_attr = attrs[METALINK_ATTR_TOKEN_DYNAMIC];
     if (dynamic_attr && strcmp("true", dynamic_attr) == 0) {
       metalink_pctrl_set_origin_dynamic(stm->ctrl, 1);
     }
@@ -238,7 +238,7 @@ void file_state_start_fun_v4(metalink_pstm_t *stm, int name, int ns_uri,
       return;
     }
 
-    location = get_attribute_value(attrs, "location");
+    location = attrs[METALINK_ATTR_TOKEN_LOCATION];
     if (location) {
       r = metalink_pctrl_resource_set_location(stm->ctrl, location);
       if (r != 0) {
@@ -247,7 +247,7 @@ void file_state_start_fun_v4(metalink_pstm_t *stm, int name, int ns_uri,
       }
     }
 
-    value = get_attribute_value(attrs, "priority");
+    value = attrs[METALINK_ATTR_TOKEN_PRIORITY];
     if (value) {
       errno = 0;
       priority = strtol(value, 0, 10);
@@ -273,7 +273,7 @@ void file_state_start_fun_v4(metalink_pstm_t *stm, int name, int ns_uri,
       return;
     }
 
-    mediatype = get_attribute_value(attrs, "mediatype");
+    mediatype = attrs[METALINK_ATTR_TOKEN_MEDIATYPE];
     if (mediatype) {
       r = metalink_pctrl_metaurl_set_mediatype(stm->ctrl, mediatype);
       if (r != 0) {
@@ -286,7 +286,7 @@ void file_state_start_fun_v4(metalink_pstm_t *stm, int name, int ns_uri,
       return;
     }
 
-    metaurl_name = get_attribute_value(attrs, "name");
+    metaurl_name = attrs[METALINK_ATTR_TOKEN_NAME];
     if (metaurl_name) {
       r = metalink_pctrl_metaurl_set_name(stm->ctrl, metaurl_name);
       if (r != 0) {
@@ -295,7 +295,7 @@ void file_state_start_fun_v4(metalink_pstm_t *stm, int name, int ns_uri,
       }
     }
 
-    value = get_attribute_value(attrs, "priority");
+    value = attrs[METALINK_ATTR_TOKEN_PRIORITY];
     if (value) {
       errno = 0;
       priority = strtol(value, 0, 10);
@@ -312,7 +312,7 @@ void file_state_start_fun_v4(metalink_pstm_t *stm, int name, int ns_uri,
     const char *type;
     metalink_checksum_t *checksum;
 
-    type = get_attribute_value(attrs, "type");
+    type = attrs[METALINK_ATTR_TOKEN_TYPE];
     if (!type) {
       metalink_pstm_enter_skip_state(stm);
       return;
@@ -336,13 +336,13 @@ void file_state_start_fun_v4(metalink_pstm_t *stm, int name, int ns_uri,
     long int length;
     metalink_chunk_checksum_t *chunk_checksum;
 
-    type = get_attribute_value(attrs, "type");
+    type = attrs[METALINK_ATTR_TOKEN_TYPE];
     if (!type) {
       metalink_pstm_enter_skip_state(stm);
       return;
     }
 
-    value = get_attribute_value(attrs, "length");
+    value = attrs[METALINK_ATTR_TOKEN_LENGTH];
     if (value) {
       errno = 0;
       length = strtol(value, 0, 10);
@@ -375,7 +375,7 @@ void file_state_start_fun_v4(metalink_pstm_t *stm, int name, int ns_uri,
     const char *mediatype;
     metalink_signature_t *signature;
 
-    mediatype = get_attribute_value(attrs, "mediatype");
+    mediatype = attrs[METALINK_ATTR_TOKEN_MEDIATYPE];
     if (!mediatype) {
       metalink_pstm_enter_skip_state(stm);
       return;
@@ -397,7 +397,7 @@ void file_state_start_fun_v4(metalink_pstm_t *stm, int name, int ns_uri,
     const char *publisher_name;
     const char *url;
 
-    publisher_name = get_attribute_value(attrs, "name");
+    publisher_name = attrs[METALINK_ATTR_TOKEN_NAME];
     if (!publisher_name) {
       /* name is mandatory */
       metalink_pstm_enter_skip_state(stm);
@@ -409,7 +409,7 @@ void file_state_start_fun_v4(metalink_pstm_t *stm, int name, int ns_uri,
       return;
     }
 
-    url = get_attribute_value(attrs, "url");
+    url = attrs[METALINK_ATTR_TOKEN_URL];
     if (url) {
       /* url is optional */
       r = metalink_pctrl_file_set_publisher_url(stm->ctrl, url);

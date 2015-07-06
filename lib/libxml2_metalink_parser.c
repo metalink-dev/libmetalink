@@ -38,6 +38,7 @@
 #include "metalink_session_data.h"
 #include "metalink_stack.h"
 #include "metalink_string_buffer.h"
+#include "metalink_helper.h"
 
 static void start_element_handler(void *user_data, const xmlChar *localname,
                                   const xmlChar *prefix, const xmlChar *ns_uri,
@@ -62,7 +63,7 @@ static void start_element_handler(void *user_data, const xmlChar *localname,
   }
 
   attrblock = malloc((numAttrs * 2 + 1) * sizeof(char *) + value_alloc_space);
-  attr_index = (const char **)attrblock;
+  attr_index = (const char **)(void *)attrblock;
   value_dst_ptr = attrblock + (numAttrs * 2 + 1) * sizeof(char *);
 
   for (i = 0, j = 0; i < numAttrs * 5; i += 5, j += 2) {
@@ -77,9 +78,16 @@ static void start_element_handler(void *user_data, const xmlChar *localname,
   /* TODO evaluate return value of stack_push; non-zero value is error. */
   metalink_stack_push(session_data->characters_stack, str_buf);
 
+  if (ns_uri) {
+    session_data->ns_uri =
+        metalink_match_ns((const char *)ns_uri, strlen((const char *)ns_uri));
+  } else {
+    session_data->ns_uri = METALINK_NS_NONE;
+  }
+
   session_data->stm->state->start_fun(session_data->stm,
                                       (const char *)localname,
-                                      (const char *)ns_uri, attr_index);
+                                      session_data->ns_uri, attr_index);
   free(attrblock);
 }
 
@@ -90,9 +98,10 @@ static void end_element_handler(void *user_data, const xmlChar *localname,
       metalink_stack_pop(session_data->characters_stack);
 
   (void)prefix;
+  (void)ns_uri;
 
   session_data->stm->state->end_fun(session_data->stm, (const char *)localname,
-                                    (const char *)ns_uri,
+                                    session_data->ns_uri,
                                     metalink_string_buffer_str(str_buf));
 
   metalink_string_buffer_delete(str_buf);
@@ -180,16 +189,17 @@ metalink_parse_update_internal(metalink_parser_context_t *ctx, const char *buf,
   metalink_error_t r;
 
   if (ctx->parser == NULL) {
-    int inilen = 4 < len ? 4 : len;
+    size_t inilen = 4 < len ? 4 : len;
     ctx->parser = xmlCreatePushParserCtxt(&mySAXHandler, ctx->session_data, buf,
-                                          inilen, NULL);
+                                          (int)inilen, NULL);
     if (ctx->parser == NULL) {
       r = METALINK_ERR_PARSER_ERROR;
     } else {
-      r = xmlParseChunk(ctx->parser, buf + inilen, len - inilen, terminate);
+      r = xmlParseChunk(ctx->parser, buf + inilen, (int)(len - inilen),
+                        terminate);
     }
   } else {
-    r = xmlParseChunk(ctx->parser, buf, len, terminate);
+    r = xmlParseChunk(ctx->parser, buf, (int)len, terminate);
   }
   return r;
 }
@@ -250,8 +260,8 @@ metalink_parse_fp(FILE *docfp, metalink_t **res) {
   session_data = metalink_session_data_new();
 
   num_read = fread(buff, 1, 4, docfp);
-  ctxt = xmlCreatePushParserCtxt(&mySAXHandler, session_data, buff, num_read,
-                                 NULL);
+  ctxt = xmlCreatePushParserCtxt(&mySAXHandler, session_data, buff,
+                                 (int)num_read, NULL);
   if (ctxt == NULL)
     r = METALINK_ERR_PARSER_ERROR;
 
@@ -261,7 +271,7 @@ metalink_parse_fp(FILE *docfp, metalink_t **res) {
       if (ferror(docfp)) {
         r = METALINK_ERR_PARSER_ERROR;
       }
-    } else if (xmlParseChunk(ctxt, buff, num_read, 0))
+    } else if (xmlParseChunk(ctxt, buff, (int)num_read, 0))
       r = METALINK_ERR_PARSER_ERROR;
   }
   xmlParseChunk(ctxt, buff, 0, 1);
@@ -307,7 +317,7 @@ metalink_parse_memory(const char *buf, size_t len, metalink_t **res) {
 
   session_data = metalink_session_data_new();
 
-  r = xmlSAXUserParseMemory(&mySAXHandler, session_data, buf, len);
+  r = xmlSAXUserParseMemory(&mySAXHandler, session_data, buf, (int)len);
 
   retval = metalink_handle_parse_result(res, session_data, r);
 

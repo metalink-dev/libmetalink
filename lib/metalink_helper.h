@@ -37,4 +37,10 @@
  */
 int metalink_check_safe_path(const char *path);
 
+/*
+ * Returns one of metalink_ns enum value corresponding to XML
+ * namespace.
+ */
+int metalink_match_ns(const char *uri, size_t len);
+
 #endif /* _D_METALINK_HELPER_H_ */

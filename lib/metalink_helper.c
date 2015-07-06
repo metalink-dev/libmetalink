@@ -28,6 +28,8 @@
 #include <string.h>
 #include <stdlib.h>
 
+#include "metalink_pstate.h"
+
 static int ends_with(const char *a, const char *b) {
   size_t alen = strlen(a);
   size_t blen = strlen(b);
@@ -133,4 +135,20 @@ const char *metalink_strerror(int error_code) {
   default:
     return "unknown error code";
   }
+}
+
+int metalink_match_ns(const char *uri, size_t len) {
+  switch (len) {
+  case sizeof(METALINK_V3_NS_URI) - 1:
+    if (memcmp(METALINK_V3_NS_URI, uri, len) == 0) {
+      return METALINK_NS_V3;
+    }
+    break;
+  case sizeof(METALINK_V4_NS_URI) - 1:
+    if (memcmp(METALINK_V4_NS_URI, uri, len) == 0) {
+      return METALINK_NS_V4;
+    }
+    break;
+  }
+  return METALINK_NS_NONE;
 }

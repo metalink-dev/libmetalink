@@ -32,6 +32,7 @@ metalink_session_data_t *metalink_session_data_new(void) {
   if (!sd) {
     return NULL;
   }
+  sd->ns_uri = METALINK_NS_NONE;
   sd->characters_stack = NULL;
   sd->stm = new_metalink_pstm();
   if (!sd->stm) {

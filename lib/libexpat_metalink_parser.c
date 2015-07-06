@@ -40,39 +40,32 @@
 #include "metalink_session_data.h"
 #include "metalink_stack.h"
 #include "metalink_string_buffer.h"
+#include "metalink_helper.h"
 
 #define NAMESPACE_SEPARATOR '\t'
 
-static void split_ns_name(const char **localname, const char **ns_uri,
-                          const char *src) {
+static int split_ns_name(const char **localname, const char *src) {
   const char *sep;
-  char *temp;
-  size_t len;
 
   sep = strchr(src, NAMESPACE_SEPARATOR);
-  if (sep) {
-    *localname = sep + 1;
-    len = sep - src;
-    temp = malloc((len + 1) * sizeof **ns_uri);
-    memcpy(temp, src, len);
-    temp[len] = '\0';
-    *ns_uri = temp;
-  } else {
+  if (!sep) {
     *localname = src;
+    return METALINK_NS_NONE;
   }
+
+  *localname = sep + 1;
+  return metalink_match_ns(src, sep - src);
 }
 
 static void start_element_handler(void *user_data, const char *name,
                                   const char **attrs) {
   const char *localname = NULL;
-  const char *ns_uri = NULL;
 
   metalink_session_data_t *session_data = (metalink_session_data_t *)user_data;
 
-  split_ns_name(&localname, &ns_uri, name);
-  session_data->stm->state->start_fun(session_data->stm, localname, ns_uri,
-                                      (const char **)attrs);
-  free((void *)ns_uri);
+  session_data->ns_uri = split_ns_name(&localname, name);
+  session_data->stm->state->start_fun(
+      session_data->stm, localname, session_data->ns_uri, (const char **)attrs);
 
   if (metalink_pstm_character_buffering_enabled(session_data->stm)) {
     metalink_string_buffer_t *str_buf = metalink_string_buffer_new(128);
@@ -83,20 +76,18 @@ static void start_element_handler(void *user_data, const char *name,
 
 static void end_element_handler(void *user_data, const char *name) {
   const char *localname = NULL;
-  const char *ns_uri = NULL;
 
   metalink_session_data_t *session_data = (metalink_session_data_t *)user_data;
   metalink_string_buffer_t *str_buf = NULL;
 
   if (metalink_pstm_character_buffering_enabled(session_data->stm)) {
-      str_buf = metalink_stack_pop(session_data->characters_stack);
+    str_buf = metalink_stack_pop(session_data->characters_stack);
   }
 
-  split_ns_name(&localname, &ns_uri, name);
+  split_ns_name(&localname, name);
   session_data->stm->state->end_fun(
-      session_data->stm, localname, ns_uri,
+      session_data->stm, localname, session_data->ns_uri,
       str_buf ? metalink_string_buffer_str(str_buf) : "");
-  free((void *)ns_uri);
 
   metalink_string_buffer_delete(str_buf);
 }

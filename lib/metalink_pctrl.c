@@ -464,6 +464,7 @@ metalink_error_t metalink_pctrl_file_set_language(metalink_pctrl_t *ctrl,
   l = strdup(language);
   ctrl->languages = metalink_list_new();
   if (!ctrl->languages || !l || metalink_list_append(ctrl->languages, l) != 0) {
+    if (l) free(l);
     return METALINK_ERR_BAD_ALLOC;
   }
 
@@ -481,6 +482,7 @@ metalink_error_t metalink_pctrl_file_set_os(metalink_pctrl_t *ctrl,
   o = strdup(os);
   ctrl->oses = metalink_list_new();
   if (!ctrl->oses || !o || metalink_list_append(ctrl->oses, o) != 0) {
+    if (o) free(o);
     return METALINK_ERR_BAD_ALLOC;
   }
 

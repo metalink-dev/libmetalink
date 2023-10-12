@@ -2,8 +2,8 @@ SUBDIRS = includes
 
 AM_CPPFLAGS = -I$(srcdir)/includes -I$(builddir)/includes \
 	$(WARNCFLAGS) $(ADDCFLAGS) \
-	@XML_CPPFLAGS@ @EXPAT_CFLAGS@ \
-	@DEFS@
+	$(XML_CFLAGS) \
+	$(EXPAT_CFLAGS)
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = libmetalink.pc
@@ -60,4 +60,5 @@ endif
 libmetalink_la_SOURCES = $(HFILES) $(OBJECTS)
 libmetalink_la_LDFLAGS = -no-undefined \
         -version-info $(LT_CURRENT):$(LT_REVISION):$(LT_AGE) \
-	@XML_LIBS@ @EXPAT_LIBS@
+	$(XML_LIBS) \
+	$(EXPAT_LIBS)

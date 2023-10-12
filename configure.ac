@@ -40,6 +40,7 @@ AM_INIT_AUTOMAKE()
 m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
 
 AC_CONFIG_MACRO_DIR([m4])
+PKG_PROG_PKG_CONFIG
 
 # Special host-dependent stuff
 case ${host} in
@@ -92,10 +93,10 @@ if test "x$with_libexpat" = "xyes"; then
 fi
 
 if test "x$with_libxml2" = "xyes" && test "x$have_libexpat" != "xyes"; then
-   AM_PATH_XML2([2.6.24], [have_libxml2=yes])
-   if test "x$have_libxml2" = "xyes"; then
+   PKG_CHECK_MODULES([XML], [libxml-2.0 >= 2.6.24], [
       AC_DEFINE([HAVE_LIBXML2], [1], [Define to 1 if you have libxml2.])
-   fi
+      have_libxml2=yes
+   ])
 fi
 
 if test "x$have_libexpat" != "xyes" && test "x$have_libxml2" != "xyes"; then
